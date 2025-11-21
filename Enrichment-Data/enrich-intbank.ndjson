@@ -1,0 +1,1400 @@
+{"index": {"_index": "enrich-intbank", "_id": "1"}}
+{"intbankID": 1, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 963399172, "intbank.swiftID": "CNGU31", "intbank.ip": "36.195.24.113"}
+{"index": {"_index": "enrich-intbank", "_id": "2"}}
+{"intbankID": 2, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Guotai Bank", "intbank.ach": 684331453, "intbank.swiftID": "CNZH29", "intbank.ip": "36.150.244.234"}
+{"index": {"_index": "enrich-intbank", "_id": "3"}}
+{"intbankID": 3, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 156657418, "intbank.swiftID": "CNHE36", "intbank.ip": "36.116.193.133"}
+{"index": {"_index": "enrich-intbank", "_id": "4"}}
+{"intbankID": 4, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Beijing Bank", "intbank.ach": 378043172, "intbank.swiftID": "CNXI81", "intbank.ip": "36.112.140.85"}
+{"index": {"_index": "enrich-intbank", "_id": "5"}}
+{"intbankID": 5, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Jinrong Bank", "intbank.ach": 509060313, "intbank.swiftID": "CNBE52", "intbank.ip": "36.229.32.161"}
+{"index": {"_index": "enrich-intbank", "_id": "6"}}
+{"intbankID": 6, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Henglong Bank", "intbank.ach": 649611820, "intbank.swiftID": "CNBE32", "intbank.ip": "36.126.99.155"}
+{"index": {"_index": "enrich-intbank", "_id": "7"}}
+{"intbankID": 7, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Zhonghua Bank", "intbank.ach": 281201727, "intbank.swiftID": "CNHE96", "intbank.ip": "36.227.21.29"}
+{"index": {"_index": "enrich-intbank", "_id": "8"}}
+{"intbankID": 8, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Guotai Bank", "intbank.ach": 940358583, "intbank.swiftID": "CNJI67", "intbank.ip": "36.253.120.76"}
+{"index": {"_index": "enrich-intbank", "_id": "9"}}
+{"intbankID": 9, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Zhonghua Bank", "intbank.ach": 157056734, "intbank.swiftID": "CNJI45", "intbank.ip": "36.58.37.230"}
+{"index": {"_index": "enrich-intbank", "_id": "10"}}
+{"intbankID": 10, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Beijing Bank", "intbank.ach": 186218008, "intbank.swiftID": "CNBE59", "intbank.ip": "36.44.222.124"}
+{"index": {"_index": "enrich-intbank", "_id": "11"}}
+{"intbankID": 11, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Zhonghua Bank", "intbank.ach": 447050956, "intbank.swiftID": "CNXI60", "intbank.ip": "36.68.68.103"}
+{"index": {"_index": "enrich-intbank", "_id": "12"}}
+{"intbankID": 12, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 787979238, "intbank.swiftID": "CNBE96", "intbank.ip": "36.110.183.109"}
+{"index": {"_index": "enrich-intbank", "_id": "13"}}
+{"intbankID": 13, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Jinrong Bank", "intbank.ach": 614852342, "intbank.swiftID": "CNJI92", "intbank.ip": "36.13.10.23"}
+{"index": {"_index": "enrich-intbank", "_id": "14"}}
+{"intbankID": 14, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 388767912, "intbank.swiftID": "CNHE89", "intbank.ip": "36.8.186.171"}
+{"index": {"_index": "enrich-intbank", "_id": "15"}}
+{"intbankID": 15, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 874741217, "intbank.swiftID": "CNSH23", "intbank.ip": "36.120.60.229"}
+{"index": {"_index": "enrich-intbank", "_id": "16"}}
+{"intbankID": 16, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 621470426, "intbank.swiftID": "CNBE14", "intbank.ip": "36.72.129.200"}
+{"index": {"_index": "enrich-intbank", "_id": "17"}}
+{"intbankID": 17, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Henglong Bank", "intbank.ach": 478263761, "intbank.swiftID": "CNHE99", "intbank.ip": "36.16.17.184"}
+{"index": {"_index": "enrich-intbank", "_id": "18"}}
+{"intbankID": 18, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Henglong Bank", "intbank.ach": 527058925, "intbank.swiftID": "CNHE67", "intbank.ip": "36.193.36.151"}
+{"index": {"_index": "enrich-intbank", "_id": "19"}}
+{"intbankID": 19, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 579496882, "intbank.swiftID": "CNJI80", "intbank.ip": "36.11.142.50"}
+{"index": {"_index": "enrich-intbank", "_id": "20"}}
+{"intbankID": 20, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Shenzhen Bank", "intbank.ach": 593810630, "intbank.swiftID": "CNXI76", "intbank.ip": "36.124.217.154"}
+{"index": {"_index": "enrich-intbank", "_id": "21"}}
+{"intbankID": 21, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Jinrong Bank", "intbank.ach": 248064653, "intbank.swiftID": "CNZH17", "intbank.ip": "36.34.243.193"}
+{"index": {"_index": "enrich-intbank", "_id": "22"}}
+{"intbankID": 22, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Guotai Bank", "intbank.ach": 159268474, "intbank.swiftID": "CNBE21", "intbank.ip": "36.146.174.113"}
+{"index": {"_index": "enrich-intbank", "_id": "23"}}
+{"intbankID": 23, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Jinrong Bank", "intbank.ach": 236624738, "intbank.swiftID": "CNSH22", "intbank.ip": "36.194.151.179"}
+{"index": {"_index": "enrich-intbank", "_id": "24"}}
+{"intbankID": 24, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Xianghe Bank", "intbank.ach": 305070085, "intbank.swiftID": "CNGU44", "intbank.ip": "36.174.194.154"}
+{"index": {"_index": "enrich-intbank", "_id": "25"}}
+{"intbankID": 25, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Zhonghua Bank", "intbank.ach": 599905496, "intbank.swiftID": "CNGU13", "intbank.ip": "36.83.81.90"}
+{"index": {"_index": "enrich-intbank", "_id": "26"}}
+{"intbankID": 26, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Sabah Bank", "intbank.ach": 581372266, "intbank.swiftID": "MYRA44", "intbank.ip": "103.199.206.192"}
+{"index": {"_index": "enrich-intbank", "_id": "27"}}
+{"intbankID": 27, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 947584197, "intbank.swiftID": "MYRA55", "intbank.ip": "103.225.4.28"}
+{"index": {"_index": "enrich-intbank", "_id": "28"}}
+{"intbankID": 28, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Melaka Bank", "intbank.ach": 103188786, "intbank.swiftID": "MYMA38", "intbank.ip": "103.11.6.247"}
+{"index": {"_index": "enrich-intbank", "_id": "29"}}
+{"intbankID": 29, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 489726883, "intbank.swiftID": "MYSA60", "intbank.ip": "103.187.80.155"}
+{"index": {"_index": "enrich-intbank", "_id": "30"}}
+{"intbankID": 30, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Saraya Bank", "intbank.ach": 641600925, "intbank.swiftID": "MYMA67", "intbank.ip": "103.163.170.161"}
+{"index": {"_index": "enrich-intbank", "_id": "31"}}
+{"intbankID": 31, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 935069654, "intbank.swiftID": "MYRA24", "intbank.ip": "103.214.81.21"}
+{"index": {"_index": "enrich-intbank", "_id": "32"}}
+{"intbankID": 32, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Sabah Bank", "intbank.ach": 908475414, "intbank.swiftID": "MYSA24", "intbank.ip": "103.217.159.100"}
+{"index": {"_index": "enrich-intbank", "_id": "33"}}
+{"intbankID": 33, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Rakyat Bank", "intbank.ach": 176688420, "intbank.swiftID": "MYSA24", "intbank.ip": "103.68.209.188"}
+{"index": {"_index": "enrich-intbank", "_id": "34"}}
+{"intbankID": 34, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Putera Bank", "intbank.ach": 301451272, "intbank.swiftID": "MYME66", "intbank.ip": "103.205.177.202"}
+{"index": {"_index": "enrich-intbank", "_id": "35"}}
+{"intbankID": 35, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Rakyat Bank", "intbank.ach": 271459430, "intbank.swiftID": "MYRA93", "intbank.ip": "103.246.13.239"}
+{"index": {"_index": "enrich-intbank", "_id": "36"}}
+{"intbankID": 36, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Saraya Bank", "intbank.ach": 920059416, "intbank.swiftID": "MYMA98", "intbank.ip": "103.252.250.14"}
+{"index": {"_index": "enrich-intbank", "_id": "37"}}
+{"intbankID": 37, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Melaka Bank", "intbank.ach": 254493312, "intbank.swiftID": "MYRA75", "intbank.ip": "103.12.174.111"}
+{"index": {"_index": "enrich-intbank", "_id": "38"}}
+{"intbankID": 38, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Saraya Bank", "intbank.ach": 854483579, "intbank.swiftID": "MYPU53", "intbank.ip": "103.191.56.97"}
+{"index": {"_index": "enrich-intbank", "_id": "39"}}
+{"intbankID": 39, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Sabah Bank", "intbank.ach": 305828339, "intbank.swiftID": "MYME21", "intbank.ip": "103.120.207.143"}
+{"index": {"_index": "enrich-intbank", "_id": "40"}}
+{"intbankID": 40, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Putera Bank", "intbank.ach": 779975199, "intbank.swiftID": "MYRA79", "intbank.ip": "103.219.219.112"}
+{"index": {"_index": "enrich-intbank", "_id": "41"}}
+{"intbankID": 41, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 766628730, "intbank.swiftID": "MYSA85", "intbank.ip": "103.84.240.233"}
+{"index": {"_index": "enrich-intbank", "_id": "42"}}
+{"intbankID": 42, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Melaka Bank", "intbank.ach": 136300938, "intbank.swiftID": "MYSA75", "intbank.ip": "103.73.184.175"}
+{"index": {"_index": "enrich-intbank", "_id": "43"}}
+{"intbankID": 43, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Sabah Bank", "intbank.ach": 292291120, "intbank.swiftID": "MYME53", "intbank.ip": "103.20.135.46"}
+{"index": {"_index": "enrich-intbank", "_id": "44"}}
+{"intbankID": 44, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 990607137, "intbank.swiftID": "MYME76", "intbank.ip": "103.150.80.233"}
+{"index": {"_index": "enrich-intbank", "_id": "45"}}
+{"intbankID": 45, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Putera Bank", "intbank.ach": 298499438, "intbank.swiftID": "MYME26", "intbank.ip": "103.117.164.111"}
+{"index": {"_index": "enrich-intbank", "_id": "46"}}
+{"intbankID": 46, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 152277683, "intbank.swiftID": "MYME43", "intbank.ip": "103.182.245.205"}
+{"index": {"_index": "enrich-intbank", "_id": "47"}}
+{"intbankID": 47, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Rakyat Bank", "intbank.ach": 586193108, "intbank.swiftID": "MYRA39", "intbank.ip": "103.66.192.64"}
+{"index": {"_index": "enrich-intbank", "_id": "48"}}
+{"intbankID": 48, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Maytara Bank", "intbank.ach": 917859022, "intbank.swiftID": "MYMA89", "intbank.ip": "103.104.62.49"}
+{"index": {"_index": "enrich-intbank", "_id": "49"}}
+{"intbankID": 49, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Saraya Bank", "intbank.ach": 752708733, "intbank.swiftID": "MYSA17", "intbank.ip": "103.112.71.237"}
+{"index": {"_index": "enrich-intbank", "_id": "50"}}
+{"intbankID": 50, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Saraya Bank", "intbank.ach": 927473542, "intbank.swiftID": "MYSA21", "intbank.ip": "103.219.141.123"}
+{"index": {"_index": "enrich-intbank", "_id": "51"}}
+{"intbankID": 51, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Northbridge Bank", "intbank.ach": 561693376, "intbank.swiftID": "GBOX12", "intbank.ip": "82.166.194.108"}
+{"index": {"_index": "enrich-intbank", "_id": "52"}}
+{"intbankID": 52, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Kentford Bank", "intbank.ach": 355212501, "intbank.swiftID": "GBNO80", "intbank.ip": "82.104.102.112"}
+{"index": {"_index": "enrich-intbank", "_id": "53"}}
+{"intbankID": 53, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Britannia Bank", "intbank.ach": 741303278, "intbank.swiftID": "GBOX37", "intbank.ip": "82.184.208.2"}
+{"index": {"_index": "enrich-intbank", "_id": "54"}}
+{"intbankID": 54, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Northbridge Bank", "intbank.ach": 118883419, "intbank.swiftID": "GBKE49", "intbank.ip": "82.226.34.231"}
+{"index": {"_index": "enrich-intbank", "_id": "55"}}
+{"intbankID": 55, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Britannia Bank", "intbank.ach": 744561814, "intbank.swiftID": "GBKE70", "intbank.ip": "82.175.8.33"}
+{"index": {"_index": "enrich-intbank", "_id": "56"}}
+{"intbankID": 56, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Royalgate Bank", "intbank.ach": 919690194, "intbank.swiftID": "GBKE92", "intbank.ip": "82.178.127.100"}
+{"index": {"_index": "enrich-intbank", "_id": "57"}}
+{"intbankID": 57, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Northbridge Bank", "intbank.ach": 168083964, "intbank.swiftID": "GBNO84", "intbank.ip": "82.123.134.235"}
+{"index": {"_index": "enrich-intbank", "_id": "58"}}
+{"intbankID": 58, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Kentford Bank", "intbank.ach": 605388036, "intbank.swiftID": "GBKE45", "intbank.ip": "82.213.48.198"}
+{"index": {"_index": "enrich-intbank", "_id": "59"}}
+{"intbankID": 59, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Britannia Bank", "intbank.ach": 501848631, "intbank.swiftID": "GBOX80", "intbank.ip": "82.147.72.17"}
+{"index": {"_index": "enrich-intbank", "_id": "60"}}
+{"intbankID": 60, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Kentford Bank", "intbank.ach": 859332782, "intbank.swiftID": "GBBR54", "intbank.ip": "82.20.125.85"}
+{"index": {"_index": "enrich-intbank", "_id": "61"}}
+{"intbankID": 61, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Royalgate Bank", "intbank.ach": 948735429, "intbank.swiftID": "GBNO39", "intbank.ip": "82.146.93.124"}
+{"index": {"_index": "enrich-intbank", "_id": "62"}}
+{"intbankID": 62, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Crownshire Bank", "intbank.ach": 113620078, "intbank.swiftID": "GBNO54", "intbank.ip": "82.107.104.170"}
+{"index": {"_index": "enrich-intbank", "_id": "63"}}
+{"intbankID": 63, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Northbridge Bank", "intbank.ach": 877425048, "intbank.swiftID": "GBCR79", "intbank.ip": "82.19.48.127"}
+{"index": {"_index": "enrich-intbank", "_id": "64"}}
+{"intbankID": 64, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Kentford Bank", "intbank.ach": 419341983, "intbank.swiftID": "GBRO56", "intbank.ip": "82.168.150.139"}
+{"index": {"_index": "enrich-intbank", "_id": "65"}}
+{"intbankID": 65, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Oxminster Bank", "intbank.ach": 740498980, "intbank.swiftID": "GBNO80", "intbank.ip": "82.235.79.171"}
+{"index": {"_index": "enrich-intbank", "_id": "66"}}
+{"intbankID": 66, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Crownshire Bank", "intbank.ach": 255384888, "intbank.swiftID": "GBCR21", "intbank.ip": "82.207.241.91"}
+{"index": {"_index": "enrich-intbank", "_id": "67"}}
+{"intbankID": 67, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Oxminster Bank", "intbank.ach": 462278542, "intbank.swiftID": "GBOX76", "intbank.ip": "82.43.53.82"}
+{"index": {"_index": "enrich-intbank", "_id": "68"}}
+{"intbankID": 68, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Britannia Bank", "intbank.ach": 792448843, "intbank.swiftID": "GBOX85", "intbank.ip": "82.188.60.242"}
+{"index": {"_index": "enrich-intbank", "_id": "69"}}
+{"intbankID": 69, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Royalgate Bank", "intbank.ach": 136146175, "intbank.swiftID": "GBNO11", "intbank.ip": "82.248.115.206"}
+{"index": {"_index": "enrich-intbank", "_id": "70"}}
+{"intbankID": 70, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Kentford Bank", "intbank.ach": 514386904, "intbank.swiftID": "GBOX16", "intbank.ip": "82.183.107.94"}
+{"index": {"_index": "enrich-intbank", "_id": "71"}}
+{"intbankID": 71, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Oxminster Bank", "intbank.ach": 498037590, "intbank.swiftID": "GBNO69", "intbank.ip": "82.230.40.195"}
+{"index": {"_index": "enrich-intbank", "_id": "72"}}
+{"intbankID": 72, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Northbridge Bank", "intbank.ach": 464304694, "intbank.swiftID": "GBCR62", "intbank.ip": "82.84.168.1"}
+{"index": {"_index": "enrich-intbank", "_id": "73"}}
+{"intbankID": 73, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Crownshire Bank", "intbank.ach": 457531714, "intbank.swiftID": "GBOX78", "intbank.ip": "82.190.88.165"}
+{"index": {"_index": "enrich-intbank", "_id": "74"}}
+{"intbankID": 74, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Oxminster Bank", "intbank.ach": 352780832, "intbank.swiftID": "GBBR52", "intbank.ip": "82.115.60.152"}
+{"index": {"_index": "enrich-intbank", "_id": "75"}}
+{"intbankID": 75, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Britannia Bank", "intbank.ach": 292205767, "intbank.swiftID": "GBNO72", "intbank.ip": "82.173.47.31"}
+{"index": {"_index": "enrich-intbank", "_id": "76"}}
+{"intbankID": 76, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Daciana Bank", "intbank.ach": 228286013, "intbank.swiftID": "RODO39", "intbank.ip": "86.82.243.180"}
+{"index": {"_index": "enrich-intbank", "_id": "77"}}
+{"intbankID": 77, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Dobrogea Bank", "intbank.ach": 281633752, "intbank.swiftID": "ROBU56", "intbank.ip": "86.127.59.88"}
+{"index": {"_index": "enrich-intbank", "_id": "78"}}
+{"intbankID": 78, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Transylvana Bank", "intbank.ach": 750952503, "intbank.swiftID": "ROCA53", "intbank.ip": "86.11.73.32"}
+{"index": {"_index": "enrich-intbank", "_id": "79"}}
+{"intbankID": 79, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Transylvana Bank", "intbank.ach": 170067113, "intbank.swiftID": "RODO24", "intbank.ip": "86.224.42.62"}
+{"index": {"_index": "enrich-intbank", "_id": "80"}}
+{"intbankID": 80, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Transylvana Bank", "intbank.ach": 355658086, "intbank.swiftID": "ROCA30", "intbank.ip": "86.13.210.147"}
+{"index": {"_index": "enrich-intbank", "_id": "81"}}
+{"intbankID": 81, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Daciana Bank", "intbank.ach": 178007745, "intbank.swiftID": "ROBU20", "intbank.ip": "86.76.110.242"}
+{"index": {"_index": "enrich-intbank", "_id": "82"}}
+{"intbankID": 82, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Dobrogea Bank", "intbank.ach": 544238883, "intbank.swiftID": "ROBU52", "intbank.ip": "86.90.159.88"}
+{"index": {"_index": "enrich-intbank", "_id": "83"}}
+{"intbankID": 83, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Carpathia Bank", "intbank.ach": 355557997, "intbank.swiftID": "ROTR86", "intbank.ip": "86.2.150.171"}
+{"index": {"_index": "enrich-intbank", "_id": "84"}}
+{"intbankID": 84, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Daciana Bank", "intbank.ach": 945699607, "intbank.swiftID": "RODO46", "intbank.ip": "86.60.75.153"}
+{"index": {"_index": "enrich-intbank", "_id": "85"}}
+{"intbankID": 85, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Carpathia Bank", "intbank.ach": 263070625, "intbank.swiftID": "ROTR85", "intbank.ip": "86.161.54.100"}
+{"index": {"_index": "enrich-intbank", "_id": "86"}}
+{"intbankID": 86, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Bucuresti Bank", "intbank.ach": 888766741, "intbank.swiftID": "RODA84", "intbank.ip": "86.11.121.217"}
+{"index": {"_index": "enrich-intbank", "_id": "87"}}
+{"intbankID": 87, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Bucuresti Bank", "intbank.ach": 895704792, "intbank.swiftID": "ROCA70", "intbank.ip": "86.170.149.61"}
+{"index": {"_index": "enrich-intbank", "_id": "88"}}
+{"intbankID": 88, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Carpathia Bank", "intbank.ach": 517213460, "intbank.swiftID": "ROCA58", "intbank.ip": "86.25.67.248"}
+{"index": {"_index": "enrich-intbank", "_id": "89"}}
+{"intbankID": 89, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Dobrogea Bank", "intbank.ach": 427555331, "intbank.swiftID": "RODO99", "intbank.ip": "86.43.154.64"}
+{"index": {"_index": "enrich-intbank", "_id": "90"}}
+{"intbankID": 90, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Transylvana Bank", "intbank.ach": 432630244, "intbank.swiftID": "RODA84", "intbank.ip": "86.2.195.56"}
+{"index": {"_index": "enrich-intbank", "_id": "91"}}
+{"intbankID": 91, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Bucuresti Bank", "intbank.ach": 738222678, "intbank.swiftID": "ROCA77", "intbank.ip": "86.79.97.145"}
+{"index": {"_index": "enrich-intbank", "_id": "92"}}
+{"intbankID": 92, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Dobrogea Bank", "intbank.ach": 998985725, "intbank.swiftID": "RODA91", "intbank.ip": "86.136.8.154"}
+{"index": {"_index": "enrich-intbank", "_id": "93"}}
+{"intbankID": 93, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Daciana Bank", "intbank.ach": 845033799, "intbank.swiftID": "ROTR17", "intbank.ip": "86.219.182.173"}
+{"index": {"_index": "enrich-intbank", "_id": "94"}}
+{"intbankID": 94, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Transylvana Bank", "intbank.ach": 414332241, "intbank.swiftID": "RODA83", "intbank.ip": "86.3.61.226"}
+{"index": {"_index": "enrich-intbank", "_id": "95"}}
+{"intbankID": 95, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Daciana Bank", "intbank.ach": 654531342, "intbank.swiftID": "ROBU32", "intbank.ip": "86.85.136.151"}
+{"index": {"_index": "enrich-intbank", "_id": "96"}}
+{"intbankID": 96, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Bucuresti Bank", "intbank.ach": 379422140, "intbank.swiftID": "ROBU91", "intbank.ip": "86.73.74.40"}
+{"index": {"_index": "enrich-intbank", "_id": "97"}}
+{"intbankID": 97, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Dobrogea Bank", "intbank.ach": 510929176, "intbank.swiftID": "ROTR76", "intbank.ip": "86.102.177.118"}
+{"index": {"_index": "enrich-intbank", "_id": "98"}}
+{"intbankID": 98, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Bucuresti Bank", "intbank.ach": 400170286, "intbank.swiftID": "ROTR29", "intbank.ip": "86.193.103.27"}
+{"index": {"_index": "enrich-intbank", "_id": "99"}}
+{"intbankID": 99, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Daciana Bank", "intbank.ach": 838982868, "intbank.swiftID": "RODO33", "intbank.ip": "86.196.253.180"}
+{"index": {"_index": "enrich-intbank", "_id": "100"}}
+{"intbankID": 100, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Dobrogea Bank", "intbank.ach": 775994118, "intbank.swiftID": "ROTR69", "intbank.ip": "86.179.68.67"}
+{"index": {"_index": "enrich-intbank", "_id": "101"}}
+{"intbankID": 101, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Zaporizh Bank", "intbank.ach": 402870150, "intbank.swiftID": "UAOD21", "intbank.ip": "91.188.174.202"}
+{"index": {"_index": "enrich-intbank", "_id": "102"}}
+{"intbankID": 102, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 724470272, "intbank.swiftID": "UAOD88", "intbank.ip": "91.165.122.132"}
+{"index": {"_index": "enrich-intbank", "_id": "103"}}
+{"intbankID": 103, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 626233176, "intbank.swiftID": "UAZA31", "intbank.ip": "91.199.164.150"}
+{"index": {"_index": "enrich-intbank", "_id": "104"}}
+{"intbankID": 104, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 789289185, "intbank.swiftID": "UAZA93", "intbank.ip": "91.181.27.254"}
+{"index": {"_index": "enrich-intbank", "_id": "105"}}
+{"intbankID": 105, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Odessia Bank", "intbank.ach": 639931755, "intbank.swiftID": "UAOD14", "intbank.ip": "91.224.86.252"}
+{"index": {"_index": "enrich-intbank", "_id": "106"}}
+{"intbankID": 106, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Odessia Bank", "intbank.ach": 872943760, "intbank.swiftID": "UAKY86", "intbank.ip": "91.45.23.48"}
+{"index": {"_index": "enrich-intbank", "_id": "107"}}
+{"intbankID": 107, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Zaporizh Bank", "intbank.ach": 453307194, "intbank.swiftID": "UAOD82", "intbank.ip": "91.138.179.236"}
+{"index": {"_index": "enrich-intbank", "_id": "108"}}
+{"intbankID": 108, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Lvivska Bank", "intbank.ach": 390409385, "intbank.swiftID": "UAOD61", "intbank.ip": "91.232.64.123"}
+{"index": {"_index": "enrich-intbank", "_id": "109"}}
+{"intbankID": 109, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 172216329, "intbank.swiftID": "UAKY64", "intbank.ip": "91.49.140.91"}
+{"index": {"_index": "enrich-intbank", "_id": "110"}}
+{"intbankID": 110, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Lvivska Bank", "intbank.ach": 741587382, "intbank.swiftID": "UAOD27", "intbank.ip": "91.116.135.169"}
+{"index": {"_index": "enrich-intbank", "_id": "111"}}
+{"intbankID": 111, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Lvivska Bank", "intbank.ach": 449352484, "intbank.swiftID": "UAZA36", "intbank.ip": "91.153.30.124"}
+{"index": {"_index": "enrich-intbank", "_id": "112"}}
+{"intbankID": 112, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 926077754, "intbank.swiftID": "UADN40", "intbank.ip": "91.29.103.217"}
+{"index": {"_index": "enrich-intbank", "_id": "113"}}
+{"intbankID": 113, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Kyivan Bank", "intbank.ach": 823904078, "intbank.swiftID": "UAZA96", "intbank.ip": "91.223.36.36"}
+{"index": {"_index": "enrich-intbank", "_id": "114"}}
+{"intbankID": 114, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Zaporizh Bank", "intbank.ach": 393267996, "intbank.swiftID": "UAZA48", "intbank.ip": "91.178.201.99"}
+{"index": {"_index": "enrich-intbank", "_id": "115"}}
+{"intbankID": 115, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Kyivan Bank", "intbank.ach": 716627388, "intbank.swiftID": "UAZA55", "intbank.ip": "91.63.235.94"}
+{"index": {"_index": "enrich-intbank", "_id": "116"}}
+{"intbankID": 116, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 813266560, "intbank.swiftID": "UAOD79", "intbank.ip": "91.62.207.69"}
+{"index": {"_index": "enrich-intbank", "_id": "117"}}
+{"intbankID": 117, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Odessia Bank", "intbank.ach": 958323160, "intbank.swiftID": "UALV44", "intbank.ip": "91.230.17.96"}
+{"index": {"_index": "enrich-intbank", "_id": "118"}}
+{"intbankID": 118, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Lvivska Bank", "intbank.ach": 958558300, "intbank.swiftID": "UAZA77", "intbank.ip": "91.228.104.1"}
+{"index": {"_index": "enrich-intbank", "_id": "119"}}
+{"intbankID": 119, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Lvivska Bank", "intbank.ach": 695769708, "intbank.swiftID": "UALV78", "intbank.ip": "91.31.115.46"}
+{"index": {"_index": "enrich-intbank", "_id": "120"}}
+{"intbankID": 120, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 529747222, "intbank.swiftID": "UALV83", "intbank.ip": "91.37.39.2"}
+{"index": {"_index": "enrich-intbank", "_id": "121"}}
+{"intbankID": 121, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Dnipro Bank", "intbank.ach": 433379613, "intbank.swiftID": "UAKY85", "intbank.ip": "91.226.111.41"}
+{"index": {"_index": "enrich-intbank", "_id": "122"}}
+{"intbankID": 122, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Kyivan Bank", "intbank.ach": 777422472, "intbank.swiftID": "UADN44", "intbank.ip": "91.150.198.173"}
+{"index": {"_index": "enrich-intbank", "_id": "123"}}
+{"intbankID": 123, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Zaporizh Bank", "intbank.ach": 145346425, "intbank.swiftID": "UADN18", "intbank.ip": "91.182.79.141"}
+{"index": {"_index": "enrich-intbank", "_id": "124"}}
+{"intbankID": 124, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Kyivan Bank", "intbank.ach": 397831387, "intbank.swiftID": "UADN84", "intbank.ip": "91.206.135.238"}
+{"index": {"_index": "enrich-intbank", "_id": "125"}}
+{"intbankID": 125, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Zaporizh Bank", "intbank.ach": 385752368, "intbank.swiftID": "UAKY78", "intbank.ip": "91.217.205.242"}
+{"index": {"_index": "enrich-intbank", "_id": "126"}}
+{"intbankID": 126, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 463368331, "intbank.swiftID": "BYBE53", "intbank.ip": "93.248.246.34"}
+{"index": {"_index": "enrich-intbank", "_id": "127"}}
+{"intbankID": 127, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 854955944, "intbank.swiftID": "BYPO70", "intbank.ip": "93.22.20.65"}
+{"index": {"_index": "enrich-intbank", "_id": "128"}}
+{"intbankID": 128, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Novopolotsk Bank", "intbank.ach": 135060701, "intbank.swiftID": "BYPO35", "intbank.ip": "93.17.67.210"}
+{"index": {"_index": "enrich-intbank", "_id": "129"}}
+{"intbankID": 129, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Polatskbank Bank", "intbank.ach": 292738941, "intbank.swiftID": "BYMI91", "intbank.ip": "93.211.78.249"}
+{"index": {"_index": "enrich-intbank", "_id": "130"}}
+{"intbankID": 130, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 612142920, "intbank.swiftID": "BYBE59", "intbank.ip": "93.199.185.54"}
+{"index": {"_index": "enrich-intbank", "_id": "131"}}
+{"intbankID": 131, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Novopolotsk Bank", "intbank.ach": 732650306, "intbank.swiftID": "BYPO98", "intbank.ip": "93.152.252.54"}
+{"index": {"_index": "enrich-intbank", "_id": "132"}}
+{"intbankID": 132, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 476078066, "intbank.swiftID": "BYPO78", "intbank.ip": "93.39.219.227"}
+{"index": {"_index": "enrich-intbank", "_id": "133"}}
+{"intbankID": 133, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 742492259, "intbank.swiftID": "BYNO73", "intbank.ip": "93.96.223.104"}
+{"index": {"_index": "enrich-intbank", "_id": "134"}}
+{"intbankID": 134, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 553119206, "intbank.swiftID": "BYBE12", "intbank.ip": "93.233.73.157"}
+{"index": {"_index": "enrich-intbank", "_id": "135"}}
+{"intbankID": 135, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 139061293, "intbank.swiftID": "BYPO67", "intbank.ip": "93.114.249.25"}
+{"index": {"_index": "enrich-intbank", "_id": "136"}}
+{"intbankID": 136, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 699282803, "intbank.swiftID": "BYNO28", "intbank.ip": "93.200.226.79"}
+{"index": {"_index": "enrich-intbank", "_id": "137"}}
+{"intbankID": 137, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Novopolotsk Bank", "intbank.ach": 491798122, "intbank.swiftID": "BYMI73", "intbank.ip": "93.14.229.233"}
+{"index": {"_index": "enrich-intbank", "_id": "138"}}
+{"intbankID": 138, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Novopolotsk Bank", "intbank.ach": 963843036, "intbank.swiftID": "BYPO40", "intbank.ip": "93.85.167.132"}
+{"index": {"_index": "enrich-intbank", "_id": "139"}}
+{"intbankID": 139, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 177079365, "intbank.swiftID": "BYPO14", "intbank.ip": "93.15.224.88"}
+{"index": {"_index": "enrich-intbank", "_id": "140"}}
+{"intbankID": 140, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Polatskbank Bank", "intbank.ach": 969120345, "intbank.swiftID": "BYMI65", "intbank.ip": "93.217.211.156"}
+{"index": {"_index": "enrich-intbank", "_id": "141"}}
+{"intbankID": 141, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Polatskbank Bank", "intbank.ach": 859109737, "intbank.swiftID": "BYNO93", "intbank.ip": "93.202.52.28"}
+{"index": {"_index": "enrich-intbank", "_id": "142"}}
+{"intbankID": 142, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 134493512, "intbank.swiftID": "BYNO24", "intbank.ip": "93.150.153.202"}
+{"index": {"_index": "enrich-intbank", "_id": "143"}}
+{"intbankID": 143, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Polatskbank Bank", "intbank.ach": 204407740, "intbank.swiftID": "BYNO26", "intbank.ip": "93.237.102.237"}
+{"index": {"_index": "enrich-intbank", "_id": "144"}}
+{"intbankID": 144, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 785476897, "intbank.swiftID": "BYNO67", "intbank.ip": "93.207.146.45"}
+{"index": {"_index": "enrich-intbank", "_id": "145"}}
+{"intbankID": 145, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 389809152, "intbank.swiftID": "BYPO37", "intbank.ip": "93.201.108.181"}
+{"index": {"_index": "enrich-intbank", "_id": "146"}}
+{"intbankID": 146, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 110040425, "intbank.swiftID": "BYBE58", "intbank.ip": "93.101.13.17"}
+{"index": {"_index": "enrich-intbank", "_id": "147"}}
+{"intbankID": 147, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 117594613, "intbank.swiftID": "BYNO93", "intbank.ip": "93.198.246.172"}
+{"index": {"_index": "enrich-intbank", "_id": "148"}}
+{"intbankID": 148, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 975790296, "intbank.swiftID": "BYMI65", "intbank.ip": "93.190.240.222"}
+{"index": {"_index": "enrich-intbank", "_id": "149"}}
+{"intbankID": 149, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 430985125, "intbank.swiftID": "BYNO97", "intbank.ip": "93.30.73.143"}
+{"index": {"_index": "enrich-intbank", "_id": "150"}}
+{"intbankID": 150, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Minskaya Bank", "intbank.ach": 710081115, "intbank.swiftID": "BYNO39", "intbank.ip": "93.63.178.27"}
+{"index": {"_index": "enrich-intbank", "_id": "151"}}
+{"intbankID": 151, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 148298072, "intbank.swiftID": "FIHE52", "intbank.ip": "91.131.15.39"}
+{"index": {"_index": "enrich-intbank", "_id": "152"}}
+{"intbankID": 152, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 601759041, "intbank.swiftID": "FINO79", "intbank.ip": "91.144.173.162"}
+{"index": {"_index": "enrich-intbank", "_id": "153"}}
+{"intbankID": 153, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Arktinen Bank", "intbank.ach": 478536549, "intbank.swiftID": "FINO87", "intbank.ip": "91.105.22.239"}
+{"index": {"_index": "enrich-intbank", "_id": "154"}}
+{"intbankID": 154, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 173469744, "intbank.swiftID": "FINO96", "intbank.ip": "91.44.227.71"}
+{"index": {"_index": "enrich-intbank", "_id": "155"}}
+{"intbankID": 155, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 414627939, "intbank.swiftID": "FISU83", "intbank.ip": "91.223.71.122"}
+{"index": {"_index": "enrich-intbank", "_id": "156"}}
+{"intbankID": 156, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 339902451, "intbank.swiftID": "FISU93", "intbank.ip": "91.31.52.33"}
+{"index": {"_index": "enrich-intbank", "_id": "157"}}
+{"intbankID": 157, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Suomen Bank", "intbank.ach": 385372898, "intbank.swiftID": "FIAR93", "intbank.ip": "91.189.70.122"}
+{"index": {"_index": "enrich-intbank", "_id": "158"}}
+{"intbankID": 158, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Suomen Bank", "intbank.ach": 364278223, "intbank.swiftID": "FISU60", "intbank.ip": "91.251.127.91"}
+{"index": {"_index": "enrich-intbank", "_id": "159"}}
+{"intbankID": 159, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 393996395, "intbank.swiftID": "FISU26", "intbank.ip": "91.110.17.116"}
+{"index": {"_index": "enrich-intbank", "_id": "160"}}
+{"intbankID": 160, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Arktinen Bank", "intbank.ach": 887749916, "intbank.swiftID": "FIAR47", "intbank.ip": "91.237.251.180"}
+{"index": {"_index": "enrich-intbank", "_id": "161"}}
+{"intbankID": 161, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 711111162, "intbank.swiftID": "FIAR39", "intbank.ip": "91.70.152.232"}
+{"index": {"_index": "enrich-intbank", "_id": "162"}}
+{"intbankID": 162, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 655432847, "intbank.swiftID": "FIHE11", "intbank.ip": "91.136.171.3"}
+{"index": {"_index": "enrich-intbank", "_id": "163"}}
+{"intbankID": 163, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 720248739, "intbank.swiftID": "FIAR33", "intbank.ip": "91.205.1.159"}
+{"index": {"_index": "enrich-intbank", "_id": "164"}}
+{"intbankID": 164, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Suomen Bank", "intbank.ach": 777114105, "intbank.swiftID": "FISU42", "intbank.ip": "91.29.2.62"}
+{"index": {"_index": "enrich-intbank", "_id": "165"}}
+{"intbankID": 165, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 427617657, "intbank.swiftID": "FIAR26", "intbank.ip": "91.193.165.176"}
+{"index": {"_index": "enrich-intbank", "_id": "166"}}
+{"intbankID": 166, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 469770637, "intbank.swiftID": "FISU85", "intbank.ip": "91.77.252.156"}
+{"index": {"_index": "enrich-intbank", "_id": "167"}}
+{"intbankID": 167, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Suomen Bank", "intbank.ach": 689351584, "intbank.swiftID": "FINO15", "intbank.ip": "91.33.186.253"}
+{"index": {"_index": "enrich-intbank", "_id": "168"}}
+{"intbankID": 168, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 620217493, "intbank.swiftID": "FINO37", "intbank.ip": "91.148.20.179"}
+{"index": {"_index": "enrich-intbank", "_id": "169"}}
+{"intbankID": 169, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 571755768, "intbank.swiftID": "FIAR72", "intbank.ip": "91.24.156.106"}
+{"index": {"_index": "enrich-intbank", "_id": "170"}}
+{"intbankID": 170, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 413910183, "intbank.swiftID": "FINO37", "intbank.ip": "91.153.5.66"}
+{"index": {"_index": "enrich-intbank", "_id": "171"}}
+{"intbankID": 171, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 438449048, "intbank.swiftID": "FIAR42", "intbank.ip": "91.66.180.221"}
+{"index": {"_index": "enrich-intbank", "_id": "172"}}
+{"intbankID": 172, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Arktinen Bank", "intbank.ach": 944326973, "intbank.swiftID": "FINO67", "intbank.ip": "91.234.155.51"}
+{"index": {"_index": "enrich-intbank", "_id": "173"}}
+{"intbankID": 173, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 462920268, "intbank.swiftID": "FINO34", "intbank.ip": "91.146.183.125"}
+{"index": {"_index": "enrich-intbank", "_id": "174"}}
+{"intbankID": 174, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Arktinen Bank", "intbank.ach": 515288282, "intbank.swiftID": "FINO51", "intbank.ip": "91.248.23.195"}
+{"index": {"_index": "enrich-intbank", "_id": "175"}}
+{"intbankID": 175, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Helsinki Trust Bank", "intbank.ach": 939100880, "intbank.swiftID": "FISU29", "intbank.ip": "91.143.177.152"}
+{"index": {"_index": "enrich-intbank", "_id": "176"}}
+{"intbankID": 176, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 108618744, "intbank.swiftID": "EENO81", "intbank.ip": "90.68.250.158"}
+{"index": {"_index": "enrich-intbank", "_id": "177"}}
+{"intbankID": 177, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 739410385, "intbank.swiftID": "EEBA25", "intbank.ip": "90.34.117.66"}
+{"index": {"_index": "enrich-intbank", "_id": "178"}}
+{"intbankID": 178, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 292027311, "intbank.swiftID": "EENO81", "intbank.ip": "90.64.215.100"}
+{"index": {"_index": "enrich-intbank", "_id": "179"}}
+{"intbankID": 179, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 600862319, "intbank.swiftID": "EENO12", "intbank.ip": "90.229.115.111"}
+{"index": {"_index": "enrich-intbank", "_id": "180"}}
+{"intbankID": 180, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 102767906, "intbank.swiftID": "EEEE65", "intbank.ip": "90.10.171.248"}
+{"index": {"_index": "enrich-intbank", "_id": "181"}}
+{"intbankID": 181, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Nordesti Bank", "intbank.ach": 854921785, "intbank.swiftID": "EETA63", "intbank.ip": "90.31.245.122"}
+{"index": {"_index": "enrich-intbank", "_id": "182"}}
+{"intbankID": 182, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 574482931, "intbank.swiftID": "EEBA31", "intbank.ip": "90.73.224.201"}
+{"index": {"_index": "enrich-intbank", "_id": "183"}}
+{"intbankID": 183, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Nordesti Bank", "intbank.ach": 123042233, "intbank.swiftID": "EENO30", "intbank.ip": "90.99.239.152"}
+{"index": {"_index": "enrich-intbank", "_id": "184"}}
+{"intbankID": 184, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 896646642, "intbank.swiftID": "EETA71", "intbank.ip": "90.217.123.23"}
+{"index": {"_index": "enrich-intbank", "_id": "185"}}
+{"intbankID": 185, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 435182164, "intbank.swiftID": "EEBA50", "intbank.ip": "90.71.15.14"}
+{"index": {"_index": "enrich-intbank", "_id": "186"}}
+{"intbankID": 186, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 898780853, "intbank.swiftID": "EETA64", "intbank.ip": "90.247.157.14"}
+{"index": {"_index": "enrich-intbank", "_id": "187"}}
+{"intbankID": 187, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 480889707, "intbank.swiftID": "EEBA97", "intbank.ip": "90.227.9.188"}
+{"index": {"_index": "enrich-intbank", "_id": "188"}}
+{"intbankID": 188, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 684257298, "intbank.swiftID": "EENO76", "intbank.ip": "90.36.15.47"}
+{"index": {"_index": "enrich-intbank", "_id": "189"}}
+{"intbankID": 189, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 471303192, "intbank.swiftID": "EEEE41", "intbank.ip": "90.155.173.107"}
+{"index": {"_index": "enrich-intbank", "_id": "190"}}
+{"intbankID": 190, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Nordesti Bank", "intbank.ach": 761180506, "intbank.swiftID": "EENO85", "intbank.ip": "90.122.189.252"}
+{"index": {"_index": "enrich-intbank", "_id": "191"}}
+{"intbankID": 191, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 362227859, "intbank.swiftID": "EENO62", "intbank.ip": "90.124.56.62"}
+{"index": {"_index": "enrich-intbank", "_id": "192"}}
+{"intbankID": 192, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 638732570, "intbank.swiftID": "EEEE18", "intbank.ip": "90.49.120.10"}
+{"index": {"_index": "enrich-intbank", "_id": "193"}}
+{"intbankID": 193, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Nordesti Bank", "intbank.ach": 897016668, "intbank.swiftID": "EETA35", "intbank.ip": "90.38.20.67"}
+{"index": {"_index": "enrich-intbank", "_id": "194"}}
+{"intbankID": 194, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 456594226, "intbank.swiftID": "EEEE75", "intbank.ip": "90.130.11.29"}
+{"index": {"_index": "enrich-intbank", "_id": "195"}}
+{"intbankID": 195, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 647156991, "intbank.swiftID": "EEEE47", "intbank.ip": "90.243.47.188"}
+{"index": {"_index": "enrich-intbank", "_id": "196"}}
+{"intbankID": 196, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 370737850, "intbank.swiftID": "EEEE25", "intbank.ip": "90.96.124.46"}
+{"index": {"_index": "enrich-intbank", "_id": "197"}}
+{"intbankID": 197, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Eesti Krediit Bank", "intbank.ach": 398431413, "intbank.swiftID": "EETA50", "intbank.ip": "90.22.226.209"}
+{"index": {"_index": "enrich-intbank", "_id": "198"}}
+{"intbankID": 198, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 622684123, "intbank.swiftID": "EEBA72", "intbank.ip": "90.66.77.186"}
+{"index": {"_index": "enrich-intbank", "_id": "199"}}
+{"intbankID": 199, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 508535494, "intbank.swiftID": "EEEE91", "intbank.ip": "90.172.56.213"}
+{"index": {"_index": "enrich-intbank", "_id": "200"}}
+{"intbankID": 200, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Balticum Bank", "intbank.ach": 380261606, "intbank.swiftID": "EETA20", "intbank.ip": "90.206.218.174"}
+{"index": {"_index": "enrich-intbank", "_id": "201"}}
+{"intbankID": 201, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 932450300, "intbank.swiftID": "CANO63", "intbank.ip": "142.89.176.233"}
+{"index": {"_index": "enrich-intbank", "_id": "202"}}
+{"intbankID": 202, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 386415208, "intbank.swiftID": "CAON98", "intbank.ip": "142.191.61.212"}
+{"index": {"_index": "enrich-intbank", "_id": "203"}}
+{"intbankID": 203, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Ontario First Bank", "intbank.ach": 930087887, "intbank.swiftID": "CAMA36", "intbank.ip": "142.69.72.163"}
+{"index": {"_index": "enrich-intbank", "_id": "204"}}
+{"intbankID": 204, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Ontario First Bank", "intbank.ach": 882879640, "intbank.swiftID": "CAMA47", "intbank.ip": "142.118.187.91"}
+{"index": {"_index": "enrich-intbank", "_id": "205"}}
+{"intbankID": 205, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Vancouver Capital Bank", "intbank.ach": 292046585, "intbank.swiftID": "CANO43", "intbank.ip": "142.203.27.29"}
+{"index": {"_index": "enrich-intbank", "_id": "206"}}
+{"intbankID": 206, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 973260404, "intbank.swiftID": "CAVA23", "intbank.ip": "142.168.183.249"}
+{"index": {"_index": "enrich-intbank", "_id": "207"}}
+{"intbankID": 207, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 834760883, "intbank.swiftID": "CAMA74", "intbank.ip": "142.222.36.141"}
+{"index": {"_index": "enrich-intbank", "_id": "208"}}
+{"intbankID": 208, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Maplewood Bank", "intbank.ach": 819142007, "intbank.swiftID": "CAON65", "intbank.ip": "142.24.202.236"}
+{"index": {"_index": "enrich-intbank", "_id": "209"}}
+{"intbankID": 209, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Maplewood Bank", "intbank.ach": 757862849, "intbank.swiftID": "CAVA90", "intbank.ip": "142.115.230.108"}
+{"index": {"_index": "enrich-intbank", "_id": "210"}}
+{"intbankID": 210, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Maplewood Bank", "intbank.ach": 448986799, "intbank.swiftID": "CANO95", "intbank.ip": "142.73.56.240"}
+{"index": {"_index": "enrich-intbank", "_id": "211"}}
+{"intbankID": 211, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 951125717, "intbank.swiftID": "CAVA22", "intbank.ip": "142.47.66.107"}
+{"index": {"_index": "enrich-intbank", "_id": "212"}}
+{"intbankID": 212, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Ontario First Bank", "intbank.ach": 659621521, "intbank.swiftID": "CANO28", "intbank.ip": "142.67.21.233"}
+{"index": {"_index": "enrich-intbank", "_id": "213"}}
+{"intbankID": 213, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Vancouver Capital Bank", "intbank.ach": 116742718, "intbank.swiftID": "CANO69", "intbank.ip": "142.121.75.234"}
+{"index": {"_index": "enrich-intbank", "_id": "214"}}
+{"intbankID": 214, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Vancouver Capital Bank", "intbank.ach": 479423330, "intbank.swiftID": "CAON99", "intbank.ip": "142.218.68.100"}
+{"index": {"_index": "enrich-intbank", "_id": "215"}}
+{"intbankID": 215, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 223151278, "intbank.swiftID": "CAMA11", "intbank.ip": "142.236.204.38"}
+{"index": {"_index": "enrich-intbank", "_id": "216"}}
+{"intbankID": 216, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Maplewood Bank", "intbank.ach": 111348842, "intbank.swiftID": "CANO71", "intbank.ip": "142.208.168.174"}
+{"index": {"_index": "enrich-intbank", "_id": "217"}}
+{"intbankID": 217, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Maplewood Bank", "intbank.ach": 931354706, "intbank.swiftID": "CAMA67", "intbank.ip": "142.34.40.15"}
+{"index": {"_index": "enrich-intbank", "_id": "218"}}
+{"intbankID": 218, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Maplewood Bank", "intbank.ach": 201128744, "intbank.swiftID": "CANO28", "intbank.ip": "142.250.129.159"}
+{"index": {"_index": "enrich-intbank", "_id": "219"}}
+{"intbankID": 219, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Ontario First Bank", "intbank.ach": 668401009, "intbank.swiftID": "CAON66", "intbank.ip": "142.5.154.78"}
+{"index": {"_index": "enrich-intbank", "_id": "220"}}
+{"intbankID": 220, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 130490288, "intbank.swiftID": "CAVA26", "intbank.ip": "142.143.47.101"}
+{"index": {"_index": "enrich-intbank", "_id": "221"}}
+{"intbankID": 221, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 252006951, "intbank.swiftID": "CAON91", "intbank.ip": "142.244.170.159"}
+{"index": {"_index": "enrich-intbank", "_id": "222"}}
+{"intbankID": 222, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Vancouver Capital Bank", "intbank.ach": 270906705, "intbank.swiftID": "CANO28", "intbank.ip": "142.147.76.241"}
+{"index": {"_index": "enrich-intbank", "_id": "223"}}
+{"intbankID": 223, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Vancouver Capital Bank", "intbank.ach": 988933780, "intbank.swiftID": "CAVA47", "intbank.ip": "142.217.208.99"}
+{"index": {"_index": "enrich-intbank", "_id": "224"}}
+{"intbankID": 224, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Northlake Bank", "intbank.ach": 217362428, "intbank.swiftID": "CAON34", "intbank.ip": "142.84.18.154"}
+{"index": {"_index": "enrich-intbank", "_id": "225"}}
+{"intbankID": 225, "intbank.country": "Canada", "intbank.country_code": "CA", "intbank.name": "Vancouver Capital Bank", "intbank.ach": 534164012, "intbank.swiftID": "CANO91", "intbank.ip": "142.45.99.166"}
+{"index": {"_index": "enrich-intbank", "_id": "226"}}
+{"intbankID": 226, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "RioPrata Bank", "intbank.ach": 910451756, "intbank.swiftID": "ARCO50", "intbank.ip": "186.154.196.80"}
+{"index": {"_index": "enrich-intbank", "_id": "227"}}
+{"intbankID": 227, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 433497628, "intbank.swiftID": "ARPA13", "intbank.ip": "186.175.205.235"}
+{"index": {"_index": "enrich-intbank", "_id": "228"}}
+{"intbankID": 228, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "RioPrata Bank", "intbank.ach": 256179875, "intbank.swiftID": "ARLA78", "intbank.ip": "186.238.55.84"}
+{"index": {"_index": "enrich-intbank", "_id": "229"}}
+{"intbankID": 229, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 566016193, "intbank.swiftID": "ARPA56", "intbank.ip": "186.225.74.52"}
+{"index": {"_index": "enrich-intbank", "_id": "230"}}
+{"intbankID": 230, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "LaPlata Bank", "intbank.ach": 587039346, "intbank.swiftID": "ARPA87", "intbank.ip": "186.128.35.142"}
+{"index": {"_index": "enrich-intbank", "_id": "231"}}
+{"intbankID": 231, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "RioPrata Bank", "intbank.ach": 730326806, "intbank.swiftID": "ARPA68", "intbank.ip": "186.54.41.9"}
+{"index": {"_index": "enrich-intbank", "_id": "232"}}
+{"intbankID": 232, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 369295032, "intbank.swiftID": "ARLA18", "intbank.ip": "186.238.175.21"}
+{"index": {"_index": "enrich-intbank", "_id": "233"}}
+{"intbankID": 233, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "LaPlata Bank", "intbank.ach": 313870059, "intbank.swiftID": "ARPA83", "intbank.ip": "186.164.180.97"}
+{"index": {"_index": "enrich-intbank", "_id": "234"}}
+{"intbankID": 234, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 412407574, "intbank.swiftID": "ARPA80", "intbank.ip": "186.72.168.1"}
+{"index": {"_index": "enrich-intbank", "_id": "235"}}
+{"intbankID": 235, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 703394323, "intbank.swiftID": "ARCO94", "intbank.ip": "186.233.197.120"}
+{"index": {"_index": "enrich-intbank", "_id": "236"}}
+{"intbankID": 236, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 876859686, "intbank.swiftID": "ARCO69", "intbank.ip": "186.83.192.150"}
+{"index": {"_index": "enrich-intbank", "_id": "237"}}
+{"intbankID": 237, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "LaPlata Bank", "intbank.ach": 988150439, "intbank.swiftID": "ARCO62", "intbank.ip": "186.228.248.208"}
+{"index": {"_index": "enrich-intbank", "_id": "238"}}
+{"intbankID": 238, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "RioPrata Bank", "intbank.ach": 964706566, "intbank.swiftID": "ARLA32", "intbank.ip": "186.117.157.210"}
+{"index": {"_index": "enrich-intbank", "_id": "239"}}
+{"intbankID": 239, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 197280904, "intbank.swiftID": "ARPA75", "intbank.ip": "186.4.199.14"}
+{"index": {"_index": "enrich-intbank", "_id": "240"}}
+{"intbankID": 240, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 892015842, "intbank.swiftID": "ARPA87", "intbank.ip": "186.30.79.252"}
+{"index": {"_index": "enrich-intbank", "_id": "241"}}
+{"intbankID": 241, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 763571717, "intbank.swiftID": "ARLA11", "intbank.ip": "186.132.47.87"}
+{"index": {"_index": "enrich-intbank", "_id": "242"}}
+{"intbankID": 242, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 959218618, "intbank.swiftID": "ARCO60", "intbank.ip": "186.75.75.116"}
+{"index": {"_index": "enrich-intbank", "_id": "243"}}
+{"intbankID": 243, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "LaPlata Bank", "intbank.ach": 273936215, "intbank.swiftID": "ARLA29", "intbank.ip": "186.44.205.66"}
+{"index": {"_index": "enrich-intbank", "_id": "244"}}
+{"intbankID": 244, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 513516284, "intbank.swiftID": "ARRI71", "intbank.ip": "186.63.147.161"}
+{"index": {"_index": "enrich-intbank", "_id": "245"}}
+{"intbankID": 245, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "LaPlata Bank", "intbank.ach": 266190504, "intbank.swiftID": "ARCO38", "intbank.ip": "186.35.213.58"}
+{"index": {"_index": "enrich-intbank", "_id": "246"}}
+{"intbankID": 246, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "LaPlata Bank", "intbank.ach": 415828950, "intbank.swiftID": "ARPA78", "intbank.ip": "186.107.85.187"}
+{"index": {"_index": "enrich-intbank", "_id": "247"}}
+{"intbankID": 247, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 201283620, "intbank.swiftID": "ARLA69", "intbank.ip": "186.26.23.230"}
+{"index": {"_index": "enrich-intbank", "_id": "248"}}
+{"intbankID": 248, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 353546447, "intbank.swiftID": "ARCO21", "intbank.ip": "186.120.63.71"}
+{"index": {"_index": "enrich-intbank", "_id": "249"}}
+{"intbankID": 249, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Capital Bank", "intbank.ach": 106576703, "intbank.swiftID": "ARLA88", "intbank.ip": "186.44.241.27"}
+{"index": {"_index": "enrich-intbank", "_id": "250"}}
+{"intbankID": 250, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "RioPrata Bank", "intbank.ach": 258771875, "intbank.swiftID": "ARPA14", "intbank.ip": "186.40.194.176"}
+{"index": {"_index": "enrich-intbank", "_id": "251"}}
+{"intbankID": 251, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 786080718, "intbank.swiftID": "CLAN17", "intbank.ip": "190.194.216.197"}
+{"index": {"_index": "enrich-intbank", "_id": "252"}}
+{"intbankID": 252, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 458727117, "intbank.swiftID": "CLAN40", "intbank.ip": "190.233.180.200"}
+{"index": {"_index": "enrich-intbank", "_id": "253"}}
+{"intbankID": 253, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 571416485, "intbank.swiftID": "CLVA83", "intbank.ip": "190.174.226.169"}
+{"index": {"_index": "enrich-intbank", "_id": "254"}}
+{"intbankID": 254, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 394325734, "intbank.swiftID": "CLAN71", "intbank.ip": "190.82.31.37"}
+{"index": {"_index": "enrich-intbank", "_id": "255"}}
+{"intbankID": 255, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Valparaiso Trust Bank", "intbank.ach": 347535322, "intbank.swiftID": "CLSA46", "intbank.ip": "190.81.92.29"}
+{"index": {"_index": "enrich-intbank", "_id": "256"}}
+{"intbankID": 256, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 234279664, "intbank.swiftID": "CLVA81", "intbank.ip": "190.68.230.43"}
+{"index": {"_index": "enrich-intbank", "_id": "257"}}
+{"intbankID": 257, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 315710364, "intbank.swiftID": "CLAN93", "intbank.ip": "190.169.58.226"}
+{"index": {"_index": "enrich-intbank", "_id": "258"}}
+{"intbankID": 258, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 413766690, "intbank.swiftID": "CLVA66", "intbank.ip": "190.34.96.238"}
+{"index": {"_index": "enrich-intbank", "_id": "259"}}
+{"intbankID": 259, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 735454482, "intbank.swiftID": "CLVA99", "intbank.ip": "190.54.60.199"}
+{"index": {"_index": "enrich-intbank", "_id": "260"}}
+{"intbankID": 260, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Valparaiso Trust Bank", "intbank.ach": 411212689, "intbank.swiftID": "CLAN81", "intbank.ip": "190.244.163.146"}
+{"index": {"_index": "enrich-intbank", "_id": "261"}}
+{"intbankID": 261, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 879886874, "intbank.swiftID": "CLVA70", "intbank.ip": "190.29.214.26"}
+{"index": {"_index": "enrich-intbank", "_id": "262"}}
+{"intbankID": 262, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 692720288, "intbank.swiftID": "CLAN39", "intbank.ip": "190.248.196.186"}
+{"index": {"_index": "enrich-intbank", "_id": "263"}}
+{"intbankID": 263, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 782261653, "intbank.swiftID": "CLAN94", "intbank.ip": "190.2.118.248"}
+{"index": {"_index": "enrich-intbank", "_id": "264"}}
+{"intbankID": 264, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 965413606, "intbank.swiftID": "CLVA17", "intbank.ip": "190.40.168.214"}
+{"index": {"_index": "enrich-intbank", "_id": "265"}}
+{"intbankID": 265, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 477460393, "intbank.swiftID": "CLVA20", "intbank.ip": "190.39.61.111"}
+{"index": {"_index": "enrich-intbank", "_id": "266"}}
+{"intbankID": 266, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Valparaiso Trust Bank", "intbank.ach": 357102260, "intbank.swiftID": "CLSA76", "intbank.ip": "190.5.116.172"}
+{"index": {"_index": "enrich-intbank", "_id": "267"}}
+{"intbankID": 267, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 955005613, "intbank.swiftID": "CLSA71", "intbank.ip": "190.205.58.176"}
+{"index": {"_index": "enrich-intbank", "_id": "268"}}
+{"intbankID": 268, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 780684001, "intbank.swiftID": "CLVA43", "intbank.ip": "190.65.14.75"}
+{"index": {"_index": "enrich-intbank", "_id": "269"}}
+{"intbankID": 269, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 944482803, "intbank.swiftID": "CLAN37", "intbank.ip": "190.56.109.240"}
+{"index": {"_index": "enrich-intbank", "_id": "270"}}
+{"intbankID": 270, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 624113589, "intbank.swiftID": "CLVA83", "intbank.ip": "190.36.133.19"}
+{"index": {"_index": "enrich-intbank", "_id": "271"}}
+{"intbankID": 271, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 877107168, "intbank.swiftID": "CLAN32", "intbank.ip": "190.72.40.134"}
+{"index": {"_index": "enrich-intbank", "_id": "272"}}
+{"intbankID": 272, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 220601135, "intbank.swiftID": "CLVA45", "intbank.ip": "190.208.67.148"}
+{"index": {"_index": "enrich-intbank", "_id": "273"}}
+{"intbankID": 273, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Valparaiso Trust Bank", "intbank.ach": 455904536, "intbank.swiftID": "CLAN60", "intbank.ip": "190.80.12.63"}
+{"index": {"_index": "enrich-intbank", "_id": "274"}}
+{"intbankID": 274, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Santiago Central Bank", "intbank.ach": 379025739, "intbank.swiftID": "CLSA96", "intbank.ip": "190.148.221.41"}
+{"index": {"_index": "enrich-intbank", "_id": "275"}}
+{"intbankID": 275, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "AndesBank Bank", "intbank.ach": 206836844, "intbank.swiftID": "CLVA19", "intbank.ip": "190.43.246.113"}
+{"index": {"_index": "enrich-intbank", "_id": "276"}}
+{"intbankID": 276, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 499133673, "intbank.swiftID": "ZAZU96", "intbank.ip": "196.97.101.155"}
+{"index": {"_index": "enrich-intbank", "_id": "277"}}
+{"intbankID": 277, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 910571622, "intbank.swiftID": "ZAZU24", "intbank.ip": "196.73.29.126"}
+{"index": {"_index": "enrich-intbank", "_id": "278"}}
+{"intbankID": 278, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Johannes Capital Bank", "intbank.ach": 733097588, "intbank.swiftID": "ZAZU74", "intbank.ip": "196.152.8.252"}
+{"index": {"_index": "enrich-intbank", "_id": "279"}}
+{"intbankID": 279, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 312132323, "intbank.swiftID": "ZACA73", "intbank.ip": "196.188.48.117"}
+{"index": {"_index": "enrich-intbank", "_id": "280"}}
+{"intbankID": 280, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 231988457, "intbank.swiftID": "ZAZU78", "intbank.ip": "196.197.244.76"}
+{"index": {"_index": "enrich-intbank", "_id": "281"}}
+{"intbankID": 281, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 982905259, "intbank.swiftID": "ZAZU67", "intbank.ip": "196.86.74.90"}
+{"index": {"_index": "enrich-intbank", "_id": "282"}}
+{"intbankID": 282, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 975384842, "intbank.swiftID": "ZAZU85", "intbank.ip": "196.64.215.23"}
+{"index": {"_index": "enrich-intbank", "_id": "283"}}
+{"intbankID": 283, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 900871960, "intbank.swiftID": "ZAJO71", "intbank.ip": "196.126.82.157"}
+{"index": {"_index": "enrich-intbank", "_id": "284"}}
+{"intbankID": 284, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 749554932, "intbank.swiftID": "ZACA83", "intbank.ip": "196.195.135.164"}
+{"index": {"_index": "enrich-intbank", "_id": "285"}}
+{"intbankID": 285, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Johannes Capital Bank", "intbank.ach": 337287100, "intbank.swiftID": "ZAJO72", "intbank.ip": "196.210.19.244"}
+{"index": {"_index": "enrich-intbank", "_id": "286"}}
+{"intbankID": 286, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 459032977, "intbank.swiftID": "ZAZU55", "intbank.ip": "196.199.209.140"}
+{"index": {"_index": "enrich-intbank", "_id": "287"}}
+{"intbankID": 287, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Johannes Capital Bank", "intbank.ach": 445219518, "intbank.swiftID": "ZACA27", "intbank.ip": "196.89.103.187"}
+{"index": {"_index": "enrich-intbank", "_id": "288"}}
+{"intbankID": 288, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 549034049, "intbank.swiftID": "ZAJO44", "intbank.ip": "196.152.109.108"}
+{"index": {"_index": "enrich-intbank", "_id": "289"}}
+{"intbankID": 289, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Johannes Capital Bank", "intbank.ach": 790191277, "intbank.swiftID": "ZACA78", "intbank.ip": "196.231.126.101"}
+{"index": {"_index": "enrich-intbank", "_id": "290"}}
+{"intbankID": 290, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Johannes Capital Bank", "intbank.ach": 228297457, "intbank.swiftID": "ZAZU25", "intbank.ip": "196.118.152.74"}
+{"index": {"_index": "enrich-intbank", "_id": "291"}}
+{"intbankID": 291, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 840455193, "intbank.swiftID": "ZAJO78", "intbank.ip": "196.120.139.117"}
+{"index": {"_index": "enrich-intbank", "_id": "292"}}
+{"intbankID": 292, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 658062244, "intbank.swiftID": "ZAJO67", "intbank.ip": "196.169.95.47"}
+{"index": {"_index": "enrich-intbank", "_id": "293"}}
+{"intbankID": 293, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 113089736, "intbank.swiftID": "ZACA69", "intbank.ip": "196.233.151.142"}
+{"index": {"_index": "enrich-intbank", "_id": "294"}}
+{"intbankID": 294, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 169144015, "intbank.swiftID": "ZAJO85", "intbank.ip": "196.39.136.70"}
+{"index": {"_index": "enrich-intbank", "_id": "295"}}
+{"intbankID": 295, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Johannes Capital Bank", "intbank.ach": 627913997, "intbank.swiftID": "ZAJO52", "intbank.ip": "196.63.122.10"}
+{"index": {"_index": "enrich-intbank", "_id": "296"}}
+{"intbankID": 296, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 158114416, "intbank.swiftID": "ZAZU46", "intbank.ip": "196.164.72.32"}
+{"index": {"_index": "enrich-intbank", "_id": "297"}}
+{"intbankID": 297, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 237030421, "intbank.swiftID": "ZACA71", "intbank.ip": "196.169.76.211"}
+{"index": {"_index": "enrich-intbank", "_id": "298"}}
+{"intbankID": 298, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 975345149, "intbank.swiftID": "ZAJO68", "intbank.ip": "196.204.52.183"}
+{"index": {"_index": "enrich-intbank", "_id": "299"}}
+{"intbankID": 299, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu National Bank", "intbank.ach": 349984872, "intbank.swiftID": "ZACA53", "intbank.ip": "196.43.9.88"}
+{"index": {"_index": "enrich-intbank", "_id": "300"}}
+{"intbankID": 300, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Sovereign Bank", "intbank.ach": 963103106, "intbank.swiftID": "ZAJO18", "intbank.ip": "196.14.113.12"}
+{"index": {"_index": "enrich-intbank", "_id": "301"}}
+{"intbankID": 301, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Lagos Unity Bank", "intbank.ach": 255335481, "intbank.swiftID": "NGAB25", "intbank.ip": "105.23.16.107"}
+{"index": {"_index": "enrich-intbank", "_id": "302"}}
+{"intbankID": 302, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 567585392, "intbank.swiftID": "NGAB20", "intbank.ip": "105.185.253.231"}
+{"index": {"_index": "enrich-intbank", "_id": "303"}}
+{"intbankID": 303, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 382070181, "intbank.swiftID": "NGLA41", "intbank.ip": "105.64.66.13"}
+{"index": {"_index": "enrich-intbank", "_id": "304"}}
+{"intbankID": 304, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 758676520, "intbank.swiftID": "NGAB76", "intbank.ip": "105.126.86.197"}
+{"index": {"_index": "enrich-intbank", "_id": "305"}}
+{"intbankID": 305, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 120515337, "intbank.swiftID": "NGNA31", "intbank.ip": "105.160.186.132"}
+{"index": {"_index": "enrich-intbank", "_id": "306"}}
+{"intbankID": 306, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 763890841, "intbank.swiftID": "NGAB99", "intbank.ip": "105.33.86.192"}
+{"index": {"_index": "enrich-intbank", "_id": "307"}}
+{"intbankID": 307, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 623900326, "intbank.swiftID": "NGNA98", "intbank.ip": "105.176.211.119"}
+{"index": {"_index": "enrich-intbank", "_id": "308"}}
+{"intbankID": 308, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 680090371, "intbank.swiftID": "NGLA47", "intbank.ip": "105.133.234.165"}
+{"index": {"_index": "enrich-intbank", "_id": "309"}}
+{"intbankID": 309, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 477611712, "intbank.swiftID": "NGLA54", "intbank.ip": "105.159.42.225"}
+{"index": {"_index": "enrich-intbank", "_id": "310"}}
+{"intbankID": 310, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Lagos Unity Bank", "intbank.ach": 164053587, "intbank.swiftID": "NGAB50", "intbank.ip": "105.172.193.48"}
+{"index": {"_index": "enrich-intbank", "_id": "311"}}
+{"intbankID": 311, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 545113089, "intbank.swiftID": "NGAB69", "intbank.ip": "105.30.189.34"}
+{"index": {"_index": "enrich-intbank", "_id": "312"}}
+{"intbankID": 312, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 930283246, "intbank.swiftID": "NGAB40", "intbank.ip": "105.223.166.242"}
+{"index": {"_index": "enrich-intbank", "_id": "313"}}
+{"intbankID": 313, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Lagos Unity Bank", "intbank.ach": 535629101, "intbank.swiftID": "NGAB95", "intbank.ip": "105.18.133.25"}
+{"index": {"_index": "enrich-intbank", "_id": "314"}}
+{"intbankID": 314, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 447677695, "intbank.swiftID": "NGAB38", "intbank.ip": "105.117.141.249"}
+{"index": {"_index": "enrich-intbank", "_id": "315"}}
+{"intbankID": 315, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 100689770, "intbank.swiftID": "NGAB22", "intbank.ip": "105.66.162.58"}
+{"index": {"_index": "enrich-intbank", "_id": "316"}}
+{"intbankID": 316, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 723299590, "intbank.swiftID": "NGLA45", "intbank.ip": "105.136.4.231"}
+{"index": {"_index": "enrich-intbank", "_id": "317"}}
+{"intbankID": 317, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 957581033, "intbank.swiftID": "NGLA18", "intbank.ip": "105.223.179.74"}
+{"index": {"_index": "enrich-intbank", "_id": "318"}}
+{"intbankID": 318, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 188482433, "intbank.swiftID": "NGAB63", "intbank.ip": "105.141.5.181"}
+{"index": {"_index": "enrich-intbank", "_id": "319"}}
+{"intbankID": 319, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Lagos Unity Bank", "intbank.ach": 461165576, "intbank.swiftID": "NGLA40", "intbank.ip": "105.131.23.160"}
+{"index": {"_index": "enrich-intbank", "_id": "320"}}
+{"intbankID": 320, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 422559388, "intbank.swiftID": "NGAB13", "intbank.ip": "105.140.15.221"}
+{"index": {"_index": "enrich-intbank", "_id": "321"}}
+{"intbankID": 321, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 311347179, "intbank.swiftID": "NGLA88", "intbank.ip": "105.143.75.167"}
+{"index": {"_index": "enrich-intbank", "_id": "322"}}
+{"intbankID": 322, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Federal Bank", "intbank.ach": 451436930, "intbank.swiftID": "NGLA91", "intbank.ip": "105.192.200.37"}
+{"index": {"_index": "enrich-intbank", "_id": "323"}}
+{"intbankID": 323, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Lagos Unity Bank", "intbank.ach": 727525032, "intbank.swiftID": "NGLA92", "intbank.ip": "105.142.241.228"}
+{"index": {"_index": "enrich-intbank", "_id": "324"}}
+{"intbankID": 324, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Naira First Bank", "intbank.ach": 111236794, "intbank.swiftID": "NGLA17", "intbank.ip": "105.157.129.201"}
+{"index": {"_index": "enrich-intbank", "_id": "325"}}
+{"intbankID": 325, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Lagos Unity Bank", "intbank.ach": 497336739, "intbank.swiftID": "NGAB61", "intbank.ip": "105.206.136.242"}
+{"index": {"_index": "enrich-intbank", "_id": "326"}}
+{"intbankID": 326, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 479895136, "intbank.swiftID": "KESA22", "intbank.ip": "105.177.100.168"}
+{"index": {"_index": "enrich-intbank", "_id": "327"}}
+{"intbankID": 327, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Nairobi National Bank", "intbank.ach": 652166141, "intbank.swiftID": "KENA47", "intbank.ip": "105.210.89.80"}
+{"index": {"_index": "enrich-intbank", "_id": "328"}}
+{"intbankID": 328, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 165367202, "intbank.swiftID": "KEKI21", "intbank.ip": "105.157.72.90"}
+{"index": {"_index": "enrich-intbank", "_id": "329"}}
+{"intbankID": 329, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Nairobi National Bank", "intbank.ach": 474433636, "intbank.swiftID": "KENA86", "intbank.ip": "105.220.209.19"}
+{"index": {"_index": "enrich-intbank", "_id": "330"}}
+{"intbankID": 330, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 350360794, "intbank.swiftID": "KENA53", "intbank.ip": "105.143.10.34"}
+{"index": {"_index": "enrich-intbank", "_id": "331"}}
+{"intbankID": 331, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 123746549, "intbank.swiftID": "KEKI67", "intbank.ip": "105.30.153.179"}
+{"index": {"_index": "enrich-intbank", "_id": "332"}}
+{"intbankID": 332, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Kilimanjaro Credit Bank", "intbank.ach": 551910513, "intbank.swiftID": "KESA10", "intbank.ip": "105.222.133.238"}
+{"index": {"_index": "enrich-intbank", "_id": "333"}}
+{"intbankID": 333, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Kilimanjaro Credit Bank", "intbank.ach": 707428623, "intbank.swiftID": "KESA52", "intbank.ip": "105.197.114.142"}
+{"index": {"_index": "enrich-intbank", "_id": "334"}}
+{"intbankID": 334, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Nairobi National Bank", "intbank.ach": 609915934, "intbank.swiftID": "KESA50", "intbank.ip": "105.148.68.83"}
+{"index": {"_index": "enrich-intbank", "_id": "335"}}
+{"intbankID": 335, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 825534464, "intbank.swiftID": "KEKI24", "intbank.ip": "105.38.50.84"}
+{"index": {"_index": "enrich-intbank", "_id": "336"}}
+{"intbankID": 336, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Kilimanjaro Credit Bank", "intbank.ach": 756044422, "intbank.swiftID": "KENA78", "intbank.ip": "105.6.248.197"}
+{"index": {"_index": "enrich-intbank", "_id": "337"}}
+{"intbankID": 337, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 253734273, "intbank.swiftID": "KENA40", "intbank.ip": "105.73.138.174"}
+{"index": {"_index": "enrich-intbank", "_id": "338"}}
+{"intbankID": 338, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 291576870, "intbank.swiftID": "KENA76", "intbank.ip": "105.78.112.239"}
+{"index": {"_index": "enrich-intbank", "_id": "339"}}
+{"intbankID": 339, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Nairobi National Bank", "intbank.ach": 977793836, "intbank.swiftID": "KENA64", "intbank.ip": "105.58.81.114"}
+{"index": {"_index": "enrich-intbank", "_id": "340"}}
+{"intbankID": 340, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 477737865, "intbank.swiftID": "KENA52", "intbank.ip": "105.127.160.58"}
+{"index": {"_index": "enrich-intbank", "_id": "341"}}
+{"intbankID": 341, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Kilimanjaro Credit Bank", "intbank.ach": 600972165, "intbank.swiftID": "KEKI17", "intbank.ip": "105.33.39.182"}
+{"index": {"_index": "enrich-intbank", "_id": "342"}}
+{"intbankID": 342, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Nairobi National Bank", "intbank.ach": 303770249, "intbank.swiftID": "KENA76", "intbank.ip": "105.227.134.230"}
+{"index": {"_index": "enrich-intbank", "_id": "343"}}
+{"intbankID": 343, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 268653172, "intbank.swiftID": "KEKI43", "intbank.ip": "105.136.51.65"}
+{"index": {"_index": "enrich-intbank", "_id": "344"}}
+{"intbankID": 344, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 138065599, "intbank.swiftID": "KEKI99", "intbank.ip": "105.111.194.32"}
+{"index": {"_index": "enrich-intbank", "_id": "345"}}
+{"intbankID": 345, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 397575269, "intbank.swiftID": "KEKI74", "intbank.ip": "105.232.58.46"}
+{"index": {"_index": "enrich-intbank", "_id": "346"}}
+{"intbankID": 346, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 639896709, "intbank.swiftID": "KENA17", "intbank.ip": "105.62.200.32"}
+{"index": {"_index": "enrich-intbank", "_id": "347"}}
+{"intbankID": 347, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Kilimanjaro Credit Bank", "intbank.ach": 843858346, "intbank.swiftID": "KENA85", "intbank.ip": "105.82.186.83"}
+{"index": {"_index": "enrich-intbank", "_id": "348"}}
+{"intbankID": 348, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Nairobi National Bank", "intbank.ach": 290274295, "intbank.swiftID": "KEKI33", "intbank.ip": "105.162.40.226"}
+{"index": {"_index": "enrich-intbank", "_id": "349"}}
+{"intbankID": 349, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Safari Trust Bank", "intbank.ach": 359484015, "intbank.swiftID": "KENA59", "intbank.ip": "105.230.178.230"}
+{"index": {"_index": "enrich-intbank", "_id": "350"}}
+{"intbankID": 350, "intbank.country": "Kenya", "intbank.country_code": "KE", "intbank.name": "Kilimanjaro Credit Bank", "intbank.ach": 235954387, "intbank.swiftID": "KESA60", "intbank.ip": "105.11.203.171"}
+{"index": {"_index": "enrich-intbank", "_id": "351"}}
+{"intbankID": 351, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 894262543, "intbank.swiftID": "HKHA87", "intbank.ip": "45.73.137.229"}
+{"index": {"_index": "enrich-intbank", "_id": "352"}}
+{"intbankID": 352, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Tower Bank Bank", "intbank.ach": 576273902, "intbank.swiftID": "HKKO24", "intbank.ip": "45.165.250.211"}
+{"index": {"_index": "enrich-intbank", "_id": "353"}}
+{"intbankID": 353, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 351286958, "intbank.swiftID": "HKKO61", "intbank.ip": "45.184.144.196"}
+{"index": {"_index": "enrich-intbank", "_id": "354"}}
+{"intbankID": 354, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 785567253, "intbank.swiftID": "HKHA85", "intbank.ip": "45.186.104.48"}
+{"index": {"_index": "enrich-intbank", "_id": "355"}}
+{"intbankID": 355, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 206148459, "intbank.swiftID": "HKKO65", "intbank.ip": "45.166.124.62"}
+{"index": {"_index": "enrich-intbank", "_id": "356"}}
+{"intbankID": 356, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Tower Bank Bank", "intbank.ach": 494185792, "intbank.swiftID": "HKKO71", "intbank.ip": "45.83.93.246"}
+{"index": {"_index": "enrich-intbank", "_id": "357"}}
+{"intbankID": 357, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 131320447, "intbank.swiftID": "HKKO85", "intbank.ip": "45.110.47.153"}
+{"index": {"_index": "enrich-intbank", "_id": "358"}}
+{"intbankID": 358, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 958298019, "intbank.swiftID": "HKVI60", "intbank.ip": "45.63.146.8"}
+{"index": {"_index": "enrich-intbank", "_id": "359"}}
+{"intbankID": 359, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 351494049, "intbank.swiftID": "HKHA70", "intbank.ip": "45.134.157.86"}
+{"index": {"_index": "enrich-intbank", "_id": "360"}}
+{"intbankID": 360, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 193869318, "intbank.swiftID": "HKVI16", "intbank.ip": "45.68.66.247"}
+{"index": {"_index": "enrich-intbank", "_id": "361"}}
+{"intbankID": 361, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Tower Bank Bank", "intbank.ach": 407151348, "intbank.swiftID": "HKKO31", "intbank.ip": "45.180.30.177"}
+{"index": {"_index": "enrich-intbank", "_id": "362"}}
+{"intbankID": 362, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 394137521, "intbank.swiftID": "HKVI74", "intbank.ip": "45.91.246.59"}
+{"index": {"_index": "enrich-intbank", "_id": "363"}}
+{"intbankID": 363, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 812825269, "intbank.swiftID": "HKKO54", "intbank.ip": "45.62.236.144"}
+{"index": {"_index": "enrich-intbank", "_id": "364"}}
+{"intbankID": 364, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 365175664, "intbank.swiftID": "HKVI75", "intbank.ip": "45.181.227.43"}
+{"index": {"_index": "enrich-intbank", "_id": "365"}}
+{"intbankID": 365, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 390181746, "intbank.swiftID": "HKHA96", "intbank.ip": "45.217.60.47"}
+{"index": {"_index": "enrich-intbank", "_id": "366"}}
+{"intbankID": 366, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 257209458, "intbank.swiftID": "HKVI53", "intbank.ip": "45.225.102.151"}
+{"index": {"_index": "enrich-intbank", "_id": "367"}}
+{"intbankID": 367, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Tower Bank Bank", "intbank.ach": 825579061, "intbank.swiftID": "HKVI36", "intbank.ip": "45.77.220.74"}
+{"index": {"_index": "enrich-intbank", "_id": "368"}}
+{"intbankID": 368, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 809468520, "intbank.swiftID": "HKKO79", "intbank.ip": "45.38.172.95"}
+{"index": {"_index": "enrich-intbank", "_id": "369"}}
+{"intbankID": 369, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 215795073, "intbank.swiftID": "HKVI93", "intbank.ip": "45.226.168.103"}
+{"index": {"_index": "enrich-intbank", "_id": "370"}}
+{"intbankID": 370, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Tower Bank Bank", "intbank.ach": 173854854, "intbank.swiftID": "HKKO65", "intbank.ip": "45.89.231.125"}
+{"index": {"_index": "enrich-intbank", "_id": "371"}}
+{"intbankID": 371, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 380015258, "intbank.swiftID": "HKHA34", "intbank.ip": "45.183.60.95"}
+{"index": {"_index": "enrich-intbank", "_id": "372"}}
+{"intbankID": 372, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 242189679, "intbank.swiftID": "HKKO53", "intbank.ip": "45.180.143.239"}
+{"index": {"_index": "enrich-intbank", "_id": "373"}}
+{"intbankID": 373, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor & Co Bank", "intbank.ach": 764960013, "intbank.swiftID": "HKKO26", "intbank.ip": "45.187.164.132"}
+{"index": {"_index": "enrich-intbank", "_id": "374"}}
+{"intbankID": 374, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 723677121, "intbank.swiftID": "HKKO18", "intbank.ip": "45.70.181.125"}
+{"index": {"_index": "enrich-intbank", "_id": "375"}}
+{"intbankID": 375, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Kowloon Capital Bank", "intbank.ach": 988856046, "intbank.swiftID": "HKVI84", "intbank.ip": "45.183.176.224"}
+{"index": {"_index": "enrich-intbank", "_id": "376"}}
+{"intbankID": 376, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 343607844, "intbank.swiftID": "TWFO88", "intbank.ip": "60.74.54.62"}
+{"index": {"_index": "enrich-intbank", "_id": "377"}}
+{"intbankID": 377, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 888455578, "intbank.swiftID": "TWFO14", "intbank.ip": "60.102.228.200"}
+{"index": {"_index": "enrich-intbank", "_id": "378"}}
+{"intbankID": 378, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 198843464, "intbank.swiftID": "TWFO54", "intbank.ip": "60.215.61.149"}
+{"index": {"_index": "enrich-intbank", "_id": "379"}}
+{"intbankID": 379, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 579319413, "intbank.swiftID": "TWTA94", "intbank.ip": "60.105.142.140"}
+{"index": {"_index": "enrich-intbank", "_id": "380"}}
+{"intbankID": 380, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Formosa Bank", "intbank.ach": 880074066, "intbank.swiftID": "TWTA17", "intbank.ip": "60.143.27.149"}
+{"index": {"_index": "enrich-intbank", "_id": "381"}}
+{"intbankID": 381, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Formosa Bank", "intbank.ach": 830920750, "intbank.swiftID": "TWTA55", "intbank.ip": "60.125.212.175"}
+{"index": {"_index": "enrich-intbank", "_id": "382"}}
+{"intbankID": 382, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 180830975, "intbank.swiftID": "TWHS91", "intbank.ip": "60.95.8.121"}
+{"index": {"_index": "enrich-intbank", "_id": "383"}}
+{"intbankID": 383, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 132505058, "intbank.swiftID": "TWTA49", "intbank.ip": "60.21.186.19"}
+{"index": {"_index": "enrich-intbank", "_id": "384"}}
+{"intbankID": 384, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 735771907, "intbank.swiftID": "TWFO19", "intbank.ip": "60.201.163.118"}
+{"index": {"_index": "enrich-intbank", "_id": "385"}}
+{"intbankID": 385, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 657089485, "intbank.swiftID": "TWHS63", "intbank.ip": "60.142.42.10"}
+{"index": {"_index": "enrich-intbank", "_id": "386"}}
+{"intbankID": 386, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Formosa Bank", "intbank.ach": 894954633, "intbank.swiftID": "TWTA78", "intbank.ip": "60.117.229.238"}
+{"index": {"_index": "enrich-intbank", "_id": "387"}}
+{"intbankID": 387, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Formosa Bank", "intbank.ach": 623735167, "intbank.swiftID": "TWFO95", "intbank.ip": "60.179.125.76"}
+{"index": {"_index": "enrich-intbank", "_id": "388"}}
+{"intbankID": 388, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Formosa Bank", "intbank.ach": 448478277, "intbank.swiftID": "TWFO30", "intbank.ip": "60.235.163.229"}
+{"index": {"_index": "enrich-intbank", "_id": "389"}}
+{"intbankID": 389, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 274733418, "intbank.swiftID": "TWTA63", "intbank.ip": "60.35.145.97"}
+{"index": {"_index": "enrich-intbank", "_id": "390"}}
+{"intbankID": 390, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Formosa Bank", "intbank.ach": 884998473, "intbank.swiftID": "TWTA45", "intbank.ip": "60.76.101.188"}
+{"index": {"_index": "enrich-intbank", "_id": "391"}}
+{"intbankID": 391, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 423682497, "intbank.swiftID": "TWFO56", "intbank.ip": "60.143.114.185"}
+{"index": {"_index": "enrich-intbank", "_id": "392"}}
+{"intbankID": 392, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 229379933, "intbank.swiftID": "TWHS84", "intbank.ip": "60.113.115.8"}
+{"index": {"_index": "enrich-intbank", "_id": "393"}}
+{"intbankID": 393, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 495764525, "intbank.swiftID": "TWHS60", "intbank.ip": "60.31.184.31"}
+{"index": {"_index": "enrich-intbank", "_id": "394"}}
+{"intbankID": 394, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 122194689, "intbank.swiftID": "TWTA80", "intbank.ip": "60.227.122.244"}
+{"index": {"_index": "enrich-intbank", "_id": "395"}}
+{"intbankID": 395, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 212269489, "intbank.swiftID": "TWFO63", "intbank.ip": "60.29.149.13"}
+{"index": {"_index": "enrich-intbank", "_id": "396"}}
+{"intbankID": 396, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 166302119, "intbank.swiftID": "TWHS27", "intbank.ip": "60.217.71.233"}
+{"index": {"_index": "enrich-intbank", "_id": "397"}}
+{"intbankID": 397, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 979267589, "intbank.swiftID": "TWTA83", "intbank.ip": "60.55.64.186"}
+{"index": {"_index": "enrich-intbank", "_id": "398"}}
+{"intbankID": 398, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 961929283, "intbank.swiftID": "TWTA54", "intbank.ip": "60.36.27.159"}
+{"index": {"_index": "enrich-intbank", "_id": "399"}}
+{"intbankID": 399, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Taipei Holdings Bank", "intbank.ach": 349826886, "intbank.swiftID": "TWTA78", "intbank.ip": "60.25.178.64"}
+{"index": {"_index": "enrich-intbank", "_id": "400"}}
+{"intbankID": 400, "intbank.country": "Taiwan", "intbank.country_code": "TW", "intbank.name": "Hsinchu National Bank", "intbank.ach": 157882663, "intbank.swiftID": "TWHS93", "intbank.ip": "60.160.174.235"}
+{"index": {"_index": "enrich-intbank", "_id": "401"}}
+{"intbankID": 401, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 483441903, "intbank.swiftID": "KRHA32", "intbank.ip": "121.254.208.97"}
+{"index": {"_index": "enrich-intbank", "_id": "402"}}
+{"intbankID": 402, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 100877918, "intbank.swiftID": "KRHA70", "intbank.ip": "121.197.89.128"}
+{"index": {"_index": "enrich-intbank", "_id": "403"}}
+{"intbankID": 403, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 712001590, "intbank.swiftID": "KRJE12", "intbank.ip": "121.119.16.141"}
+{"index": {"_index": "enrich-intbank", "_id": "404"}}
+{"intbankID": 404, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 821761830, "intbank.swiftID": "KRSE42", "intbank.ip": "121.44.6.91"}
+{"index": {"_index": "enrich-intbank", "_id": "405"}}
+{"intbankID": 405, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 735255228, "intbank.swiftID": "KRSE18", "intbank.ip": "121.130.233.102"}
+{"index": {"_index": "enrich-intbank", "_id": "406"}}
+{"intbankID": 406, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 969208820, "intbank.swiftID": "KRSE27", "intbank.ip": "121.49.172.89"}
+{"index": {"_index": "enrich-intbank", "_id": "407"}}
+{"intbankID": 407, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 827568171, "intbank.swiftID": "KRSE59", "intbank.ip": "121.132.213.219"}
+{"index": {"_index": "enrich-intbank", "_id": "408"}}
+{"intbankID": 408, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 425216250, "intbank.swiftID": "KRSE61", "intbank.ip": "121.33.138.126"}
+{"index": {"_index": "enrich-intbank", "_id": "409"}}
+{"intbankID": 409, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 414047498, "intbank.swiftID": "KRJE24", "intbank.ip": "121.134.83.65"}
+{"index": {"_index": "enrich-intbank", "_id": "410"}}
+{"intbankID": 410, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 142990536, "intbank.swiftID": "KRJE82", "intbank.ip": "121.190.165.125"}
+{"index": {"_index": "enrich-intbank", "_id": "411"}}
+{"intbankID": 411, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 247810703, "intbank.swiftID": "KRSE47", "intbank.ip": "121.129.2.30"}
+{"index": {"_index": "enrich-intbank", "_id": "412"}}
+{"intbankID": 412, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 151253631, "intbank.swiftID": "KRJE28", "intbank.ip": "121.3.122.136"}
+{"index": {"_index": "enrich-intbank", "_id": "413"}}
+{"intbankID": 413, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 156692367, "intbank.swiftID": "KRJE63", "intbank.ip": "121.143.215.160"}
+{"index": {"_index": "enrich-intbank", "_id": "414"}}
+{"intbankID": 414, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 779952499, "intbank.swiftID": "KRSE28", "intbank.ip": "121.231.170.177"}
+{"index": {"_index": "enrich-intbank", "_id": "415"}}
+{"intbankID": 415, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 999269509, "intbank.swiftID": "KRSE58", "intbank.ip": "121.163.132.124"}
+{"index": {"_index": "enrich-intbank", "_id": "416"}}
+{"intbankID": 416, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 456815129, "intbank.swiftID": "KRSE11", "intbank.ip": "121.128.197.136"}
+{"index": {"_index": "enrich-intbank", "_id": "417"}}
+{"intbankID": 417, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 112569541, "intbank.swiftID": "KRJE83", "intbank.ip": "121.1.46.145"}
+{"index": {"_index": "enrich-intbank", "_id": "418"}}
+{"intbankID": 418, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 487475535, "intbank.swiftID": "KRSE19", "intbank.ip": "121.174.239.191"}
+{"index": {"_index": "enrich-intbank", "_id": "419"}}
+{"intbankID": 419, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju United Bank Bank", "intbank.ach": 432830561, "intbank.swiftID": "KRSE96", "intbank.ip": "121.221.165.60"}
+{"index": {"_index": "enrich-intbank", "_id": "420"}}
+{"intbankID": 420, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 647795470, "intbank.swiftID": "KRSE55", "intbank.ip": "121.246.70.209"}
+{"index": {"_index": "enrich-intbank", "_id": "421"}}
+{"intbankID": 421, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 847449905, "intbank.swiftID": "KRSE39", "intbank.ip": "121.222.66.29"}
+{"index": {"_index": "enrich-intbank", "_id": "422"}}
+{"intbankID": 422, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 559568866, "intbank.swiftID": "KRJE36", "intbank.ip": "121.202.63.187"}
+{"index": {"_index": "enrich-intbank", "_id": "423"}}
+{"intbankID": 423, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 770504955, "intbank.swiftID": "KRSE42", "intbank.ip": "121.182.104.54"}
+{"index": {"_index": "enrich-intbank", "_id": "424"}}
+{"intbankID": 424, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Seoul Central Bank", "intbank.ach": 729250988, "intbank.swiftID": "KRJE43", "intbank.ip": "121.23.84.175"}
+{"index": {"_index": "enrich-intbank", "_id": "425"}}
+{"intbankID": 425, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Trust Bank", "intbank.ach": 982911878, "intbank.swiftID": "KRJE19", "intbank.ip": "121.164.23.44"}
+{"index": {"_index": "enrich-intbank", "_id": "426"}}
+{"intbankID": 426, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Capital Bank", "intbank.ach": 295701013, "intbank.swiftID": "MXAZ60", "intbank.ip": "189.126.213.120"}
+{"index": {"_index": "enrich-intbank", "_id": "427"}}
+{"intbankID": 427, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Capital Bank", "intbank.ach": 846424609, "intbank.swiftID": "MXNU40", "intbank.ip": "189.49.97.64"}
+{"index": {"_index": "enrich-intbank", "_id": "428"}}
+{"intbankID": 428, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 637046668, "intbank.swiftID": "MXAZ23", "intbank.ip": "189.152.72.16"}
+{"index": {"_index": "enrich-intbank", "_id": "429"}}
+{"intbankID": 429, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 557074013, "intbank.swiftID": "MXAZ41", "intbank.ip": "189.69.73.221"}
+{"index": {"_index": "enrich-intbank", "_id": "430"}}
+{"intbankID": 430, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Capital Bank", "intbank.ach": 139787807, "intbank.swiftID": "MXNU84", "intbank.ip": "189.176.114.145"}
+{"index": {"_index": "enrich-intbank", "_id": "431"}}
+{"intbankID": 431, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 347417610, "intbank.swiftID": "MXNU34", "intbank.ip": "189.185.31.142"}
+{"index": {"_index": "enrich-intbank", "_id": "432"}}
+{"intbankID": 432, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Capital Bank", "intbank.ach": 349060246, "intbank.swiftID": "MXNU54", "intbank.ip": "189.185.233.218"}
+{"index": {"_index": "enrich-intbank", "_id": "433"}}
+{"intbankID": 433, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 984393502, "intbank.swiftID": "MXNU95", "intbank.ip": "189.164.18.105"}
+{"index": {"_index": "enrich-intbank", "_id": "434"}}
+{"intbankID": 434, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 969217045, "intbank.swiftID": "MXNU11", "intbank.ip": "189.122.252.143"}
+{"index": {"_index": "enrich-intbank", "_id": "435"}}
+{"intbankID": 435, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 754349210, "intbank.swiftID": "MXAZ78", "intbank.ip": "189.90.36.97"}
+{"index": {"_index": "enrich-intbank", "_id": "436"}}
+{"intbankID": 436, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 979558168, "intbank.swiftID": "MXNU67", "intbank.ip": "189.38.212.154"}
+{"index": {"_index": "enrich-intbank", "_id": "437"}}
+{"intbankID": 437, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 270494087, "intbank.swiftID": "MXNU10", "intbank.ip": "189.196.133.180"}
+{"index": {"_index": "enrich-intbank", "_id": "438"}}
+{"intbankID": 438, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Capital Bank", "intbank.ach": 667620525, "intbank.swiftID": "MXNU90", "intbank.ip": "189.9.130.87"}
+{"index": {"_index": "enrich-intbank", "_id": "439"}}
+{"intbankID": 439, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 989501072, "intbank.swiftID": "MXBA25", "intbank.ip": "189.24.68.120"}
+{"index": {"_index": "enrich-intbank", "_id": "440"}}
+{"intbankID": 440, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 308884001, "intbank.swiftID": "MXBA68", "intbank.ip": "189.152.11.222"}
+{"index": {"_index": "enrich-intbank", "_id": "441"}}
+{"intbankID": 441, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 673699622, "intbank.swiftID": "MXNU68", "intbank.ip": "189.151.74.246"}
+{"index": {"_index": "enrich-intbank", "_id": "442"}}
+{"intbankID": 442, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 215607586, "intbank.swiftID": "MXNU70", "intbank.ip": "189.33.167.23"}
+{"index": {"_index": "enrich-intbank", "_id": "443"}}
+{"intbankID": 443, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 487210194, "intbank.swiftID": "MXNU20", "intbank.ip": "189.9.121.233"}
+{"index": {"_index": "enrich-intbank", "_id": "444"}}
+{"intbankID": 444, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 892898218, "intbank.swiftID": "MXAZ87", "intbank.ip": "189.176.197.145"}
+{"index": {"_index": "enrich-intbank", "_id": "445"}}
+{"intbankID": 445, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 138431009, "intbank.swiftID": "MXNU90", "intbank.ip": "189.236.223.18"}
+{"index": {"_index": "enrich-intbank", "_id": "446"}}
+{"intbankID": 446, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 849252132, "intbank.swiftID": "MXBA37", "intbank.ip": "189.14.7.55"}
+{"index": {"_index": "enrich-intbank", "_id": "447"}}
+{"intbankID": 447, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Baja Holdings Bank", "intbank.ach": 470242050, "intbank.swiftID": "MXBA31", "intbank.ip": "189.232.161.151"}
+{"index": {"_index": "enrich-intbank", "_id": "448"}}
+{"intbankID": 448, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 540226726, "intbank.swiftID": "MXAZ29", "intbank.ip": "189.203.189.32"}
+{"index": {"_index": "enrich-intbank", "_id": "449"}}
+{"intbankID": 449, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Federal Bank", "intbank.ach": 372291093, "intbank.swiftID": "MXNU66", "intbank.ip": "189.215.171.6"}
+{"index": {"_index": "enrich-intbank", "_id": "450"}}
+{"intbankID": 450, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Capital Bank", "intbank.ach": 394607389, "intbank.swiftID": "MXBA48", "intbank.ip": "189.169.109.107"}
+{"index": {"_index": "enrich-intbank", "_id": "451"}}
+{"intbankID": 451, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 873409311, "intbank.swiftID": "PAIS69", "intbank.ip": "186.72.24.107"}
+{"index": {"_index": "enrich-intbank", "_id": "452"}}
+{"intbankID": 452, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 219824303, "intbank.swiftID": "PAIS61", "intbank.ip": "186.47.40.123"}
+{"index": {"_index": "enrich-intbank", "_id": "453"}}
+{"intbankID": 453, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 236313441, "intbank.swiftID": "PAIS61", "intbank.ip": "186.215.191.42"}
+{"index": {"_index": "enrich-intbank", "_id": "454"}}
+{"intbankID": 454, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 153847157, "intbank.swiftID": "PACA91", "intbank.ip": "186.217.4.179"}
+{"index": {"_index": "enrich-intbank", "_id": "455"}}
+{"intbankID": 455, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 432442945, "intbank.swiftID": "PAIS17", "intbank.ip": "186.42.241.137"}
+{"index": {"_index": "enrich-intbank", "_id": "456"}}
+{"intbankID": 456, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 541991113, "intbank.swiftID": "PAIS78", "intbank.ip": "186.103.205.109"}
+{"index": {"_index": "enrich-intbank", "_id": "457"}}
+{"intbankID": 457, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 986344598, "intbank.swiftID": "PACA48", "intbank.ip": "186.156.175.253"}
+{"index": {"_index": "enrich-intbank", "_id": "458"}}
+{"intbankID": 458, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 997640787, "intbank.swiftID": "PAIS67", "intbank.ip": "186.36.122.13"}
+{"index": {"_index": "enrich-intbank", "_id": "459"}}
+{"intbankID": 459, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 639816560, "intbank.swiftID": "PAIS53", "intbank.ip": "186.164.146.172"}
+{"index": {"_index": "enrich-intbank", "_id": "460"}}
+{"intbankID": 460, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 995339038, "intbank.swiftID": "PACA22", "intbank.ip": "186.111.2.110"}
+{"index": {"_index": "enrich-intbank", "_id": "461"}}
+{"intbankID": 461, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 770610840, "intbank.swiftID": "PACA23", "intbank.ip": "186.134.230.39"}
+{"index": {"_index": "enrich-intbank", "_id": "462"}}
+{"intbankID": 462, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 662435067, "intbank.swiftID": "PAPA36", "intbank.ip": "186.190.81.5"}
+{"index": {"_index": "enrich-intbank", "_id": "463"}}
+{"intbankID": 463, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 258322645, "intbank.swiftID": "PAIS10", "intbank.ip": "186.162.164.163"}
+{"index": {"_index": "enrich-intbank", "_id": "464"}}
+{"intbankID": 464, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 940239354, "intbank.swiftID": "PAPA75", "intbank.ip": "186.225.220.74"}
+{"index": {"_index": "enrich-intbank", "_id": "465"}}
+{"intbankID": 465, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 205212780, "intbank.swiftID": "PAPA25", "intbank.ip": "186.157.252.147"}
+{"index": {"_index": "enrich-intbank", "_id": "466"}}
+{"intbankID": 466, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 473571676, "intbank.swiftID": "PAPA82", "intbank.ip": "186.165.235.36"}
+{"index": {"_index": "enrich-intbank", "_id": "467"}}
+{"intbankID": 467, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 107610155, "intbank.swiftID": "PAIS27", "intbank.ip": "186.164.146.184"}
+{"index": {"_index": "enrich-intbank", "_id": "468"}}
+{"intbankID": 468, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 202950994, "intbank.swiftID": "PACA77", "intbank.ip": "186.135.94.107"}
+{"index": {"_index": "enrich-intbank", "_id": "469"}}
+{"intbankID": 469, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 743848083, "intbank.swiftID": "PAIS74", "intbank.ip": "186.150.239.112"}
+{"index": {"_index": "enrich-intbank", "_id": "470"}}
+{"intbankID": 470, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 272807277, "intbank.swiftID": "PACA86", "intbank.ip": "186.200.157.100"}
+{"index": {"_index": "enrich-intbank", "_id": "471"}}
+{"intbankID": 471, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Panama Federal Bank", "intbank.ach": 116993582, "intbank.swiftID": "PAIS62", "intbank.ip": "186.55.6.81"}
+{"index": {"_index": "enrich-intbank", "_id": "472"}}
+{"intbankID": 472, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 314655173, "intbank.swiftID": "PACA21", "intbank.ip": "186.229.221.124"}
+{"index": {"_index": "enrich-intbank", "_id": "473"}}
+{"intbankID": 473, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 349757439, "intbank.swiftID": "PAIS90", "intbank.ip": "186.107.2.35"}
+{"index": {"_index": "enrich-intbank", "_id": "474"}}
+{"intbankID": 474, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Canal Trust Bank", "intbank.ach": 704000584, "intbank.swiftID": "PAPA30", "intbank.ip": "186.235.24.33"}
+{"index": {"_index": "enrich-intbank", "_id": "475"}}
+{"intbankID": 475, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Capital Bank", "intbank.ach": 793802680, "intbank.swiftID": "PAIS68", "intbank.ip": "186.18.211.216"}
+{"index": {"_index": "enrich-intbank", "_id": "476"}}
+{"intbankID": 476, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 205086069, "intbank.swiftID": "COMA21", "intbank.ip": "186.198.2.180"}
+{"index": {"_index": "enrich-intbank", "_id": "477"}}
+{"intbankID": 477, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 999356651, "intbank.swiftID": "COBO94", "intbank.ip": "186.14.157.105"}
+{"index": {"_index": "enrich-intbank", "_id": "478"}}
+{"intbankID": 478, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 115773597, "intbank.swiftID": "COBO63", "intbank.ip": "186.116.215.188"}
+{"index": {"_index": "enrich-intbank", "_id": "479"}}
+{"intbankID": 479, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Cali Capital Bank", "intbank.ach": 883353035, "intbank.swiftID": "COBO63", "intbank.ip": "186.21.1.109"}
+{"index": {"_index": "enrich-intbank", "_id": "480"}}
+{"intbankID": 480, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 325934090, "intbank.swiftID": "COMA52", "intbank.ip": "186.217.84.199"}
+{"index": {"_index": "enrich-intbank", "_id": "481"}}
+{"intbankID": 481, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Cali Capital Bank", "intbank.ach": 989551146, "intbank.swiftID": "COMA71", "intbank.ip": "186.204.182.5"}
+{"index": {"_index": "enrich-intbank", "_id": "482"}}
+{"intbankID": 482, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 426480705, "intbank.swiftID": "COCA14", "intbank.ip": "186.5.208.85"}
+{"index": {"_index": "enrich-intbank", "_id": "483"}}
+{"intbankID": 483, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 926405742, "intbank.swiftID": "COBO72", "intbank.ip": "186.118.105.82"}
+{"index": {"_index": "enrich-intbank", "_id": "484"}}
+{"intbankID": 484, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 573305016, "intbank.swiftID": "COBO34", "intbank.ip": "186.238.33.170"}
+{"index": {"_index": "enrich-intbank", "_id": "485"}}
+{"intbankID": 485, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 904711151, "intbank.swiftID": "COBO36", "intbank.ip": "186.243.2.20"}
+{"index": {"_index": "enrich-intbank", "_id": "486"}}
+{"intbankID": 486, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 149576487, "intbank.swiftID": "COCA79", "intbank.ip": "186.54.100.194"}
+{"index": {"_index": "enrich-intbank", "_id": "487"}}
+{"intbankID": 487, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 245317003, "intbank.swiftID": "COBO64", "intbank.ip": "186.146.29.226"}
+{"index": {"_index": "enrich-intbank", "_id": "488"}}
+{"intbankID": 488, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 131312091, "intbank.swiftID": "COMA14", "intbank.ip": "186.245.97.213"}
+{"index": {"_index": "enrich-intbank", "_id": "489"}}
+{"intbankID": 489, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Cali Capital Bank", "intbank.ach": 195551446, "intbank.swiftID": "COMA27", "intbank.ip": "186.128.182.130"}
+{"index": {"_index": "enrich-intbank", "_id": "490"}}
+{"intbankID": 490, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 247876856, "intbank.swiftID": "COCA78", "intbank.ip": "186.87.86.136"}
+{"index": {"_index": "enrich-intbank", "_id": "491"}}
+{"intbankID": 491, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Cali Capital Bank", "intbank.ach": 401315660, "intbank.swiftID": "COMA75", "intbank.ip": "186.60.127.147"}
+{"index": {"_index": "enrich-intbank", "_id": "492"}}
+{"intbankID": 492, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 646311525, "intbank.swiftID": "COBO52", "intbank.ip": "186.19.7.69"}
+{"index": {"_index": "enrich-intbank", "_id": "493"}}
+{"intbankID": 493, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 555553857, "intbank.swiftID": "COBO26", "intbank.ip": "186.125.204.149"}
+{"index": {"_index": "enrich-intbank", "_id": "494"}}
+{"intbankID": 494, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank Bank", "intbank.ach": 898986708, "intbank.swiftID": "COMA11", "intbank.ip": "186.146.245.139"}
+{"index": {"_index": "enrich-intbank", "_id": "495"}}
+{"intbankID": 495, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 588931362, "intbank.swiftID": "COBO14", "intbank.ip": "186.175.17.52"}
+{"index": {"_index": "enrich-intbank", "_id": "496"}}
+{"intbankID": 496, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 217027724, "intbank.swiftID": "COMA92", "intbank.ip": "186.108.138.65"}
+{"index": {"_index": "enrich-intbank", "_id": "497"}}
+{"intbankID": 497, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Cali Capital Bank", "intbank.ach": 172748957, "intbank.swiftID": "COMA90", "intbank.ip": "186.24.36.217"}
+{"index": {"_index": "enrich-intbank", "_id": "498"}}
+{"intbankID": 498, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 898471546, "intbank.swiftID": "COCA79", "intbank.ip": "186.194.43.171"}
+{"index": {"_index": "enrich-intbank", "_id": "499"}}
+{"intbankID": 499, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Cali Capital Bank", "intbank.ach": 187360682, "intbank.swiftID": "COCA61", "intbank.ip": "186.90.198.120"}
+{"index": {"_index": "enrich-intbank", "_id": "500"}}
+{"intbankID": 500, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Financial Bank", "intbank.ach": 945774336, "intbank.swiftID": "COMA28", "intbank.ip": "186.237.70.235"}
+{"index": {"_index": "enrich-intbank", "_id": "501"}}
+{"intbankID": 501, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Orinoco Credit Bank", "intbank.ach": 448300998, "intbank.swiftID": "VECA34", "intbank.ip": "190.128.186.95"}
+{"index": {"_index": "enrich-intbank", "_id": "502"}}
+{"intbankID": 502, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 335821302, "intbank.swiftID": "VEOR83", "intbank.ip": "190.167.165.70"}
+{"index": {"_index": "enrich-intbank", "_id": "503"}}
+{"intbankID": 503, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 219578934, "intbank.swiftID": "VEBO64", "intbank.ip": "190.236.102.6"}
+{"index": {"_index": "enrich-intbank", "_id": "504"}}
+{"intbankID": 504, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 447839742, "intbank.swiftID": "VEBO92", "intbank.ip": "190.31.150.9"}
+{"index": {"_index": "enrich-intbank", "_id": "505"}}
+{"intbankID": 505, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 890781300, "intbank.swiftID": "VEOR23", "intbank.ip": "190.188.2.24"}
+{"index": {"_index": "enrich-intbank", "_id": "506"}}
+{"intbankID": 506, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 857702230, "intbank.swiftID": "VEOR84", "intbank.ip": "190.238.238.5"}
+{"index": {"_index": "enrich-intbank", "_id": "507"}}
+{"intbankID": 507, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 231940114, "intbank.swiftID": "VEBO87", "intbank.ip": "190.34.170.144"}
+{"index": {"_index": "enrich-intbank", "_id": "508"}}
+{"intbankID": 508, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 750038755, "intbank.swiftID": "VECA39", "intbank.ip": "190.232.15.140"}
+{"index": {"_index": "enrich-intbank", "_id": "509"}}
+{"intbankID": 509, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 111660532, "intbank.swiftID": "VEOR69", "intbank.ip": "190.39.184.31"}
+{"index": {"_index": "enrich-intbank", "_id": "510"}}
+{"intbankID": 510, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 245388965, "intbank.swiftID": "VECA43", "intbank.ip": "190.43.214.81"}
+{"index": {"_index": "enrich-intbank", "_id": "511"}}
+{"intbankID": 511, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 969874438, "intbank.swiftID": "VEOR18", "intbank.ip": "190.161.95.67"}
+{"index": {"_index": "enrich-intbank", "_id": "512"}}
+{"intbankID": 512, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 762758206, "intbank.swiftID": "VEOR87", "intbank.ip": "190.165.28.153"}
+{"index": {"_index": "enrich-intbank", "_id": "513"}}
+{"intbankID": 513, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Orinoco Credit Bank", "intbank.ach": 309313079, "intbank.swiftID": "VECA47", "intbank.ip": "190.236.24.61"}
+{"index": {"_index": "enrich-intbank", "_id": "514"}}
+{"intbankID": 514, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Orinoco Credit Bank", "intbank.ach": 157239203, "intbank.swiftID": "VEOR11", "intbank.ip": "190.116.110.108"}
+{"index": {"_index": "enrich-intbank", "_id": "515"}}
+{"intbankID": 515, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 946659481, "intbank.swiftID": "VEOR52", "intbank.ip": "190.108.155.61"}
+{"index": {"_index": "enrich-intbank", "_id": "516"}}
+{"intbankID": 516, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 815487527, "intbank.swiftID": "VEBO11", "intbank.ip": "190.145.123.230"}
+{"index": {"_index": "enrich-intbank", "_id": "517"}}
+{"intbankID": 517, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 445949988, "intbank.swiftID": "VEOR30", "intbank.ip": "190.200.3.253"}
+{"index": {"_index": "enrich-intbank", "_id": "518"}}
+{"intbankID": 518, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 555881607, "intbank.swiftID": "VEBO27", "intbank.ip": "190.34.92.35"}
+{"index": {"_index": "enrich-intbank", "_id": "519"}}
+{"intbankID": 519, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 355766495, "intbank.swiftID": "VEBO60", "intbank.ip": "190.75.71.205"}
+{"index": {"_index": "enrich-intbank", "_id": "520"}}
+{"intbankID": 520, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Orinoco Credit Bank", "intbank.ach": 312310984, "intbank.swiftID": "VEBO32", "intbank.ip": "190.73.191.58"}
+{"index": {"_index": "enrich-intbank", "_id": "521"}}
+{"intbankID": 521, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Trust Bank", "intbank.ach": 960086951, "intbank.swiftID": "VEOR96", "intbank.ip": "190.242.203.108"}
+{"index": {"_index": "enrich-intbank", "_id": "522"}}
+{"intbankID": 522, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Orinoco Credit Bank", "intbank.ach": 416450037, "intbank.swiftID": "VECA87", "intbank.ip": "190.124.1.109"}
+{"index": {"_index": "enrich-intbank", "_id": "523"}}
+{"intbankID": 523, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 195201944, "intbank.swiftID": "VECA91", "intbank.ip": "190.150.36.243"}
+{"index": {"_index": "enrich-intbank", "_id": "524"}}
+{"intbankID": 524, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas United Bank", "intbank.ach": 604384102, "intbank.swiftID": "VEBO26", "intbank.ip": "190.88.76.10"}
+{"index": {"_index": "enrich-intbank", "_id": "525"}}
+{"intbankID": 525, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Orinoco Credit Bank", "intbank.ach": 738345857, "intbank.swiftID": "VEOR74", "intbank.ip": "190.21.177.201"}
+{"index": {"_index": "enrich-intbank", "_id": "526"}}
+{"intbankID": 526, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 645850596, "intbank.swiftID": "BRRI19", "intbank.ip": "179.176.81.123"}
+{"index": {"_index": "enrich-intbank", "_id": "527"}}
+{"intbankID": 527, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 442361327, "intbank.swiftID": "BRSA83", "intbank.ip": "179.124.117.92"}
+{"index": {"_index": "enrich-intbank", "_id": "528"}}
+{"intbankID": 528, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 161503091, "intbank.swiftID": "BRAM69", "intbank.ip": "179.30.129.11"}
+{"index": {"_index": "enrich-intbank", "_id": "529"}}
+{"intbankID": 529, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 252386933, "intbank.swiftID": "BRAM80", "intbank.ip": "179.242.100.77"}
+{"index": {"_index": "enrich-intbank", "_id": "530"}}
+{"intbankID": 530, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 207856456, "intbank.swiftID": "BRSA51", "intbank.ip": "179.205.54.127"}
+{"index": {"_index": "enrich-intbank", "_id": "531"}}
+{"intbankID": 531, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 831169819, "intbank.swiftID": "BRAM57", "intbank.ip": "179.245.54.72"}
+{"index": {"_index": "enrich-intbank", "_id": "532"}}
+{"intbankID": 532, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 221881986, "intbank.swiftID": "BRSA15", "intbank.ip": "179.75.191.248"}
+{"index": {"_index": "enrich-intbank", "_id": "533"}}
+{"intbankID": 533, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 833205917, "intbank.swiftID": "BRSA77", "intbank.ip": "179.35.106.142"}
+{"index": {"_index": "enrich-intbank", "_id": "534"}}
+{"intbankID": 534, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 223043781, "intbank.swiftID": "BRSA75", "intbank.ip": "179.88.145.121"}
+{"index": {"_index": "enrich-intbank", "_id": "535"}}
+{"intbankID": 535, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 501088927, "intbank.swiftID": "BRRI87", "intbank.ip": "179.34.89.98"}
+{"index": {"_index": "enrich-intbank", "_id": "536"}}
+{"intbankID": 536, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 555429282, "intbank.swiftID": "BRSA40", "intbank.ip": "179.171.61.19"}
+{"index": {"_index": "enrich-intbank", "_id": "537"}}
+{"intbankID": 537, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 997587426, "intbank.swiftID": "BRAM30", "intbank.ip": "179.244.236.10"}
+{"index": {"_index": "enrich-intbank", "_id": "538"}}
+{"intbankID": 538, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 705549302, "intbank.swiftID": "BRSA49", "intbank.ip": "179.22.82.165"}
+{"index": {"_index": "enrich-intbank", "_id": "539"}}
+{"intbankID": 539, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 694926643, "intbank.swiftID": "BRSA87", "intbank.ip": "179.216.95.182"}
+{"index": {"_index": "enrich-intbank", "_id": "540"}}
+{"intbankID": 540, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 921152203, "intbank.swiftID": "BRAM98", "intbank.ip": "179.175.163.174"}
+{"index": {"_index": "enrich-intbank", "_id": "541"}}
+{"intbankID": 541, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 143616354, "intbank.swiftID": "BRRI27", "intbank.ip": "179.144.119.105"}
+{"index": {"_index": "enrich-intbank", "_id": "542"}}
+{"intbankID": 542, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 486190368, "intbank.swiftID": "BRSA58", "intbank.ip": "179.2.182.232"}
+{"index": {"_index": "enrich-intbank", "_id": "543"}}
+{"intbankID": 543, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 455603090, "intbank.swiftID": "BRRI30", "intbank.ip": "179.69.252.99"}
+{"index": {"_index": "enrich-intbank", "_id": "544"}}
+{"intbankID": 544, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 129689569, "intbank.swiftID": "BRRI47", "intbank.ip": "179.228.60.182"}
+{"index": {"_index": "enrich-intbank", "_id": "545"}}
+{"intbankID": 545, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 977663397, "intbank.swiftID": "BRRI57", "intbank.ip": "179.108.200.125"}
+{"index": {"_index": "enrich-intbank", "_id": "546"}}
+{"intbankID": 546, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 933845416, "intbank.swiftID": "BRRI16", "intbank.ip": "179.175.115.1"}
+{"index": {"_index": "enrich-intbank", "_id": "547"}}
+{"intbankID": 547, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Rio Capital Bank", "intbank.ach": 361519635, "intbank.swiftID": "BRAM47", "intbank.ip": "179.150.40.82"}
+{"index": {"_index": "enrich-intbank", "_id": "548"}}
+{"intbankID": 548, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 222052298, "intbank.swiftID": "BRSA34", "intbank.ip": "179.99.195.90"}
+{"index": {"_index": "enrich-intbank", "_id": "549"}}
+{"intbankID": 549, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo United Bank", "intbank.ach": 109459949, "intbank.swiftID": "BRAM25", "intbank.ip": "179.97.190.59"}
+{"index": {"_index": "enrich-intbank", "_id": "550"}}
+{"intbankID": 550, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "Amazon Federal Bank", "intbank.ach": 221282534, "intbank.swiftID": "BRSA81", "intbank.ip": "179.166.235.98"}
+{"index": {"_index": "enrich-intbank", "_id": "551"}}
+{"intbankID": 551, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 207320347, "intbank.swiftID": "FRLY52", "intbank.ip": "82.6.233.240"}
+{"index": {"_index": "enrich-intbank", "_id": "552"}}
+{"intbankID": 552, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 115818510, "intbank.swiftID": "FRLY78", "intbank.ip": "82.25.68.67"}
+{"index": {"_index": "enrich-intbank", "_id": "553"}}
+{"intbankID": 553, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 769948661, "intbank.swiftID": "FRLY65", "intbank.ip": "82.55.250.99"}
+{"index": {"_index": "enrich-intbank", "_id": "554"}}
+{"intbankID": 554, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 208659401, "intbank.swiftID": "FRRI70", "intbank.ip": "82.175.219.187"}
+{"index": {"_index": "enrich-intbank", "_id": "555"}}
+{"intbankID": 555, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 759520188, "intbank.swiftID": "FRBA36", "intbank.ip": "82.4.111.1"}
+{"index": {"_index": "enrich-intbank", "_id": "556"}}
+{"intbankID": 556, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 674788316, "intbank.swiftID": "FRLY38", "intbank.ip": "82.146.25.87"}
+{"index": {"_index": "enrich-intbank", "_id": "557"}}
+{"intbankID": 557, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 691917242, "intbank.swiftID": "FRLY44", "intbank.ip": "82.53.111.248"}
+{"index": {"_index": "enrich-intbank", "_id": "558"}}
+{"intbankID": 558, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 953110505, "intbank.swiftID": "FRLY46", "intbank.ip": "82.54.234.218"}
+{"index": {"_index": "enrich-intbank", "_id": "559"}}
+{"intbankID": 559, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 700159920, "intbank.swiftID": "FRBA38", "intbank.ip": "82.94.233.6"}
+{"index": {"_index": "enrich-intbank", "_id": "560"}}
+{"intbankID": 560, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 793602077, "intbank.swiftID": "FRBA32", "intbank.ip": "82.74.25.67"}
+{"index": {"_index": "enrich-intbank", "_id": "561"}}
+{"intbankID": 561, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 234233842, "intbank.swiftID": "FRBA76", "intbank.ip": "82.51.115.45"}
+{"index": {"_index": "enrich-intbank", "_id": "562"}}
+{"intbankID": 562, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 477760218, "intbank.swiftID": "FRLY17", "intbank.ip": "82.241.64.189"}
+{"index": {"_index": "enrich-intbank", "_id": "563"}}
+{"intbankID": 563, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 713069012, "intbank.swiftID": "FRBA71", "intbank.ip": "82.142.63.37"}
+{"index": {"_index": "enrich-intbank", "_id": "564"}}
+{"intbankID": 564, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 900526748, "intbank.swiftID": "FRBA68", "intbank.ip": "82.219.71.215"}
+{"index": {"_index": "enrich-intbank", "_id": "565"}}
+{"intbankID": 565, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 455295912, "intbank.swiftID": "FRRI37", "intbank.ip": "82.228.234.185"}
+{"index": {"_index": "enrich-intbank", "_id": "566"}}
+{"intbankID": 566, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 598764451, "intbank.swiftID": "FRRI39", "intbank.ip": "82.59.251.80"}
+{"index": {"_index": "enrich-intbank", "_id": "567"}}
+{"intbankID": 567, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 870651149, "intbank.swiftID": "FRBA36", "intbank.ip": "82.54.57.36"}
+{"index": {"_index": "enrich-intbank", "_id": "568"}}
+{"intbankID": 568, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 381970924, "intbank.swiftID": "FRLY56", "intbank.ip": "82.102.138.187"}
+{"index": {"_index": "enrich-intbank", "_id": "569"}}
+{"intbankID": 569, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 960066601, "intbank.swiftID": "FRLY61", "intbank.ip": "82.147.188.191"}
+{"index": {"_index": "enrich-intbank", "_id": "570"}}
+{"intbankID": 570, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 385267333, "intbank.swiftID": "FRRI65", "intbank.ip": "82.104.234.252"}
+{"index": {"_index": "enrich-intbank", "_id": "571"}}
+{"intbankID": 571, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Riviera Trust Bank", "intbank.ach": 184481665, "intbank.swiftID": "FRBA33", "intbank.ip": "82.43.121.214"}
+{"index": {"_index": "enrich-intbank", "_id": "572"}}
+{"intbankID": 572, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 129701371, "intbank.swiftID": "FRBA83", "intbank.ip": "82.252.206.183"}
+{"index": {"_index": "enrich-intbank", "_id": "573"}}
+{"intbankID": 573, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 433404449, "intbank.swiftID": "FRBA63", "intbank.ip": "82.1.207.207"}
+{"index": {"_index": "enrich-intbank", "_id": "574"}}
+{"intbankID": 574, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Banque Parisienne Bank", "intbank.ach": 913052820, "intbank.swiftID": "FRBA64", "intbank.ip": "82.141.163.247"}
+{"index": {"_index": "enrich-intbank", "_id": "575"}}
+{"intbankID": 575, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 447262079, "intbank.swiftID": "FRBA49", "intbank.ip": "82.213.143.74"}
+{"index": {"_index": "enrich-intbank", "_id": "576"}}
+{"intbankID": 576, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 138886202, "intbank.swiftID": "NLAM56", "intbank.ip": "145.43.222.149"}
+{"index": {"_index": "enrich-intbank", "_id": "577"}}
+{"intbankID": 577, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 887039879, "intbank.swiftID": "NLNO37", "intbank.ip": "145.110.150.48"}
+{"index": {"_index": "enrich-intbank", "_id": "578"}}
+{"intbankID": 578, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 120372920, "intbank.swiftID": "NLRO99", "intbank.ip": "145.150.41.166"}
+{"index": {"_index": "enrich-intbank", "_id": "579"}}
+{"intbankID": 579, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 682356146, "intbank.swiftID": "NLNO23", "intbank.ip": "145.11.97.232"}
+{"index": {"_index": "enrich-intbank", "_id": "580"}}
+{"intbankID": 580, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 813349228, "intbank.swiftID": "NLRO82", "intbank.ip": "145.165.181.250"}
+{"index": {"_index": "enrich-intbank", "_id": "581"}}
+{"intbankID": 581, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 532059232, "intbank.swiftID": "NLRO51", "intbank.ip": "145.122.157.117"}
+{"index": {"_index": "enrich-intbank", "_id": "582"}}
+{"intbankID": 582, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 646407112, "intbank.swiftID": "NLRO90", "intbank.ip": "145.173.86.54"}
+{"index": {"_index": "enrich-intbank", "_id": "583"}}
+{"intbankID": 583, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 653140880, "intbank.swiftID": "NLRO67", "intbank.ip": "145.154.69.216"}
+{"index": {"_index": "enrich-intbank", "_id": "584"}}
+{"intbankID": 584, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 889729596, "intbank.swiftID": "NLNO63", "intbank.ip": "145.222.72.79"}
+{"index": {"_index": "enrich-intbank", "_id": "585"}}
+{"intbankID": 585, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 664567982, "intbank.swiftID": "NLRO34", "intbank.ip": "145.229.207.19"}
+{"index": {"_index": "enrich-intbank", "_id": "586"}}
+{"intbankID": 586, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 896834705, "intbank.swiftID": "NLRO73", "intbank.ip": "145.59.231.156"}
+{"index": {"_index": "enrich-intbank", "_id": "587"}}
+{"intbankID": 587, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 755843309, "intbank.swiftID": "NLNO49", "intbank.ip": "145.81.252.115"}
+{"index": {"_index": "enrich-intbank", "_id": "588"}}
+{"intbankID": 588, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 214900900, "intbank.swiftID": "NLRO22", "intbank.ip": "145.68.109.156"}
+{"index": {"_index": "enrich-intbank", "_id": "589"}}
+{"intbankID": 589, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 448959374, "intbank.swiftID": "NLRO12", "intbank.ip": "145.160.180.35"}
+{"index": {"_index": "enrich-intbank", "_id": "590"}}
+{"intbankID": 590, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 941513995, "intbank.swiftID": "NLNO52", "intbank.ip": "145.194.239.46"}
+{"index": {"_index": "enrich-intbank", "_id": "591"}}
+{"intbankID": 591, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 563237184, "intbank.swiftID": "NLRO22", "intbank.ip": "145.158.110.167"}
+{"index": {"_index": "enrich-intbank", "_id": "592"}}
+{"intbankID": 592, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 655284051, "intbank.swiftID": "NLRO46", "intbank.ip": "145.40.166.247"}
+{"index": {"_index": "enrich-intbank", "_id": "593"}}
+{"intbankID": 593, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 370803222, "intbank.swiftID": "NLAM65", "intbank.ip": "145.182.192.158"}
+{"index": {"_index": "enrich-intbank", "_id": "594"}}
+{"intbankID": 594, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 445132117, "intbank.swiftID": "NLAM66", "intbank.ip": "145.201.157.36"}
+{"index": {"_index": "enrich-intbank", "_id": "595"}}
+{"intbankID": 595, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 915396206, "intbank.swiftID": "NLAM19", "intbank.ip": "145.201.52.22"}
+{"index": {"_index": "enrich-intbank", "_id": "596"}}
+{"intbankID": 596, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 208004250, "intbank.swiftID": "NLAM38", "intbank.ip": "145.196.216.154"}
+{"index": {"_index": "enrich-intbank", "_id": "597"}}
+{"intbankID": 597, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 580933916, "intbank.swiftID": "NLRO86", "intbank.ip": "145.19.150.37"}
+{"index": {"_index": "enrich-intbank", "_id": "598"}}
+{"intbankID": 598, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 886489669, "intbank.swiftID": "NLNO32", "intbank.ip": "145.212.175.252"}
+{"index": {"_index": "enrich-intbank", "_id": "599"}}
+{"intbankID": 599, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Rotterdam Harbor Trust Bank", "intbank.ach": 176571477, "intbank.swiftID": "NLNO11", "intbank.ip": "145.92.169.67"}
+{"index": {"_index": "enrich-intbank", "_id": "600"}}
+{"intbankID": 600, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Capital Bank", "intbank.ach": 354051506, "intbank.swiftID": "NLRO54", "intbank.ip": "145.178.15.96"}
+{"index": {"_index": "enrich-intbank", "_id": "601"}}
+{"intbankID": 601, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 378616522, "intbank.swiftID": "DEBA28", "intbank.ip": "88.127.70.141"}
+{"index": {"_index": "enrich-intbank", "_id": "602"}}
+{"intbankID": 602, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 665403413, "intbank.swiftID": "DEBE42", "intbank.ip": "88.96.120.80"}
+{"index": {"_index": "enrich-intbank", "_id": "603"}}
+{"intbankID": 603, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 393681191, "intbank.swiftID": "DEBE76", "intbank.ip": "88.125.35.143"}
+{"index": {"_index": "enrich-intbank", "_id": "604"}}
+{"intbankID": 604, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "RheinMain Credit Bank", "intbank.ach": 993494492, "intbank.swiftID": "DEBA30", "intbank.ip": "88.65.152.145"}
+{"index": {"_index": "enrich-intbank", "_id": "605"}}
+{"intbankID": 605, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 471750186, "intbank.swiftID": "DEBE18", "intbank.ip": "88.195.233.183"}
+{"index": {"_index": "enrich-intbank", "_id": "606"}}
+{"intbankID": 606, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "RheinMain Credit Bank", "intbank.ach": 553653419, "intbank.swiftID": "DEBA94", "intbank.ip": "88.252.96.189"}
+{"index": {"_index": "enrich-intbank", "_id": "607"}}
+{"intbankID": 607, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 157193364, "intbank.swiftID": "DEBE60", "intbank.ip": "88.7.88.115"}
+{"index": {"_index": "enrich-intbank", "_id": "608"}}
+{"intbankID": 608, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 133838694, "intbank.swiftID": "DEBA97", "intbank.ip": "88.85.64.95"}
+{"index": {"_index": "enrich-intbank", "_id": "609"}}
+{"intbankID": 609, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 428762528, "intbank.swiftID": "DEBE91", "intbank.ip": "88.151.198.193"}
+{"index": {"_index": "enrich-intbank", "_id": "610"}}
+{"intbankID": 610, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "RheinMain Credit Bank", "intbank.ach": 420870108, "intbank.swiftID": "DEBE37", "intbank.ip": "88.132.246.57"}
+{"index": {"_index": "enrich-intbank", "_id": "611"}}
+{"intbankID": 611, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 226553680, "intbank.swiftID": "DERH38", "intbank.ip": "88.13.164.218"}
+{"index": {"_index": "enrich-intbank", "_id": "612"}}
+{"intbankID": 612, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 298651128, "intbank.swiftID": "DERH48", "intbank.ip": "88.94.42.221"}
+{"index": {"_index": "enrich-intbank", "_id": "613"}}
+{"intbankID": 613, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 806109416, "intbank.swiftID": "DEBA86", "intbank.ip": "88.130.151.114"}
+{"index": {"_index": "enrich-intbank", "_id": "614"}}
+{"intbankID": 614, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 447634478, "intbank.swiftID": "DEBA77", "intbank.ip": "88.18.26.196"}
+{"index": {"_index": "enrich-intbank", "_id": "615"}}
+{"intbankID": 615, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 476803446, "intbank.swiftID": "DEBA37", "intbank.ip": "88.197.91.87"}
+{"index": {"_index": "enrich-intbank", "_id": "616"}}
+{"intbankID": 616, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 918864349, "intbank.swiftID": "DEBE34", "intbank.ip": "88.250.160.28"}
+{"index": {"_index": "enrich-intbank", "_id": "617"}}
+{"intbankID": 617, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "RheinMain Credit Bank", "intbank.ach": 122605514, "intbank.swiftID": "DEBE84", "intbank.ip": "88.5.229.51"}
+{"index": {"_index": "enrich-intbank", "_id": "618"}}
+{"intbankID": 618, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "RheinMain Credit Bank", "intbank.ach": 511926571, "intbank.swiftID": "DERH38", "intbank.ip": "88.233.14.66"}
+{"index": {"_index": "enrich-intbank", "_id": "619"}}
+{"intbankID": 619, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 227500046, "intbank.swiftID": "DEBA78", "intbank.ip": "88.204.171.4"}
+{"index": {"_index": "enrich-intbank", "_id": "620"}}
+{"intbankID": 620, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 446700417, "intbank.swiftID": "DEBE19", "intbank.ip": "88.151.12.142"}
+{"index": {"_index": "enrich-intbank", "_id": "621"}}
+{"intbankID": 621, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 678510046, "intbank.swiftID": "DEBA64", "intbank.ip": "88.54.21.29"}
+{"index": {"_index": "enrich-intbank", "_id": "622"}}
+{"intbankID": 622, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 635294340, "intbank.swiftID": "DEBA73", "intbank.ip": "88.65.225.244"}
+{"index": {"_index": "enrich-intbank", "_id": "623"}}
+{"intbankID": 623, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 697068347, "intbank.swiftID": "DEBA33", "intbank.ip": "88.121.226.99"}
+{"index": {"_index": "enrich-intbank", "_id": "624"}}
+{"intbankID": 624, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlinische Bank", "intbank.ach": 463019843, "intbank.swiftID": "DERH60", "intbank.ip": "88.46.109.137"}
+{"index": {"_index": "enrich-intbank", "_id": "625"}}
+{"intbankID": 625, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria National Bank", "intbank.ach": 957171626, "intbank.swiftID": "DEBA15", "intbank.ip": "88.30.182.135"}
+{"index": {"_index": "enrich-intbank", "_id": "626"}}
+{"intbankID": 626, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 362208269, "intbank.swiftID": "ATDA38", "intbank.ip": "91.198.169.252"}
+{"index": {"_index": "enrich-intbank", "_id": "627"}}
+{"intbankID": 627, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "AlpenBank Bank", "intbank.ach": 614727356, "intbank.swiftID": "ATAL29", "intbank.ip": "91.84.209.117"}
+{"index": {"_index": "enrich-intbank", "_id": "628"}}
+{"intbankID": 628, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 196584900, "intbank.swiftID": "ATVI24", "intbank.ip": "91.3.172.190"}
+{"index": {"_index": "enrich-intbank", "_id": "629"}}
+{"intbankID": 629, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "AlpenBank Bank", "intbank.ach": 189142878, "intbank.swiftID": "ATAL53", "intbank.ip": "91.46.229.192"}
+{"index": {"_index": "enrich-intbank", "_id": "630"}}
+{"intbankID": 630, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 945241101, "intbank.swiftID": "ATAL74", "intbank.ip": "91.205.219.45"}
+{"index": {"_index": "enrich-intbank", "_id": "631"}}
+{"intbankID": 631, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 808840447, "intbank.swiftID": "ATDA26", "intbank.ip": "91.176.99.144"}
+{"index": {"_index": "enrich-intbank", "_id": "632"}}
+{"intbankID": 632, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 124603091, "intbank.swiftID": "ATVI30", "intbank.ip": "91.118.155.175"}
+{"index": {"_index": "enrich-intbank", "_id": "633"}}
+{"intbankID": 633, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 736587518, "intbank.swiftID": "ATAL93", "intbank.ip": "91.132.162.7"}
+{"index": {"_index": "enrich-intbank", "_id": "634"}}
+{"intbankID": 634, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 598424756, "intbank.swiftID": "ATDA49", "intbank.ip": "91.224.118.176"}
+{"index": {"_index": "enrich-intbank", "_id": "635"}}
+{"intbankID": 635, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 294154973, "intbank.swiftID": "ATDA78", "intbank.ip": "91.224.95.171"}
+{"index": {"_index": "enrich-intbank", "_id": "636"}}
+{"intbankID": 636, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 284034272, "intbank.swiftID": "ATAL79", "intbank.ip": "91.241.170.3"}
+{"index": {"_index": "enrich-intbank", "_id": "637"}}
+{"intbankID": 637, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 623781898, "intbank.swiftID": "ATDA12", "intbank.ip": "91.146.66.197"}
+{"index": {"_index": "enrich-intbank", "_id": "638"}}
+{"intbankID": 638, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 473837290, "intbank.swiftID": "ATAL46", "intbank.ip": "91.133.183.78"}
+{"index": {"_index": "enrich-intbank", "_id": "639"}}
+{"intbankID": 639, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 928706710, "intbank.swiftID": "ATVI49", "intbank.ip": "91.186.5.55"}
+{"index": {"_index": "enrich-intbank", "_id": "640"}}
+{"intbankID": 640, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "AlpenBank Bank", "intbank.ach": 938512237, "intbank.swiftID": "ATDA41", "intbank.ip": "91.127.33.245"}
+{"index": {"_index": "enrich-intbank", "_id": "641"}}
+{"intbankID": 641, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 411196464, "intbank.swiftID": "ATAL49", "intbank.ip": "91.236.95.97"}
+{"index": {"_index": "enrich-intbank", "_id": "642"}}
+{"intbankID": 642, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 558912561, "intbank.swiftID": "ATDA16", "intbank.ip": "91.124.47.216"}
+{"index": {"_index": "enrich-intbank", "_id": "643"}}
+{"intbankID": 643, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "AlpenBank Bank", "intbank.ach": 592669491, "intbank.swiftID": "ATVI37", "intbank.ip": "91.100.104.198"}
+{"index": {"_index": "enrich-intbank", "_id": "644"}}
+{"intbankID": 644, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 383047619, "intbank.swiftID": "ATDA48", "intbank.ip": "91.53.235.91"}
+{"index": {"_index": "enrich-intbank", "_id": "645"}}
+{"intbankID": 645, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Vienna Sovereign Bank", "intbank.ach": 358594820, "intbank.swiftID": "ATVI75", "intbank.ip": "91.139.104.151"}
+{"index": {"_index": "enrich-intbank", "_id": "646"}}
+{"intbankID": 646, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "AlpenBank Bank", "intbank.ach": 868110999, "intbank.swiftID": "ATDA78", "intbank.ip": "91.162.172.170"}
+{"index": {"_index": "enrich-intbank", "_id": "647"}}
+{"intbankID": 647, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 758034090, "intbank.swiftID": "ATDA25", "intbank.ip": "91.65.120.240"}
+{"index": {"_index": "enrich-intbank", "_id": "648"}}
+{"intbankID": 648, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 423698631, "intbank.swiftID": "ATVI75", "intbank.ip": "91.120.100.2"}
+{"index": {"_index": "enrich-intbank", "_id": "649"}}
+{"intbankID": 649, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "AlpenBank Bank", "intbank.ach": 982699703, "intbank.swiftID": "ATVI71", "intbank.ip": "91.220.28.34"}
+{"index": {"_index": "enrich-intbank", "_id": "650"}}
+{"intbankID": 650, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Danube Credit Bank", "intbank.ach": 767002008, "intbank.swiftID": "ATVI96", "intbank.ip": "91.252.188.127"}
+{"index": {"_index": "enrich-intbank", "_id": "651"}}
+{"intbankID": 651, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Henglong Bank", "intbank.ach": 975120386, "intbank.swiftID": "CNUY47", "intbank.ip": "36.39.116.21"}
+{"index": {"_index": "enrich-intbank", "_id": "652"}}
+{"intbankID": 652, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Berlin Bank", "intbank.ach": 183781365, "intbank.swiftID": "DEEC94", "intbank.ip": "88.227.80.135"}
+{"index": {"_index": "enrich-intbank", "_id": "653"}}
+{"intbankID": 653, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju Bank", "intbank.ach": 563470597, "intbank.swiftID": "KREX65", "intbank.ip": "121.65.94.26"}
+{"index": {"_index": "enrich-intbank", "_id": "654"}}
+{"intbankID": 654, "intbank.country": "Estonia", "intbank.country_code": "EE", "intbank.name": "Tallinna Bank", "intbank.ach": 820883515, "intbank.swiftID": "EEGB76", "intbank.ip": "90.84.114.49"}
+{"index": {"_index": "enrich-intbank", "_id": "655"}}
+{"intbankID": 655, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 207743473, "intbank.swiftID": "NLQX42", "intbank.ip": "145.91.148.167"}
+{"index": {"_index": "enrich-intbank", "_id": "656"}}
+{"intbankID": 656, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Carpathia Bank", "intbank.ach": 100848424, "intbank.swiftID": "ROCU51", "intbank.ip": "86.223.163.194"}
+{"index": {"_index": "enrich-intbank", "_id": "657"}}
+{"intbankID": 657, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Polatsk Bank", "intbank.ach": 311517833, "intbank.swiftID": "BYEZ11", "intbank.ip": "93.128.67.35"}
+{"index": {"_index": "enrich-intbank", "_id": "658"}}
+{"intbankID": 658, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Bank", "intbank.ach": 101582849, "intbank.swiftID": "HKNY44", "intbank.ip": "45.74.138.124"}
+{"index": {"_index": "enrich-intbank", "_id": "659"}}
+{"intbankID": 659, "intbank.country": "Brazil", "intbank.country_code": "BR", "intbank.name": "SaoPaulo Bank", "intbank.ach": 380784619, "intbank.swiftID": "BRWX94", "intbank.ip": "179.232.107.50"}
+{"index": {"_index": "enrich-intbank", "_id": "660"}}
+{"intbankID": 660, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria Bank", "intbank.ach": 376695456, "intbank.swiftID": "DEDH07", "intbank.ip": "88.242.157.42"}
+{"index": {"_index": "enrich-intbank", "_id": "661"}}
+{"intbankID": 661, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "Amsterdam Bank", "intbank.ach": 764963066, "intbank.swiftID": "NLUC37", "intbank.ip": "145.18.110.161"}
+{"index": {"_index": "enrich-intbank", "_id": "662"}}
+{"intbankID": 662, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Cape Bank", "intbank.ach": 195696379, "intbank.swiftID": "ZAPM52", "intbank.ip": "196.154.54.227"}
+{"index": {"_index": "enrich-intbank", "_id": "663"}}
+{"intbankID": 663, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Bank", "intbank.ach": 803621206, "intbank.swiftID": "VEWR03", "intbank.ip": "190.123.218.92"}
+{"index": {"_index": "enrich-intbank", "_id": "664"}}
+{"intbankID": 664, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Hanwha Bank", "intbank.ach": 464674257, "intbank.swiftID": "KRNS25", "intbank.ip": "121.223.217.41"}
+{"index": {"_index": "enrich-intbank", "_id": "665"}}
+{"intbankID": 665, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Bank", "intbank.ach": 245567207, "intbank.swiftID": "MXNG44", "intbank.ip": "189.208.25.157"}
+{"index": {"_index": "enrich-intbank", "_id": "666"}}
+{"intbankID": 666, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 711815886, "intbank.swiftID": "FRFT11", "intbank.ip": "82.147.251.212"}
+{"index": {"_index": "enrich-intbank", "_id": "667"}}
+{"intbankID": 667, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Patagonia Bank", "intbank.ach": 515891014, "intbank.swiftID": "ARRN93", "intbank.ip": "186.67.49.139"}
+{"index": {"_index": "enrich-intbank", "_id": "668"}}
+{"intbankID": 668, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Harbor Bank", "intbank.ach": 945266316, "intbank.swiftID": "HKTI70", "intbank.ip": "45.120.175.37"}
+{"index": {"_index": "enrich-intbank", "_id": "669"}}
+{"intbankID": 669, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria Bank", "intbank.ach": 466712662, "intbank.swiftID": "DEFA85", "intbank.ip": "88.154.77.180"}
+{"index": {"_index": "enrich-intbank", "_id": "670"}}
+{"intbankID": 670, "intbank.country": "United Kingdom", "intbank.country_code": "GB", "intbank.name": "Oxminster Bank", "intbank.ach": 413789915, "intbank.swiftID": "GBLO90", "intbank.ip": "82.238.161.152"}
+{"index": {"_index": "enrich-intbank", "_id": "671"}}
+{"intbankID": 671, "intbank.country": "Ukraine", "intbank.country_code": "UA", "intbank.name": "Kyivan Bank", "intbank.ach": 860743767, "intbank.swiftID": "UAAO93", "intbank.ip": "91.163.42.232"}
+{"index": {"_index": "enrich-intbank", "_id": "672"}}
+{"intbankID": 672, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Caracas Bank", "intbank.ach": 548745876, "intbank.swiftID": "VEMY23", "intbank.ip": "190.72.200.69"}
+{"index": {"_index": "enrich-intbank", "_id": "673"}}
+{"intbankID": 673, "intbank.country": "Chile", "intbank.country_code": "CL", "intbank.name": "Andes Bank", "intbank.ach": 694816023, "intbank.swiftID": "CLSM83", "intbank.ip": "190.207.164.133"}
+{"index": {"_index": "enrich-intbank", "_id": "674"}}
+{"intbankID": 674, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Polatsk Bank", "intbank.ach": 127096094, "intbank.swiftID": "BYRG86", "intbank.ip": "93.179.170.246"}
+{"index": {"_index": "enrich-intbank", "_id": "675"}}
+{"intbankID": 675, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "RioPrata Bank", "intbank.ach": 654447786, "intbank.swiftID": "ARZG23", "intbank.ip": "186.164.29.129"}
+{"index": {"_index": "enrich-intbank", "_id": "676"}}
+{"intbankID": 676, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Magdalena Bank", "intbank.ach": 831847167, "intbank.swiftID": "COLH81", "intbank.ip": "186.14.86.253"}
+{"index": {"_index": "enrich-intbank", "_id": "677"}}
+{"intbankID": 677, "intbank.country": "South Africa", "intbank.country_code": "ZA", "intbank.name": "Zulu Bank", "intbank.ach": 956447802, "intbank.swiftID": "ZATE99", "intbank.ip": "196.78.71.168"}
+{"index": {"_index": "enrich-intbank", "_id": "678"}}
+{"intbankID": 678, "intbank.country": "Argentina", "intbank.country_code": "AR", "intbank.name": "Cordoba Bank", "intbank.ach": 662234768, "intbank.swiftID": "ARYS68", "intbank.ip": "186.169.143.128"}
+{"index": {"_index": "enrich-intbank", "_id": "679"}}
+{"intbankID": 679, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 195518016, "intbank.swiftID": "NLJY11", "intbank.ip": "145.140.16.115"}
+{"index": {"_index": "enrich-intbank", "_id": "680"}}
+{"intbankID": 680, "intbank.country": "Austria", "intbank.country_code": "AT", "intbank.name": "Alpen Bank", "intbank.ach": 427042255, "intbank.swiftID": "ATUV51", "intbank.ip": "91.215.24.185"}
+{"index": {"_index": "enrich-intbank", "_id": "681"}}
+{"intbankID": 681, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Saraya Bank", "intbank.ach": 757617339, "intbank.swiftID": "MYHR28", "intbank.ip": "103.154.56.38"}
+{"index": {"_index": "enrich-intbank", "_id": "682"}}
+{"intbankID": 682, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Nuevo Leon Bank", "intbank.ach": 425362481, "intbank.swiftID": "MXWS13", "intbank.ip": "189.194.171.113"}
+{"index": {"_index": "enrich-intbank", "_id": "683"}}
+{"intbankID": 683, "intbank.country": "France", "intbank.country_code": "FR", "intbank.name": "Lyonnaise Bank", "intbank.ach": 611881087, "intbank.swiftID": "FROE12", "intbank.ip": "82.25.245.56"}
+{"index": {"_index": "enrich-intbank", "_id": "684"}}
+{"intbankID": 684, "intbank.country": "Venezuela", "intbank.country_code": "VE", "intbank.name": "Bolivar Bank", "intbank.ach": 685753955, "intbank.swiftID": "VEJU82", "intbank.ip": "190.79.19.151"}
+{"index": {"_index": "enrich-intbank", "_id": "685"}}
+{"intbankID": 685, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Putera Bank", "intbank.ach": 289125958, "intbank.swiftID": "MYZA06", "intbank.ip": "103.26.130.88"}
+{"index": {"_index": "enrich-intbank", "_id": "686"}}
+{"intbankID": 686, "intbank.country": "Nigeria", "intbank.country_code": "NG", "intbank.name": "Abuja Bank", "intbank.ach": 908294414, "intbank.swiftID": "NGKW71", "intbank.ip": "105.18.67.229"}
+{"index": {"_index": "enrich-intbank", "_id": "687"}}
+{"intbankID": 687, "intbank.country": "China", "intbank.country_code": "CN", "intbank.name": "Henglong Bank", "intbank.ach": 641770641, "intbank.swiftID": "CNQN06", "intbank.ip": "36.74.72.240"}
+{"index": {"_index": "enrich-intbank", "_id": "688"}}
+{"intbankID": 688, "intbank.country": "Mexico", "intbank.country_code": "MX", "intbank.name": "Azteca Bank", "intbank.ach": 928392726, "intbank.swiftID": "MXTJ88", "intbank.ip": "189.153.198.247"}
+{"index": {"_index": "enrich-intbank", "_id": "689"}}
+{"intbankID": 689, "intbank.country": "Romania", "intbank.country_code": "RO", "intbank.name": "Bucuresti Bank", "intbank.ach": 835881181, "intbank.swiftID": "ROZJ99", "intbank.ip": "86.101.129.147"}
+{"index": {"_index": "enrich-intbank", "_id": "690"}}
+{"intbankID": 690, "intbank.country": "Finland", "intbank.country_code": "FI", "intbank.name": "Nordlinn Bank", "intbank.ach": 713816203, "intbank.swiftID": "FIRD84", "intbank.ip": "91.9.156.192"}
+{"index": {"_index": "enrich-intbank", "_id": "691"}}
+{"intbankID": 691, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Bank", "intbank.ach": 593324755, "intbank.swiftID": "HKNN74", "intbank.ip": "45.12.45.151"}
+{"index": {"_index": "enrich-intbank", "_id": "692"}}
+{"intbankID": 692, "intbank.country": "Belarus", "intbank.country_code": "BY", "intbank.name": "Belvest Bank", "intbank.ach": 342158053, "intbank.swiftID": "BYTE58", "intbank.ip": "93.146.119.191"}
+{"index": {"_index": "enrich-intbank", "_id": "693"}}
+{"intbankID": 693, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Bank", "intbank.ach": 345046722, "intbank.swiftID": "PAHU38", "intbank.ip": "186.231.111.149"}
+{"index": {"_index": "enrich-intbank", "_id": "694"}}
+{"intbankID": 694, "intbank.country": "Malaysia", "intbank.country_code": "MY", "intbank.name": "Putera Bank", "intbank.ach": 598874737, "intbank.swiftID": "MYBG03", "intbank.ip": "103.100.37.85"}
+{"index": {"_index": "enrich-intbank", "_id": "695"}}
+{"intbankID": 695, "intbank.country": "Colombia", "intbank.country_code": "CO", "intbank.name": "Bogota Bank", "intbank.ach": 218914175, "intbank.swiftID": "COAM22", "intbank.ip": "186.212.15.100"}
+{"index": {"_index": "enrich-intbank", "_id": "696"}}
+{"intbankID": 696, "intbank.country": "Holland", "intbank.country_code": "NL", "intbank.name": "NordWind Bank", "intbank.ach": 229478659, "intbank.swiftID": "NLRF58", "intbank.ip": "145.39.122.142"}
+{"index": {"_index": "enrich-intbank", "_id": "697"}}
+{"intbankID": 697, "intbank.country": "Germany", "intbank.country_code": "DE", "intbank.name": "Bavaria Bank", "intbank.ach": 678280860, "intbank.swiftID": "DEYX62", "intbank.ip": "88.153.15.224"}
+{"index": {"_index": "enrich-intbank", "_id": "698"}}
+{"intbankID": 698, "intbank.country": "Panama", "intbank.country_code": "PA", "intbank.name": "Isthmus Bank", "intbank.ach": 387907551, "intbank.swiftID": "PAOR74", "intbank.ip": "186.145.48.74"}
+{"index": {"_index": "enrich-intbank", "_id": "699"}}
+{"intbankID": 699, "intbank.country": "Hong Kong", "intbank.country_code": "HK", "intbank.name": "Victoria Bank", "intbank.ach": 556541268, "intbank.swiftID": "HKAU92", "intbank.ip": "45.108.190.238"}
+{"index": {"_index": "enrich-intbank", "_id": "700"}}
+{"intbankID": 700, "intbank.country": "South Korea", "intbank.country_code": "KR", "intbank.name": "Jeju Bank", "intbank.ach": 516391231, "intbank.swiftID": "KRFY61", "intbank.ip": "121.118.148.88"}
