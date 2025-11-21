@@ -1,0 +1,37 @@
+{
+  "processors": [
+    {
+      "enrich": {
+        "field": "txbankId",
+        "policy_name": "enrich-austinswift",
+        "target_field": "4",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "4.austinbank.name",
+        "target_field": "austinbank.name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "4.austinbank.routing_number",
+        "target_field": "austinbank.routing_number",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "4.austinbank.swiftID",
+        "target_field": "austinbank.swiftID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
