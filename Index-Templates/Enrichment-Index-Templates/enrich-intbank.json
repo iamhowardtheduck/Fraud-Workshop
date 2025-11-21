@@ -1,0 +1,45 @@
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "intbankID": {
+          "type": "keyword"
+        },
+        "intbank": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "keyword"
+            },
+            "country_code": {
+              "type": "keyword"
+            },
+            "ach": {
+              "type": "keyword"
+            },
+            "ip": {
+              "type": "ip"
+            },
+            "name": {
+              "type": "keyword"
+            },
+            "swiftID": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "mode": "lookup"
+      }
+    }
+  },
+  "index_patterns": [
+    "enrich-intbank*"
+  ],
+  "composed_of": [],
+  "ignore_missing_component_templates": [],
+  "allow_auto_create": true
+}
