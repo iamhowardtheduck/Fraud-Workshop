@@ -6,6 +6,15 @@
 
 set -e  # Exit on any error
 
+# Set non-interactive mode for package installations
+export DEBIAN_FRONTEND=noninteractive
+export APT_LISTCHANGES_FRONTEND=none
+export NEEDRESTART_MODE=a
+
+# Configure dpkg to use old config files by default (auto-accept)
+export DEBIAN_PRIORITY=critical
+export DEBCONF_NONINTERACTIVE_SEEN=true
+
 # Color codes for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -69,6 +78,45 @@ check_root() {
     print_success "Running as root - proceeding with installation"
 }
 
+# Setup non-interactive environment
+setup_noninteractive_environment() {
+    print_status "Configuring non-interactive installation mode..."
+    
+    # Prevent interactive prompts during package installation
+    export DEBIAN_FRONTEND=noninteractive
+    export APT_LISTCHANGES_FRONTEND=none
+    export NEEDRESTART_MODE=a
+    export DEBIAN_PRIORITY=critical
+    export DEBCONF_NONINTERACTIVE_SEEN=true
+    export UCF_FORCE_CONFFOLD=1
+    export UCF_FORCE_CONFFNEW=0
+    
+    # Configure debconf for non-interactive mode
+    echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+    
+    # Configure dpkg to automatically keep existing config files
+    echo 'DPkg::options { "--force-confdef"; "--force-confold"; }' > /etc/apt/apt.conf.d/99local-force-confold
+    
+    # Configure APT to be non-interactive
+    cat > /etc/apt/apt.conf.d/99local-noninteractive << 'APTEOF'
+APT::Get::Assume-Yes "true";
+APT::Get::Fix-Broken "true";
+APT::Get::Force-Yes "true";
+Dpkg::Use-Pty "false";
+Dpkg::Options {
+    "--force-confdef";
+    "--force-confold";
+}
+APTEOF
+    
+    # Configure needrestart to restart services automatically
+    if [ -f /etc/needrestart/needrestart.conf ]; then
+        sed -i 's/#$nrconf{restart} = '"'"'i'"'"';/$nrconf{restart} = '"'"'a'"'"';/' /etc/needrestart/needrestart.conf
+    fi
+    
+    print_success "Non-interactive mode configured (will auto-accept defaults)"
+}
+
 # Check Ubuntu version
 check_ubuntu_version() {
     if ! command -v lsb_release &> /dev/null; then
@@ -92,16 +140,35 @@ check_ubuntu_version() {
 
 # Update system packages
 update_system() {
-    print_status "Updating system packages..."
-    apt update
-    apt upgrade -y
-    print_success "System packages updated"
+    print_status "Updating system packages (non-interactive mode)..."
+    
+    # Set additional non-interactive options
+    export UCF_FORCE_CONFFOLD=1
+    export UCF_FORCE_CONFFNEW=0
+    
+    # Configure dpkg to keep old config files automatically
+    echo 'DPkg::options { "--force-confdef"; "--force-confold"; }' > /etc/apt/apt.conf.d/local
+    
+    # Update with non-interactive flags
+    apt update -qq
+    apt upgrade -y -qq \
+        -o Dpkg::Options::="--force-confdef" \
+        -o Dpkg::Options::="--force-confold" \
+        -o APT::Get::Assume-Yes=true \
+        -o APT::Get::Fix-Broken=true \
+        -o APT::Get::Force-Yes=true \
+        -o Dpkg::Use-Pty=0
+    
+    print_success "System packages updated (auto-accepted defaults)"
 }
 
 # Install essential packages
 install_essentials() {
-    print_status "Installing essential packages..."
-    apt install -y \
+    print_status "Installing essential packages (non-interactive mode)..."
+    
+    apt install -y -qq \
+        -o Dpkg::Options::="--force-confdef" \
+        -o Dpkg::Options::="--force-confold" \
         curl \
         wget \
         software-properties-common \
@@ -116,19 +183,22 @@ install_essentials() {
         vim \
         htop \
         build-essential
-    print_success "Essential packages installed"
+        
+    print_success "Essential packages installed (auto-accepted defaults)"
 }
 
 # Install Python and pip
 install_python() {
-    print_status "Installing Python $PYTHON_VERSION and pip..."
+    print_status "Installing Python $PYTHON_VERSION and pip (non-interactive mode)..."
     
-    # Add deadsnakes PPA for latest Python versions
-    add-apt-repository -y ppa:deadsnakes/ppa
-    apt update
+    # Add deadsnakes PPA for latest Python versions (non-interactive)
+    add-apt-repository -y ppa:deadsnakes/ppa > /dev/null 2>&1
+    apt update -qq
     
-    # Install Python and related packages
-    apt install -y \
+    # Install Python and related packages (non-interactive)
+    apt install -y -qq \
+        -o Dpkg::Options::="--force-confdef" \
+        -o Dpkg::Options::="--force-confold" \
         python${PYTHON_VERSION} \
         python${PYTHON_VERSION}-dev \
         python${PYTHON_VERSION}-venv \
@@ -137,10 +207,10 @@ install_python() {
         python3-wheel
     
     # Update alternatives
-    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
-    update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1 > /dev/null 2>&1
+    update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1 > /dev/null 2>&1
     
-    print_success "Python $PYTHON_VERSION installed"
+    print_success "Python $PYTHON_VERSION installed (auto-accepted defaults)"
 }
 
 # Create workshop user
@@ -1055,6 +1125,7 @@ display_completion_info() {
     echo "   📈 Events: $ES_EVENTS"
     echo "   ⏰ Business Hours: ${BUSINESS_START}:00 AM - ${BUSINESS_END}:00 PM (${BUSINESS_MULTIPLIER}x volume)"
     echo "   🌙 Off Hours: Events still generated at 1x volume"
+    echo "   🤖 Installation: Non-interactive (auto-accepted package defaults)"
     echo ""
     echo -e "${CYAN}🚀 Quick Start:${NC}"
     echo "   1. Switch to workshop user:"
@@ -1086,10 +1157,12 @@ main() {
     print_header
     print_status "Installing AML Fraud Workshop with your specific configuration..."
     print_status "Running from: /root/Fraud-Workshop/Scripts/"
+    print_status "Mode: Non-interactive (auto-accepts package defaults)"
     echo ""
     
     # Pre-flight checks
     check_root
+    setup_noninteractive_environment
     check_ubuntu_version
     
     # System setup
@@ -1108,8 +1181,34 @@ main() {
     # Verification
     verify_installation
     
+    # Cleanup non-interactive configurations
+    cleanup_noninteractive_environment
+    
     # Completion
     display_completion_info
+}
+
+# Cleanup non-interactive environment
+cleanup_noninteractive_environment() {
+    print_status "Cleaning up non-interactive configuration..."
+    
+    # Remove APT configuration files we created
+    rm -f /etc/apt/apt.conf.d/99local-force-confold
+    rm -f /etc/apt/apt.conf.d/99local-noninteractive
+    
+    # Reset debconf to interactive mode
+    echo 'debconf debconf/frontend select Dialog' | debconf-set-selections
+    
+    # Unset environment variables
+    unset DEBIAN_FRONTEND
+    unset APT_LISTCHANGES_FRONTEND
+    unset NEEDRESTART_MODE
+    unset DEBIAN_PRIORITY
+    unset DEBCONF_NONINTERACTIVE_SEEN
+    unset UCF_FORCE_CONFFOLD
+    unset UCF_FORCE_CONFFNEW
+    
+    print_success "Interactive mode restored for future package installations"
 }
 
 # Error handling
