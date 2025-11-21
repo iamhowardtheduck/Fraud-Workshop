@@ -92,4 +92,5 @@ echo "Ingest pipelines loaded"
 echo
 
 # Start data-gen installation
-bash /root/Fraud-Workshop/Scrits/install_aml_generator.sh
+chmod +x /root/Fraud-Workshop/Scripts/install_aml_generator_root.sh
+bash /root/Fraud-Workshop/Scripts/install_aml_generator_root.sh
