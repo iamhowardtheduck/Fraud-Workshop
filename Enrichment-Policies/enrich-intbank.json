@@ -1,0 +1,7 @@
+{
+  "match": {
+    "indices": "enrich-intbank",
+    "match_field": "intbankID",
+    "enrich_fields": ["intbank.name", "intbank.country", "intbank.country_code", "intbank.ach", "intbank.ip", "intbank.swiftID"]
+  }
+}
