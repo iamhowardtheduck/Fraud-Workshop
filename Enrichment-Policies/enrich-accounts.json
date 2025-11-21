@@ -1,0 +1,7 @@
+{
+  "match": {
+    "indices": "enrich-accounts",
+    "match_field": "accountID",
+    "enrich_fields": ["account.address", "account.checking", "account.checking_opened", "account.moneymarket", "account.moneymarket_opened", "account.name", "account.savings", "account.savings_opened", "account.telephone_number"]
+  }
+}
