@@ -85,3 +85,10 @@ curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-inbound" -H "Content
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-intbank" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-intbank.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-outbound" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-outbound.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/fraud-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/fraud-detection-enrich.json
+
+echo
+echo "Ingest pipelines loaded"
+echo
+
+# Start data-gen installation
+bash /root/Fraud-Workshop/Scrits/install_aml_generator.sh
