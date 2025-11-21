@@ -1,0 +1,13 @@
+{
+  "processors": [
+    {
+      "enrich": {
+        "field": "addressId",
+        "policy_name": "enrich-austinbanks",
+        "target_field": "2",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
