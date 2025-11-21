@@ -1,0 +1,76 @@
+{
+  "processors": [
+    {
+      "rename": {
+        "field": "austinbank.name",
+        "target_field": "wire.inbound.bank_name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "intbank.name",
+        "target_field": "wire.inbound.bank_name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "austinbank.routing_number",
+        "target_field": "wire.inbound.routing_number",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "intbank.ach",
+        "target_field": "wire.inbound.routing_number",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "austinbank.swiftID",
+        "target_field": "wire.inbound.swiftID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "intbank.swiftID",
+        "target_field": "wire.inbound.swiftID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "intbank.country",
+        "target_field": "wire.inbound.country",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "intbank.country_code",
+        "target_field": "wire.inbound.country_code",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "intbank.ip",
+        "target_field": "wire.inbound.ip",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
