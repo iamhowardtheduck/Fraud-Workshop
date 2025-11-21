@@ -1,0 +1,284 @@
+{
+  "template": {
+    "mappings": {
+      "_source": {
+        "mode": "synthetic"
+      },
+      "properties": {
+        "wire": {
+          "type": "object",
+          "properties": {
+            "inbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "ip": {
+                  "time_series_dimension": true,
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                }
+              }
+            },
+            "outbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "ip": {
+                  "time_series_dimension": true,
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                }
+              }
+            },
+            "direction": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            }
+          }
+        },
+        "@timestamp": {
+          "type": "date"
+        },
+        "pos": {
+          "type": "object",
+          "properties": {
+            "merchant_name": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "merchant_address": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "merchant_zip": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "geo_point": {
+              "type": "geo_point"
+            }
+          }
+        },
+        "deposit": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            }
+          }
+        },
+        "risk": {
+          "type": "object",
+          "properties": {
+            "score": {
+              "time_series_metric": "counter",
+              "type": "long"
+            },
+            "override_req": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            }
+          }
+        },
+        "atm": {
+          "type": "object",
+          "properties": {
+            "deposit_amount": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "available_20": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "pin_attempts": {
+              "time_series_metric": "counter",
+              "type": "integer"
+            },
+            "available_10": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "software": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "available_50": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "request_amount": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "available": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "paper_jam": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "24hours": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "version": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "camera_enabled": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "request_source": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "inquiry_type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "available_100": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "vendor": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "online": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "id": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "event": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "deposit_type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            }
+          }
+        },
+        "event": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            }
+          }
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "checking": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "address": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "savings_opened": {
+              "type": "date"
+            },
+            "name": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "telephone_number": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "moneymarket": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "moneymarket_opened": {
+              "type": "date"
+            },
+            "savings": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "event": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "checking_opened": {
+              "type": "date"
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "routing_path": [
+          "event.type"
+        ],
+        "default_pipeline": "enrich-fraud",
+        "mode": "time_series"
+      }
+    }
+  },
+  "index_patterns": [
+    "fraud-workshop*",
+    "fraud-workshop-tsds*",
+    "testing*"
+  ],
+  "composed_of": [],
+  "ignore_missing_component_templates": [],
+  "allow_auto_create": true
+}
