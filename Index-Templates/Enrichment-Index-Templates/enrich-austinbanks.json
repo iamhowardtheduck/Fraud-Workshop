@@ -2,67 +2,40 @@
   "template": {
     "mappings": {
       "properties": {
-        "accountID": {
+        "txbankId": {
           "type": "keyword"
         },
-        "account": {
+        "austinbank": {
           "type": "object",
           "properties": {
-            "checking": {
-              "type": "keyword"
-            },
             "address": {
               "type": "keyword"
-            },
-            "savings_opened": {
-              "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
-              "index": true,
-              "ignore_malformed": false,
-              "store": false,
-              "type": "date",
-              "doc_values": true
             },
             "name": {
               "type": "keyword"
             },
-            "telephone_number": {
+            "swiftID": {
               "type": "keyword"
             },
-            "moneymarket": {
+            "routing_number": {
               "type": "keyword"
-            },
-            "moneymarket_opened": {
-              "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
-              "index": true,
-              "ignore_malformed": false,
-              "store": false,
-              "type": "date",
-              "doc_values": true
-            },
-            "savings": {
-              "type": "keyword"
-            },
-            "checking_opened": {
-              "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
-              "index": true,
-              "ignore_malformed": false,
-              "store": false,
-              "type": "date",
-              "doc_values": true
             }
           }
+        },
+        "addressId": {
+          "type": "keyword"
         }
       }
     },
     "settings": {
       "index": {
         "mode": "lookup",
-        "number_of_replicas": "0"
+        "number_of_replicas": 0
       }
     }
   },
   "index_patterns": [
-    "enrich-accounts*"
+    "enrich-austinbanks*"
   ],
   "composed_of": [],
   "ignore_missing_component_templates": [],
