@@ -1,0 +1,62 @@
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "posID": {
+          "type": "keyword"
+        },
+        "pos": {
+          "type": "object",
+          "properties": {
+            "merchant_name": {
+              "type": "keyword"
+            },
+            "merchant_address": {
+              "type": "keyword"
+            },
+            "merchant_zip": {
+              "type": "keyword"
+            },
+            "geo_point": {
+              "type": "geo_point"
+            }
+          }
+        },
+        "atm": {
+          "type": "object",
+          "properties": {
+            "software": {
+              "type": "keyword"
+            },
+            "vendor": {
+              "type": "keyword"
+            },
+            "available": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "keyword"
+            },
+            "24hours": {
+              "type": "boolean"
+            },
+            "version": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "mode": "lookup"
+      }
+    }
+  },
+  "index_patterns": [
+    "enrich-austinstores"
+  ],
+  "composed_of": [],
+  "ignore_missing_component_templates": [],
+  "allow_auto_create": true
+}
