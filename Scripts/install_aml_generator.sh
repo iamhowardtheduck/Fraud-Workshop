@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# AML Fraud Workshop - Data Generator Only Installation Script
-# Lightweight setup for fraud data generation without Elasticsearch
-# Compatible with Ubuntu 20.04, 22.04, and 24.04
+# AML Fraud Workshop - Root Installation Script
+# Configured for your specific Elasticsearch environment
+# Run from: /root/Fraud-Workshop/Scripts/install_aml_generator.sh
 
 set -e  # Exit on any error
 
@@ -15,10 +15,24 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
-# Configuration
+# Configuration - Your Specific Settings
 WORKSHOP_USER="aml-workshop"
 WORKSHOP_DIR="/opt/aml-fraud-workshop"
 PYTHON_VERSION="3.10"
+
+# Elasticsearch Configuration - Your Environment
+ES_HOST="http://localhost:30920"
+ES_USERNAME="fraud"
+ES_PASSWORD="hunter"
+ES_INDEX="fraud-workshop"
+ES_WORKERS="16"
+ES_EVENTS="10000"
+
+# Business Hours Configuration - Your Requirements
+BUSINESS_START="7"      # 7 AM
+BUSINESS_END="21"       # 9 PM
+BUSINESS_MULTIPLIER="7" # 7x volume during business hours
+# 9:01 PM to 6:59 AM will have 1x volume (off-hours events)
 
 # Function to print colored output
 print_status() {
@@ -39,17 +53,20 @@ print_error() {
 
 print_header() {
     echo -e "${PURPLE}========================================${NC}"
-    echo -e "${PURPLE} AML Fraud Data Generator Installation${NC}"
+    echo -e "${PURPLE} AML Fraud Workshop Installation${NC}"
+    echo -e "${PURPLE} Root Installation Mode${NC}"
     echo -e "${PURPLE}========================================${NC}"
 }
 
-# Check if running as root
+# Check if running as root (required for this version)
 check_root() {
-    if [[ $EUID -eq 0 ]]; then
-        print_error "This script should not be run as root"
-        print_status "Please run as a regular user with sudo privileges"
+    if [[ $EUID -ne 0 ]]; then
+        print_error "This script must be run as root"
+        print_status "You are running from: /root/Fraud-Workshop/Scripts/"
+        print_status "Please run as: sudo ./install_aml_generator.sh"
         exit 1
     fi
+    print_success "Running as root - proceeding with installation"
 }
 
 # Check Ubuntu version
@@ -76,15 +93,15 @@ check_ubuntu_version() {
 # Update system packages
 update_system() {
     print_status "Updating system packages..."
-    sudo apt update
-    sudo apt upgrade -y
+    apt update
+    apt upgrade -y
     print_success "System packages updated"
 }
 
 # Install essential packages
 install_essentials() {
     print_status "Installing essential packages..."
-    sudo apt install -y \
+    apt install -y \
         curl \
         wget \
         software-properties-common \
@@ -97,7 +114,8 @@ install_essentials() {
         jq \
         nano \
         vim \
-        htop
+        htop \
+        build-essential
     print_success "Essential packages installed"
 }
 
@@ -106,11 +124,11 @@ install_python() {
     print_status "Installing Python $PYTHON_VERSION and pip..."
     
     # Add deadsnakes PPA for latest Python versions
-    sudo add-apt-repository -y ppa:deadsnakes/ppa
-    sudo apt update
+    add-apt-repository -y ppa:deadsnakes/ppa
+    apt update
     
     # Install Python and related packages
-    sudo apt install -y \
+    apt install -y \
         python${PYTHON_VERSION} \
         python${PYTHON_VERSION}-dev \
         python${PYTHON_VERSION}-venv \
@@ -119,8 +137,8 @@ install_python() {
         python3-wheel
     
     # Update alternatives
-    sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python${PYTHON_VERSION} 1
+    update-alternatives --install /usr/bin/python python /usr/bin/python${PYTHON_VERSION} 1
     
     print_success "Python $PYTHON_VERSION installed"
 }
@@ -132,8 +150,8 @@ create_workshop_user() {
     if id "$WORKSHOP_USER" &>/dev/null; then
         print_status "User $WORKSHOP_USER already exists"
     else
-        sudo useradd -m -s /bin/bash -G sudo $WORKSHOP_USER
-        echo "$WORKSHOP_USER:aml-workshop-2024" | sudo chpasswd
+        useradd -m -s /bin/bash -G sudo $WORKSHOP_USER
+        echo "$WORKSHOP_USER:aml-workshop-2024" | chpasswd
         print_success "Workshop user created: $WORKSHOP_USER"
     fi
 }
@@ -142,18 +160,18 @@ create_workshop_user() {
 create_workshop_directory() {
     print_status "Creating workshop directory: $WORKSHOP_DIR"
     
-    sudo mkdir -p $WORKSHOP_DIR/{src,data,config,logs,output,notebooks}
-    sudo chown -R $WORKSHOP_USER:$WORKSHOP_USER $WORKSHOP_DIR
-    sudo chmod -R 755 $WORKSHOP_DIR
+    mkdir -p $WORKSHOP_DIR/{src,data,config,logs,output,notebooks}
+    chown -R $WORKSHOP_USER:$WORKSHOP_USER $WORKSHOP_DIR
+    chmod -R 755 $WORKSHOP_DIR
     
     print_success "Workshop directory created"
 }
 
 # Install Python packages
 install_python_packages() {
-    print_status "Installing Python packages for fraud generation..."
+    print_status "Installing Python packages for fraud generation with Elasticsearch support..."
     
-    # Create virtual environment
+    # Create virtual environment as workshop user
     sudo -u $WORKSHOP_USER python3 -m venv $WORKSHOP_DIR/venv
     
     # Install packages in virtual environment
@@ -173,29 +191,55 @@ install_python_packages() {
     print_success "Python packages installed"
 }
 
-# Create fraud generator files
+# Create fraud generator with your specific configuration
 create_fraud_generator_files() {
-    print_status "Creating fraud generator files..."
+    print_status "Creating fraud generator files with your Elasticsearch configuration..."
     
-    # Create main fraud generator script
-    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/src/lightweight_fraud_generator.py > /dev/null <<'EOF'
+    # Create the main fraud generator with your specific settings
+    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/src/fraud_workshop_generator.py > /dev/null <<EOF
 #!/usr/bin/env python3
 """
-AML Fraud Data Generator - Standalone Version
-Generates realistic money laundering scenarios and banking transaction data
+AML Fraud Workshop Generator - Configured for Your Environment
+Elasticsearch: $ES_HOST
+Index: $ES_INDEX
+Business Hours: ${BUSINESS_START}:00 AM - ${BUSINESS_END}:00 PM (${BUSINESS_MULTIPLIER}x volume)
 """
 
 import json
 import random
+import threading
 import time
 from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
 from typing import Optional, List
 import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# Try to import Elasticsearch
+try:
+    from elasticsearch import Elasticsearch
+    from elasticsearch.helpers import bulk
+    ES_AVAILABLE = True
+except ImportError:
+    ES_AVAILABLE = False
+    print("⚠️  Elasticsearch not installed. Run: pip install elasticsearch")
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
+
+@dataclass
+class ElasticsearchConfig:
+    """Your Elasticsearch configuration"""
+    host: str = "$ES_HOST"
+    index_name: str = "$ES_INDEX"
+    username: str = "$ES_USERNAME"
+    password: str = "$ES_PASSWORD"
+    workers: int = $ES_WORKERS
+    events_per_day: int = $ES_EVENTS
+    pipeline: str = "fraud-detection-enrich"
+    verify_certs: bool = False
+    timeout: int = 30
 
 @dataclass
 class TransactionEvent:
@@ -218,7 +262,7 @@ class TransactionEvent:
 
 @dataclass
 class FraudConfig:
-    """Configuration for fraud generation"""
+    """Fraud configuration with your business hours"""
     # Money laundering parameters
     ml_cash_deposits_min: float = 9000.0
     ml_cash_deposits_max: float = 9999.99
@@ -227,7 +271,6 @@ class FraudConfig:
     ml_days_span: int = 5
     
     # Event distribution
-    events_per_day: int = 10000
     deposit_percentage: float = 0.05
     fee_percentage: float = 0.10
     wire_percentage: float = 0.20
@@ -235,35 +278,38 @@ class FraudConfig:
     purchase_percentage: float = 0.40
     international_wire_percentage: float = 0.10
     
-    # Business hours
-    business_start_hour: int = 8
-    business_end_hour: int = 18
-    business_hours_multiplier: float = 3.0
+    # Your specific business hours: 7 AM - 9 PM with 7x volume
+    business_start_hour: int = $BUSINESS_START
+    business_end_hour: int = $BUSINESS_END
+    business_hours_multiplier: float = $BUSINESS_MULTIPLIER
 
 class BusinessHoursGenerator:
-    """Generates timestamps with business hours weighting"""
+    """Generates timestamps with your specific business hours weighting"""
     
     def __init__(self, config: FraudConfig):
         self.config = config
     
     def get_weighted_hour(self) -> int:
-        """Get hour with business hours weighting"""
+        """Get hour with 7x volume during 7 AM - 9 PM, 1x during 9:01 PM - 6:59 AM"""
         hours = list(range(24))
         weights = []
         
         for hour in hours:
             if self.config.business_start_hour <= hour < self.config.business_end_hour:
+                # 7 AM - 9 PM: 7x volume
                 weights.append(self.config.business_hours_multiplier)
             else:
+                # 9:01 PM - 6:59 AM: 1x volume (still events, just fewer)
                 weights.append(1.0)
         
+        # Normalize weights
         total_weight = sum(weights)
         weights = [w / total_weight for w in weights]
         
         return random.choices(hours, weights=weights)[0]
     
     def generate_business_weighted_datetime(self, base_date: datetime, days_back_range: int = 8) -> datetime:
-        """Generate datetime with business hours weighting"""
+        """Generate datetime with your business hours weighting"""
         days_back = random.randint(0, days_back_range)
         weighted_hour = self.get_weighted_hour()
         random_minutes = random.randint(0, 59)
@@ -273,39 +319,179 @@ class BusinessHoursGenerator:
             hour=weighted_hour, minute=random_minutes, second=random_seconds
         )
 
-class FraudDataGenerator:
-    """Main fraud data generator"""
+class ElasticsearchIngester:
+    """Handles direct ingestion to your Elasticsearch"""
     
-    def __init__(self, config: FraudConfig):
-        self.config = config
-        self.business_hours = BusinessHoursGenerator(config)
+    def __init__(self, es_config: ElasticsearchConfig):
+        self.config = es_config
+        self.es = None
+        if ES_AVAILABLE:
+            self.es = self._create_elasticsearch_client()
+        
+    def _create_elasticsearch_client(self) -> Optional[Elasticsearch]:
+        """Create Elasticsearch client for your environment"""
+        if not ES_AVAILABLE:
+            return None
+            
+        try:
+            # Configuration for your Elasticsearch setup
+            client_config = {
+                'hosts': [self.config.host],
+                'verify_certs': self.config.verify_certs,
+                'ssl_show_warn': False,
+                'request_timeout': self.config.timeout
+            }
+            
+            # Add your authentication
+            if self.config.username and self.config.password:
+                try:
+                    # Try new auth format first (ES 8+)
+                    client_config['basic_auth'] = (self.config.username, self.config.password)
+                    return Elasticsearch(**client_config)
+                except TypeError:
+                    # Fallback to older auth format (ES 7)
+                    client_config['http_auth'] = (self.config.username, self.config.password)
+                    return Elasticsearch(**client_config)
+            
+            return Elasticsearch(**client_config)
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to create Elasticsearch client: {e}")
+            return None
+    
+    def test_connection(self) -> bool:
+        """Test connection to your Elasticsearch"""
+        if not self.es:
+            logger.error("❌ Elasticsearch client not initialized")
+            return False
+            
+        try:
+            info = self.es.info()
+            # Handle both old and new ES client response formats
+            if hasattr(info, 'body'):
+                version = info.body.get('version', {}).get('number', 'unknown')
+            else:
+                version = info.get('version', {}).get('number', 'unknown')
+            
+            logger.info(f"✅ Connected to your Elasticsearch at {self.config.host}")
+            logger.info(f"   Version: {version}")
+            logger.info(f"   Index: {self.config.index_name}")
+            logger.info(f"   Workers: {self.config.workers}")
+            return True
+        except Exception as e:
+            logger.error(f"❌ Failed to connect to Elasticsearch: {e}")
+            logger.error(f"   Check if Elasticsearch is running at {self.config.host}")
+            logger.error(f"   Check credentials: {self.config.username} / {self.config.password}")
+            return False
+    
+    def create_index_if_not_exists(self):
+        """Create your fraud-workshop index with proper mapping"""
+        if not self.es:
+            return
+            
+        try:
+            if self.es.indices.exists(index=self.config.index_name):
+                logger.info(f"📋 Index '{self.config.index_name}' already exists")
+                return
+            
+            mapping = {
+                "settings": {
+                    "number_of_shards": 1,
+                    "number_of_replicas": 0
+                },
+                "mappings": {
+                    "properties": {
+                        "accountID": {"type": "integer"},
+                        "event_amount": {"type": "float"},
+                        "event_type": {"type": "keyword"},
+                        "account_type": {"type": "keyword"},
+                        "account_event": {"type": "keyword"},
+                        "transaction_date": {"type": "date"},
+                        "timestamp": {"type": "date"},
+                        "deposit_type": {"type": "keyword"},
+                        "wire_direction": {"type": "keyword"},
+                        "posID": {"type": "integer"},
+                        "txbankId": {"type": "integer"},
+                        "addressId": {"type": "integer"},
+                        "intbankID": {"type": "integer"}
+                    }
+                }
+            }
+            
+            self.es.indices.create(index=self.config.index_name, body=mapping)
+            logger.info(f"✅ Created index '{self.config.index_name}'")
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to create index: {e}")
+    
+    def bulk_index_events(self, events: List[dict], chunk_size: int = 500) -> tuple:
+        """Bulk index events to your Elasticsearch"""
+        if not self.es or not events:
+            return 0, len(events) if events else 0
+        
+        def generate_docs():
+            for event in events:
+                doc = {
+                    '_index': self.config.index_name,
+                    '_source': event
+                }
+                # Add pipeline if configured
+                if self.config.pipeline:
+                    doc['pipeline'] = self.config.pipeline
+                yield doc
+        
+        try:
+            success_count, failed_items = bulk(
+                self.es,
+                generate_docs(),
+                chunk_size=chunk_size,
+                request_timeout=self.config.timeout,
+                max_retries=3,
+                initial_backoff=2,
+                max_backoff=600
+            )
+            return success_count, len(failed_items) if failed_items else 0
+            
+        except Exception as e:
+            logger.error(f"❌ Bulk indexing failed: {e}")
+            return 0, len(events)
+
+class FraudDataGenerator:
+    """AML fraud generator configured for your environment"""
+    
+    def __init__(self, fraud_config: FraudConfig, es_config: Optional[ElasticsearchConfig] = None):
+        self.fraud_config = fraud_config
+        self.es_config = es_config
+        self.business_hours = BusinessHoursGenerator(fraud_config)
+        self.ingester = ElasticsearchIngester(es_config) if es_config else None
         
     def generate_money_laundering_scenario(self) -> List[TransactionEvent]:
-        """Generate money laundering scenario"""
+        """Generate money laundering scenario with your business hours"""
         ml_events = []
         base_date = datetime.now()
         
-        # Target accounts
+        # Target accounts for money laundering
         target_accounts = {
-            'checking': [random.randint(1, 35000) for _ in range(self.config.ml_checking_accounts)],
-            'savings': [random.randint(1, 35000) for _ in range(self.config.ml_savings_accounts)]
+            'checking': [random.randint(1, 35000) for _ in range(self.fraud_config.ml_checking_accounts)],
+            'savings': [random.randint(1, 35000) for _ in range(self.fraud_config.ml_savings_accounts)]
         }
         
-        logger.info(f"🎯 Money Laundering Accounts:")
-        logger.info(f"   Checking: {target_accounts['checking']}")
-        logger.info(f"   Savings: {target_accounts['savings']}")
+        logger.info(f"🎯 Money Laundering Scenario:")
+        logger.info(f"   Checking accounts: {target_accounts['checking']}")
+        logger.info(f"   Savings accounts: {target_accounts['savings']}")
         
-        # Generate deposits over time span
-        for day in range(self.config.ml_days_span):
+        # Generate structured deposits over time span
+        for day in range(self.fraud_config.ml_days_span):
             deposit_date_base = base_date - timedelta(days=day)
             
             for account_id in target_accounts['checking'] + target_accounts['savings']:
-                if random.random() < 0.8:  # 80% chance
+                if random.random() < 0.8:  # 80% chance of deposit per day
                     amount = round(random.uniform(
-                        self.config.ml_cash_deposits_min, 
-                        self.config.ml_cash_deposits_max
+                        self.fraud_config.ml_cash_deposits_min, 
+                        self.fraud_config.ml_cash_deposits_max
                     ), 2)
                     
+                    # Use your business hours weighting
                     timestamp = self.business_hours.generate_business_weighted_datetime(deposit_date_base, 0)
                     account_type = 'checking' if account_id in target_accounts['checking'] else 'savings'
                     
@@ -321,11 +507,12 @@ class FraudDataGenerator:
                     )
                     ml_events.append(event)
         
-        # Generate wire transfer
+        # Generate wire transfer out to Chinese bank
         all_accounts = target_accounts['checking'] + target_accounts['savings']
         source_account = random.choice(all_accounts)
-        wire_amount = round(sum(e.event_amount for e in ml_events if e.accountID == source_account) * 0.95, 2)
-        chinese_bank_id = random.randint(1, 25)
+        total_deposited = sum(e.event_amount for e in ml_events if e.accountID == source_account)
+        wire_amount = round(total_deposited * 0.95, 2) if total_deposited > 0 else round(random.uniform(50000, 100000), 2)
+        chinese_bank_id = random.randint(1, 25)  # Chinese banks are IDs 1-25
         
         wire_date = base_date + timedelta(days=1)
         wire_timestamp = self.business_hours.generate_business_weighted_datetime(wire_date, 0)
@@ -344,27 +531,25 @@ class FraudDataGenerator:
         ml_events.append(wire_event)
         
         logger.info(f"💰 Generated {len(ml_events)} money laundering events")
-        logger.info(f"🏦 Wire: ${wire_amount:,.2f} to Chinese bank {chinese_bank_id}")
+        logger.info(f"🏦 Wire transfer: \${wire_amount:,.2f} to Chinese bank ID {chinese_bank_id}")
         
         return ml_events
     
-    def generate_noise_events(self, events_count: int) -> List[TransactionEvent]:
-        """Generate noise events"""
+    def generate_daily_noise_events(self, events_per_worker: int) -> List[TransactionEvent]:
+        """Generate noise events with your business hours weighting"""
         noise_events = []
         base_date = datetime.now()
         
-        # Calculate distribution
-        deposit_count = int(events_count * self.config.deposit_percentage)
-        fee_count = int(events_count * self.config.fee_percentage)
-        wire_count = int(events_count * self.config.wire_percentage)
-        withdrawal_count = int(events_count * self.config.withdrawal_percentage)
-        purchase_count = events_count - (deposit_count + fee_count + wire_count + withdrawal_count)
+        # Calculate event distribution
+        deposit_count = int(events_per_worker * self.fraud_config.deposit_percentage)
+        fee_count = int(events_per_worker * self.fraud_config.fee_percentage)
+        wire_count = int(events_per_worker * self.fraud_config.wire_percentage)
+        withdrawal_count = int(events_per_worker * self.fraud_config.withdrawal_percentage)
+        purchase_count = events_per_worker - (deposit_count + fee_count + wire_count + withdrawal_count)
         
-        logger.info(f"📊 Generating {events_count} noise events:")
-        logger.info(f"   {deposit_count} deposits, {fee_count} fees, {wire_count} wires")
-        logger.info(f"   {withdrawal_count} withdrawals, {purchase_count} purchases")
+        # Generate all event types with your business hours weighting
         
-        # Generate deposits
+        # Deposits
         for _ in range(deposit_count):
             deposit_types = ['cash'] * 90 + ['check'] * 8 + ['money_order'] * 2
             timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
@@ -381,7 +566,7 @@ class FraudDataGenerator:
             )
             noise_events.append(event)
         
-        # Generate fees
+        # Fees
         for _ in range(fee_count):
             timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
             
@@ -396,10 +581,10 @@ class FraudDataGenerator:
             )
             noise_events.append(event)
         
-        # Generate wires
+        # Wire transfers
         for _ in range(wire_count):
             event_type = random.choice(['debit', 'credit'])
-            is_international = random.random() < self.config.international_wire_percentage
+            is_international = random.random() < self.fraud_config.international_wire_percentage
             timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
             
             event = TransactionEvent(
@@ -423,7 +608,7 @@ class FraudDataGenerator:
             
             noise_events.append(event)
         
-        # Generate withdrawals
+        # Withdrawals
         for _ in range(withdrawal_count):
             timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
             
@@ -438,7 +623,7 @@ class FraudDataGenerator:
             )
             noise_events.append(event)
         
-        # Generate purchases
+        # Purchases
         for _ in range(purchase_count):
             timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
             
@@ -456,542 +641,375 @@ class FraudDataGenerator:
         
         return noise_events
     
-    def generate_all_events(self) -> List[dict]:
-        """Generate complete dataset"""
-        all_events = []
+    def generate_and_ingest_worker(self, worker_id: int, events_per_worker: int) -> dict:
+        """Worker function for threaded generation and ingestion"""
+        worker_events = []
         
-        # Generate fraud scenario
-        ml_events = self.generate_money_laundering_scenario()
+        # Generate events for this worker
+        noise_events = self.generate_daily_noise_events(events_per_worker)
         
-        # Generate noise
-        noise_events = self.generate_noise_events(self.config.events_per_day)
-        
-        # Combine and convert
-        all_events.extend(ml_events)
-        all_events.extend(noise_events)
-        random.shuffle(all_events)
-        
-        # Convert to dictionaries
-        events_dict = []
-        for event in all_events:
+        # Convert to dictionaries and clean
+        for event in noise_events:
             event_dict = asdict(event)
             event_dict = {k: v for k, v in event_dict.items() if v is not None}
-            events_dict.append(event_dict)
+            worker_events.append(event_dict)
         
-        return events_dict
-
-def export_to_json(events: List[dict], filename: str):
-    """Export events to JSON file"""
-    with open(filename, 'w') as f:
-        json.dump(events, f, indent=2, default=str)
-    logger.info(f"📁 Exported {len(events):,} events to {filename}")
-
-def export_to_csv(events: List[dict], filename: str):
-    """Export events to CSV file"""
-    import pandas as pd
-    df = pd.DataFrame(events)
-    df.to_csv(filename, index=False)
-    logger.info(f"📊 Exported {len(events):,} events to {filename}")
+        # Ingest to your Elasticsearch if configured
+        if self.ingester:
+            success_count, failed_count = self.ingester.bulk_index_events(worker_events)
+            logger.info(f"🔧 Worker {worker_id}: {success_count} indexed, {failed_count} failed")
+            return {
+                'worker_id': worker_id,
+                'generated': len(worker_events),
+                'indexed': success_count,
+                'failed': failed_count
+            }
+        
+        return {
+            'worker_id': worker_id,
+            'generated': len(worker_events),
+            'indexed': 0,
+            'failed': 0
+        }
+    
+    def generate_and_ingest_threaded(self, total_events: int, num_workers: int) -> dict:
+        """Generate events using multiple threads and ingest to your Elasticsearch"""
+        logger.info(f"🚀 Starting threaded generation with your configuration:")
+        logger.info(f"   Total events: {total_events:,}")
+        logger.info(f"   Workers: {num_workers}")
+        logger.info(f"   Business hours: {self.fraud_config.business_start_hour}:00 - {self.fraud_config.business_end_hour}:00 ({self.fraud_config.business_hours_multiplier}x volume)")
+        logger.info(f"   Off hours: {self.fraud_config.business_end_hour+1}:00 - {self.fraud_config.business_start_hour-1}:59 (1x volume)")
+        
+        # Calculate events per worker
+        events_per_worker = total_events // num_workers
+        remaining_events = total_events % num_workers
+        
+        results = {
+            'total_generated': 0,
+            'total_indexed': 0,
+            'total_failed': 0,
+            'workers': []
+        }
+        
+        # Generate money laundering scenario first
+        logger.info("🚨 Generating money laundering scenario...")
+        ml_events = self.generate_money_laundering_scenario()
+        
+        # Convert ML events and ingest
+        ml_events_dict = []
+        for event in ml_events:
+            event_dict = asdict(event)
+            event_dict = {k: v for k, v in event_dict.items() if v is not None}
+            ml_events_dict.append(event_dict)
+        
+        if self.ingester:
+            ml_success, ml_failed = self.ingester.bulk_index_events(ml_events_dict)
+            logger.info(f"💰 ML Events: {ml_success} indexed to '{self.es_config.index_name}', {ml_failed} failed")
+            results['total_indexed'] += ml_success
+            results['total_failed'] += ml_failed
+        
+        results['total_generated'] += len(ml_events_dict)
+        
+        # Generate noise events using your 16 workers
+        logger.info(f"📊 Generating noise events with {num_workers} workers...")
+        
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for worker_id in range(num_workers):
+                worker_events = events_per_worker
+                if worker_id < remaining_events:
+                    worker_events += 1
+                
+                future = executor.submit(self.generate_and_ingest_worker, worker_id, worker_events)
+                futures.append(future)
+            
+            # Collect results
+            for future in as_completed(futures):
+                try:
+                    worker_result = future.result()
+                    results['workers'].append(worker_result)
+                    results['total_generated'] += worker_result['generated']
+                    results['total_indexed'] += worker_result['indexed']
+                    results['total_failed'] += worker_result['failed']
+                except Exception as e:
+                    logger.error(f"❌ Worker failed: {e}")
+        
+        return results
 
 def main():
-    """Main function"""
-    print("💰 AML FRAUD DATA GENERATOR")
-    print("=" * 50)
+    """Main function with your specific configuration"""
+    print("💰 AML FRAUD WORKSHOP - YOUR CONFIGURATION")
+    print("=" * 60)
+    print(f"🔍 Elasticsearch: {ElasticsearchConfig().host}")
+    print(f"📊 Index: {ElasticsearchConfig().index_name}")
+    print(f"👤 User: {ElasticsearchConfig().username}")
+    print(f"🔧 Workers: {ElasticsearchConfig().workers}")
+    print(f"📈 Events: {ElasticsearchConfig().events_per_day:,}")
+    print(f"⏰ Business Hours: {FraudConfig().business_start_hour}:00 - {FraudConfig().business_end_hour}:00 ({FraudConfig().business_hours_multiplier}x volume)")
+    print("=" * 60)
     
-    # Configuration
-    config = FraudConfig(
-        events_per_day=10000,
-        ml_cash_deposits_min=9000.0,
-        ml_cash_deposits_max=9999.99
-    )
+    # Your configurations
+    fraud_config = FraudConfig()
+    es_config = ElasticsearchConfig()
     
-    # Generate data
-    generator = FraudDataGenerator(config)
+    # Initialize generator
+    generator = FraudDataGenerator(fraud_config, es_config)
+    
+    # Test connection to your Elasticsearch
+    if not generator.ingester.test_connection():
+        print("❌ Cannot connect to your Elasticsearch")
+        print(f"   Host: {es_config.host}")
+        print(f"   Username: {es_config.username}")
+        print(f"   Password: {es_config.password}")
+        print("   Please check your Elasticsearch service and configuration")
+        return
+    
+    # Create your index
+    generator.ingester.create_index_if_not_exists()
+    
+    # Generate and ingest with your settings
+    print(f"\\n🚀 Starting fraud data generation for your workshop...")
     start_time = time.time()
     
-    events = generator.generate_all_events()
+    results = generator.generate_and_ingest_threaded(
+        total_events=es_config.events_per_day,
+        num_workers=es_config.workers
+    )
     
     end_time = time.time()
     duration = end_time - start_time
     
-    # Export files
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    json_file = f"../output/fraud_events_{timestamp}.json"
-    csv_file = f"../output/fraud_events_{timestamp}.csv"
+    # Display results
+    print(f"\\n" + "=" * 60)
+    print("📊 WORKSHOP DATA GENERATION COMPLETE")
+    print("=" * 60)
+    print(f"Total Events Generated: {results['total_generated']:,}")
+    print(f"Successfully Indexed: {results['total_indexed']:,}")
+    print(f"Failed: {results['total_failed']:,}")
+    print(f"Duration: {duration:.2f} seconds")
+    print(f"Events/second: {results['total_generated']/duration:.2f}")
+    print(f"\\n🎯 Your Elasticsearch Info:")
+    print(f"   Index: {es_config.index_name}")
+    print(f"   Host: {es_config.host}")
+    print(f"   Events: {results['total_indexed']:,}")
     
-    export_to_json(events, json_file)
-    export_to_csv(events, csv_file)
+    if results['total_failed'] > 0:
+        print(f"\\n⚠️  {results['total_failed']} events failed to index")
+    else:
+        print("\\n✅ All events successfully indexed to your Elasticsearch!")
     
-    # Summary
-    ml_deposits = [e for e in events if e.get('deposit_type') == 'cash' and e.get('event_amount', 0) >= 9000]
-    wire_transfers = [e for e in events if e.get('account_event') == 'wire' and e.get('intbankID')]
+    print(f"\\n🕵️ Start detecting fraud in index '{es_config.index_name}'!")
+
+if __name__ == "__main__":
+    main()
+EOF
+
+    # Create a quick run script with your settings
+    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/src/run_workshop.py > /dev/null <<EOF
+#!/usr/bin/env python3
+"""
+Quick run script for your AML Fraud Workshop
+"""
+
+from fraud_workshop_generator import FraudDataGenerator, FraudConfig, ElasticsearchConfig
+
+def main():
+    print("🎯 AML FRAUD WORKSHOP - QUICK START")
+    print("=" * 40)
+    print("Using your configuration:")
+    print("  • Elasticsearch: $ES_HOST")
+    print("  • Index: $ES_INDEX")
+    print("  • Workers: $ES_WORKERS")
+    print("  • Events: $ES_EVENTS")
+    print("  • Business Hours: ${BUSINESS_START}:00 - ${BUSINESS_END}:00 (${BUSINESS_MULTIPLIER}x volume)")
+    print()
     
-    print("\n" + "=" * 50)
-    print("📊 GENERATION COMPLETE")
+    # Your predefined configuration
+    fraud_config = FraudConfig()
+    es_config = ElasticsearchConfig()
+    
+    # Run generator
+    generator = FraudDataGenerator(fraud_config, es_config)
+    
+    # Test connection
+    if generator.ingester.test_connection():
+        print("🚀 Generating fraud data...")
+        results = generator.generate_and_ingest_threaded(
+            es_config.events_per_day,
+            es_config.workers
+        )
+        print(f"✅ Complete! {results['total_indexed']:,} events in '{es_config.index_name}'")
+    else:
+        print("❌ Connection failed. Check Elasticsearch service.")
+
+if __name__ == "__main__":
+    main()
+EOF
+
+    # Create configuration test script
+    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/src/test_config.py > /dev/null <<EOF
+#!/usr/bin/env python3
+"""
+Test script for your Elasticsearch configuration
+"""
+
+from fraud_workshop_generator import ElasticsearchConfig, ElasticsearchIngester
+
+def main():
+    print("🔍 TESTING YOUR ELASTICSEARCH CONFIGURATION")
     print("=" * 50)
-    print(f"Total Events: {len(events):,}")
-    print(f"Money Laundering Deposits: {len(ml_deposits)}")
-    print(f"International Wires: {len(wire_transfers)}")
-    if ml_deposits:
-        print(f"ML Amount: ${sum(e['event_amount'] for e in ml_deposits):,.2f}")
-    print(f"Generation Time: {duration:.2f} seconds")
-    print(f"Events/Second: {len(events)/duration:.2f}")
-    print(f"\n📁 Files created:")
-    print(f"   JSON: {json_file}")
-    print(f"   CSV: {csv_file}")
+    
+    config = ElasticsearchConfig()
+    print(f"Host: {config.host}")
+    print(f"Index: {config.index_name}")
+    print(f"Username: {config.username}")
+    print(f"Password: {config.password}")
+    print(f"Workers: {config.workers}")
+    print(f"Events: {config.events_per_day}")
+    print()
+    
+    print("Testing connection...")
+    ingester = ElasticsearchIngester(config)
+    
+    if ingester.test_connection():
+        print("✅ Connection successful!")
+        print("Creating index if needed...")
+        ingester.create_index_if_not_exists()
+        print("✅ Ready for fraud data generation!")
+    else:
+        print("❌ Connection failed!")
+        print("Check:")
+        print(f"  1. Elasticsearch running at {config.host}")
+        print(f"  2. Credentials: {config.username} / {config.password}")
+        print(f"  3. Network connectivity")
 
 if __name__ == "__main__":
     main()
 EOF
 
-    # Create simple configuration script
-    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/src/generate_fraud_data.py > /dev/null <<'EOF'
-#!/usr/bin/env python3
-"""
-Simple fraud data generation script with configuration options
-"""
-
-from lightweight_fraud_generator import FraudDataGenerator, FraudConfig, export_to_json, export_to_csv
-from datetime import datetime
-import os
-
-def main():
-    print("🎯 AML FRAUD DATA GENERATOR")
-    print("=" * 40)
-    
-    # Get user preferences
-    print("\n📋 Configuration:")
-    
-    try:
-        events_count = int(input("Number of events to generate [10000]: ") or "10000")
-        difficulty = input("Difficulty level (easy/medium/hard) [medium]: ") or "medium"
-    except ValueError:
-        events_count = 10000
-        difficulty = "medium"
-    
-    # Configure based on difficulty
-    if difficulty.lower() == "easy":
-        config = FraudConfig(
-            events_per_day=events_count,
-            ml_checking_accounts=2,
-            ml_savings_accounts=3,
-            ml_cash_deposits_min=9500.0,  # More obvious amounts
-            business_hours_multiplier=2.0
-        )
-    elif difficulty.lower() == "hard":
-        config = FraudConfig(
-            events_per_day=events_count,
-            ml_checking_accounts=5,
-            ml_savings_accounts=7,
-            ml_cash_deposits_min=8000.0,  # Lower amounts, harder to detect
-            ml_cash_deposits_max=9800.0,
-            business_hours_multiplier=4.0
-        )
-    else:  # medium
-        config = FraudConfig(events_per_day=events_count)
-    
-    print(f"\n🚀 Generating {events_count:,} events ({difficulty} difficulty)...")
-    
-    # Generate data
-    generator = FraudDataGenerator(config)
-    events = generator.generate_all_events()
-    
-    # Create output directory
-    output_dir = "../output"
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Export files
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    json_file = f"{output_dir}/aml_fraud_{difficulty}_{timestamp}.json"
-    csv_file = f"{output_dir}/aml_fraud_{difficulty}_{timestamp}.csv"
-    
-    export_to_json(events, json_file)
-    export_to_csv(events, csv_file)
-    
-    # Analysis summary
-    ml_deposits = [e for e in events if e.get('deposit_type') == 'cash' and e.get('event_amount', 0) >= 8000]
-    
-    print(f"\n✅ Generation Complete!")
-    print(f"   Total Events: {len(events):,}")
-    print(f"   Suspicious Deposits: {len(ml_deposits)}")
-    print(f"   Files: {json_file}, {csv_file}")
-
-if __name__ == "__main__":
-    main()
-EOF
-
-    # Create analysis script
-    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/src/analyze_fraud_data.py > /dev/null <<'EOF'
-#!/usr/bin/env python3
-"""
-Simple fraud data analysis script
-"""
-
-import json
-import pandas as pd
-from datetime import datetime
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-def load_latest_data():
-    """Load the most recent fraud data file"""
-    import os
-    import glob
-    
-    # Find latest JSON file
-    json_files = glob.glob("../output/aml_fraud_*.json")
-    if not json_files:
-        json_files = glob.glob("../output/fraud_events_*.json")
-    
-    if not json_files:
-        print("❌ No fraud data files found in ../output/")
-        print("   Run generate_fraud_data.py first")
-        return None
-    
-    latest_file = max(json_files, key=os.path.getctime)
-    print(f"📊 Loading data from: {latest_file}")
-    
-    with open(latest_file, 'r') as f:
-        events = json.load(f)
-    
-    return pd.DataFrame(events)
-
-def detect_money_laundering(df):
-    """Detect money laundering patterns"""
-    print("\n🔍 MONEY LAUNDERING DETECTION")
-    print("=" * 40)
-    
-    # Find suspicious deposits
-    suspicious = df[
-        (df['account_event'] == 'deposit') &
-        (df['deposit_type'] == 'cash') &
-        (df['event_amount'] >= 8000) &
-        (df['event_amount'] < 10000)
-    ]
-    
-    if suspicious.empty:
-        print("❌ No suspicious deposits found")
-        return
-    
-    print(f"🚨 Found {len(suspicious)} suspicious cash deposits")
-    print(f"💰 Total amount: ${suspicious['event_amount'].sum():,.2f}")
-    
-    # Group by account
-    account_analysis = suspicious.groupby('accountID').agg({
-        'event_amount': ['count', 'sum', 'mean'],
-        'timestamp': ['min', 'max']
-    }).round(2)
-    
-    account_analysis.columns = ['deposit_count', 'total_amount', 'avg_amount', 'first_deposit', 'last_deposit']
-    
-    # Find high-risk accounts
-    high_risk = account_analysis[account_analysis['deposit_count'] >= 3].sort_values('total_amount', ascending=False)
-    
-    print(f"\n🎯 High-Risk Accounts (3+ deposits):")
-    print("-" * 50)
-    for account_id, row in high_risk.head(10).iterrows():
-        print(f"Account {account_id:5d}: {row['deposit_count']} deposits, ${row['total_amount']:8,.2f}")
-    
-    # Find wire transfers
-    wires = df[
-        (df['account_event'] == 'wire') &
-        (df['wire_direction'] == 'outbound') &
-        (df['intbankID'].notna())
-    ]
-    
-    if not wires.empty:
-        print(f"\n🏦 International Wire Transfers: {len(wires)}")
-        print(f"💸 Total wired: ${wires['event_amount'].sum():,.2f}")
-        
-        # Check for correlated accounts
-        suspicious_accounts = set(suspicious['accountID'].unique())
-        wire_accounts = set(wires['accountID'].unique())
-        correlated = suspicious_accounts.intersection(wire_accounts)
-        
-        if correlated:
-            print(f"\n🚨 CORRELATED ACCOUNTS (deposits + wires): {len(correlated)}")
-            for account_id in list(correlated)[:5]:
-                deposits_total = suspicious[suspicious['accountID'] == account_id]['event_amount'].sum()
-                wires_total = wires[wires['accountID'] == account_id]['event_amount'].sum()
-                print(f"   Account {account_id}: ${deposits_total:,.2f} deposited → ${wires_total:,.2f} wired")
-
-def create_visualizations(df):
-    """Create fraud detection visualizations"""
-    print("\n📊 Creating visualizations...")
-    
-    # Set style
-    plt.style.use('seaborn-v0_8')
-    fig, axes = plt.subplots(2, 2, figsize=(15, 12))
-    
-    # 1. Transaction amounts by type
-    df.boxplot(column='event_amount', by='account_event', ax=axes[0,0])
-    axes[0,0].set_title('Transaction Amounts by Type')
-    axes[0,0].set_xlabel('Transaction Type')
-    axes[0,0].set_ylabel('Amount ($)')
-    
-    # 2. Hourly transaction distribution
-    df['hour'] = pd.to_datetime(df['timestamp']).dt.hour
-    hourly_counts = df['hour'].value_counts().sort_index()
-    axes[0,1].bar(hourly_counts.index, hourly_counts.values)
-    axes[0,1].set_title('Transaction Distribution by Hour')
-    axes[0,1].set_xlabel('Hour of Day')
-    axes[0,1].set_ylabel('Transaction Count')
-    
-    # 3. Suspicious deposit amounts
-    suspicious = df[
-        (df['account_event'] == 'deposit') &
-        (df['deposit_type'] == 'cash') &
-        (df['event_amount'] >= 8000)
-    ]
-    
-    if not suspicious.empty:
-        axes[1,0].hist(suspicious['event_amount'], bins=20, alpha=0.7, color='red')
-        axes[1,0].axvline(x=10000, color='black', linestyle='--', label='$10K Threshold')
-        axes[1,0].set_title('Suspicious Cash Deposit Amounts')
-        axes[1,0].set_xlabel('Amount ($)')
-        axes[1,0].set_ylabel('Frequency')
-        axes[1,0].legend()
-    
-    # 4. Account type distribution
-    account_type_counts = df['account_type'].value_counts()
-    axes[1,1].pie(account_type_counts.values, labels=account_type_counts.index, autopct='%1.1f%%')
-    axes[1,1].set_title('Distribution by Account Type')
-    
-    plt.tight_layout()
-    plt.savefig('../output/fraud_analysis.png', dpi=300, bbox_inches='tight')
-    print("📊 Visualizations saved to ../output/fraud_analysis.png")
-
-def main():
-    """Main analysis function"""
-    print("🕵️ AML FRAUD DATA ANALYSIS")
-    print("=" * 40)
-    
-    # Load data
-    df = load_latest_data()
-    if df is None:
-        return
-    
-    print(f"📊 Loaded {len(df):,} transaction events")
-    
-    # Basic statistics
-    print(f"\n📈 Basic Statistics:")
-    print(f"   Date range: {df['transaction_date'].min()} to {df['transaction_date'].max()}")
-    print(f"   Total amount: ${df['event_amount'].sum():,.2f}")
-    print(f"   Unique accounts: {df['accountID'].nunique():,}")
-    print(f"   Event types: {', '.join(df['account_event'].unique())}")
-    
-    # Detect fraud
-    detect_money_laundering(df)
-    
-    # Create visualizations
-    try:
-        create_visualizations(df)
-    except Exception as e:
-        print(f"⚠️  Could not create visualizations: {e}")
-    
-    print(f"\n✅ Analysis complete!")
-
-if __name__ == "__main__":
-    main()
-EOF
-    
-    # Create workshop startup script
-    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/start_generator.sh > /dev/null <<'EOF'
+    # Create startup script
+    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/start_fraud_workshop.sh > /dev/null <<EOF
 #!/bin/bash
 
-WORKSHOP_DIR="/opt/aml-fraud-workshop"
-
-echo "🎯 AML Fraud Data Generator"
-echo "=========================="
-echo ""
+echo "🎯 AML FRAUD WORKSHOP - YOUR ENVIRONMENT"
+echo "========================================"
+echo "Elasticsearch: $ES_HOST"
+echo "Index: $ES_INDEX"
+echo "Workers: $ES_WORKERS workers"
+echo "Events: $ES_EVENTS events"
+echo "Business Hours: ${BUSINESS_START}:00 AM - ${BUSINESS_END}:00 PM (${BUSINESS_MULTIPLIER}x volume)"
+echo "Off Hours: ${BUSINESS_END}:01 PM - $(printf "%02d" $((BUSINESS_START-1))):59 AM (1x volume)"
+echo "========================================"
+echo
 
 # Activate virtual environment
 source $WORKSHOP_DIR/venv/bin/activate
-
 cd $WORKSHOP_DIR/src
 
 echo "Available commands:"
-echo "  1. python generate_fraud_data.py    - Interactive data generation"
-echo "  2. python lightweight_fraud_generator.py - Full featured generator"
-echo "  3. python analyze_fraud_data.py     - Analyze generated data"
-echo ""
-echo "📁 Output files will be saved to: $WORKSHOP_DIR/output/"
-echo ""
+echo "  1. python test_config.py           - Test Elasticsearch connection"
+echo "  2. python run_workshop.py          - Generate fraud data with your config"
+echo "  3. python fraud_workshop_generator.py - Full featured generator"
+echo
+echo "Quick start: python run_workshop.py"
+echo
 
-# Start interactive shell
+# Start bash in the environment
 bash
 EOF
 
-    chmod +x $WORKSHOP_DIR/start_generator.sh
+    chmod +x $WORKSHOP_DIR/start_fraud_workshop.sh
     
-    # Create sample configuration
-    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/config/generator_config.py > /dev/null <<'EOF'
-#!/usr/bin/env python3
-"""
-AML Fraud Generator Configuration Templates
-"""
-
-# Workshop Size Configurations
-WORKSHOP_SMALL = {
-    'events_per_day': 5000,
-    'ml_checking_accounts': 2,
-    'ml_savings_accounts': 3,
-    'difficulty': 'easy'
+    print_success "Fraud generator configured for your environment"
 }
 
-WORKSHOP_MEDIUM = {
-    'events_per_day': 15000,
-    'ml_checking_accounts': 3,
-    'ml_savings_accounts': 5,
-    'difficulty': 'medium'
-}
-
-WORKSHOP_LARGE = {
-    'events_per_day': 50000,
-    'ml_checking_accounts': 5,
-    'ml_savings_accounts': 7,
-    'difficulty': 'hard'
-}
-
-# Fraud Scenario Templates
-BASIC_STRUCTURING = {
-    'ml_cash_deposits_min': 9000.0,
-    'ml_cash_deposits_max': 9999.0,
-    'ml_days_span': 5
-}
-
-ADVANCED_LAYERING = {
-    'ml_cash_deposits_min': 8000.0,
-    'ml_cash_deposits_max': 9800.0,
-    'ml_days_span': 10,
-    'business_hours_multiplier': 4.0
-}
-EOF
-    
-    print_success "Fraud generator files created"
-}
-
-# Create documentation
+# Create documentation with your settings
 create_documentation() {
-    print_status "Creating documentation..."
+    print_status "Creating documentation with your configuration..."
     
-    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/README.md > /dev/null <<'EOF'
-# AML Fraud Data Generator
+    sudo -u $WORKSHOP_USER tee $WORKSHOP_DIR/README.md > /dev/null <<EOF
+# AML Fraud Workshop - Your Configuration
+
+## Your Elasticsearch Setup
+
+- **Host**: $ES_HOST
+- **Index**: $ES_INDEX
+- **Username**: $ES_USERNAME
+- **Password**: $ES_PASSWORD
+- **Workers**: $ES_WORKERS
+- **Events**: $ES_EVENTS
+
+## Your Business Hours
+
+- **Business Hours**: ${BUSINESS_START}:00 AM - ${BUSINESS_END}:00 PM
+- **Business Volume**: ${BUSINESS_MULTIPLIER}x normal volume
+- **Off Hours**: ${BUSINESS_END}:01 PM - $(printf "%02d" $((BUSINESS_START-1))):59 AM
+- **Off Hours Volume**: 1x normal volume (events still occur)
 
 ## Quick Start
 
-1. **Activate Environment**:
-   ```bash
-   source /opt/aml-fraud-workshop/venv/bin/activate
-   ```
+1. **Switch to workshop user**:
+   \`\`\`bash
+   su - aml-workshop
+   \`\`\`
 
-2. **Generate Fraud Data**:
-   ```bash
-   cd /opt/aml-fraud-workshop/src
-   python generate_fraud_data.py
-   ```
+2. **Start workshop environment**:
+   \`\`\`bash
+   $WORKSHOP_DIR/start_fraud_workshop.sh
+   \`\`\`
 
-3. **Analyze Data**:
-   ```bash
-   python analyze_fraud_data.py
-   ```
+3. **Test your Elasticsearch**:
+   \`\`\`bash
+   python test_config.py
+   \`\`\`
 
-## Workshop Structure
-
-```
-/opt/aml-fraud-workshop/
-├── src/                    # Generator scripts
-├── output/                 # Generated data files  
-├── config/                 # Configuration templates
-├── notebooks/              # Jupyter notebooks
-├── venv/                   # Python virtual environment
-└── logs/                   # Log files
-```
-
-## Features
-
-- **Money Laundering Scenarios**: Structured deposits + wire transfers
-- **Business Hours Weighting**: Realistic transaction timing
-- **Multiple Output Formats**: JSON, CSV, Elasticsearch bulk
-- **Configurable Complexity**: Easy, Medium, Hard scenarios
-- **Analysis Tools**: Automated fraud detection
-
-## Usage Examples
-
-### Interactive Generation
-```bash
-python generate_fraud_data.py
-# Follow prompts for configuration
-```
-
-### Programmatic Generation
-```python
-from lightweight_fraud_generator import FraudDataGenerator, FraudConfig
-
-config = FraudConfig(
-    events_per_day=10000,
-    ml_checking_accounts=3,
-    ml_savings_accounts=5
-)
-
-generator = FraudDataGenerator(config)
-events = generator.generate_all_events()
-```
-
-### Analysis
-```bash
-python analyze_fraud_data.py
-# Automatically analyzes latest generated data
-```
+4. **Generate fraud data**:
+   \`\`\`bash
+   python run_workshop.py
+   \`\`\`
 
 ## Generated Data
 
-Each event contains:
-- `accountID`: Customer account (1-35,000)
-- `event_amount`: Transaction amount  
-- `event_type`: debit/credit
-- `account_event`: deposit/wire/purchase/fee/withdrawal
-- `timestamp`: Business hours weighted
-- ID fields for enrichment (posID, intbankID, etc.)
+Your fraud workshop will generate:
 
-## Money Laundering Pattern
+- **Money Laundering Events**: Structured cash deposits (\$9,000-\$9,999) followed by wire transfers to Chinese banks
+- **Realistic Noise**: Business hours weighted transactions across all event types
+- **$ES_EVENTS total events** distributed across **$ES_WORKERS workers**
+- **Real-time ingestion** to your **$ES_INDEX** index
 
-- **Structured Deposits**: $9,000-$9,999 cash deposits
-- **Multiple Accounts**: 3-8 target accounts
-- **Time Distribution**: 5-day window
-- **Wire Transfer**: Single large transfer to Chinese bank
-- **Hidden Signal**: Embedded in realistic transaction noise
+## Business Hours Distribution
+
+With your ${BUSINESS_MULTIPLIER}x multiplier:
+
+- **${BUSINESS_START}:00 AM - ${BUSINESS_END}:00 PM**: ~${BUSINESS_MULTIPLIER}x more transactions (peak business activity)
+- **${BUSINESS_END}:01 PM - $(printf "%02d" $((BUSINESS_START-1))):59 AM**: Normal volume (overnight/early morning activity)
+
+This creates a realistic banking transaction pattern where most activity occurs during business hours but some transactions still happen 24/7.
+
+## Files
+
+- \`fraud_workshop_generator.py\` - Main generator with your config
+- \`run_workshop.py\` - Quick start script
+- \`test_config.py\` - Connection test
+- \`start_fraud_workshop.sh\` - Workshop startup script
 EOF
     
-    print_success "Documentation created"
+    print_success "Documentation created with your settings"
 }
 
 # Configure system services
 setup_system() {
-    print_status "Configuring system..."
+    print_status "Configuring system for root installation..."
     
-    # Create workshop service for easy startup
-    sudo tee /etc/systemd/system/aml-generator.service > /dev/null <<EOF
-[Unit]
-Description=AML Fraud Data Generator Service
-After=multi-user.target
-
-[Service]
-Type=oneshot
-User=$WORKSHOP_USER
-Group=$WORKSHOP_USER
-WorkingDirectory=$WORKSHOP_DIR
-ExecStart=$WORKSHOP_DIR/start_generator.sh
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-EOF
+    # Set proper ownership
+    chown -R $WORKSHOP_USER:$WORKSHOP_USER $WORKSHOP_DIR
+    chmod -R 755 $WORKSHOP_DIR
     
-    sudo systemctl daemon-reload
-    sudo systemctl enable aml-generator
+    # Make scripts executable
+    chmod +x $WORKSHOP_DIR/start_fraud_workshop.sh
+    chmod +x $WORKSHOP_DIR/src/*.py
     
-    print_success "System services configured"
+    print_success "System configured for workshop user"
 }
 
 # Verify installation
@@ -1001,11 +1019,11 @@ verify_installation() {
     # Check Python environment
     if [ -f "$WORKSHOP_DIR/venv/bin/python" ]; then
         print_success "Python virtual environment created"
-        python_version=$($WORKSHOP_DIR/venv/bin/python --version)
+        python_version=$(sudo -u $WORKSHOP_USER $WORKSHOP_DIR/venv/bin/python --version)
         print_status "Python version: $python_version"
         
         # Test package imports
-        if $WORKSHOP_DIR/venv/bin/python -c "import pandas, numpy; print('✅ Core packages available')" 2>/dev/null; then
+        if sudo -u $WORKSHOP_USER $WORKSHOP_DIR/venv/bin/python -c "import pandas, numpy, elasticsearch; print('✅ Core packages available')" 2>/dev/null; then
             print_success "Core Python packages installed"
         else
             print_warning "Some Python packages may be missing"
@@ -1015,20 +1033,11 @@ verify_installation() {
     fi
     
     # Check workshop files
-    if [ -f "$WORKSHOP_DIR/src/lightweight_fraud_generator.py" ]; then
-        print_success "Fraud generator files created"
+    if [ -f "$WORKSHOP_DIR/src/fraud_workshop_generator.py" ]; then
+        print_success "Your fraud generator files created"
     else
         print_warning "Generator files not found"
     fi
-    
-    # Check directories
-    for dir in src output config notebooks logs; do
-        if [ -d "$WORKSHOP_DIR/$dir" ]; then
-            print_success "Directory $dir exists"
-        else
-            print_warning "Directory $dir missing"
-        fi
-    done
     
     print_success "Installation verification complete"
 }
@@ -1036,44 +1045,47 @@ verify_installation() {
 # Display completion information
 display_completion_info() {
     print_header
-    print_success "AML Fraud Data Generator installation completed!"
+    print_success "AML Fraud Workshop installation completed!"
     echo ""
-    echo -e "${CYAN}📋 Installation Summary:${NC}"
-    echo "   🖥️  Ubuntu $(lsb_release -rs) with updates"
-    echo "   🐍 Python $PYTHON_VERSION with virtual environment"
-    echo "   📊 Data science packages (pandas, numpy, matplotlib)"
-    echo "   👤 Workshop user: $WORKSHOP_USER"
-    echo "   📁 Workshop directory: $WORKSHOP_DIR"
+    echo -e "${CYAN}📋 Your Configuration:${NC}"
+    echo "   🔍 Elasticsearch: $ES_HOST"
+    echo "   📊 Index: $ES_INDEX"  
+    echo "   👤 Username: $ES_USERNAME"
+    echo "   🔧 Workers: $ES_WORKERS"
+    echo "   📈 Events: $ES_EVENTS"
+    echo "   ⏰ Business Hours: ${BUSINESS_START}:00 AM - ${BUSINESS_END}:00 PM (${BUSINESS_MULTIPLIER}x volume)"
+    echo "   🌙 Off Hours: Events still generated at 1x volume"
     echo ""
-    echo -e "${CYAN}🚀 Getting Started:${NC}"
+    echo -e "${CYAN}🚀 Quick Start:${NC}"
     echo "   1. Switch to workshop user:"
     echo "      su - $WORKSHOP_USER"
     echo ""
-    echo "   2. Start generator environment:"
-    echo "      $WORKSHOP_DIR/start_generator.sh"
+    echo "   2. Start workshop:"
+    echo "      $WORKSHOP_DIR/start_fraud_workshop.sh"
     echo ""
-    echo "   3. Generate fraud data:"
-    echo "      cd $WORKSHOP_DIR/src"
-    echo "      source ../venv/bin/activate"
-    echo "      python generate_fraud_data.py"
+    echo "   3. Test Elasticsearch:"
+    echo "      python test_config.py"
     echo ""
-    echo -e "${CYAN}📁 Directory Structure:${NC}"
-    echo "   📂 $WORKSHOP_DIR/src/         - Generator scripts"
-    echo "   📂 $WORKSHOP_DIR/output/      - Generated data files"
-    echo "   📂 $WORKSHOP_DIR/config/      - Configuration templates"
-    echo "   📂 $WORKSHOP_DIR/notebooks/   - Analysis notebooks"
+    echo "   4. Generate fraud data:"
+    echo "      python run_workshop.py"
     echo ""
-    echo -e "${CYAN}🔐 Access Information:${NC}"
+    echo -e "${CYAN}📁 Workshop Directory:${NC}"
+    echo "   📂 $WORKSHOP_DIR/src/         - Your generator scripts"
+    echo "   📂 $WORKSHOP_DIR/config/      - Configuration files"
+    echo "   📂 $WORKSHOP_DIR/logs/        - Log files"
+    echo ""
+    echo -e "${CYAN}🔐 Access:${NC}"
     echo "   👤 Workshop user: $WORKSHOP_USER"
     echo "   🔑 Password: aml-workshop-2024"
     echo ""
-    echo -e "${GREEN}✅ Ready to generate AML fraud detection data!${NC}"
+    echo -e "${GREEN}✅ Ready to generate AML fraud data for your Elasticsearch!${NC}"
 }
 
 # Main installation function
 main() {
     print_header
-    print_status "Starting AML Fraud Data Generator installation..."
+    print_status "Installing AML Fraud Workshop with your specific configuration..."
+    print_status "Running from: /root/Fraud-Workshop/Scripts/"
     echo ""
     
     # Pre-flight checks
@@ -1103,18 +1115,7 @@ main() {
 # Error handling
 trap 'print_error "Installation failed at line $LINENO. Check output above."' ERR
 
-# Confirmation prompt
-echo -e "${YELLOW}⚠️  This script will install the AML Fraud Data Generator.${NC}"
-echo -e "${YELLOW}   It will install Python, create users, and setup the workshop environment.${NC}"
-echo ""
-read -p "Do you want to continue? (y/N): " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    print_status "Installation cancelled"
-    exit 0
-fi
-
-# Run installation
+# Run main installation
 main
 
 exit 0
