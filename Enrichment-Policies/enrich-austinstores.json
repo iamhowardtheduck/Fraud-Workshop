@@ -1,0 +1,7 @@
+{
+  "match": {
+    "indices": "enrich-austinstores",
+    "match_field": "posID",
+    "enrich_fields": ["pos.merchant_name", "pos.merchant_address", "pos.merchant_zip", "pos.geo_point", "atm.available", "atm.24hours", "atm.vendor", "atm.software", "atm.version", "atm.id"]
+  }
+}
