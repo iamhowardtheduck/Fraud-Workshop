@@ -268,7 +268,7 @@
         "routing_path": [
           "event.type"
         ],
-        "default_pipeline": "enrich-fraud",
+        "default_pipeline": "fraud-detection-enrich",
         "mode": "time_series"
       }
     }
