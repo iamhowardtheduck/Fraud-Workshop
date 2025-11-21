@@ -1,0 +1,93 @@
+{
+  "processors": [
+    {
+      "enrich": {
+        "ignore_failure": true,
+        "policy_name": "enrich-austinstores",
+        "ignore_missing": true,
+        "field": "posID",
+        "target_field": "3"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.pos.geo_point",
+        "target_field": "pos.geo_point"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.pos.merchant_address",
+        "target_field": "pos.merchant_address"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.pos.merchant_name",
+        "target_field": "pos.merchant_name"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.pos.merchant_zip",
+        "target_field": "pos.merchant_zip"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.atm.available",
+        "target_field": "atm.available"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.atm.24hours",
+        "target_field": "atm.24hours"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.atm.vendor",
+        "target_field": "atm.vendor"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.atm.software",
+        "target_field": "atm.software"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.atm.version",
+        "target_field": "atm.version"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "3.atm.id",
+        "target_field": "atm.id"
+      }
+    }
+  ]
+}
