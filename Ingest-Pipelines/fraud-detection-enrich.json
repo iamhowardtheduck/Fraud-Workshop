@@ -1,0 +1,141 @@
+{
+  "processors": [
+    {
+      "pipeline": {
+        "name": "enrich-accounts",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('accountID')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-austinbanks",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('addressID')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-austinstores",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('posID')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-austinswift",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('txbankId')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-intbank",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('intbankID')"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "account_event",
+        "target_field": "account.event"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "account_type",
+        "target_field": "account.type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "deposit_type",
+        "target_field": "deposit.type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "event_amount",
+        "target_field": "event.amount"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "event_type",
+        "target_field": "event.type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "transaction_date",
+        "target_field": "transaction.date"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "wire_direction",
+        "target_field": "wire.direction"
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": [
+          "1.accountID",
+          "4.txbankId",
+          "3.posID",
+          "5.intbankID",
+          "2.addressId",
+          "addressId",
+          "intbankID",
+          "posID",
+          "timestamp",
+          "txbankId"
+        ]
+      }
+    },
+    {
+      "set": {
+        "ignore_failure": true,
+        "field": "@timestamp",
+        "copy_from": "transaction.date"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-inbound",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.wire?.direction == 'inbound'"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-outbound",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.wire?.direction == 'outbound'"
+      }
+    }
+  ]
+}
