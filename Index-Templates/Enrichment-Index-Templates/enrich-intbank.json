@@ -32,7 +32,8 @@
     },
     "settings": {
       "index": {
-        "mode": "lookup"
+        "mode": "lookup",
+        "number_of_replicas": "0"
       }
     }
   },
