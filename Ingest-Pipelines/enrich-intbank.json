@@ -1,0 +1,61 @@
+{
+  "processors": [
+    {
+      "enrich": {
+        "field": "intbankID",
+        "policy_name": "enrich-intbank",
+        "target_field": "5",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbank.ach",
+        "target_field": "intbank.ach",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbank.country",
+        "target_field": "intbank.country",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbank.country_code",
+        "target_field": "intbank.country_code",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbank.ip",
+        "target_field": "intbank.ip",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbank.name",
+        "target_field": "intbank.name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbank.swiftID",
+        "target_field": "intbank.swiftID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
