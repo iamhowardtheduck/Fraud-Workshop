@@ -1,0 +1,69 @@
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "accountID": {
+          "type": "keyword"
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "checking": {
+              "type": "keyword"
+            },
+            "address": {
+              "type": "keyword"
+            },
+            "savings_opened": {
+              "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
+              "index": true,
+              "ignore_malformed": false,
+              "store": false,
+              "type": "date",
+              "doc_values": true
+            },
+            "name": {
+              "type": "keyword"
+            },
+            "telephone_number": {
+              "type": "keyword"
+            },
+            "moneymarket": {
+              "type": "keyword"
+            },
+            "moneymarket_opened": {
+              "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
+              "index": true,
+              "ignore_malformed": false,
+              "store": false,
+              "type": "date",
+              "doc_values": true
+            },
+            "savings": {
+              "type": "keyword"
+            },
+            "checking_opened": {
+              "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
+              "index": true,
+              "ignore_malformed": false,
+              "store": false,
+              "type": "date",
+              "doc_values": true
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "mode": "lookup"
+      }
+    }
+  },
+  "index_patterns": [
+    "enrich-accounts*"
+  ],
+  "composed_of": [],
+  "ignore_missing_component_templates": [],
+  "allow_auto_create": true
+}
