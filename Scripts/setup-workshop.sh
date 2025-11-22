@@ -38,6 +38,16 @@ curl -X POST "http://localhost:30002/api/kibana/settings" -H "Content-Type: appl
     }
   }'
 
+# Create fraud-workshop data view
+curl -X POST "http://localhost:30002/api/data_views/data_view" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter"  -d 
+'{
+  "data_view": {
+    "title": "fraud-workshop*",
+    "name": "Fraud-Workshop",
+    "timeFieldName": "@timestamp"  // Optional, include if your data has a timestamp field
+  }
+}'  
+
 # Load index templates for enrichment data
 curl -X POST "http://localhost:30920/_index_template/enrich-accounts" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-accounts.json
 curl -X POST "http://localhost:30920/_index_template/enrich-austinbanks" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinbanks.json
