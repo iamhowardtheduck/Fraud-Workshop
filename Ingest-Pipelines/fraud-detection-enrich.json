@@ -129,6 +129,7 @@
           "3.posID",
           "5.intbankID",
           "addressId",
+          "enrich-outbounds.accountID",
           "intbankID",
           "posID",
           "timestamp",
