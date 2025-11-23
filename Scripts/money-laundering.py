@@ -1505,12 +1505,9 @@ def main():
     
     # Display results
     print(f"\n" + "=" * 60)
-    print(" WORKSHOP DATA GENERATION COMPLETE")
+    print("FRAUD WORKSHOP DATA GENERATION COMPLETE")
     print("=" * 60)
-    print(f"\n ")
-    print(f"\n ")
-    print(f"\n ")
-    print(f"\n DETECTION CHALLENGES:")
+    print(f"\n DETECTION CHALLENGES:  🕵️")
     print(f"\n ")
     print(f"\n Challenge 1")
     print(f"   - Idenitfy account clustering and temporal pattern recognition")
@@ -1523,13 +1520,6 @@ def main():
     print(f"   - Trace the money through account hops")
     print(f"   - Notice the progression across 5 consecutive days")
 
-    
-    if results['total_failed'] > 0:
-        print(f"\n  {results['total_failed']} events failed to index")
-    else:
-        print("\nAll events successfully indexed to your Elasticsearch!")
-    
-    print(f"\nStart detecting fraud in index '{es_config.index_name}'!")
 
 if __name__ == "__main__":
     main()
