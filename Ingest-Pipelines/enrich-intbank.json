@@ -2,57 +2,64 @@
   "processors": [
     {
       "enrich": {
-        "field": "intbankID",
+        "ignore_failure": true,
         "policy_name": "enrich-intbank",
-        "target_field": "5",
         "ignore_missing": true,
-        "ignore_failure": true
+        "field": "intbankID",
+        "target_field": "5"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "5.intbank.ach",
-        "target_field": "intbank.ach",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "intbank.ach"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "5.intbank.country",
-        "target_field": "intbank.country",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "intbank.country"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "5.intbank.country_code",
-        "target_field": "intbank.country_code",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "intbank.country_code"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "5.intbank.ip",
-        "target_field": "intbank.ip",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "intbank.ip"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "5.intbank.name",
-        "target_field": "intbank.name",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "intbank.name"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "5.intbank.swiftID",
-        "target_field": "intbank.swiftID",
+        "target_field": "intbank.swiftID"
+      }
+    },
+    {
+      "remove": {
+        "field": "accountID",
         "ignore_missing": true,
         "ignore_failure": true
       }
