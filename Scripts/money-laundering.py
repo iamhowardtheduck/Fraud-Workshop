@@ -744,8 +744,6 @@ def main():
     print(f"â° Peak: 12:00 (noon)")
     print(f"ðŸŒ† Activity until: 21:00 (9 PM)")
     print(f"ðŸ• Timeframe: NOW-8d to NOW")
-    print(f"ðŸ”„ Layering Chain: 32687â†’16384â†’8192â†’4096â†’2048 (all 1-35000)")
-    print(f"ðŸ’° Amount: $25,000 through each hop")
     print(f"… Format: 2025-11-22T13:47:15.984Z (Zulu)")
     print("=" * 60)
     
@@ -763,7 +761,7 @@ def main():
         print(f"   Host: {es_config.host}")
         print(f"   Username: {es_config.username}")
         print(f"   Password: {es_config.password}")
-        print("\nðŸ’¡ Options:")
+        print("\n Options:")
         print("   1. Check if Elasticsearch is running at the configured host")
         print("   2. Verify credentials are correct")
         print("   3. Generate data to files only (without Elasticsearch)")
@@ -773,7 +771,7 @@ def main():
             return
         
         # Generate without Elasticsearch
-        print("\nðŸ€ Generating layering fraud data to files only...")
+        print("\nGenerating layering fraud data to files only...")
         start_time = time.time()
         
         # Generate events
@@ -794,8 +792,8 @@ def main():
         end_time = time.time()
         duration = end_time - start_time
         
-        print(f"\nâœ… Generated {len(all_events):,} events in {duration:.2f} seconds")
-        print(f" Files saved: {json_file}, {csv_file}")
+        print(f"\nGenerated {len(all_events):,} events in {duration:.2f} seconds")
+        print(f"Files saved: {json_file}, {csv_file}")
         return
     
     # Create your index
@@ -822,22 +820,23 @@ def main():
     print(f"Failed: {results['total_failed']:,}")
     print(f"Duration: {duration:.2f} seconds")
     print(f"Events/second: {results['total_generated']/duration:.2f}")
-    print(f"\nðŸŽ¯ Your Elasticsearch Info:")
+    print(f"\n Your Elasticsearch Info:")
     print(f"   Index: {es_config.index_name}")
     print(f"   Host: {es_config.host}")
     print(f"   Events: {results['total_indexed']:,}")
     
     if results['total_failed'] > 0:
-        print(f"\nâ ï¸ {results['total_failed']} events failed to index")
+        print(f"\n {results['total_failed']} events failed to index")
     else:
-        print("\nâœ… All events successfully indexed to your Elasticsearch!")
+        print("\nAll events successfully indexed to your Elasticsearch!")
     
-    print(f"\n¸ Start detecting layering fraud in index '{es_config.index_name}'!")
+    print(f"\n Start detecting layering fraud in index '{es_config.index_name}'!")
     print(f"\n DETECTION CHALLENGE:")
-    print(f"   â€¢ Find the $25,000 cash deposit into account 32687")
-    print(f"   â€¢ Trace the money through account hops: 32687â†’16384â†’8192â†’4096â†’2048")
-    print(f"   â€¢ Notice the progression across 5 consecutive days (NOW-5d to NOW-1d)")
-    print(f"   â€¢ Identify this as a layering technique to obscure money trail")
+    print(f"   Identify this as a layering technique to obscure money trail")
+    print(f"   Find the large SAR worthy cash deposit into an account")
+    print(f"   Trace the money through account hops")
+    print(f"   Notice the progression across 5 consecutive days")
+    
 
 if __name__ == "__main__":
     main()
