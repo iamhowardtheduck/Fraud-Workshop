@@ -1507,22 +1507,29 @@ def main():
     print(f"\n" + "=" * 60)
     print(" WORKSHOP DATA GENERATION COMPLETE")
     print("=" * 60)
-    print(f"Total Events Generated: {results['total_generated']:,}")
-    print(f"Successfully Indexed: {results['total_indexed']:,}")
-    print(f"Failed: {results['total_failed']:,}")
-    print(f"Duration: {duration:.2f} seconds")
-    print(f"Events/second: {results['total_generated']/duration:.2f}")
-    print(f"\n Your Elasticsearch Info:")
-    print(f"   Index: {es_config.index_name}")
-    print(f"   Host: {es_config.host}")
-    print(f"   Events: {results['total_indexed']:,}")
+    print(f"\n ")
+    print(f"\n ")
+    print(f"\n ")
+    print(f"\n DETECTION CHALLENGES:")
+    print(f"\n ")
+    print(f"\n Challenge 1")
+    print(f"   - Idenitfy account clustering and temporal pattern recognition")
+    print(f"   - Structural amount analysis for SAR avoidance")
+    print(f"   - Wire correlation to an overseas bank")
+    print(f"\n ")
+    print(f"\n Challenge 2")
+    print(f"   - Identify layering technique to obscure money trail")
+    print(f"   - Find the large SAR worthy cash deposit into an account")
+    print(f"   - Trace the money through account hops")
+    print(f"   - Notice the progression across 5 consecutive days")
+
     
     if results['total_failed'] > 0:
         print(f"\n  {results['total_failed']} events failed to index")
     else:
-        print("\n All events successfully indexed to your Elasticsearch!")
+        print("\nAll events successfully indexed to your Elasticsearch!")
     
-    print(f"\n¸ Start detecting fraud in index '{es_config.index_name}'!")
+    print(f"\nStart detecting fraud in index '{es_config.index_name}'!")
 
 if __name__ == "__main__":
     main()
