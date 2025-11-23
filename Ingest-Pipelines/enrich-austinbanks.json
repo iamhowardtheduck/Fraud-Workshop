@@ -8,13 +8,6 @@
         "field": "addressId",
         "target_field": "2"
       }
-    },
-    {
-      "remove": {
-        "ignore_failure": true,
-        "ignore_missing": true,
-        "field": "accountID"
-      }
     }
   ]
 }
