@@ -11,74 +11,81 @@
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.address",
-        "target_field": "account.address",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.address"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.checking",
-        "target_field": "account.checking",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.checking"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.checking_opened",
-        "target_field": "account.checking_opened",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.checking_opened"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.moneymarket",
-        "target_field": "account.moneymarket",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.moneymarket"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.moneymarket_opened",
-        "target_field": "account.moneymarket_opened",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.moneymarket_opened"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.name",
-        "target_field": "account.name",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.name"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.savings",
-        "target_field": "account.savings",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.savings"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "1.account.savings_opened",
-        "target_field": "account.savings_opened",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "account.savings_opened"
       }
     },
     {
       "rename": {
-        "field": "1.account.telephone_number",
-        "target_field": "account.telephone_number",
+        "ignore_failure": true,
         "ignore_missing": true,
-        "ignore_failure": true
+        "field": "1.account.telephone_number",
+        "target_field": "account.telephone_number"
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "accountID"
       }
     }
   ]
