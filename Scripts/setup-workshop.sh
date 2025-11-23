@@ -38,25 +38,12 @@ curl -X POST "http://localhost:30002/api/kibana/settings" -H "Content-Type: appl
     }
   }'
 
-# Create fraud-workshop data view
-#curl -X POST "http://localhost:30002/api/saved_objects/index-pattern" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop*", "name": "Fraud-Workshop", "timeFieldName": "@timestamp"  }}'  
+# Create fraud-workshop data views
+curl -X POST "http://localhost:30002/api/saved_objects/index-pattern" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop*", "name": "Fraud-Workshop", "timeFieldName": "@timestamp"  }}'  
+curl -X POST "http://localhost:30002/api/saved_objects/index-pattern" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-money-laundering*", "name": "Fraud-Workshop-Money-Laundering", "timeFieldName": "@timestamp"  }}'  
+curl -X POST "http://localhost:30002/api/saved_objects/index-pattern" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-wire-fraud", "name": "Fraud-Workshop-Wire-Fraud", "timeFieldName": "@timestamp"  }}'  
 
-# Create fraud-workshop data view and set it as default
-RESPONSE=$(curl -s -X POST "http://localhost:30002/api/saved_objects/index-pattern" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
-  -d '{ "attributes": { "title": "fraud-workshop*", "name": "Fraud-Workshop", "timeFieldName": "@timestamp" }}')
 
-ID=$(echo "$RESPONSE" | grep -oP '"id":"\K[^"]+')
-
-echo "Created index pattern ID: $ID"
-
-curl -X POST "http://localhost:30002/api/kibana/settings" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
-  -d "{ \"changes\": { \"defaultIndex\": \"$ID\" }}"
 
 
 # Load index templates
