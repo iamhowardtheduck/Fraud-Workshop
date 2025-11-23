@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
 """
-AML Fraud Workshop Generator - Single File Version
-Run from: /root/Fraud-Workshop
-Your Elasticsearch: http://localhost:30920
-Index: fraud-workshop
-Credentials: fraud/hunter
-Workers: 16, Events: 10,000
-Business Hours: 7 AM - 9 PM (7x volume)
+AML Fraud Workshop Generator - Sophisticated Scenario Version
+Hidden fraud patterns for educational detection exercises
 """
 
 import json
@@ -19,6 +14,7 @@ from dataclasses import dataclass, asdict
 from typing import Optional, List
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from zoneinfo import ZoneInfo
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -45,7 +41,7 @@ except ImportError:
     missing_packages.append('elasticsearch')
 
 if missing_packages:
-    print("❌ Missing required packages. Install with:")
+    print("⚠ Missing required packages. Install with:")
     print(f"   pip install {' '.join(missing_packages)}")
     sys.exit(1)
 
@@ -54,7 +50,7 @@ if missing_packages:
 class ElasticsearchConfig:
     """Your Elasticsearch configuration - hard-coded"""
     host: str = "http://localhost:30920"
-    index_name: str = "fraud-workshop"
+    index_name: str = "fraud-workshop-wire-fraud"
     username: str = "fraud"
     password: str = "hunter"
     workers: int = 16
@@ -65,13 +61,13 @@ class ElasticsearchConfig:
 
 @dataclass
 class FraudConfig:
-    """Fraud configuration with your business hours"""
+    """Austin, TX fraud configuration"""
     # Money laundering parameters
-    ml_cash_deposits_min: float = 9000.0
-    ml_cash_deposits_max: float = 9999.99
-    ml_checking_accounts: int = 3
-    ml_savings_accounts: int = 5
-    ml_days_span: int = 5
+    ml_cash_deposits_min: float = 9000.01
+    ml_cash_deposits_max: float = 9999.89
+    ml_checking_accounts: int = 2  # Fixed accounts
+    ml_savings_accounts: int = 0   # No savings
+    ml_days_span: int = 7
     
     # Event distribution
     deposit_percentage: float = 0.05
@@ -81,10 +77,16 @@ class FraudConfig:
     purchase_percentage: float = 0.40
     international_wire_percentage: float = 0.10
     
-    # Your specific business hours: 7 AM - 9 PM with 7x volume
-    business_start_hour: int = 7
-    business_end_hour: int = 21
-    business_hours_multiplier: float = 7.0
+    # Austin, TX banking hours: 9 AM - 6 PM peak, with activity until 9 PM
+    banking_start_hour: int = 9
+    banking_end_hour: int = 18  # 6 PM
+    activity_end_hour: int = 21  # 9 PM
+    peak_hour: int = 12  # Noon peak
+    
+    # Time range configuration
+    days_back_min: int = 1  # NOW-1d (fraud events end)
+    days_back_max: int = 8  # NOW-8d (events start)
+    austin_tz: str = "America/Chicago"
 
 @dataclass
 class TransactionEvent:
@@ -94,8 +96,8 @@ class TransactionEvent:
     event_type: str  # debit or credit
     account_type: str  # checking, savings, money market
     account_event: str  # deposit, fee, wire, withdrawal, purchase
-    transaction_date: str
-    timestamp: str
+    transaction_date: str  # Format: 2025-11-22T13:47:15.984Z
+    timestamp: str  # Format: 2025-11-22T13:47:15.984Z
     
     # Optional ID fields for enrichment
     deposit_type: Optional[str] = None
@@ -105,24 +107,39 @@ class TransactionEvent:
     addressId: Optional[int] = None
     intbankID: Optional[int] = None
 
-class BusinessHoursGenerator:
-    """Generates timestamps with your specific business hours weighting"""
+class AustinTimeGenerator:
+    """Generates timestamps for Austin, TX timezone with banking hour distribution"""
     
     def __init__(self, config: FraudConfig):
         self.config = config
-    
+        self.austin_tz = ZoneInfo(config.austin_tz)
+        
     def get_weighted_hour(self) -> int:
-        """Get hour with 7x volume during 7 AM - 9 PM, 1x during 9:01 PM - 6:59 AM"""
+        """Get hour with realistic banking distribution for Austin, TX"""
         hours = list(range(24))
         weights = []
         
         for hour in hours:
-            if self.config.business_start_hour <= hour < self.config.business_end_hour:
-                # 7 AM - 9 PM: 7x volume
-                weights.append(self.config.business_hours_multiplier)
-            else:
-                # 9:01 PM - 6:59 AM: 1x volume (still events, just fewer)
-                weights.append(1.0)
+            if 9 <= hour <= 18:  # 9 AM - 6 PM banking hours
+                # Peak at noon (12), higher during banking hours
+                if hour == 12:  # Noon peak
+                    weight = 10.0
+                elif hour in [11, 13]:  # Around noon
+                    weight = 8.0
+                elif hour in [10, 14, 15, 16]:  # Active banking hours
+                    weight = 6.0
+                elif hour in [9, 17, 18]:  # Start/end of banking
+                    weight = 4.0
+                else:
+                    weight = 3.0
+            elif 19 <= hour <= 21:  # 7 PM - 9 PM tapering off
+                weight = 2.0
+            elif 22 <= hour <= 23 or 0 <= hour <= 6:  # Night hours
+                weight = 0.5
+            else:  # 7 AM - 8 AM early morning
+                weight = 1.0
+            
+            weights.append(weight)
         
         # Normalize weights
         total_weight = sum(weights)
@@ -130,16 +147,60 @@ class BusinessHoursGenerator:
         
         return random.choices(hours, weights=weights)[0]
     
-    def generate_business_weighted_datetime(self, base_date: datetime, days_back_range: int = 8) -> datetime:
-        """Generate datetime with your business hours weighting"""
-        days_back = random.randint(0, days_back_range)
+    def generate_austin_datetime(self, base_date: datetime = None) -> datetime:
+        """Generate datetime for Austin, TX in the last week (NOW-8d to NOW-1d for fraud events)"""
+        if base_date is None:
+            base_date = datetime.now(self.austin_tz)
+        
+        # For fraud events: NOW-8d to NOW-1d
+        # For regular events: NOW-8d to NOW
+        days_back = random.randint(self.config.days_back_min, self.config.days_back_max)
+        
         weighted_hour = self.get_weighted_hour()
         random_minutes = random.randint(0, 59)
         random_seconds = random.randint(0, 59)
+        random_microseconds = random.randint(0, 999) * 1000  # Convert to microseconds for .984 format
         
-        return (base_date - timedelta(days=days_back)).replace(
-            hour=weighted_hour, minute=random_minutes, second=random_seconds
+        # Create Austin time
+        austin_time = (base_date - timedelta(days=days_back)).replace(
+            hour=weighted_hour, 
+            minute=random_minutes, 
+            second=random_seconds,
+            microsecond=random_microseconds
         )
+        
+        # Convert to UTC for Zulu time
+        utc_time = austin_time.astimezone(ZoneInfo('UTC'))
+        return utc_time
+    
+    def generate_fraud_datetime(self, base_date: datetime = None) -> datetime:
+        """Generate datetime specifically for fraud events (NOW-8d to NOW-1d)"""
+        if base_date is None:
+            base_date = datetime.now(self.austin_tz)
+        
+        # Fraud events should be in the past week but not today
+        days_back = random.randint(1, 7)  # 1 to 7 days back
+        
+        weighted_hour = self.get_weighted_hour()
+        random_minutes = random.randint(0, 59)
+        random_seconds = random.randint(0, 59)
+        random_microseconds = random.randint(0, 999) * 1000
+        
+        # Create Austin time
+        austin_time = (base_date - timedelta(days=days_back)).replace(
+            hour=weighted_hour, 
+            minute=random_minutes, 
+            second=random_seconds,
+            microsecond=random_microseconds
+        )
+        
+        # Convert to UTC for Zulu time
+        utc_time = austin_time.astimezone(ZoneInfo('UTC'))
+        return utc_time
+    
+    def format_zulu_time(self, dt: datetime) -> str:
+        """Format datetime as Zulu time: 2025-11-22T13:47:15.984Z"""
+        return dt.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
 
 class ElasticsearchIngester:
     """Handles direct ingestion to your Elasticsearch"""
@@ -173,13 +234,13 @@ class ElasticsearchIngester:
             return Elasticsearch(**client_config)
             
         except Exception as e:
-            logger.error(f"❌ Failed to create Elasticsearch client: {e}")
+            logger.error(f"⚠ Failed to create Elasticsearch client: {e}")
             return None
     
     def test_connection(self) -> bool:
         """Test connection to your Elasticsearch"""
         if not self.es:
-            logger.error("❌ Elasticsearch client not initialized")
+            logger.error("⚠ Elasticsearch client not initialized")
             return False
             
         try:
@@ -196,7 +257,7 @@ class ElasticsearchIngester:
             logger.info(f"   Workers: {self.config.workers}")
             return True
         except Exception as e:
-            logger.error(f"❌ Failed to connect to Elasticsearch: {e}")
+            logger.error(f"⚠ Failed to connect to Elasticsearch: {e}")
             logger.error(f"   Host: {self.config.host}")
             logger.error(f"   Credentials: {self.config.username} / {self.config.password}")
             return False
@@ -239,7 +300,7 @@ class ElasticsearchIngester:
             logger.info(f"✅ Created index '{self.config.index_name}'")
             
         except Exception as e:
-            logger.error(f"❌ Failed to create index: {e}")
+            logger.error(f"⚠ Failed to create index: {e}")
     
     def bulk_index_events(self, events: List[dict], chunk_size: int = 500) -> tuple:
         """Bulk index events to your Elasticsearch"""
@@ -270,92 +331,158 @@ class ElasticsearchIngester:
             return success_count, len(failed_items) if failed_items else 0
             
         except Exception as e:
-            logger.error(f"❌ Bulk indexing failed: {e}")
+            logger.error(f"⚠ Bulk indexing failed: {e}")
             return 0, len(events)
 
 class FraudDataGenerator:
-    """AML fraud generator configured for your environment"""
+    """AML fraud generator configured for Austin, TX environment with sophisticated patterns"""
     
     def __init__(self, fraud_config: FraudConfig, es_config: ElasticsearchConfig):
         self.fraud_config = fraud_config
         self.es_config = es_config
-        self.business_hours = BusinessHoursGenerator(fraud_config)
+        self.time_generator = AustinTimeGenerator(fraud_config)
         self.ingester = ElasticsearchIngester(es_config)
         
     def generate_money_laundering_scenario(self) -> List[TransactionEvent]:
-        """Generate money laundering scenario with your business hours"""
+        """Generate sophisticated money laundering scenario for educational purposes"""
         ml_events = []
-        base_date = datetime.now()
         
-        # Target accounts for money laundering
+        # Target accounts for money laundering (fixed for consistent detection patterns)
         target_accounts = {
-            'checking': [random.randint(1, 35000) for _ in range(self.fraud_config.ml_checking_accounts)],
-            'savings': [random.randint(1, 35000) for _ in range(self.fraud_config.ml_savings_accounts)]
+            'checking': [1981, 476],  # Fixed accounts: 1981 and 476
+            'savings': []  # No savings accounts for this scenario
         }
         
-        logger.info(f"🎯 Money Laundering Scenario:")
-        logger.info(f"   Checking accounts: {target_accounts['checking']}")
-        logger.info(f"   Savings accounts: {target_accounts['savings']}")
-        
-        # Generate structured deposits over time span
-        for day in range(self.fraud_config.ml_days_span):
-            deposit_date_base = base_date - timedelta(days=day)
-            
-            for account_id in target_accounts['checking'] + target_accounts['savings']:
-                if random.random() < 0.8:  # 80% chance of deposit per day
-                    amount = round(random.uniform(
-                        self.fraud_config.ml_cash_deposits_min, 
-                        self.fraud_config.ml_cash_deposits_max
-                    ), 2)
+        # Generate structured deposits over time span (fraud events should be NOW-8d to NOW-1d)
+        # Large deposits between 4-5 PM only
+        for day in range(1, 8):  # NOW-7d to NOW-1d (7 days of deposits)
+            for account_id in target_accounts['checking']:
+                if random.random() < 0.9:  # 90% chance of deposit per day
+                    amount = round(random.uniform(9000.01, 9999.89), 2)
                     
-                    # Use your business hours weighting
-                    timestamp = self.business_hours.generate_business_weighted_datetime(deposit_date_base, 0)
-                    account_type = 'checking' if account_id in target_accounts['checking'] else 'savings'
+                    # Generate fraud datetime specifically between 4-5 PM Austin time
+                    base_date = datetime.now(ZoneInfo(self.fraud_config.austin_tz))
+                    austin_time = (base_date - timedelta(days=day)).replace(
+                        hour=16,  # 4 PM
+                        minute=random.randint(0, 59),
+                        second=random.randint(0, 59),
+                        microsecond=random.randint(0, 999) * 1000
+                    )
+                    
+                    # Convert to UTC for Zulu time
+                    utc_time = austin_time.astimezone(ZoneInfo('UTC'))
+                    zulu_timestamp = self.time_generator.format_zulu_time(utc_time)
                     
                     event = TransactionEvent(
                         accountID=account_id,
                         event_amount=amount,
                         event_type='credit',
-                        account_type=account_type,
+                        account_type='checking',
                         account_event='deposit',
-                        transaction_date=timestamp.strftime('%Y-%m-%d'),
-                        timestamp=timestamp.isoformat(),
+                        transaction_date=zulu_timestamp,
+                        timestamp=zulu_timestamp,
                         deposit_type='cash'
                     )
                     ml_events.append(event)
         
-        # Generate wire transfer out to Chinese bank
-        all_accounts = target_accounts['checking'] + target_accounts['savings']
-        source_account = random.choice(all_accounts)
-        total_deposited = sum(e.event_amount for e in ml_events if e.accountID == source_account)
-        wire_amount = round(total_deposited * 0.95, 2) if total_deposited > 0 else round(random.uniform(50000, 100000), 2)
-        chinese_bank_id = random.randint(1, 25)  # Chinese banks are IDs 1-25
+        # Calculate total deposited for both accounts
+        total_deposited = sum(e.event_amount for e in ml_events)
         
-        wire_date = base_date + timedelta(days=1)
-        wire_timestamp = self.business_hours.generate_business_weighted_datetime(wire_date, 0)
+        # Generate wire transfers split under $10,000 limit on NOW-1d at 4:59:59
+        remaining_amount = total_deposited * 0.98  # Keep 98% to avoid exact matching
+        wire_count = 0
         
-        wire_event = TransactionEvent(
-            accountID=source_account,
-            event_amount=wire_amount,
-            event_type='debit',
-            account_type='checking',
-            account_event='wire',
-            transaction_date=wire_timestamp.strftime('%Y-%m-%d'),
-            timestamp=wire_timestamp.isoformat(),
-            wire_direction='outbound',
-            intbankID=chinese_bank_id
+        base_date = datetime.now(ZoneInfo(self.fraud_config.austin_tz))
+        wire_base_time = (base_date - timedelta(days=1)).replace(
+            hour=16, minute=59, second=59, microsecond=0
         )
-        ml_events.append(wire_event)
         
-        logger.info(f"💰 Generated {len(ml_events)} money laundering events")
-        logger.info(f"🏦 Wire transfer: ${wire_amount:,.2f} to Chinese bank ID {chinese_bank_id}")
+        while remaining_amount > 0 and wire_count < 10:  # Safety limit
+            wire_amount = min(remaining_amount, round(random.uniform(7500.00, 9999.99), 2))
+            remaining_amount -= wire_amount
+            
+            # Stagger wire times slightly around 4:59:59 PM
+            wire_time = wire_base_time.replace(
+                second=59 - wire_count,  # 59, 58, 57, etc.
+                microsecond=random.randint(0, 999) * 1000
+            )
+            
+            utc_wire_time = wire_time.astimezone(ZoneInfo('UTC'))
+            wire_zulu = self.time_generator.format_zulu_time(utc_wire_time)
+            
+            # Alternate between the two accounts for wires
+            source_account = target_accounts['checking'][wire_count % 2]
+            
+            wire_event = TransactionEvent(
+                accountID=source_account,
+                event_amount=wire_amount,
+                event_type='debit',
+                account_type='checking',
+                account_event='wire',
+                transaction_date=wire_zulu,
+                timestamp=wire_zulu,
+                wire_direction='outbound',
+                intbankID=20  # Fixed Chinese bank ID
+            )
+            ml_events.append(wire_event)
+            wire_count += 1
+        
+        # Generate decoy large transactions (other accounts, different patterns)
+        decoy_accounts = [1234, 5678, 9012, 3456, 7890, 2468, 1357, 8642, 9753, 4681, 
+                         2579, 3691, 8524, 7413, 9876]
+        decoy_banks = [1, 3, 7, 11, 15, 19, 23, 25]  # Different bank IDs (not 20)
+        
+        for _ in range(random.randint(10, 15)):  # 10-15 decoy transactions
+            decoy_account = random.choice(decoy_accounts)
+            decoy_amount = round(random.uniform(10000.01, 25000.00), 2)
+            
+            # Random times throughout the week, not 4-5 PM pattern
+            decoy_day = random.randint(1, 7)
+            decoy_hour = random.choice([8, 9, 10, 11, 13, 14, 17, 18, 19])  # Avoid 4-5 PM
+            
+            base_date = datetime.now(ZoneInfo(self.fraud_config.austin_tz))
+            decoy_time = (base_date - timedelta(days=decoy_day)).replace(
+                hour=decoy_hour,
+                minute=random.randint(0, 59),
+                second=random.randint(0, 59),
+                microsecond=random.randint(0, 999) * 1000
+            )
+            
+            utc_decoy_time = decoy_time.astimezone(ZoneInfo('UTC'))
+            decoy_zulu = self.time_generator.format_zulu_time(utc_decoy_time)
+            
+            # Mix of deposits and wires
+            if random.random() < 0.6:  # 60% deposits
+                decoy_event = TransactionEvent(
+                    accountID=decoy_account,
+                    event_amount=decoy_amount,
+                    event_type='credit',
+                    account_type=random.choice(['checking', 'savings']),
+                    account_event='deposit',
+                    transaction_date=decoy_zulu,
+                    timestamp=decoy_zulu,
+                    deposit_type=random.choice(['cash', 'check', 'wire'])
+                )
+            else:  # 40% outbound wires
+                decoy_event = TransactionEvent(
+                    accountID=decoy_account,
+                    event_amount=decoy_amount,
+                    event_type='debit',
+                    account_type='checking',
+                    account_event='wire',
+                    transaction_date=decoy_zulu,
+                    timestamp=decoy_zulu,
+                    wire_direction='outbound',
+                    intbankID=random.choice(decoy_banks)
+                )
+            
+            ml_events.append(decoy_event)
         
         return ml_events
     
     def generate_daily_noise_events(self, events_per_worker: int) -> List[TransactionEvent]:
-        """Generate noise events with your business hours weighting"""
+        """Generate noise events with Austin time distribution"""
         noise_events = []
-        base_date = datetime.now()
         
         # Calculate event distribution
         deposit_count = int(events_per_worker * self.fraud_config.deposit_percentage)
@@ -364,12 +491,13 @@ class FraudDataGenerator:
         withdrawal_count = int(events_per_worker * self.fraud_config.withdrawal_percentage)
         purchase_count = events_per_worker - (deposit_count + fee_count + wire_count + withdrawal_count)
         
-        # Generate all event types with your business hours weighting
+        # Generate all event types with Austin time weighting
         
         # Deposits
         for _ in range(deposit_count):
             deposit_types = ['cash'] * 90 + ['check'] * 8 + ['money_order'] * 2
-            timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
+            timestamp = self.time_generator.generate_austin_datetime()
+            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
             
             event = TransactionEvent(
                 accountID=random.randint(1, 35000),
@@ -377,15 +505,16 @@ class FraudDataGenerator:
                 event_type='credit',
                 account_type=random.choice(['checking', 'savings', 'money market']),
                 account_event='deposit',
-                transaction_date=timestamp.strftime('%Y-%m-%d'),
-                timestamp=timestamp.isoformat(),
+                transaction_date=zulu_timestamp,
+                timestamp=zulu_timestamp,
                 deposit_type=random.choice(deposit_types)
             )
             noise_events.append(event)
         
         # Fees
         for _ in range(fee_count):
-            timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
+            timestamp = self.time_generator.generate_austin_datetime()
+            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
             
             event = TransactionEvent(
                 accountID=random.randint(1, 35000),
@@ -393,8 +522,8 @@ class FraudDataGenerator:
                 event_type='debit',
                 account_type=random.choice(['checking', 'savings', 'money market']),
                 account_event='fee',
-                transaction_date=timestamp.strftime('%Y-%m-%d'),
-                timestamp=timestamp.isoformat()
+                transaction_date=zulu_timestamp,
+                timestamp=zulu_timestamp
             )
             noise_events.append(event)
         
@@ -402,7 +531,8 @@ class FraudDataGenerator:
         for _ in range(wire_count):
             event_type = random.choice(['debit', 'credit'])
             is_international = random.random() < self.fraud_config.international_wire_percentage
-            timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
+            timestamp = self.time_generator.generate_austin_datetime()
+            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
             
             event = TransactionEvent(
                 accountID=random.randint(1, 35000),
@@ -410,8 +540,8 @@ class FraudDataGenerator:
                 event_type=event_type,
                 account_type=random.choice(['checking', 'savings', 'money market']),
                 account_event='wire',
-                transaction_date=timestamp.strftime('%Y-%m-%d'),
-                timestamp=timestamp.isoformat(),
+                transaction_date=zulu_timestamp,
+                timestamp=zulu_timestamp,
                 wire_direction='outbound' if event_type == 'debit' else 'inbound'
             )
             
@@ -427,7 +557,8 @@ class FraudDataGenerator:
         
         # Withdrawals
         for _ in range(withdrawal_count):
-            timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
+            timestamp = self.time_generator.generate_austin_datetime()
+            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
             
             event = TransactionEvent(
                 accountID=random.randint(1, 35000),
@@ -435,14 +566,15 @@ class FraudDataGenerator:
                 event_type='debit',
                 account_type=random.choice(['checking', 'savings', 'money market']),
                 account_event='withdrawal',
-                transaction_date=timestamp.strftime('%Y-%m-%d'),
-                timestamp=timestamp.isoformat()
+                transaction_date=zulu_timestamp,
+                timestamp=zulu_timestamp
             )
             noise_events.append(event)
         
         # Purchases
         for _ in range(purchase_count):
-            timestamp = self.business_hours.generate_business_weighted_datetime(base_date)
+            timestamp = self.time_generator.generate_austin_datetime()
+            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
             
             event = TransactionEvent(
                 accountID=random.randint(1, 35000),
@@ -450,8 +582,8 @@ class FraudDataGenerator:
                 event_type='debit',
                 account_type=random.choice(['checking', 'savings', 'money market']),
                 account_event='purchase',
-                transaction_date=timestamp.strftime('%Y-%m-%d'),
-                timestamp=timestamp.isoformat(),
+                transaction_date=zulu_timestamp,
+                timestamp=zulu_timestamp,
                 posID=random.randint(1, 10500)
             )
             noise_events.append(event)
@@ -483,11 +615,15 @@ class FraudDataGenerator:
     
     def generate_and_ingest_threaded(self, total_events: int, num_workers: int) -> dict:
         """Generate events using multiple threads and ingest to your Elasticsearch"""
-        logger.info(f"🚀 Starting threaded generation with your configuration:")
+        logger.info(f"🚀 Starting threaded generation with Austin, TX configuration:")
         logger.info(f"   Total events: {total_events:,}")
         logger.info(f"   Workers: {num_workers}")
-        logger.info(f"   Business hours: {self.fraud_config.business_start_hour}:00 - {self.fraud_config.business_end_hour}:00 ({self.fraud_config.business_hours_multiplier}x volume)")
-        logger.info(f"   Off hours: {self.fraud_config.business_end_hour+1}:00 - {self.fraud_config.business_start_hour-1}:59 (1x volume)")
+        logger.info(f"   Banking hours: {self.fraud_config.banking_start_hour}:00 - {self.fraud_config.banking_end_hour}:00 (peak activity)")
+        logger.info(f"   Peak hour: {self.fraud_config.peak_hour}:00 (noon)")
+        logger.info(f"   Activity until: {self.fraud_config.activity_end_hour}:00 (9 PM)")
+        logger.info(f"   Event timeframe: NOW-{self.fraud_config.days_back_max}d to NOW")
+        logger.info(f"   Fraud events: NOW-{self.fraud_config.days_back_max}d to NOW-{self.fraud_config.days_back_min}d")
+        logger.info(f"   Timezone: {self.fraud_config.austin_tz}")
         
         # Calculate events per worker
         events_per_worker = total_events // num_workers
@@ -500,8 +636,7 @@ class FraudDataGenerator:
             'workers': []
         }
         
-        # Generate money laundering scenario first
-        logger.info("🚨 Generating money laundering scenario...")
+        # Generate money laundering scenario first (no obvious logging)
         ml_events = self.generate_money_laundering_scenario()
         
         # Convert ML events and ingest
@@ -512,7 +647,6 @@ class FraudDataGenerator:
             ml_events_dict.append(event_dict)
         
         ml_success, ml_failed = self.ingester.bulk_index_events(ml_events_dict)
-        logger.info(f"💰 ML Events: {ml_success} indexed to '{self.es_config.index_name}', {ml_failed} failed")
         results['total_indexed'] += ml_success
         results['total_failed'] += ml_failed
         results['total_generated'] += len(ml_events_dict)
@@ -539,7 +673,7 @@ class FraudDataGenerator:
                     results['total_indexed'] += worker_result['indexed']
                     results['total_failed'] += worker_result['failed']
                 except Exception as e:
-                    logger.error(f"❌ Worker failed: {e}")
+                    logger.error(f"⚠ Worker failed: {e}")
         
         return results
     
@@ -563,17 +697,22 @@ class FraudDataGenerator:
         return json_file, csv_file
 
 def main():
-    """Main function with your specific configuration"""
-    print("💰 AML FRAUD WORKSHOP - YOUR CONFIGURATION")
+    """Main function with Austin, TX timezone configuration"""
+    print("💰 AML FRAUD WORKSHOP - AUSTIN, TX CONFIGURATION")
     print("=" * 60)
     print(f"📍 Running from: {os.getcwd()}")
-    print(f"🔍 Elasticsearch: http://localhost:30920")
+    print(f"🔗 Elasticsearch: http://localhost:30920")
     print(f"📊 Index: fraud-workshop")
     print(f"👤 User: fraud")
     print(f"🔧 Workers: 16")
     print(f"📈 Events: 10,000")
-    print(f"⏰ Business Hours: 7:00 - 21:00 (7x volume)")
-    print(f"🌙 Off Hours: 22:00 - 06:59 (1x volume)")
+    print(f"🏦 Banking Hours: 9:00 - 18:00 (peak activity)")
+    print(f"⏰ Peak: 12:00 (noon)")
+    print(f"🌆 Activity until: 21:00 (9 PM)")
+    print(f"🕐 Timeframe: NOW-8d to NOW")
+    print(f"🚨 Fraud Events: NOW-8d to NOW-1d") 
+    print(f"🌍 Timezone: America/Chicago (Austin, TX)")
+    print(f"📅 Format: 2025-11-22T13:47:15.984Z (Zulu)")
     print("=" * 60)
     
     # Your configurations
@@ -586,7 +725,7 @@ def main():
     # Test connection to your Elasticsearch
     print("\n🔍 Testing Elasticsearch connection...")
     if not generator.ingester.test_connection():
-        print("❌ Cannot connect to your Elasticsearch")
+        print("⚠ Cannot connect to your Elasticsearch")
         print(f"   Host: {es_config.host}")
         print(f"   Username: {es_config.username}")
         print(f"   Password: {es_config.password}")
@@ -655,7 +794,7 @@ def main():
     print(f"   Events: {results['total_indexed']:,}")
     
     if results['total_failed'] > 0:
-        print(f"\n⚠️  {results['total_failed']} events failed to index")
+        print(f"\n⚠️ {results['total_failed']} events failed to index")
     else:
         print("\n✅ All events successfully indexed to your Elasticsearch!")
     
