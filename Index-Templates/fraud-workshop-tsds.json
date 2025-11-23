@@ -5,137 +5,108 @@
         "mode": "synthetic"
       },
       "properties": {
-        "@timestamp": {
-          "type": "date"
-        },
-        "account": {
+        "wire": {
           "type": "object",
           "properties": {
-            "address": {
-              "time_series_dimension": true,
-              "type": "keyword"
+            "inbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "ip": {
+                  "time_series_dimension": true,
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                }
+              }
             },
-            "checking": {
-              "time_series_dimension": true,
-              "type": "keyword"
+            "outbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "name_on_account": {
+                  "type": "keyword"
+                },
+                "checking_account": {
+                  "type": "keyword"
+                },
+                "ip": {
+                  "time_series_dimension": true,
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "savings_account": {
+                  "type": "keyword"
+                },
+                "account_address": {
+                  "type": "keyword"
+                },
+                "moneymarket_account": {
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "time_series_dimension": true,
+                  "type": "keyword"
+                }
+              }
             },
-            "checking_opened": {
-              "type": "date"
-            },
-            "event": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "moneymarket": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "moneymarket_opened": {
-              "type": "date"
-            },
-            "name": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "savings": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "savings_opened": {
-              "type": "date"
-            },
-            "telephone_number": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "type": {
+            "direction": {
               "time_series_dimension": true,
               "type": "keyword"
             }
           }
         },
-        "atm": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "pos": {
           "type": "object",
           "properties": {
-            "24hours": {
-              "time_series_dimension": true,
-              "type": "boolean"
-            },
-            "available": {
-              "time_series_dimension": true,
-              "type": "boolean"
-            },
-            "available_10": {
-              "time_series_metric": "gauge",
-              "type": "integer"
-            },
-            "available_100": {
-              "time_series_metric": "gauge",
-              "type": "integer"
-            },
-            "available_20": {
-              "time_series_metric": "gauge",
-              "type": "integer"
-            },
-            "available_50": {
-              "time_series_metric": "gauge",
-              "type": "integer"
-            },
-            "camera_enabled": {
-              "time_series_dimension": true,
-              "type": "boolean"
-            },
-            "deposit_amount": {
-              "time_series_metric": "gauge",
-              "type": "integer"
-            },
-            "deposit_type": {
+            "merchant_name": {
               "time_series_dimension": true,
               "type": "keyword"
             },
-            "event": {
+            "merchant_address": {
               "time_series_dimension": true,
               "type": "keyword"
             },
-            "id": {
+            "merchant_zip": {
               "time_series_dimension": true,
               "type": "keyword"
             },
-            "inquiry_type": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "online": {
-              "time_series_dimension": true,
-              "type": "boolean"
-            },
-            "paper_jam": {
-              "time_series_dimension": true,
-              "type": "boolean"
-            },
-            "pin_attempts": {
-              "time_series_metric": "counter",
-              "type": "integer"
-            },
-            "request_amount": {
-              "time_series_metric": "gauge",
-              "type": "integer"
-            },
-            "request_source": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "software": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "vendor": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            },
-            "version": {
-              "time_series_dimension": true,
-              "type": "keyword"
+            "geo_point": {
+              "type": "geo_point"
             }
           }
         },
@@ -145,6 +116,127 @@
             "type": {
               "time_series_dimension": true,
               "type": "keyword"
+            }
+          }
+        },
+        "risk": {
+          "type": "object",
+          "properties": {
+            "score": {
+              "time_series_metric": "counter",
+              "type": "long"
+            },
+            "override_req": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            }
+          }
+        },
+        "atm": {
+          "type": "object",
+          "properties": {
+            "deposit_amount": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "available_20": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "pin_attempts": {
+              "time_series_metric": "counter",
+              "type": "integer"
+            },
+            "available_10": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "software": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "available_50": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "request_amount": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "available": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "hours24": {
+              "index": true,
+              "store": false,
+              "type": "boolean",
+              "doc_values": true
+            },
+            "paper_jam": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "available_amount": {
+              "type": "long"
+            },
+            "camera_enabled": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "version": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "request_source": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "inquiry_type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "available_100": {
+              "time_series_metric": "gauge",
+              "type": "integer"
+            },
+            "vendor": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "withdrawal_source": {
+              "eager_global_ordinals": false,
+              "norms": false,
+              "index": true,
+              "store": false,
+              "type": "keyword",
+              "split_queries_on_whitespace": false,
+              "index_options": "docs",
+              "doc_values": true
+            },
+            "online": {
+              "time_series_dimension": true,
+              "type": "boolean"
+            },
+            "id": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "event": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "deposit_type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "withdrawal_amount": {
+              "coerce": true,
+              "index": true,
+              "ignore_malformed": false,
+              "store": false,
+              "type": "integer",
+              "doc_values": true
             }
           }
         },
@@ -161,118 +253,49 @@
             }
           }
         },
-        "pos": {
+        "account": {
           "type": "object",
           "properties": {
-            "geo_point": {
-              "type": "geo_point"
-            },
-            "merchant_address": {
+            "checking": {
               "time_series_dimension": true,
               "type": "keyword"
             },
-            "merchant_name": {
+            "address": {
               "time_series_dimension": true,
               "type": "keyword"
             },
-            "merchant_zip": {
-              "time_series_dimension": true,
-              "type": "keyword"
-            }
-          }
-        },
-        "risk": {
-          "type": "object",
-          "properties": {
-            "override_req": {
-              "time_series_dimension": true,
-              "type": "boolean"
+            "savings_opened": {
+              "type": "date"
             },
-            "score": {
-              "time_series_metric": "counter",
-              "type": "long"
-            }
-          }
-        },
-        "wire": {
-          "type": "object",
-          "properties": {
-            "direction": {
+            "name": {
               "time_series_dimension": true,
               "type": "keyword"
             },
-            "inbound": {
-              "type": "object",
-              "properties": {
-                "bank_name": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "country": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "country_code": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "ip": {
-                  "time_series_dimension": true,
-                  "type": "ip"
-                },
-                "routing_number": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "swiftID": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                }
-              }
+            "telephone_number": {
+              "time_series_dimension": true,
+              "type": "keyword"
             },
-            "outbound": {
-              "type": "object",
-              "properties": {
-                "account_address": {
-                  "type": "keyword"
-                },
-                "bank_name": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "checking_account": {
-                  "type": "keyword"
-                },
-                "country": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "country_code": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "ip": {
-                  "time_series_dimension": true,
-                  "type": "ip"
-                },
-                "moneymarket_account": {
-                  "type": "keyword"
-                },
-                "name_on_account": {
-                  "type": "keyword"
-                },
-                "routing_number": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                },
-                "savings_account": {
-                  "type": "keyword"
-                },
-                "swiftID": {
-                  "time_series_dimension": true,
-                  "type": "keyword"
-                }
-              }
+            "moneymarket": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "moneymarket_opened": {
+              "type": "date"
+            },
+            "savings": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "event": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "type": {
+              "time_series_dimension": true,
+              "type": "keyword"
+            },
+            "checking_opened": {
+              "type": "date"
             }
           }
         }
@@ -283,7 +306,7 @@
         "routing_path": [
           "event.type"
         ],
-        "default_pipeline": "enrich-fraud",
+        "default_pipeline": "fraud-detection-enrich",
         "mode": "time_series"
       }
     }
