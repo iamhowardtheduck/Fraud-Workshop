@@ -2,81 +2,74 @@
   "processors": [
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "austinbank.name",
-        "target_field": "wire.inbound.bank_name",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.bank_name"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "intbank.name",
-        "target_field": "wire.inbound.bank_name",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.bank_name"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "austinbank.routing_number",
-        "target_field": "wire.inbound.routing_number",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.routing_number"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "intbank.ach",
-        "target_field": "wire.inbound.routing_number",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.routing_number"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "austinbank.swiftID",
-        "target_field": "wire.inbound.swiftID",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.swiftID"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "intbank.swiftID",
-        "target_field": "wire.inbound.swiftID",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.swiftID"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "intbank.country",
-        "target_field": "wire.inbound.country",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.country"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "intbank.country_code",
-        "target_field": "wire.inbound.country_code",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.country_code"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "intbank.ip",
-        "target_field": "wire.inbound.ip",
-        "ignore_missing": true,
-        "ignore_failure": true
-      }
-    },
-    {
-      "remove": {
-        "field": "accountID",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "wire.inbound.ip"
       }
     }
   ]
