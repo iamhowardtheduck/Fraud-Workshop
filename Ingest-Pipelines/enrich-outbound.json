@@ -73,13 +73,11 @@
       }
     },
     {
-      "remove": {
+      "pipeline": {
+        "name": "enrich-outbounds",
+        "ignore_missing_pipeline": true,
         "ignore_failure": true,
-        "ignore_missing": true,
-        "field": [
-          "to_account",
-          "accountID"
-        ]
+        "if": "ctx.containsKey('to_account') && ctx.containsKey('accountID')"
       }
     }
   ]
