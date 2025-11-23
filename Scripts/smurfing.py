@@ -49,11 +49,11 @@ if missing_packages:
 @dataclass
 class ElasticsearchConfig:
     """Your Elasticsearch configuration - hard-coded"""
-    host: str = "https://fraud-workshop-5b63ee.es.us-west2.gcp.elastic-cloud.com:443"
+    host: str = "http://localhost:30920"
     index_name: str = "fraud-workshop-atm"
-    username: str = "fraudster"
-    password: str = "flt72100"
-    workers: int = 24
+    username: str = "fraud"
+    password: str = "hunter"
+    workers: int = 16
     events_per_day: int = 100000
     pipeline: str = "fraud-detection-enrich"
     verify_certs: bool = False
