@@ -1,0 +1,68 @@
+{
+  "processors": [
+    {
+      "remove": {
+        "field": "accountID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "to_account",
+        "target_field": "accountID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "enrich": {
+        "field": "accountID",
+        "policy_name": "enrich-outbounds",
+        "target_field": "enrich-outbounds",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-outbounds.account.address",
+        "target_field": "wire.outbound.account_address",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-outbounds.account.checking",
+        "target_field": "wire.outbound.checking_account",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-outbounds.account.moneymarket",
+        "target_field": "wire.outbound.moneymarket_account",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-outbounds.account.savings",
+        "target_field": "wire.outbound.savings_account",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-outbounds.account.name",
+        "target_field": "wire.outbound.name_on_account",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
