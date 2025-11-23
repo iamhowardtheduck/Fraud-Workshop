@@ -97,24 +97,6 @@
       }
     },
     {
-      "remove": {
-        "ignore_failure": true,
-        "ignore_missing": true,
-        "field": [
-          "1.accountID",
-          "4.txbankId",
-          "3.posID",
-          "5.intbankID",
-          "2.addressId",
-          "addressId",
-          "intbankID",
-          "posID",
-          "timestamp",
-          "txbankId"
-        ]
-      }
-    },
-    {
       "set": {
         "ignore_failure": true,
         "field": "@timestamp",
@@ -135,6 +117,32 @@
         "ignore_missing_pipeline": true,
         "ignore_failure": true,
         "if": "ctx.wire?.direction == 'outbound'"
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": [
+          "1.accountID",
+          "4.txbankId",
+          "3.posID",
+          "5.intbankID",
+          "addressId",
+          "intbankID",
+          "posID",
+          "timestamp",
+          "txbankId",
+          "accountID",
+          "account_event",
+          "account_type",
+          "deposit_type",
+          "event_amount",
+          "event_type",
+          "wire_direction",
+          "transaction_date",
+          "to_account"
+        ]
       }
     }
   ]
