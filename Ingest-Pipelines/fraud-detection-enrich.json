@@ -123,13 +123,27 @@
       "remove": {
         "ignore_failure": true,
         "ignore_missing": true,
+        "field": "business_hours"
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm.pin_attempts",
+        "if": "ctx.atm.event == 'status_check' && ctx.atm.available == true && ctx.atm.online == true"
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": [
           "1.accountID",
           "4.txbankId",
           "3.posID",
           "5.intbankID",
           "addressId",
-          "enrich-outbounds.accountID",
           "intbankID",
           "posID",
           "timestamp",
@@ -142,8 +156,25 @@
           "event_type",
           "wire_direction",
           "transaction_date",
-          "to_account"
+          "to_account",
+          "enrich-outbounds.accountID"
         ]
+      }
+    },
+    {
+      "pipeline": {
+        "name": "atm-cleanup",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.atm.available == false"
+      }
+    },
+    {
+      "set": {
+        "field": "atm.online",
+        "value": false,
+        "if": "ctx.atm?.available == false",
+        "ignore_failure": true
       }
     }
   ]
