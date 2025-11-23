@@ -71,6 +71,13 @@
         "ignore_missing": true,
         "ignore_failure": true
       }
+    },
+    {
+      "remove": {
+        "field": "accountID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
     }
   ]
 }
