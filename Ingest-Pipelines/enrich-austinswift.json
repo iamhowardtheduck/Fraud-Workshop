@@ -32,13 +32,6 @@
         "field": "4.austinbank.swiftID",
         "target_field": "austinbank.swiftID"
       }
-    },
-    {
-      "remove": {
-        "field": "accountID",
-        "ignore_missing": true,
-        "ignore_failure": true
-      }
     }
   ]
 }
