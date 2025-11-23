@@ -121,25 +121,18 @@
     },
     {
       "remove": {
-        "ignore_failure": true,
-        "ignore_missing": true,
-        "field": "business_hours"
-      }
-    },
-    {
-      "remove": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "atm.pin_attempts",
-        "if": "ctx.atm.event == 'status_check' && ctx.atm.available == true && ctx.atm.online == true"
+        "ignore_missing": true,
+        "if": "ctx?.atm?.event == 'status_check' && ctx?.atm?.available == true && ctx?.atm?.online == true",
+        "ignore_failure": true
       }
     },
     {
       "pipeline": {
         "name": "atm-cleanup",
         "ignore_missing_pipeline": true,
-        "ignore_failure": true,
-        "if": "ctx.atm.available == false"
+        "if": "ctx?.atm?.available == false",
+        "ignore_failure": true
       }
     },
     {
@@ -175,6 +168,13 @@
           "to_account",
           "enrich-outbounds.accountID"
         ]
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "business_hours"
       }
     }
   ]
