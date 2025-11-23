@@ -58,7 +58,7 @@ class ElasticsearchConfig:
     username: str = "fraud"
     password: str = "hunter"
     workers: int = 16
-    events_per_day: int = 10000
+    events_per_day: int = 100000
     pipeline: str = "fraud-detection-enrich"
     verify_certs: bool = False
     timeout: int = 30
