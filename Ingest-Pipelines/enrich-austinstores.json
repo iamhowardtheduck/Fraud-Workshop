@@ -11,82 +11,202 @@
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.pos.geo_point",
-        "target_field": "pos.geo_point",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "pos.geo_point"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.pos.merchant_address",
-        "target_field": "pos.merchant_address",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "pos.merchant_address"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.pos.merchant_name",
-        "target_field": "pos.merchant_name",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "pos.merchant_name"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.pos.merchant_zip",
-        "target_field": "pos.merchant_zip",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "pos.merchant_zip"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.atm.available",
-        "target_field": "atm.available",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "atm.available"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.atm.24hours",
-        "target_field": "atm.24hours",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "atm.hours24"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.atm.vendor",
-        "target_field": "atm.vendor",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "atm.vendor"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.atm.software",
-        "target_field": "atm.software",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "atm.software"
       }
     },
     {
       "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": "3.atm.version",
-        "target_field": "atm.version",
-        "ignore_missing": true,
-        "ignore_failure": true
+        "target_field": "atm.version"
       }
     },
     {
       "rename": {
-        "field": "3.atm.id",
-        "target_field": "atm.id",
+        "ignore_failure": true,
         "ignore_missing": true,
-        "ignore_failure": true
+        "field": "3.atm.id",
+        "target_field": "atm.id"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_available_10",
+        "target_field": "atm.available_10"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_available_100",
+        "target_field": "atm.available_100"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_available_20",
+        "target_field": "atm.available_20"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_available_50",
+        "target_field": "atm.available_50"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_available_amount",
+        "target_field": "atm.available_amount"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_camera_enabled",
+        "target_field": "atm.camera_enabled"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_deposit_amount",
+        "target_field": "atm.deposit_amount"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_deposit_type",
+        "target_field": "atm.deposit_type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_event",
+        "target_field": "atm.event"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_inquiry_type",
+        "target_field": "atm.inquiry_type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_online",
+        "target_field": "atm.online"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_paper_jam",
+        "target_field": "atm.paper_jam"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_pin_attempts",
+        "target_field": "atm.pin_attempts"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_withdrawal_amount",
+        "target_field": "atm.withdrawal_amount"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "atm_withdrawal_source",
+        "target_field": "atm.withdrawal_source"
       }
     }
   ]
