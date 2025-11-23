@@ -135,6 +135,22 @@
       }
     },
     {
+      "pipeline": {
+        "name": "atm-cleanup",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.atm.available == false"
+      }
+    },
+    {
+      "set": {
+        "field": "atm.online",
+        "value": false,
+        "if": "ctx.atm?.available == false",
+        "ignore_failure": true
+      }
+    },
+    {
       "remove": {
         "ignore_failure": true,
         "ignore_missing": true,
@@ -159,22 +175,6 @@
           "to_account",
           "enrich-outbounds.accountID"
         ]
-      }
-    },
-    {
-      "pipeline": {
-        "name": "atm-cleanup",
-        "ignore_missing_pipeline": true,
-        "ignore_failure": true,
-        "if": "ctx.atm.available == false"
-      }
-    },
-    {
-      "set": {
-        "field": "atm.online",
-        "value": false,
-        "if": "ctx.atm?.available == false",
-        "ignore_failure": true
       }
     }
   ]
