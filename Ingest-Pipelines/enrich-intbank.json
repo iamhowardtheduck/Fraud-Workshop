@@ -56,13 +56,6 @@
         "field": "5.intbank.swiftID",
         "target_field": "intbank.swiftID"
       }
-    },
-    {
-      "remove": {
-        "field": "accountID",
-        "ignore_missing": true,
-        "ignore_failure": true
-      }
     }
   ]
 }
