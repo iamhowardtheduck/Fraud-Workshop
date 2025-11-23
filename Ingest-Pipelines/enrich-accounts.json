@@ -80,13 +80,6 @@
         "field": "1.account.telephone_number",
         "target_field": "account.telephone_number"
       }
-    },
-    {
-      "remove": {
-        "ignore_failure": true,
-        "ignore_missing": true,
-        "field": "accountID"
-      }
     }
   ]
 }
