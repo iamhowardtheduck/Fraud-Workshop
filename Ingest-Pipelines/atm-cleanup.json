@@ -1,0 +1,26 @@
+{
+  "processors": [
+    {
+      "remove": {
+        "field": [
+          "atm.camera_enabled",
+          "atm.event",
+          "atm.pin_attempts",
+          "atm.withdrawal_amount",
+          "atm.withdrawal_source",
+          "atm.deposit_amount",
+          "atm.deposit_type",
+          "atm.inquiry_type",
+          "atm.available_10",
+          "atm.available_100",
+          "atm.available_20",
+          "atm.available_50",
+          "atm.available_amount",
+          "atm.paper_jam"
+        ],
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
