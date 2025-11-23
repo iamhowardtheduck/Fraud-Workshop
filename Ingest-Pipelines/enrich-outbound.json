@@ -71,6 +71,16 @@
         "field": "intbank.ip",
         "target_field": "wire.outbound.ip"
       }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": [
+          "to_account",
+          "accountID"
+        ]
+      }
     }
   ]
 }
