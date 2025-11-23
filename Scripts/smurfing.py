@@ -49,12 +49,12 @@ if missing_packages:
 @dataclass
 class ElasticsearchConfig:
     """Your Elasticsearch configuration - hard-coded"""
-    host: str = "http://localhost:30920"
+    host: str = "https://fraud-workshop-5b63ee.es.us-west2.gcp.elastic-cloud.com:443"
     index_name: str = "fraud-workshop-atm"
-    username: str = "fraud"
-    password: str = "hunter"
-    workers: int = 16
-    events_per_day: int = 10000
+    username: str = "fraudster"
+    password: str = "flt72100"
+    workers: int = 24
+    events_per_day: int = 100000
     pipeline: str = "fraud-detection-enrich"
     verify_certs: bool = False
     timeout: int = 30
@@ -69,6 +69,10 @@ class FraudConfig:
     fraud_start_hour: int = 9  # 9 AM
     fraud_end_hour: int = 21   # 9 PM
     fraud_interval_minutes: int = 30  # Every 30 minutes
+    
+    # Date range configuration
+    fraud_start_days_back: int = 8  # Start 8 days ago
+    fraud_end_days_back: int = 1    # End 1 day ago
     
     # Event distribution for noise
     deposit_percentage: float = 0.30
@@ -210,39 +214,28 @@ class ElasticsearchIngester:
     def test_connection(self) -> bool:
         """Test connection to your Elasticsearch"""
         if not self.es:
-            logger.error("⚠ Elasticsearch client not initialized")
             return False
-            
+        
         try:
             info = self.es.info()
-            if hasattr(info, 'body'):
-                version = info.body.get('version', {}).get('number', 'unknown')
-            else:
-                version = info.get('version', {}).get('number', 'unknown')
-            
-            logger.info(f"✅ Connected to Elasticsearch at {self.config.host}")
-            logger.info(f"   Version: {version}")
-            logger.info(f"   Index: {self.config.index_name}")
+            logger.info(f"✅ Connected to Elasticsearch {info.get('version', {}).get('number', 'unknown')}")
             return True
         except Exception as e:
-            logger.error(f"⚠ Failed to connect to Elasticsearch: {e}")
+            logger.error(f"⚠ Connection test failed: {e}")
             return False
     
-    def create_index_if_not_exists(self):
-        """Create your fraud-workshop-atm index with proper mapping"""
+    def create_index_if_not_exists(self) -> None:
+        """Create index with mapping if it doesn't exist"""
         if not self.es:
             return
-            
+        
         try:
             if self.es.indices.exists(index=self.config.index_name):
-                logger.info(f"📋 Index '{self.config.index_name}' already exists")
+                logger.info(f"📊 Index '{self.config.index_name}' already exists")
                 return
             
+            # ATM transaction mapping
             mapping = {
-                "settings": {
-                    "number_of_shards": 1,
-                    "number_of_replicas": 0
-                },
                 "mappings": {
                     "properties": {
                         "accountID": {"type": "integer"},
@@ -299,315 +292,209 @@ class ElasticsearchIngester:
                 self.es,
                 generate_docs(),
                 chunk_size=chunk_size,
-                request_timeout=self.config.timeout,
-                max_retries=3,
-                initial_backoff=2,
-                max_backoff=600
+                request_timeout=self.config.timeout
             )
-            return success_count, len(failed_items) if failed_items else 0
-            
+            return success_count, len(failed_items)
         except Exception as e:
             logger.error(f"⚠ Bulk indexing failed: {e}")
             return 0, len(events)
 
 class ATMFraudGenerator:
-    """AML fraud generator for ATM structuring scenarios"""
+    """Austin, TX ATM fraud pattern generator"""
     
     def __init__(self, fraud_config: FraudConfig, es_config: ElasticsearchConfig):
         self.fraud_config = fraud_config
-        self.es_config = es_config
         self.time_generator = AustinTimeGenerator(fraud_config)
         self.ingester = ElasticsearchIngester(es_config)
-        
+    
     def generate_atm_structuring_scenario(self) -> List[ATMTransactionEvent]:
-        """Generate ATM structuring fraud scenario"""
+        """Generate ATM structuring fraud scenario across multiple days"""
         atm_fraud_events = []
         
-        # Generate structured deposits every 30 minutes from 9 AM to 9 PM
-        current_hour = self.fraud_config.fraud_start_hour
-        current_minute = 0
-        account_index = 0
-        pos_index = 0
-        
-        while current_hour <= self.fraud_config.fraud_end_hour:
-            # Select account (cycle through)
-            account_id = self.fraud_config.fraud_accounts[account_index % len(self.fraud_config.fraud_accounts)]
+        # Generate fraud events for each day in the range
+        for days_back in range(self.fraud_config.fraud_end_days_back, 
+                             self.fraud_config.fraud_start_days_back + 1):
             
-            # Select POS ID ensuring no consecutive use
-            pos_id = self.fraud_config.fraud_pos_ids[pos_index % len(self.fraud_config.fraud_pos_ids)]
+            # Generate structured deposits every 30 minutes from 9 AM to 9 PM for this day
+            current_hour = self.fraud_config.fraud_start_hour
+            current_minute = 0
+            account_index = 0
+            pos_index = 0
             
-            # Generate timestamp
-            timestamp = self.time_generator.generate_fraud_timestamp(current_hour, current_minute)
-            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
-            
-            # Create structured deposit event
-            fraud_event = ATMTransactionEvent(
-                accountID=account_id,
-                event_amount=self.fraud_config.fraud_deposit_amount,
-                event_type='credit',
-                account_type='checking',
-                account_event='deposit',
-                transaction_date=zulu_timestamp,
-                timestamp=zulu_timestamp,
-                posID=pos_id,
-                business_hours=True,  # Always during business hours
-                atm_event='deposit',
-                atm_camera_enabled=False,  # Cameras disabled at fraud ATMs
-                atm_online=True,
-                atm_pin_attempts=1,
-                atm_deposit_type='cash',
-                atm_deposit_amount=500
-            )
-            
-            atm_fraud_events.append(fraud_event)
-            
-            # Move to next time slot
-            current_minute += self.fraud_config.fraud_interval_minutes
-            if current_minute >= 60:
-                current_minute = 0
-                current_hour += 1
-            
-            # Cycle through accounts and POS IDs
-            account_index += 1
-            pos_index += 1
-            
-            # Break if we've reached end hour
-            if current_hour > self.fraud_config.fraud_end_hour:
-                break
-        
-        return atm_fraud_events
-    
-    def generate_withdrawal_amount(self) -> int:
-        """Generate realistic ATM withdrawal amounts with specified distribution"""
-        rand = random.random()
-        
-        if rand < 0.05:  # 5%
-            return 20
-        elif rand < 0.15:  # 10%
-            return 40
-        elif rand < 0.20:  # 5%
-            return 60
-        elif rand < 0.35:  # 15%
-            return 80
-        elif rand < 0.75:  # 40%
-            return 100
-        elif rand < 0.95:  # 20%
-            return 120
-        else:  # 5% - larger amounts
-            # Generate amounts from 130-800 in 10s or 20s, with bias toward smaller amounts
-            base_amounts = list(range(130, 801, 10)) + list(range(140, 801, 20))
-            # Weight smaller amounts more heavily
-            weights = [1.0 / (amt / 100) for amt in base_amounts]
-            return random.choices(base_amounts, weights=weights)[0]
-    
-    def generate_atm_cash_availability(self) -> Dict[str, int]:
-        """Generate realistic ATM cash availability"""
-        total_amount = random.randint(20000, 100000)
-        
-        # Distribute among denominations
-        # Typical ATM distribution: more 20s and 100s, fewer 10s and 50s
-        amount_100 = random.randint(int(total_amount * 0.3), int(total_amount * 0.6))
-        remaining = total_amount - amount_100
-        
-        amount_20 = random.randint(int(remaining * 0.4), int(remaining * 0.7))
-        remaining -= amount_20
-        
-        amount_50 = random.randint(int(remaining * 0.2), int(remaining * 0.6))
-        amount_10 = max(0, remaining - amount_50)
-        
-        return {
-            'total': total_amount,
-            'available_10': amount_10,
-            'available_20': amount_20,
-            'available_50': amount_50,
-            'available_100': amount_100
-        }
-    
-    def generate_atm_noise_events(self, events_per_worker: int) -> List[ATMTransactionEvent]:
-        """Generate noise ATM events with realistic distributions"""
-        noise_events = []
-        
-        for _ in range(events_per_worker):
-            # Determine event type
-            rand = random.random()
-            
-            if rand < self.fraud_config.deposit_percentage:  # 30% deposits
-                event_type = 'deposit'
-            elif rand < self.fraud_config.deposit_percentage + self.fraud_config.withdrawal_percentage:  # 58% withdrawals
-                event_type = 'withdrawal'
-            elif rand < self.fraud_config.deposit_percentage + self.fraud_config.withdrawal_percentage + self.fraud_config.inquiry_percentage:  # 10% inquiries
-                event_type = 'inquiry'
-            else:  # 2% status checks
-                event_type = 'status_check'
-            
-            # Generate basic event details
-            account_id = random.randint(1, 35000)
-            pos_id = random.randint(1, 10500)
-            timestamp = self.time_generator.generate_random_timestamp()
-            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
-            business_hours = self.time_generator.is_business_hours(timestamp)
-            
-            # Determine camera status (false for fraud ATMs, otherwise mostly true)
-            if pos_id in self.fraud_config.fraud_pos_ids:
-                camera_enabled = False
-            else:
-                camera_enabled = random.random() < 0.97  # 97% true, 3% false
-            
-            # Determine PIN attempts
-            pin_rand = random.random()
-            if pin_rand < 0.95:  # 95%
-                pin_attempts = 1
-                generate_lockout = False
-            elif pin_rand < 0.9975:  # 4.75%
-                pin_attempts = 2
-                generate_lockout = False
-            else:  # 0.25%
-                pin_attempts = 3
-                generate_lockout = True
-            
-            # Create event based on type
-            if event_type == 'deposit':
-                # Deposit type distribution
-                dep_rand = random.random()
-                if dep_rand < 0.80:
-                    deposit_type = 'cash'
-                elif dep_rand < 0.95:
-                    deposit_type = 'check'
-                else:
-                    deposit_type = 'money_order'
+            while current_hour <= self.fraud_config.fraud_end_hour:
+                # Select account (cycle through)
+                account_id = self.fraud_config.fraud_accounts[account_index % len(self.fraud_config.fraud_accounts)]
                 
-                deposit_amount = random.randint(10, 800)
+                # Select POS ID ensuring no consecutive use
+                pos_id = self.fraud_config.fraud_pos_ids[pos_index % len(self.fraud_config.fraud_pos_ids)]
                 
-                event = ATMTransactionEvent(
+                # Generate timestamp for this specific day
+                timestamp = self.time_generator.generate_fraud_timestamp(current_hour, current_minute, days_back)
+                zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
+                
+                # Create structured deposit event
+                fraud_event = ATMTransactionEvent(
                     accountID=account_id,
-                    event_amount=float(deposit_amount),
+                    event_amount=self.fraud_config.fraud_deposit_amount,
                     event_type='credit',
                     account_type='checking',
                     account_event='deposit',
                     transaction_date=zulu_timestamp,
                     timestamp=zulu_timestamp,
                     posID=pos_id,
-                    business_hours=business_hours,
+                    business_hours=True,  # Always during business hours
                     atm_event='deposit',
-                    atm_camera_enabled=camera_enabled,
+                    atm_camera_enabled=False,  # Cameras disabled at fraud ATMs
                     atm_online=True,
-                    atm_pin_attempts=pin_attempts,
-                    atm_deposit_type=deposit_type,
-                    atm_deposit_amount=deposit_amount
+                    atm_pin_attempts=1,
+                    atm_deposit_type='cash',
+                    atm_deposit_amount=500
                 )
                 
-            elif event_type == 'withdrawal':
-                # Withdrawal source distribution
-                source_rand = random.random()
-                if source_rand < 0.80:
-                    withdrawal_source = 'checking'
-                elif source_rand < 0.95:
-                    withdrawal_source = 'savings'
-                else:
-                    withdrawal_source = 'money_market'
+                atm_fraud_events.append(fraud_event)
                 
+                # Move to next time slot
+                current_minute += self.fraud_config.fraud_interval_minutes
+                if current_minute >= 60:
+                    current_minute = 0
+                    current_hour += 1
+                
+                # Cycle through accounts and POS IDs
+                account_index += 1
+                pos_index += 1
+                
+                # Break if we've reached end hour for this day
+                if current_hour > self.fraud_config.fraud_end_hour:
+                    break
+        
+        return atm_fraud_events
+    
+    def generate_withdrawal_amount(self) -> int:
+        """Generate realistic withdrawal amounts"""
+        amounts = [20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 240, 280, 300, 320, 400, 500]
+        weights = [20, 15, 12, 10, 8, 6, 5, 4, 4, 3, 3, 3, 2, 2, 2, 1]
+        return random.choices(amounts, weights=weights)[0]
+    
+    def generate_deposit_amount(self) -> float:
+        """Generate realistic deposit amounts"""
+        # Mix of common amounts
+        if random.random() < 0.6:  # 60% common amounts
+            amounts = [20.0, 50.0, 100.0, 200.0, 250.0, 500.0, 1000.0]
+            return random.choice(amounts)
+        else:  # 40% random amounts
+            return round(random.uniform(25.0, 2500.0), 2)
+    
+    def generate_atm_noise_events(self, count: int) -> List[ATMTransactionEvent]:
+        """Generate legitimate ATM noise events"""
+        events = []
+        legitimate_accounts = list(range(1, 5001))  # 5000 legitimate accounts
+        legitimate_pos_ids = list(range(1, 129))  # 128 ATM locations
+        
+        for _ in range(count):
+            # Select random legitimate account and ATM
+            account_id = random.choice(legitimate_accounts)
+            pos_id = random.choice(legitimate_pos_ids)
+            
+            # Generate random timestamp
+            timestamp = self.time_generator.generate_random_timestamp()
+            zulu_timestamp = self.time_generator.format_zulu_time(timestamp)
+            business_hours = self.time_generator.is_business_hours(timestamp)
+            
+            # Determine event type
+            rand = random.random()
+            if rand < self.fraud_config.withdrawal_percentage:
+                # Withdrawal event
                 withdrawal_amount = self.generate_withdrawal_amount()
-                
                 event = ATMTransactionEvent(
                     accountID=account_id,
-                    event_amount=float(withdrawal_amount),
+                    event_amount=withdrawal_amount,
                     event_type='debit',
-                    account_type='checking',
+                    account_type=random.choice(['checking', 'savings']),
                     account_event='withdrawal',
                     transaction_date=zulu_timestamp,
                     timestamp=zulu_timestamp,
                     posID=pos_id,
                     business_hours=business_hours,
                     atm_event='withdrawal',
-                    atm_camera_enabled=camera_enabled,
+                    atm_camera_enabled=random.choice([True, False]),
                     atm_online=True,
-                    atm_pin_attempts=pin_attempts,
-                    atm_withdrawal_source=withdrawal_source,
+                    atm_pin_attempts=random.choices([1, 2, 3], weights=[85, 12, 3])[0],
+                    atm_withdrawal_source=random.choice(['checking', 'savings']),
                     atm_withdrawal_amount=withdrawal_amount
                 )
-                
-            elif event_type == 'inquiry':
-                # Inquiry type distribution
-                inq_rand = random.random()
-                if inq_rand < 0.92:
-                    inquiry_type = 'checking'
-                elif inq_rand < 0.98:
-                    inquiry_type = 'savings'
-                else:
-                    inquiry_type = 'money_market'
-                
+            
+            elif rand < (self.fraud_config.withdrawal_percentage + self.fraud_config.deposit_percentage):
+                # Deposit event
+                deposit_amount = self.generate_deposit_amount()
+                event = ATMTransactionEvent(
+                    accountID=account_id,
+                    event_amount=deposit_amount,
+                    event_type='credit',
+                    account_type=random.choice(['checking', 'savings']),
+                    account_event='deposit',
+                    transaction_date=zulu_timestamp,
+                    timestamp=zulu_timestamp,
+                    posID=pos_id,
+                    business_hours=business_hours,
+                    atm_event='deposit',
+                    atm_camera_enabled=random.choice([True, False]),
+                    atm_online=True,
+                    atm_pin_attempts=random.choices([1, 2], weights=[90, 10])[0],
+                    atm_deposit_type=random.choices(['cash', 'check'], weights=[70, 30])[0],
+                    atm_deposit_amount=int(deposit_amount)
+                )
+            
+            elif rand < (self.fraud_config.withdrawal_percentage + 
+                        self.fraud_config.deposit_percentage + 
+                        self.fraud_config.inquiry_percentage):
+                # Inquiry event
                 event = ATMTransactionEvent(
                     accountID=account_id,
                     event_amount=0.0,
                     event_type='inquiry',
-                    account_type='checking',
+                    account_type=random.choice(['checking', 'savings']),
                     account_event='inquiry',
                     transaction_date=zulu_timestamp,
                     timestamp=zulu_timestamp,
                     posID=pos_id,
                     business_hours=business_hours,
                     atm_event='inquiry',
-                    atm_camera_enabled=camera_enabled,
+                    atm_camera_enabled=random.choice([True, False]),
                     atm_online=True,
-                    atm_pin_attempts=pin_attempts,
-                    atm_inquiry_type=inquiry_type
+                    atm_pin_attempts=1,
+                    atm_inquiry_type=random.choice(['balance', 'recent_transactions', 'mini_statement'])
                 )
-                
-            else:  # status_check
-                cash_availability = self.generate_atm_cash_availability()
-                
+            
+            else:
+                # Status check event
                 event = ATMTransactionEvent(
                     accountID=account_id,
                     event_amount=0.0,
                     event_type='status',
-                    account_type='checking',
+                    account_type=random.choice(['checking', 'savings']),
                     account_event='status_check',
                     transaction_date=zulu_timestamp,
                     timestamp=zulu_timestamp,
                     posID=pos_id,
                     business_hours=business_hours,
                     atm_event='status_check',
-                    atm_camera_enabled=camera_enabled,
-                    atm_online=True,
-                    atm_pin_attempts=1,
-                    atm_paper_jam=random.random() < 0.01,  # 1% paper jam
-                    atm_available_amount=cash_availability['total'],
-                    atm_available_10=cash_availability['available_10'],
-                    atm_available_20=cash_availability['available_20'],
-                    atm_available_50=cash_availability['available_50'],
-                    atm_available_100=cash_availability['available_100']
+                    atm_camera_enabled=random.choice([True, False]),
+                    atm_online=random.choices([True, False], weights=[95, 5])[0],
+                    atm_pin_attempts=0,
+                    atm_paper_jam=random.choices([False, True], weights=[98, 2])[0],
+                    atm_available_amount=random.randint(50000, 200000),
+                    atm_available_10=random.randint(100, 500),
+                    atm_available_20=random.randint(200, 1000),
+                    atm_available_50=random.randint(50, 300),
+                    atm_available_100=random.randint(100, 800)
                 )
             
-            noise_events.append(event)
-            
-            # Generate lockout event if needed
-            if generate_lockout:
-                lockout_timestamp = timestamp + timedelta(seconds=random.randint(1, 10))
-                lockout_zulu = self.time_generator.format_zulu_time(lockout_timestamp)
-                
-                lockout_event = ATMTransactionEvent(
-                    accountID=account_id,
-                    event_amount=0.0,
-                    event_type='lockout',
-                    account_type='checking',
-                    account_event='lockout',
-                    transaction_date=lockout_zulu,
-                    timestamp=lockout_zulu,
-                    posID=pos_id,
-                    business_hours=business_hours,
-                    atm_event='LOCKOUT',
-                    atm_camera_enabled=camera_enabled,
-                    atm_online=True,
-                    atm_pin_attempts=3,
-                    atm_deposit_amount=0 if event_type == 'deposit' else None
-                )
-                
-                noise_events.append(lockout_event)
+            events.append(event)
         
-        return noise_events
+        return events
     
     def generate_and_ingest_worker(self, worker_id: int, events_per_worker: int) -> dict:
-        """Worker function for threaded generation and ingestion"""
+        """Generate events for a single worker thread"""
         worker_events = []
         
         # Generate events for this worker
@@ -634,7 +521,7 @@ class ATMFraudGenerator:
         logger.info(f"🏧 Starting ATM fraud generation with Austin, TX configuration:")
         logger.info(f"   Total events: {total_events:,}")
         logger.info(f"   Workers: {num_workers}")
-        logger.info(f"   Fraud timeframe: NOW-7d from 9:00-21:00 (every 30min)")
+        logger.info(f"   Fraud timeframe: NOW-{self.fraud_config.fraud_start_days_back}d to NOW-{self.fraud_config.fraud_end_days_back}d from {self.fraud_config.fraud_start_hour}:00-{self.fraud_config.fraud_end_hour}:00 (every {self.fraud_config.fraud_interval_minutes}min)")
         logger.info(f"   Fraud accounts: {len(self.fraud_config.fraud_accounts)} accounts")
         logger.info(f"   Fraud ATMs: {len(self.fraud_config.fraud_pos_ids)} ATMs")
         logger.info(f"   Timezone: {self.fraud_config.austin_tz}")
@@ -721,7 +608,7 @@ def main():
     print(f"🔧 Workers: 16")
     print(f"📈 Events: 10,000")
     print(f"🏧 Fraud Pattern: Structured $500 deposits every 30min")
-    print(f"📅 Fraud Timing: NOW-7d, 9:00-21:00 (business hours)")
+    print(f"📅 Fraud Timing: NOW-8d to NOW-1d, 9:00-21:00 (business hours)")
     print(f"👥 Fraud Accounts: 2,4,6,8,10,12,14,16,18,20")
     print(f"📹 Camera Status: Disabled at fraud ATMs")
     print(f"🕐 Format: 2025-11-22T13:47:15.984Z (Zulu)")
@@ -793,6 +680,30 @@ def main():
     
     # Display results
     print(f"\n" + "=" * 60)
+    print("📊 ATM FRAUD WORKSHOP COMPLETE")
+    print("=" * 60)
+    print(f"Total Events Generated: {results['total_generated']:,}")
+    print(f"Successfully Indexed: {results['total_indexed']:,}")
+    print(f"Failed: {results['total_failed']:,}")
+    print(f"Duration: {duration:.2f} seconds")
+    print(f"Events/second: {results['total_generated']/duration:.2f}")
+    print(f"\n🎯 Your Elasticsearch Info:")
+    print(f"   Index: {es_config.index_name}")
+    print(f"   Host: {es_config.host}")
+    print(f"   Events: {results['total_indexed']:,}")
+    
+    if results['total_failed'] > 0:
+        print(f"\n⚠️ {results['total_failed']} events failed to index")
+    else:
+        print("\n✅ All events successfully indexed to your Elasticsearch!")
+    
+if __name__ == "__main__":
+    main()
+clear
+####    
+    
+    # Display results
+    print(f"\n" + "=" * 60)
     print("📊 FRAUD WORKSHOP SETUP COMPLETE")
     print("=" * 60)       
     print(f"\n🕵️ Start detecting fraud!")
@@ -807,7 +718,7 @@ def main():
     print(f"   - Trace the money through account hops")
     print(f"   - Notice the progression across 5 consecutive days")
     print(f"\n Challenge 3 - Smurfing")
-    print(f"   • Find the structured deposits every 30 minutes")
+    print(f"   • Find the structured deposits every 30 minutes over the course of a week")
     print(f"   • Identify across all 10 smurfs/accounts")
     print(f"   • Correlate with ATM condition")
     print(f"   • Recognize this as ATM-based structuring")
