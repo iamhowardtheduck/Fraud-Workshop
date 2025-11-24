@@ -484,7 +484,7 @@ class FraudDataGenerator:
                     transaction_date=zulu_timestamp,
                     timestamp=zulu_timestamp,
                     wire_direction=random.choice(['incoming_domestic', 'outgoing_domestic']),
-                    txbankId=random.randint(1001, 9999)
+                    txbankId=random.randint(1, 30)
                 )
             elif event_type_rand < (self.fraud_config.deposit_percentage + self.fraud_config.fee_percentage + 
                                    self.fraud_config.wire_percentage + self.fraud_config.withdrawal_percentage):
