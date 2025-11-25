@@ -1,0 +1,253 @@
+{
+  "template": {
+    "settings": {
+      "index": {
+        "number_of_replicas": "0"
+      }
+    },
+    "mappings": {
+      "properties": {
+        "accountID": {
+          "type": "keyword"
+        },
+        "posID": {
+          "type": "keyword"
+        },
+        "txbankId": {
+          "type": "keyword"
+        },
+        "wire": {
+          "type": "object",
+          "properties": {
+            "inbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "type": "keyword"
+                },
+                "ip": {
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "outbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "type": "keyword"
+                },
+                "name_on_account": {
+                  "type": "keyword"
+                },
+                "checking_account": {
+                  "type": "keyword"
+                },
+                "ip": {
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "type": "keyword"
+                },
+                "savings_account": {
+                  "type": "keyword"
+                },
+                "account_address": {
+                  "type": "keyword"
+                },
+                "moneymarket_account": {
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "direction": {
+              "type": "keyword"
+            }
+          }
+        },
+        "pos": {
+          "type": "object",
+          "properties": {
+            "merchant_name": {
+              "type": "keyword"
+            },
+            "merchant_address": {
+              "type": "keyword"
+            },
+            "merchant_zip": {
+              "type": "keyword"
+            },
+            "geo_point": {
+              "type": "geo_point"
+            }
+          }
+        },
+        "deposit": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "keyword"
+            }
+          }
+        },
+        "risk": {
+          "type": "object",
+          "properties": {
+            "score": {
+              "type": "long"
+            },
+            "override_req": {
+              "type": "boolean"
+            }
+          }
+        },
+        "atm": {
+          "type": "object",
+          "properties": {
+            "deposit_amount": {
+              "type": "long"
+            },
+            "available_20": {
+              "type": "long"
+            },
+            "pin_attempts": {
+              "type": "long"
+            },
+            "available_10": {
+              "type": "long"
+            },
+            "software": {
+              "type": "keyword"
+            },
+            "available_50": {
+              "type": "long"
+            },
+            "request_amount": {
+              "type": "long"
+            },
+            "available": {
+              "type": "boolean"
+            },
+            "hours24": {
+              "type": "boolean"
+            },
+            "paper_jam": {
+              "type": "boolean"
+            },
+            "available_amount": {
+              "type": "long"
+            },
+            "camera_enabled": {
+              "type": "boolean"
+            },
+            "version": {
+              "type": "keyword"
+            },
+            "request_source": {
+              "type": "keyword"
+            },
+            "inquiry_type": {
+              "type": "keyword"
+            },
+            "available_100": {
+              "type": "long"
+            },
+            "vendor": {
+              "type": "keyword"
+            },
+            "withdrawal_source": {
+              "type": "keyword"
+            },
+            "online": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "keyword"
+            },
+            "event": {
+              "type": "keyword"
+            },
+            "deposit_type": {
+              "type": "keyword"
+            },
+            "withdrawal_amount": {
+              "type": "long"
+            }
+          }
+        },
+        "event": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "long"
+            },
+            "type": {
+              "type": "keyword"
+            }
+          }
+        },
+        "intbankID": {
+          "type": "keyword"
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "checking": {
+              "type": "keyword"
+            },
+            "address": {
+              "type": "keyword"
+            },
+            "savings_opened": {
+              "type": "date"
+            },
+            "name": {
+              "type": "keyword"
+            },
+            "telephone_number": {
+              "type": "keyword"
+            },
+            "moneymarket": {
+              "type": "keyword"
+            },
+            "moneymarket_opened": {
+              "type": "date"
+            },
+            "savings": {
+              "type": "keyword"
+            },
+            "event": {
+              "type": "keyword"
+            },
+            "type": {
+              "type": "keyword"
+            },
+            "checking_opened": {
+              "type": "date"
+            }
+          }
+        }
+      }
+    }
+  }
+}
