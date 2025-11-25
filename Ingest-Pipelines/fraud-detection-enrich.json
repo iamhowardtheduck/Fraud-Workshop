@@ -108,7 +108,7 @@
         "name": "enrich-inbound",
         "ignore_missing_pipeline": true,
         "ignore_failure": true,
-        "if": "ctx.wire?.direction == 'inbound'"
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'"
       }
     },
     {
@@ -116,31 +116,31 @@
         "name": "enrich-outbound",
         "ignore_missing_pipeline": true,
         "ignore_failure": true,
-        "if": "ctx.wire?.direction == 'outbound'"
+        "if": "ctx.wire?.direction == 'outbound' || ctx.wire?.direction == 'outgoing_domestic' || ctx.wire?.direction == 'outgoing_international'"
       }
     },
     {
       "remove": {
-        "field": "atm.pin_attempts",
+        "ignore_failure": true,
         "ignore_missing": true,
-        "if": "ctx?.atm?.event == 'status_check' && ctx?.atm?.available == true && ctx?.atm?.online == true",
-        "ignore_failure": true
+        "field": "atm.pin_attempts",
+        "if": "ctx?.atm?.event == 'status_check' && ctx?.atm?.available == true && ctx?.atm?.online == true"
       }
     },
     {
       "pipeline": {
         "name": "atm-cleanup",
         "ignore_missing_pipeline": true,
-        "if": "ctx?.atm?.available == false",
-        "ignore_failure": true
+        "ignore_failure": true,
+        "if": "ctx?.atm?.available == false"
       }
     },
     {
       "set": {
+        "ignore_failure": true,
         "field": "atm.online",
         "value": false,
-        "if": "ctx.atm?.available == false",
-        "ignore_failure": true
+        "if": "ctx.atm?.available == false"
       }
     },
     {
@@ -148,6 +148,10 @@
         "ignore_failure": true,
         "ignore_missing": true,
         "field": [
+          "business_hours",
+          "txbankId",
+          "timestamp",
+          "accountID",
           "1.accountID",
           "4.txbankId",
           "3.posID",
@@ -155,9 +159,6 @@
           "addressId",
           "intbankID",
           "posID",
-          "timestamp",
-          "txbankId",
-          "accountID",
           "account_event",
           "account_type",
           "deposit_type",
@@ -168,13 +169,6 @@
           "to_account",
           "enrich-outbounds.accountID"
         ]
-      }
-    },
-    {
-      "remove": {
-        "ignore_failure": true,
-        "ignore_missing": true,
-        "field": "business_hours"
       }
     }
   ]
