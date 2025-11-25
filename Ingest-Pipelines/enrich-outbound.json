@@ -79,6 +79,22 @@
         "ignore_failure": true,
         "if": "ctx.containsKey('to_account') && ctx.containsKey('accountID')"
       }
+    },
+    {
+      "set": {
+        "ignore_failure": true,
+        "field": "wire.direction",
+        "value": "outbound",
+        "if": "ctx.wire?.direction == 'outgoing_domestic' || ctx.wire?.direction == 'outgoing_international'"
+      }
+    },
+    {
+      "set": {
+        "ignore_failure": true,
+        "field": "event.type",
+        "value": "debit",
+        "if": "ctx.wire?.direction == 'outgoing_domestic' || ctx.wire?.direction == 'outgoing_international'"
+      }
     }
   ]
 }
