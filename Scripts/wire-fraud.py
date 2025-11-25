@@ -279,7 +279,7 @@ class ElasticsearchIngester:
                 },
                 "mappings": {
                     "properties": {
-                        "accountID": {"type": "integer"},
+                        "accountID": {"type": "keyword"},
                         "event_amount": {"type": "float"},
                         "event_type": {"type": "keyword"},
                         "account_type": {"type": "keyword"},
@@ -288,10 +288,10 @@ class ElasticsearchIngester:
                         "timestamp": {"type": "date"},
                         "deposit_type": {"type": "keyword"},
                         "wire_direction": {"type": "keyword"},
-                        "posID": {"type": "integer"},
-                        "txbankId": {"type": "integer"},
-                        "addressId": {"type": "integer"},
-                        "intbankID": {"type": "integer"}
+                        "posID": {"type": "keyword"},
+                        "txbankId": {"type": "keyword"},
+                        "addressId": {"type": "keyword"},
+                        "intbankID": {"type": "keyword"}
                     }
                 }
             }
