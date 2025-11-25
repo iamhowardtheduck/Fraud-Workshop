@@ -50,7 +50,7 @@ if missing_packages:
 class ElasticsearchConfig:
     """Your Elasticsearch configuration - hard-coded"""
     host: str = "http://localhost:30920"
-    index_name: str = "fraud-workshop-atm"
+    index_name: str = "fraud-workshop-logsdb-atm"
     username: str = "fraud"
     password: str = "hunter"
     workers: int = 16
