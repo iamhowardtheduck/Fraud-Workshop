@@ -1,0 +1,13 @@
+{
+  "template": {
+    "settings": {
+      "index": {
+        "mode": "logsdb"
+      }
+    }
+  },
+  "index_patterns": [
+    "fraud-workshop-logsdb*"
+  ],
+  "allow_auto_create": true
+}
