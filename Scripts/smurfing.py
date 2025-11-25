@@ -41,7 +41,7 @@ except ImportError:
     missing_packages.append('elasticsearch')
 
 if missing_packages:
-    print("âš  Missing required packages. Install with:")
+    print("⚠ Missing required packages. Install with:")
     print(f"   pip install {' '.join(missing_packages)}")
     sys.exit(1)
 
@@ -208,7 +208,7 @@ class ElasticsearchIngester:
             return Elasticsearch(**client_config)
             
         except Exception as e:
-            logger.error(f"âš  Failed to create Elasticsearch client: {e}")
+            logger.error(f"⚠ Failed to create Elasticsearch client: {e}")
             return None
     
     def test_connection(self) -> bool:
@@ -218,10 +218,10 @@ class ElasticsearchIngester:
         
         try:
             info = self.es.info()
-            logger.info(f"âœ… Connected to Elasticsearch {info.get('version', {}).get('number', 'unknown')}")
+            logger.info(f"✅ Connected to Elasticsearch {info.get('version', {}).get('number', 'unknown')}")
             return True
         except Exception as e:
-            logger.error(f"âš  Connection test failed: {e}")
+            logger.error(f"⚠ Connection test failed: {e}")
             return False
     
     def create_index_if_not_exists(self) -> None:
@@ -231,21 +231,21 @@ class ElasticsearchIngester:
         
         try:
             if self.es.indices.exists(index=self.config.index_name):
-                logger.info(f"ðŸ“Š Index '{self.config.index_name}' already exists")
+                logger.info(f"📊 Index '{self.config.index_name}' already exists")
                 return
             
             # ATM transaction mapping
             mapping = {
                 "mappings": {
                     "properties": {
-                        "accountID": {"type": "integer"},
+                        "accountID": {"type": "keyword"},
                         "event_amount": {"type": "float"},
                         "event_type": {"type": "keyword"},
                         "account_type": {"type": "keyword"},
                         "account_event": {"type": "keyword"},
                         "transaction_date": {"type": "date"},
                         "timestamp": {"type": "date"},
-                        "posID": {"type": "integer"},
+                        "posID": {"type": "keyword"},
                         "business_hours": {"type": "boolean"},
                         "atm_event": {"type": "keyword"},
                         "atm_camera_enabled": {"type": "boolean"},
@@ -267,10 +267,10 @@ class ElasticsearchIngester:
             }
             
             self.es.indices.create(index=self.config.index_name, body=mapping)
-            logger.info(f"âœ… Created index '{self.config.index_name}'")
+            logger.info(f"✅ Created index '{self.config.index_name}'")
             
         except Exception as e:
-            logger.error(f"âš  Failed to create index: {e}")
+            logger.error(f"⚠ Failed to create index: {e}")
     
     def bulk_index_events(self, events: List[dict], chunk_size: int = 500) -> tuple:
         """Bulk index events to your Elasticsearch"""
@@ -296,7 +296,7 @@ class ElasticsearchIngester:
             )
             return success_count, len(failed_items)
         except Exception as e:
-            logger.error(f"âš  Bulk indexing failed: {e}")
+            logger.error(f"⚠ Bulk indexing failed: {e}")
             return 0, len(events)
 
 class ATMFraudGenerator:
@@ -508,7 +508,7 @@ class ATMFraudGenerator:
         
         # Ingest to your Elasticsearch
         success_count, failed_count = self.ingester.bulk_index_events(worker_events)
-        logger.info(f"ðŸ”§ Worker {worker_id}: {success_count} indexed, {failed_count} failed")
+        logger.info(f"🔧 Worker {worker_id}: {success_count} indexed, {failed_count} failed")
         return {
             'worker_id': worker_id,
             'generated': len(worker_events),
@@ -518,7 +518,7 @@ class ATMFraudGenerator:
     
     def generate_and_ingest_threaded(self, total_events: int, num_workers: int) -> dict:
         """Generate events using multiple threads and ingest to your Elasticsearch"""
-        logger.info(f"ðŸ§ Starting ATM fraud generation with Austin, TX configuration:")
+        logger.info(f"🏧 Starting ATM fraud generation with Austin, TX configuration:")
         logger.info(f"   Total events: {total_events:,}")
         logger.info(f"   Workers: {num_workers}")
         logger.info(f"   Fraud timeframe: NOW-{self.fraud_config.fraud_start_days_back}d to NOW-{self.fraud_config.fraud_end_days_back}d from {self.fraud_config.fraud_start_hour}:00-{self.fraud_config.fraud_end_hour}:00 (every {self.fraud_config.fraud_interval_minutes}min)")
@@ -553,7 +553,7 @@ class ATMFraudGenerator:
         results['total_generated'] += len(atm_fraud_events_dict)
         
         # Generate noise events using workers
-        logger.info(f"ðŸ“Š Generating noise events with {num_workers} workers...")
+        logger.info(f"📊 Generating noise events with {num_workers} workers...")
         
         with ThreadPoolExecutor(max_workers=num_workers) as executor:
             futures = []
@@ -574,7 +574,7 @@ class ATMFraudGenerator:
                     results['total_indexed'] += worker_result['indexed']
                     results['total_failed'] += worker_result['failed']
                 except Exception as e:
-                    logger.error(f"âš  Worker failed: {e}")
+                    logger.error(f"⚠ Worker failed: {e}")
         
         return results
     
@@ -587,31 +587,31 @@ class ATMFraudGenerator:
         json_file = os.path.join(output_dir, f"atm_fraud_events_{timestamp}.json")
         with open(json_file, 'w') as f:
             json.dump(events, f, indent=2, default=str)
-        logger.info(f"ðŸ’¾ Saved JSON: {json_file}")
+        logger.info(f"💾 Saved JSON: {json_file}")
         
         # Save CSV
         csv_file = os.path.join(output_dir, f"atm_fraud_events_{timestamp}.csv")
         df = pd.DataFrame(events)
         df.to_csv(csv_file, index=False)
-        logger.info(f"ðŸ’¾ Saved CSV: {csv_file}")
+        logger.info(f"💾 Saved CSV: {csv_file}")
         
         return json_file, csv_file
 
 def main():
     """Main function for ATM fraud scenario"""
-    print("ðŸ§ AML FRAUD WORKSHOP - ATM STRUCTURING SCENARIO")
+    print("🏧 AML FRAUD WORKSHOP - ATM STRUCTURING SCENARIO")
     print("=" * 60)
-    print(f"ðŸ“ Running from: {os.getcwd()}")
-    print(f"ðŸ”— Elasticsearch: http://localhost:30920")
-    print(f"ðŸ“Š Index: fraud-workshop-atm")
-    print(f"ðŸ‘¤ User: fraud")
-    print(f"ðŸ”§ Workers: 16")
-    print(f"ðŸ“ˆ Events: 10,000")
-    print(f"ðŸ§ Fraud Pattern: Structured $500 deposits every 30min")
-    print(f"ðŸ“… Fraud Timing: NOW-8d to NOW-1d, 9:00-21:00 (business hours)")
-    print(f"ðŸ‘¥ Fraud Accounts: 2,4,6,8,10,12,14,16,18,20")
-    print(f"ðŸ“¹ Camera Status: Disabled at fraud ATMs")
-    print(f"ðŸ• Format: 2025-11-22T13:47:15.984Z (Zulu)")
+    print(f"📍 Running from: {os.getcwd()}")
+    print(f"🔗 Elasticsearch: http://localhost:30920")
+    print(f"📊 Index: fraud-workshop-atm")
+    print(f"👤 User: fraud")
+    print(f"🔧 Workers: 16")
+    print(f"📈 Events: 10,000")
+    print(f"🏧 Fraud Pattern: Structured $500 deposits every 30min")
+    print(f"📅 Fraud Timing: NOW-8d to NOW-1d, 9:00-21:00 (business hours)")
+    print(f"👥 Fraud Accounts: 2,4,6,8,10,12,14,16,18,20")
+    print(f"📹 Camera Status: Disabled at fraud ATMs")
+    print(f"🕐 Format: 2025-11-22T13:47:15.984Z (Zulu)")
     print("=" * 60)
     
     # Your configurations
@@ -622,13 +622,13 @@ def main():
     generator = ATMFraudGenerator(fraud_config, es_config)
     
     # Test connection to your Elasticsearch
-    print("\nðŸ” Testing Elasticsearch connection...")
+    print("\n🔍 Testing Elasticsearch connection...")
     if not generator.ingester.test_connection():
-        print("âš  Cannot connect to your Elasticsearch")
+        print("⚠ Cannot connect to your Elasticsearch")
         print(f"   Host: {es_config.host}")
         print(f"   Username: {es_config.username}")
         print(f"   Password: {es_config.password}")
-        print("\nðŸ’¡ Options:")
+        print("\n💡 Options:")
         print("   1. Check if Elasticsearch is running at the configured host")
         print("   2. Verify credentials are correct")
         print("   3. Generate data to files only (without Elasticsearch)")
@@ -638,7 +638,7 @@ def main():
             return
         
         # Generate without Elasticsearch
-        print("\nðŸš€ Generating ATM fraud data to files only...")
+        print("\n🚀 Generating ATM fraud data to files only...")
         start_time = time.time()
         
         # Generate events
@@ -659,15 +659,15 @@ def main():
         end_time = time.time()
         duration = end_time - start_time
         
-        print(f"\nâœ… Generated {len(all_events):,} events in {duration:.2f} seconds")
-        print(f"ðŸ“ Files saved: {json_file}, {csv_file}")
+        print(f"\n✅ Generated {len(all_events):,} events in {duration:.2f} seconds")
+        print(f"📁 Files saved: {json_file}, {csv_file}")
         return
     
     # Create your index
     generator.ingester.create_index_if_not_exists()
     
     # Generate and ingest with your settings
-    print(f"\nðŸš€ Starting ATM fraud data generation...")
+    print(f"\n🚀 Starting ATM fraud data generation...")
     start_time = time.time()
     
     results = generator.generate_and_ingest_threaded(
@@ -679,23 +679,38 @@ def main():
     duration = end_time - start_time
     
     # Display results
+    print(f"\n" + "=" * 60)
+    print("📊 ATM FRAUD WORKSHOP COMPLETE")
+    print("=" * 60)
+    print(f"Total Events Generated: {results['total_generated']:,}")
+    print(f"Successfully Indexed: {results['total_indexed']:,}")
+    print(f"Failed: {results['total_failed']:,}")
+    print(f"Duration: {duration:.2f} seconds")
+    print(f"Events/second: {results['total_generated']/duration:.2f}")
+    print(f"\n🎯 Your Elasticsearch Info:")
+    print(f"   Index: {es_config.index_name}")
+    print(f"   Host: {es_config.host}")
+    print(f"   Events: {results['total_indexed']:,}")
+    
+    if results['total_failed'] > 0:
+        print(f"\n⚠️ {results['total_failed']} events failed to index")
+    else:
+        print("\n✅ All events successfully indexed to your Elasticsearch!") 
+    # Display results
     # Display results
     print(f"\n" + "=" * 60)
     print("FRAUD WORKSHOP DATA GENERATION COMPLETE")
     print("=" * 60)
     print(f"\n DETECTION CHALLENGES:  🕵️")
-    print(f"\n ")
     print(f"\n Challenge 1")
-    print(f"   - Idenitfy account clustering and temporal pattern recognition")
+    print(f"   - Idenitfy account clustering between 2 accounts and time-pattern recognition")
     print(f"   - Structural amount analysis for SAR avoidance")
-    print(f"   - Wire correlation to an overseas bank")
-    print(f"\n ")
+    print(f"   - Wire correlation to a single overseas bank")
     print(f"\n Challenge 2")
     print(f"   - Identify layering technique to obscure money trail")
     print(f"   - Find the large SAR worthy cash deposit into an account")
     print(f"   - Trace the money through account hops")
     print(f"   - Notice the progression across 5 consecutive days")
-    print(f"\n ")
     print(f"\n Challenge 3")
     print(f"   - Find the structured deposits every 30 minutes for a week")
     print(f"   - Identify across all 10 smurfs/accounts")
