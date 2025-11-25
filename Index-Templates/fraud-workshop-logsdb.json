@@ -9,5 +9,8 @@
   "index_patterns": [
     "fraud-workshop-logsdb*"
   ],
+  "composed_of": [
+    "fraud-workshop-logsdb-mappings"
+  ],
   "allow_auto_create": true
 }
