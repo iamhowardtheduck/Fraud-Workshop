@@ -2,6 +2,8 @@
   "processors": [
     {
       "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
         "field": [
           "atm.camera_enabled",
           "atm.event",
@@ -17,9 +19,7 @@
           "atm.available_50",
           "atm.available_amount",
           "atm.paper_jam"
-        ],
-        "ignore_missing": true,
-        "ignore_failure": true
+        ]
       }
     }
   ]
