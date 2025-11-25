@@ -313,9 +313,7 @@
     }
   },
   "index_patterns": [
-    "fraud-workshop*",
-    "fraud-workshop-tsds*",
-    "testing*"
+    "fraud-workshop-tsds*"
   ],
   "composed_of": [],
   "ignore_missing_component_templates": [],
