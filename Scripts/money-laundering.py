@@ -51,7 +51,7 @@ except ImportError:
     missing_packages.append('elasticsearch')
 
 if missing_packages:
-    print("❌ Missing required packages. Install with:")
+    print("âŒ Missing required packages. Install with:")
     print(f"   pip install {' '.join(missing_packages)}")
     sys.exit(1)
 
@@ -97,7 +97,7 @@ class FraudConfig:
     
     def __post_init__(self):
         if self.target_accounts is None:
-            # Layering chain: 32687 → 16384 → 8192 → 4096 → 2048 (all within 1-35000)
+            # Layering chain: 32687 â†’ 16384 â†’ 8192 â†’ 4096 â†’ 2048 (all within 1-35000)
             self.target_accounts = [32687, 16384, 8192, 4096, 2048]
 
 @dataclass
@@ -209,9 +209,9 @@ class ElasticsearchIngester:
                 retry_on_timeout=True,
                 max_retries=3
             )
-            logger.info(f"📡 Connected to Elasticsearch: {self.config.host}")
+            logger.info(f"ðŸ“¡ Connected to Elasticsearch: {self.config.host}")
         except Exception as e:
-            logger.error(f"❌ Elasticsearch connection failed: {e}")
+            logger.error(f"âŒ Elasticsearch connection failed: {e}")
             self.es = None
     
     def test_connection(self) -> bool:
@@ -220,21 +220,21 @@ class ElasticsearchIngester:
             return False
         try:
             info = self.es.info()
-            logger.info(f"✅ Elasticsearch connection successful: {info['version']['number']}")
+            logger.info(f"âœ… Elasticsearch connection successful: {info['version']['number']}")
             return True
         except Exception as e:
-            logger.error(f"❌ Elasticsearch test failed: {e}")
+            logger.error(f"âŒ Elasticsearch test failed: {e}")
             return False
     
     def create_index_if_not_exists(self):
         """Create the fraud workshop index with mapping"""
         if not self.es:
-            logger.warning("⚠️ No Elasticsearch connection")
+            logger.warning("âš ï¸ No Elasticsearch connection")
             return
         
         try:
             if self.es.indices.exists(index=self.config.index_name):
-                logger.info(f"📋 Index '{self.config.index_name}' already exists")
+                logger.info(f"ðŸ“‹ Index '{self.config.index_name}' already exists")
                 return
             
             # Index mapping for fraud detection
@@ -265,14 +265,14 @@ class ElasticsearchIngester:
             }
             
             self.es.indices.create(index=self.config.index_name, body=mapping)
-            logger.info(f"📋 Created index: '{self.config.index_name}'")
+            logger.info(f"ðŸ“‹ Created index: '{self.config.index_name}'")
         except Exception as e:
-            logger.error(f"❌ Index creation failed: {e}")
+            logger.error(f"âŒ Index creation failed: {e}")
     
     def bulk_index_events(self, events: List[dict]) -> tuple:
         """Bulk index events to your Elasticsearch"""
         if not self.es:
-            logger.warning("⚠️ No Elasticsearch connection - skipping ingestion")
+            logger.warning("âš ï¸ No Elasticsearch connection - skipping ingestion")
             return 0, len(events)
         
         try:
@@ -299,7 +299,7 @@ class ElasticsearchIngester:
             return success_count, failed_count
         
         except Exception as e:
-            logger.error(f"❌ Bulk indexing failed: {e}")
+            logger.error(f"âŒ Bulk indexing failed: {e}")
             return 0, len(events)
 
 class FraudDataGenerator:
@@ -329,7 +329,7 @@ class FraudDataGenerator:
         events = []
         base_date = datetime.now(ZoneInfo(self.fraud_config.austin_tz))
         
-        logger.info("🔍 FRAUD SCENARIO: Money Laundering through Account Layering")
+        logger.info("ðŸ” FRAUD SCENARIO: Money Laundering through Account Layering")
 #        logger.info(f"   Initial deposit: ${self.fraud_config.initial_deposit_amount:,.2f}")
 #        logger.info(f"   Layering accounts: {self.fraud_config.target_accounts}")
 #        logger.info(f"   Timeframe: {self.fraud_config.days_back_max} days back to {self.fraud_config.days_back_min} day back")
@@ -534,7 +534,7 @@ class FraudDataGenerator:
         
         # Ingest to your Elasticsearch
         success_count, failed_count = self.ingester.bulk_index_events(worker_events)
-        logger.info(f"🔧 Worker {worker_id}: {success_count} indexed, {failed_count} failed")
+        logger.info(f"ðŸ”§ Worker {worker_id}: {success_count} indexed, {failed_count} failed")
         return {
             'worker_id': worker_id,
             'generated': len(worker_events),
@@ -544,7 +544,7 @@ class FraudDataGenerator:
     
     def generate_and_ingest_threaded(self, total_events: int, num_workers: int) -> dict:
         """Generate events using multiple threads and ingest to your Elasticsearch"""
-        logger.info(f"🚀 Starting threaded generation with Austin, TX configuration:")
+        logger.info(f"ðŸš€ Starting threaded generation with Austin, TX configuration:")
         logger.info(f"   Total events: {total_events:,}")
         logger.info(f"   Workers: {num_workers}")
         logger.info(f"   Banking hours: {self.fraud_config.banking_start_hour}:00 - {self.fraud_config.banking_end_hour}:00 (peak activity)")
@@ -566,7 +566,7 @@ class FraudDataGenerator:
         }
         
         # Generate money laundering scenario first
-        logger.info("🚨 Generating money laundering scenario...")
+        logger.info("ðŸš¨ Generating money laundering scenario...")
         ml_events = self.generate_money_laundering_scenario()
         
         # Convert ML events and ingest
@@ -577,13 +577,13 @@ class FraudDataGenerator:
             ml_events_dict.append(event_dict)
         
         ml_success, ml_failed = self.ingester.bulk_index_events(ml_events_dict)
-        logger.info(f"💰 ML Events: {ml_success} indexed to '{self.es_config.index_name}', {ml_failed} failed")
+        logger.info(f"ðŸ’° ML Events: {ml_success} indexed to '{self.es_config.index_name}', {ml_failed} failed")
         results['total_indexed'] += ml_success
         results['total_failed'] += ml_failed
         results['total_generated'] += len(ml_events_dict)
         
         # Generate noise events using your 16 workers
-        logger.info(f"🔀 Generating noise events with {num_workers} workers...")
+        logger.info(f"ðŸ”€ Generating noise events with {num_workers} workers...")
         
         with ThreadPoolExecutor(max_workers=num_workers) as executor:
             futures = []
@@ -604,7 +604,7 @@ class FraudDataGenerator:
                     results['total_indexed'] += worker_result['indexed']
                     results['total_failed'] += worker_result['failed']
                 except Exception as e:
-                    logger.error(f"❌ Worker failed: {e}")
+                    logger.error(f"âŒ Worker failed: {e}")
         
         return results
     
@@ -617,28 +617,28 @@ class FraudDataGenerator:
         json_file = os.path.join(output_dir, f"fraud_events_{timestamp}.json")
         with open(json_file, 'w') as f:
             json.dump(events, f, indent=2, default=str)
-        logger.info(f"💾 Saved JSON: {json_file}")
+        logger.info(f"ðŸ’¾ Saved JSON: {json_file}")
         
         # Save CSV
         csv_file = os.path.join(output_dir, f"fraud_events_{timestamp}.csv")
         df = pd.DataFrame(events)
         df.to_csv(csv_file, index=False)
-        logger.info(f"💾 Saved CSV: {csv_file}")
+        logger.info(f"ðŸ’¾ Saved CSV: {csv_file}")
         
         return json_file, csv_file
 
 def main():
     """Main function with Austin, TX timezone configuration"""
-    print("🏦 AML FRAUD WORKSHOP - YOUR CONFIGURATION")
+    print("ðŸ¦ AML FRAUD WORKSHOP - YOUR CONFIGURATION")
     print("=" * 60)
-    print(f"📁 Running from: {os.getcwd()}")
-    print(f"🔍 Elasticsearch: http://localhost:30920")
-    print(f"📊 Index: fraud-workshop-money-laundering")
-    print(f"👤 User: fraud")
-    print(f"⚡ Workers: 16")
-    print(f"📈 Events: 100,000")
-    print(f"🕘 Business Hours: 9:00 - 18:00 (peak activity)")
-    print(f"🕘 Extended Hours: 19:00 - 21:00 (reduced activity)")
+    print(f"ðŸ“ Running from: {os.getcwd()}")
+    print(f"ðŸ” Elasticsearch: http://localhost:30920")
+    print(f"ðŸ“Š Index: fraud-workshop-money-laundering")
+    print(f"ðŸ‘¤ User: fraud")
+    print(f"âš¡ Workers: 16")
+    print(f"ðŸ“ˆ Events: 100,000")
+    print(f"ðŸ•˜ Business Hours: 9:00 - 18:00 (peak activity)")
+    print(f"ðŸ•˜ Extended Hours: 19:00 - 21:00 (reduced activity)")
     print("=" * 60)
     
     # Your configurations
@@ -649,13 +649,13 @@ def main():
     generator = FraudDataGenerator(fraud_config, es_config)
     
     # Test connection to your Elasticsearch
-    print("\n🔌 Testing Elasticsearch connection...")
+    print("\nðŸ”Œ Testing Elasticsearch connection...")
     if not generator.ingester.test_connection():
-        print("❌ Cannot connect to your Elasticsearch")
+        print("âŒ Cannot connect to your Elasticsearch")
         print(f"   Host: {es_config.host}")
         print(f"   Username: {es_config.username}")
         print(f"   Password: {es_config.password}")
-        print("\n📋 Options:")
+        print("\nðŸ“‹ Options:")
         print("   1. Check if Elasticsearch is running at the configured host")
         print("   2. Verify credentials are correct")
         print("   3. Generate data to files only (without Elasticsearch)")
@@ -665,7 +665,7 @@ def main():
             return
         
         # Generate without Elasticsearch
-        print("\n📝 Generating fraud data to files only...")
+        print("\nðŸ“ Generating fraud data to files only...")
         start_time = time.time()
         
         # Generate events
@@ -686,15 +686,15 @@ def main():
         end_time = time.time()
         duration = end_time - start_time
         
-        print(f"\n✅ Generated {len(all_events):,} events in {duration:.2f} seconds")
-        print(f"📄 Files saved: {json_file}, {csv_file}")
+        print(f"\nâœ… Generated {len(all_events):,} events in {duration:.2f} seconds")
+        print(f"ðŸ“„ Files saved: {json_file}, {csv_file}")
         return
     
     # Create your index
     generator.ingester.create_index_if_not_exists()
     
     # Generate and ingest with your settings
-    print(f"\n🎯 Starting fraud data generation...")
+    print(f"\nðŸŽ¯ Starting fraud data generation...")
     start_time = time.time()
     
     results = generator.generate_and_ingest_threaded(
@@ -709,7 +709,7 @@ def main():
     print(f"\n" + "=" * 60)
     print("FRAUD WORKSHOP MONEY LAUNDERING DATA GENERATION COMPLETE")
     print("=" * 60)
-    print(f"\n📈 Generation Statistics:")
+    print(f"\nðŸ“ˆ Generation Statistics:")
     print(f"   Total Generated: {results['total_generated']:,} events")
     print(f"   Total Indexed: {results['total_indexed']:,} events")
     print(f"   Total Failed: {results['total_failed']:,} events")
