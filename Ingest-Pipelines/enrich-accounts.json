@@ -1,12 +1,13 @@
+PUT _ingest/pipeline/enrich-accounts
 {
   "processors": [
     {
       "enrich": {
-        "ignore_failure": true,
-        "policy_name": "enrich-accounts",
-        "ignore_missing": true,
         "field": "accountID",
-        "target_field": "1"
+        "policy_name": "enrich-accountsint",
+        "target_field": "1",
+        "ignore_missing": true,
+        "ignore_failure": true
       }
     },
     {
