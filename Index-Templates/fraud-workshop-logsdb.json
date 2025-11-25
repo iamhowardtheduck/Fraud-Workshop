@@ -2,7 +2,8 @@
   "template": {
     "settings": {
       "index": {
-        "mode": "logsdb"
+        "mode": "logsdb",
+        "default_pipeline": "fraud-detection-enrich"
       }
     }
   },
