@@ -3,7 +3,7 @@
     {
       "enrich": {
         "field": "accountID",
-        "policy_name": "enrich-accountsint",
+        "policy_name": "enrich-accounts",
         "target_field": "1",
         "ignore_missing": true,
         "ignore_failure": true
