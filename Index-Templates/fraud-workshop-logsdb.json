@@ -1,9 +1,14 @@
 {
   "template": {
+    "mappings": {
+      "_source": {
+        "mode": "synthetic"
+      }
+    },
     "settings": {
       "index": {
-        "mode": "logsdb",
-        "default_pipeline": "fraud-detection-enrich"
+        "default_pipeline": "fraud-detection-enrich",
+        "mode": "logsdb"
       }
     }
   },
@@ -13,5 +18,6 @@
   "composed_of": [
     "fraud-workshop-logsdb-mappings"
   ],
+  "ignore_missing_component_templates": [],
   "allow_auto_create": true
 }
