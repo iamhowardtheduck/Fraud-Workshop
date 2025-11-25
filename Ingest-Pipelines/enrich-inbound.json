@@ -2,74 +2,150 @@
   "processors": [
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "austinbank.name",
-        "target_field": "wire.inbound.bank_name"
+        "target_field": "wire.inbound.bank_name",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "intbank.name",
-        "target_field": "wire.inbound.bank_name"
+        "target_field": "wire.inbound.bank_name",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "austinbank.routing_number",
-        "target_field": "wire.inbound.routing_number"
+        "target_field": "wire.inbound.routing_number",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "intbank.ach",
-        "target_field": "wire.inbound.routing_number"
+        "target_field": "wire.inbound.routing_number",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "austinbank.swiftID",
-        "target_field": "wire.inbound.swiftID"
+        "target_field": "wire.inbound.swiftID",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "intbank.swiftID",
-        "target_field": "wire.inbound.swiftID"
+        "target_field": "wire.inbound.swiftID",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "intbank.country",
-        "target_field": "wire.inbound.country"
+        "target_field": "wire.inbound.country",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "intbank.country_code",
-        "target_field": "wire.inbound.country_code"
+        "target_field": "wire.inbound.country_code",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "intbank.ip",
-        "target_field": "wire.inbound.ip"
+        "target_field": "wire.inbound.ip",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
+      }
+    },
+    {
+      "set": {
+        "ignore_failure": true,
+        "field": "wire.direction",
+        "value": "inbound",
+        "if": "ctx.wire?.direction == 'incoming_domestic'"
+      }
+    },
+    {
+      "set": {
+        "field": "event.type",
+        "value": "credit",
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
+      }
+    },
+    {
+      "enrich": {
+        "field": "txbankId",
+        "policy_name": "enrich-inbounds",
+        "target_field": "enrich-inbounds",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-inbounds.austinbank.name",
+        "target_field": "wire.inbound.bank_name",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-inbounds.austinbank.routing_number",
+        "target_field": "wire.inbound.routing_number",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "enrich-inbounds.austinbank.swiftID",
+        "target_field": "wire.inbound.swiftID",
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
+      }
+    },
+    {
+      "remove": {
+        "field": [
+          "enrich-inbounds.austinbank.address",
+          "enrich-inbounds.txbankId",
+          "enrich-inbounds.austinbank.name",
+          "enrich-inbounds.austinbank.routing_number",
+          "enrich-inbounds.austinbank.swiftID"
+        ],
+        "ignore_missing": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'",
+        "ignore_failure": true
       }
     }
   ]
