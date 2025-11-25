@@ -15,12 +15,16 @@ import random
 import time
 import sys
 import os
+import urllib3
 from datetime import datetime, timedelta
 from dataclasses import dataclass, asdict
 from typing import Optional, List
 import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from zoneinfo import ZoneInfo
+
+# Suppress SSL warnings for Elasticsearch connections
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -326,9 +330,9 @@ class FraudDataGenerator:
         base_date = datetime.now(ZoneInfo(self.fraud_config.austin_tz))
         
         logger.info("🔍 FRAUD SCENARIO: Money Laundering through Account Layering")
-        logger.info(f"   Initial deposit: ${self.fraud_config.initial_deposit_amount:,.2f}")
-        logger.info(f"   Layering accounts: {self.fraud_config.target_accounts}")
-        logger.info(f"   Timeframe: {self.fraud_config.days_back_max} days back to {self.fraud_config.days_back_min} day back")
+#        logger.info(f"   Initial deposit: ${self.fraud_config.initial_deposit_amount:,.2f}")
+#        logger.info(f"   Layering accounts: {self.fraud_config.target_accounts}")
+#        logger.info(f"   Timeframe: {self.fraud_config.days_back_max} days back to {self.fraud_config.days_back_min} day back")
         
         # Day 1 (NOW-8d): Large structured cash deposit
         day_1_time = self.time_generator.generate_specific_datetime(8, base_date)
@@ -427,7 +431,7 @@ class FraudDataGenerator:
         ))
         
         logger.info(f"   Generated {len(events)} money laundering events")
-        logger.info(f"   Final amount wired: ${final_amount:,.2f}")
+#        logger.info(f"   Final amount wired: ${final_amount:,.2f}")
         
         return events
     
@@ -545,9 +549,9 @@ class FraudDataGenerator:
         logger.info(f"   Workers: {num_workers}")
         logger.info(f"   Banking hours: {self.fraud_config.banking_start_hour}:00 - {self.fraud_config.banking_end_hour}:00 (peak activity)")
         logger.info(f"   Peak hour: {self.fraud_config.peak_hour}:00 (noon)")
-        logger.info(f"   Activity until: {self.fraud_config.activity_end_hour}:00 (9 PM)")
+ #       logger.info(f"   Activity until: {self.fraud_config.activity_end_hour}:00 (9 PM)")
         logger.info(f"   Event timeframe: NOW-{self.fraud_config.days_back_max}d to NOW")
-        logger.info(f"   Fraud events: NOW-{self.fraud_config.days_back_max}d to NOW-{self.fraud_config.days_back_min}d")
+ #       logger.info(f"   Fraud events: NOW-{self.fraud_config.days_back_max}d to NOW-{self.fraud_config.days_back_min}d")
         logger.info(f"   Timezone: {self.fraud_config.austin_tz}")
         
         # Calculate events per worker
