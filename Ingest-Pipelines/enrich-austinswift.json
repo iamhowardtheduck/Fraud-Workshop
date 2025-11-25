@@ -11,26 +11,26 @@
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "4.austinbank.name",
-        "target_field": "austinbank.name"
+        "target_field": "wire.inbound.bank_name",
+        "ignore_missing": true,
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "4.austinbank.routing_number",
-        "target_field": "austinbank.routing_number"
+        "target_field": "wire.inbound.routing_number",
+        "ignore_missing": true,
+        "ignore_failure": true
       }
     },
     {
       "rename": {
-        "ignore_failure": true,
-        "ignore_missing": true,
         "field": "4.austinbank.swiftID",
-        "target_field": "austinbank.swiftID"
+        "target_field": "wire.inbound.swiftID",
+        "ignore_missing": true,
+        "ignore_failure": true
       }
     }
   ]
