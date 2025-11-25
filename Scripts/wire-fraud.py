@@ -358,7 +358,7 @@ class FraudDataGenerator:
         for day in range(1, 8):  # NOW-7d to NOW-1d (7 days of deposits)
             for account_id in target_accounts['checking']:
                 if random.random() < 0.9:  # 90% chance of deposit per day
-                    amount = round(random.uniform(9000.01, 9999.89), 2)
+                    amount = round(random.uniform(9250.00, 9500.00), 2)
                     
                     # Generate fraud datetime specifically between 4-5 PM Austin time
                     base_date = datetime.now(ZoneInfo(self.fraud_config.austin_tz))
@@ -428,8 +428,9 @@ class FraudDataGenerator:
             wire_count += 1
         
         # Generate decoy large transactions (other accounts, different patterns)
-        decoy_accounts = [1234, 5678, 9012, 3456, 7890, 2468, 1357, 8642, 9753, 4681, 
-                         2579, 3691, 8524, 7413, 9876]
+        decoy_accounts = [1234, 5678, 9012, 3456]
+#        decoy_accounts = [1234, 5678, 9012, 3456, 7890, 2468, 1357, 8642, 9753, 4681, 
+#                         2579, 3691, 8524, 7413, 9876]
         decoy_banks = [1, 3, 7, 11, 15, 19, 23, 25]  # Different bank IDs (not 20)
         
         for _ in range(random.randint(10, 15)):  # 10-15 decoy transactions
@@ -702,7 +703,7 @@ def main():
     print("=" * 60)
     print(f"📍 Running from: {os.getcwd()}")
     print(f"🔗 Elasticsearch: http://localhost:30920")
-    print(f"📊 Index: fraud-workshop")
+    print(f"📊 Index: fraud-workshop-logsdb")
     print(f"👤 User: fraud")
     print(f"🔧 Workers: 16")
     print(f"📈 Events: 10,000")
@@ -781,11 +782,24 @@ def main():
     
     # Display results
     print(f"\n" + "=" * 60)
-    print("📊 WIRE FRAUD SCNERAIO DATA GENERATION COMPLETE")
+    print("📊 WORKSHOP DATA GENERATION COMPLETE")
     print("=" * 60)
     print(f"Total Events Generated: {results['total_generated']:,}")
+    print(f"Successfully Indexed: {results['total_indexed']:,}")
+    print(f"Failed: {results['total_failed']:,}")
     print(f"Duration: {duration:.2f} seconds")
     print(f"Events/second: {results['total_generated']/duration:.2f}")
+    print(f"\n🎯 Your Elasticsearch Info:")
+    print(f"   Index: {es_config.index_name}")
+    print(f"   Host: {es_config.host}")
+    print(f"   Events: {results['total_indexed']:,}")
+    
+    if results['total_failed'] > 0:
+        print(f"\n⚠️ {results['total_failed']} events failed to index")
+    else:
+        print("\n✅ All events successfully indexed to your Elasticsearch!")
+    
+    print(f"\n🕵️ Start detecting fraud in index '{es_config.index_name}'!")
 
 if __name__ == "__main__":
     main()
