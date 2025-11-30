@@ -41,7 +41,7 @@ except ImportError:
     missing_packages.append('elasticsearch')
 
 if missing_packages:
-    print("⚠ Missing required packages. Install with:")
+    print("âš  Missing required packages. Install with:")
     print(f"   pip install {' '.join(missing_packages)}")
     sys.exit(1)
 
@@ -50,7 +50,7 @@ if missing_packages:
 class ElasticsearchConfig:
     """Your Elasticsearch configuration - hard-coded"""
     host: str = "http://localhost:30920"
-    index_name: str = "fraud-workshop-logsdb-wire-fraud"
+    index_name: str = "fraud-workshop-wire-fraud"
     username: str = "fraud"
     password: str = "hunter"
     workers: int = 16
@@ -234,13 +234,13 @@ class ElasticsearchIngester:
             return Elasticsearch(**client_config)
             
         except Exception as e:
-            logger.error(f"⚠ Failed to create Elasticsearch client: {e}")
+            logger.error(f"âš  Failed to create Elasticsearch client: {e}")
             return None
     
     def test_connection(self) -> bool:
         """Test connection to your Elasticsearch"""
         if not self.es:
-            logger.error("⚠ Elasticsearch client not initialized")
+            logger.error("âš  Elasticsearch client not initialized")
             return False
             
         try:
@@ -251,13 +251,13 @@ class ElasticsearchIngester:
             else:
                 version = info.get('version', {}).get('number', 'unknown')
             
-            logger.info(f"✅ Connected to Elasticsearch at {self.config.host}")
+            logger.info(f"âœ… Connected to Elasticsearch at {self.config.host}")
             logger.info(f"   Version: {version}")
             logger.info(f"   Index: {self.config.index_name}")
             logger.info(f"   Workers: {self.config.workers}")
             return True
         except Exception as e:
-            logger.error(f"⚠ Failed to connect to Elasticsearch: {e}")
+            logger.error(f"âš  Failed to connect to Elasticsearch: {e}")
             logger.error(f"   Host: {self.config.host}")
             logger.error(f"   Credentials: {self.config.username} / {self.config.password}")
             return False
@@ -269,7 +269,7 @@ class ElasticsearchIngester:
             
         try:
             if self.es.indices.exists(index=self.config.index_name):
-                logger.info(f"📋 Index '{self.config.index_name}' already exists")
+                logger.info(f"ðŸ“‹ Index '{self.config.index_name}' already exists")
                 return
             
             mapping = {
@@ -297,10 +297,10 @@ class ElasticsearchIngester:
             }
             
             self.es.indices.create(index=self.config.index_name, body=mapping)
-            logger.info(f"✅ Created index '{self.config.index_name}'")
+            logger.info(f"âœ… Created index '{self.config.index_name}'")
             
         except Exception as e:
-            logger.error(f"⚠ Failed to create index: {e}")
+            logger.error(f"âš  Failed to create index: {e}")
     
     def bulk_index_events(self, events: List[dict], chunk_size: int = 500) -> tuple:
         """Bulk index events to your Elasticsearch"""
@@ -331,7 +331,7 @@ class ElasticsearchIngester:
             return success_count, len(failed_items) if failed_items else 0
             
         except Exception as e:
-            logger.error(f"⚠ Bulk indexing failed: {e}")
+            logger.error(f"âš  Bulk indexing failed: {e}")
             return 0, len(events)
 
 class FraudDataGenerator:
@@ -606,7 +606,7 @@ class FraudDataGenerator:
         
         # Ingest to your Elasticsearch
         success_count, failed_count = self.ingester.bulk_index_events(worker_events)
-        logger.info(f"🔧 Worker {worker_id}: {success_count} indexed, {failed_count} failed")
+        logger.info(f"ðŸ”§ Worker {worker_id}: {success_count} indexed, {failed_count} failed")
         return {
             'worker_id': worker_id,
             'generated': len(worker_events),
@@ -616,7 +616,7 @@ class FraudDataGenerator:
     
     def generate_and_ingest_threaded(self, total_events: int, num_workers: int) -> dict:
         """Generate events using multiple threads and ingest to your Elasticsearch"""
-        logger.info(f"🚀 Starting threaded generation with Austin, TX configuration:")
+        logger.info(f"ðŸš€ Starting threaded generation with Austin, TX configuration:")
         logger.info(f"   Total events: {total_events:,}")
         logger.info(f"   Workers: {num_workers}")
         logger.info(f"   Banking hours: {self.fraud_config.banking_start_hour}:00 - {self.fraud_config.banking_end_hour}:00 (peak activity)")
@@ -653,7 +653,7 @@ class FraudDataGenerator:
         results['total_generated'] += len(ml_events_dict)
         
         # Generate noise events using your 16 workers
-        logger.info(f"📊 Generating noise events with {num_workers} workers...")
+        logger.info(f"ðŸ“Š Generating noise events with {num_workers} workers...")
         
         with ThreadPoolExecutor(max_workers=num_workers) as executor:
             futures = []
@@ -674,7 +674,7 @@ class FraudDataGenerator:
                     results['total_indexed'] += worker_result['indexed']
                     results['total_failed'] += worker_result['failed']
                 except Exception as e:
-                    logger.error(f"⚠ Worker failed: {e}")
+                    logger.error(f"âš  Worker failed: {e}")
         
         return results
     
@@ -687,33 +687,33 @@ class FraudDataGenerator:
         json_file = os.path.join(output_dir, f"fraud_events_{timestamp}.json")
         with open(json_file, 'w') as f:
             json.dump(events, f, indent=2, default=str)
-        logger.info(f"💾 Saved JSON: {json_file}")
+        logger.info(f"ðŸ’¾ Saved JSON: {json_file}")
         
         # Save CSV
         csv_file = os.path.join(output_dir, f"fraud_events_{timestamp}.csv")
         df = pd.DataFrame(events)
         df.to_csv(csv_file, index=False)
-        logger.info(f"💾 Saved CSV: {csv_file}")
+        logger.info(f"ðŸ’¾ Saved CSV: {csv_file}")
         
         return json_file, csv_file
 
 def main():
     """Main function with Austin, TX timezone configuration"""
-    print("💰 AML FRAUD WORKSHOP - AUSTIN, TX CONFIGURATION")
+    print("ðŸ’° AML FRAUD WORKSHOP - AUSTIN, TX CONFIGURATION")
     print("=" * 60)
-    print(f"📍 Running from: {os.getcwd()}")
-    print(f"🔗 Elasticsearch: http://localhost:30920")
-    print(f"📊 Index: fraud-workshop-logsdb")
-    print(f"👤 User: fraud")
-    print(f"🔧 Workers: 16")
-    print(f"📈 Events: 10,000")
-    print(f"🏦 Banking Hours: 9:00 - 18:00 (peak activity)")
-    print(f"⏰ Peak: 12:00 (noon)")
-    print(f"🌆 Activity until: 21:00 (9 PM)")
-    print(f"🕐 Timeframe: NOW-8d to NOW")
-    print(f"🚨 Fraud Events: NOW-8d to NOW-1d") 
-    print(f"🌍 Timezone: America/Chicago (Austin, TX)")
-    print(f"📅 Format: 2025-11-22T13:47:15.984Z (Zulu)")
+    print(f"ðŸ“ Running from: {os.getcwd()}")
+    print(f"ðŸ”— Elasticsearch: http://localhost:30920")
+    print(f"ðŸ“Š Index: fraud-workshop")
+    print(f"ðŸ‘¤ User: fraud")
+    print(f"ðŸ”§ Workers: 16")
+    print(f"ðŸ“ˆ Events: 10,000")
+    print(f"ðŸ¦ Banking Hours: 9:00 - 18:00 (peak activity)")
+    print(f"â° Peak: 12:00 (noon)")
+    print(f"ðŸŒ† Activity until: 21:00 (9 PM)")
+    print(f"ðŸ• Timeframe: NOW-8d to NOW")
+    print(f"ðŸš¨ Fraud Events: NOW-8d to NOW-1d") 
+    print(f"ðŸŒ Timezone: America/Chicago (Austin, TX)")
+    print(f"ðŸ“… Format: 2025-11-22T13:47:15.984Z (Zulu)")
     print("=" * 60)
     
     # Your configurations
@@ -724,13 +724,13 @@ def main():
     generator = FraudDataGenerator(fraud_config, es_config)
     
     # Test connection to your Elasticsearch
-    print("\n🔍 Testing Elasticsearch connection...")
+    print("\nðŸ” Testing Elasticsearch connection...")
     if not generator.ingester.test_connection():
-        print("⚠ Cannot connect to your Elasticsearch")
+        print("âš  Cannot connect to your Elasticsearch")
         print(f"   Host: {es_config.host}")
         print(f"   Username: {es_config.username}")
         print(f"   Password: {es_config.password}")
-        print("\n💡 Options:")
+        print("\nðŸ’¡ Options:")
         print("   1. Check if Elasticsearch is running at the configured host")
         print("   2. Verify credentials are correct")
         print("   3. Generate data to files only (without Elasticsearch)")
@@ -740,7 +740,7 @@ def main():
             return
         
         # Generate without Elasticsearch
-        print("\n🚀 Generating fraud data to files only...")
+        print("\nðŸš€ Generating fraud data to files only...")
         start_time = time.time()
         
         # Generate events
@@ -761,15 +761,15 @@ def main():
         end_time = time.time()
         duration = end_time - start_time
         
-        print(f"\n✅ Generated {len(all_events):,} events in {duration:.2f} seconds")
-        print(f"📁 Files saved: {json_file}, {csv_file}")
+        print(f"\nâœ… Generated {len(all_events):,} events in {duration:.2f} seconds")
+        print(f"ðŸ“ Files saved: {json_file}, {csv_file}")
         return
     
     # Create your index
     generator.ingester.create_index_if_not_exists()
     
     # Generate and ingest with your settings
-    print(f"\n🚀 Starting fraud data generation...")
+    print(f"\nðŸš€ Starting fraud data generation...")
     start_time = time.time()
     
     results = generator.generate_and_ingest_threaded(
@@ -782,24 +782,24 @@ def main():
     
     # Display results
     print(f"\n" + "=" * 60)
-    print("📊 WORKSHOP DATA GENERATION COMPLETE")
+    print("ðŸ“Š WORKSHOP DATA GENERATION COMPLETE")
     print("=" * 60)
     print(f"Total Events Generated: {results['total_generated']:,}")
     print(f"Successfully Indexed: {results['total_indexed']:,}")
     print(f"Failed: {results['total_failed']:,}")
     print(f"Duration: {duration:.2f} seconds")
     print(f"Events/second: {results['total_generated']/duration:.2f}")
-    print(f"\n🎯 Your Elasticsearch Info:")
+    print(f"\nðŸŽ¯ Your Elasticsearch Info:")
     print(f"   Index: {es_config.index_name}")
     print(f"   Host: {es_config.host}")
     print(f"   Events: {results['total_indexed']:,}")
     
     if results['total_failed'] > 0:
-        print(f"\n⚠️ {results['total_failed']} events failed to index")
+        print(f"\nâš ï¸ {results['total_failed']} events failed to index")
     else:
-        print("\n✅ All events successfully indexed to your Elasticsearch!")
+        print("\nâœ… All events successfully indexed to your Elasticsearch!")
     
-    print(f"\n🕵️ Start detecting fraud in index '{es_config.index_name}'!")
+    print(f"\nðŸ•µï¸ Start detecting fraud in index '{es_config.index_name}'!")
 
 if __name__ == "__main__":
     main()
