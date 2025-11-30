@@ -703,7 +703,7 @@ def main():
     print("=" * 60)
     print(f"\n DETECTION CHALLENGES:  🕵️")
     print(f"\n Challenge 1")
-    print(f"   - Idenitfy account clustering between 2 accounts and time-pattern recognition")
+    print(f"   - Identify account clustering between 2 accounts and time-pattern recognition")
     print(f"   - Structural amount analysis for SAR avoidance")
     print(f"   - Wire correlation to a single overseas bank")
     print(f"\n Challenge 2")
