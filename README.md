@@ -1,2 +1,2 @@
 # Fraud-Workshop
-Money laundering, smurfing accounts, ATM fraud, gift cards fraud and more.
+Wire fraud, money laundering, and smurfing with ATMs!
