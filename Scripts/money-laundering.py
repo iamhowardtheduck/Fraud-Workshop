@@ -60,7 +60,7 @@ if missing_packages:
 class ElasticsearchConfig:
     """Your Elasticsearch configuration - hard-coded"""
     host: str = "http://localhost:30920"
-    index_name: str = "fraud-workshop-logsdb-money-laundering"
+    index_name: str = "fraud-workshop-money-laundering"
     username: str = "fraud"
     password: str = "hunter"
     workers: int = 16
@@ -354,7 +354,7 @@ class FraudDataGenerator:
             to_account = self.fraud_config.target_accounts[day - 1]
             
             # Subtract small fee for transfer
-            fee_amount = round(random.uniform(15.00, 35.00), 2)
+            fee_amount = round(random.uniform(15.00, 15.00), 2)
             transfer_amount = round(current_amount - fee_amount, 2)
             
             day_time = self.time_generator.generate_specific_datetime(8 - day + 1, base_date)
@@ -403,7 +403,7 @@ class FraudDataGenerator:
         final_account = self.fraud_config.target_accounts[-1]  # 2048
         
         # International wire fee
-        intl_fee = round(random.uniform(45.00, 85.00), 2)
+        intl_fee = round(random.uniform(45.00, 45.00), 2)
         final_amount = round(current_amount - intl_fee, 2)
         
         # International wire transfer
