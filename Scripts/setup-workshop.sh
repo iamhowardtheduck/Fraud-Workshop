@@ -45,8 +45,8 @@ curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-works
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop-wire-fraud" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-wire-fraud*", "name": "Wire-Fraud", "timeFieldName": "@timestamp"  }}' 
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop-smurfing" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-smurfing*", "name": "Smurfing", "timeFieldName": "@timestamp"  }}'
 
-# Load saved-search for assignment starts
-curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u fraud:hunter -F "file=@/root/Fraud-Workshop/Saved-Searches/Wire-Fraud-SSS.ndjson"
+# Load saved-searches for assignment starts
+curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u fraud:hunter -F "file=@/root/Fraud-Workshop/Saved-Searches/3-StartSavedSearches.ndjson"
 
 
 # Load component templates
