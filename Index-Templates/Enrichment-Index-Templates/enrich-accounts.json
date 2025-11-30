@@ -14,6 +14,10 @@
             "address": {
               "type": "keyword"
             },
+            
+            "ID": {
+              "type": "keyword"
+            },
             "savings_opened": {
               "format": "strict_date_optional_time||epoch_millis||YYYY-MM-DD",
               "index": true,
