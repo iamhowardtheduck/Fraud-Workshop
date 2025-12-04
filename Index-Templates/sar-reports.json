@@ -1,0 +1,80 @@
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "suspect_address": {
+          "type": "keyword"
+        },
+        "account_number": {
+          "type": "keyword"
+        },
+        "suspicious_activity_date": {
+          "type": "date"
+        },
+        "suspect_first_name": {
+          "type": "keyword"
+        },
+        "financial_institution_address": {
+          "type": "keyword"
+        },
+        "financial_institution_state": {
+          "type": "keyword"
+        },
+        "activity_description": {
+          "type": "text"
+        },
+        "suspect_phone": {
+          "type": "keyword"
+        },
+        "suspect_city": {
+          "type": "keyword"
+        },
+        "financial_institution_ein": {
+          "type": "keyword"
+        },
+        "financial_institution_city": {
+          "type": "keyword"
+        },
+        "suspect_state": {
+          "type": "keyword"
+        },
+        "@timestamp": {
+          "type": "date"
+        },
+        "financial_institution_name": {
+          "type": "keyword"
+        },
+        "activity_type": {
+          "type": "keyword"
+        },
+        "financial_institution_zip": {
+          "type": "keyword"
+        },
+        "suspect_last_name": {
+          "type": "keyword"
+        },
+        "suspect_zip": {
+          "type": "keyword"
+        },
+        "total_dollar_amount": {
+          "type": "float"
+        },
+        "report_date": {
+          "type": "date"
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_replicas": "0",
+        "mode": "lookup"
+      }
+    }
+  },
+  "index_patterns": [
+    "sar-reports*"
+  ],
+  "composed_of": [],
+  "ignore_missing_component_templates": [],
+  "allow_auto_create": true
+}
