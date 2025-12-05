@@ -1,0 +1,203 @@
+{
+  "processors": [
+    {
+      "rename": {
+        "field": "document.timestamp",
+        "target_field": "timestamp",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.report_date",
+        "target_field": "report_date",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspicious_activity_date",
+        "target_field": "suspicious_activity_date",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "date": {
+        "field": "timestamp",
+        "formats": [
+          "EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('zzzz')'"
+        ],
+        "ignore_failure": true
+      }
+    },
+    {
+      "date": {
+        "field": "report_date",
+        "formats": [
+          "EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('zzzz')'"
+        ],
+        "target_field": "report_date",
+        "ignore_failure": true
+      }
+    },
+    {
+      "date": {
+        "field": "suspicious_activity_date",
+        "formats": [
+          "EEE MMM dd yyyy HH:mm:ss 'GMT'Z '('zzzz')'"
+        ],
+        "target_field": "suspicious_activity_date",
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.total_dollar_amount",
+        "target_field": "total_dollar_amount",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.activity_description",
+        "target_field": "activity_description",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.activity_type",
+        "target_field": "activity_type",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.financial_institution_address",
+        "target_field": "financial_institution_address",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.financial_institution_city",
+        "target_field": "financial_institution_city",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.financial_institution_ein",
+        "target_field": "financial_institution_ein",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.financial_institution_name",
+        "target_field": "financial_institution_name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.financial_institution_state",
+        "target_field": "financial_institution_state",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.financial_institution_zip",
+        "target_field": "financial_institution_zip",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_address",
+        "target_field": "suspect_address",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_city",
+        "target_field": "suspect_city",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_first_name",
+        "target_field": "suspect_first_name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_last_name",
+        "target_field": "suspect_last_name",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_phone",
+        "target_field": "suspect_phone",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_state",
+        "target_field": "suspect_state",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspect_zip",
+        "target_field": "suspect_zip",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "document.suspicious_activity_date",
+        "target_field": "suspicious_activity_date",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "remove": {
+        "field": [
+          "timestamp",
+          "timestamp.keyword"
+        ],
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
