@@ -67,7 +67,8 @@
     "settings": {
       "index": {
         "number_of_replicas": "0",
-        "mode": "lookup"
+        "mode": "lookup",
+        "default_pipeline": "sar-reports"
       }
     }
   },
