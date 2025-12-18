@@ -142,7 +142,7 @@ echo
 echo "Enrichment policies executed"
 echo
 
-# Creat ingest pipelines
+# Create ingest pipelines
 curl -X PUT "http://localhost:30920/_ingest/pipeline/atm-cleanup" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/atm-cleanup.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-accounts" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-accounts.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-austinbanks" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-austinbanks.json
@@ -158,6 +158,43 @@ curl -X PUT "http://localhost:30920/_ingest/pipeline/fraud-detection-enrich" -H 
 echo
 echo "Ingest pipelines loaded"
 echo
+
+echo
+echo "Deploying our Suspicous Activity Reporting Agent"
+echo
+
+# Create Suspicious Activity Reporting Agent 
+#!/usr/bin/env bash
+set -euo pipefail
+
+BASE_URL="http://localhost:30002/api/agent_builder/agents"
+USER="fraud:hunter"
+DATA_DIR="/root/Fraud-Workshop/Agents"
+
+declare -A SOURCES=(
+  [SARA]="SARA.json"
+)
+
+for index in "${!SOURCES[@]}"; do
+  file="${DATA_DIR}/${SOURCES[$index]}"
+  output="bulk_${index}_response.json"
+
+  echo "Uploading $file to index [$index]..."
+
+  curl --progress-bar \
+    -X POST "$BASE_URL" \
+    -H "Content-Type: application/json" \
+    -H "kbn-xsrf: true" \
+    -u "$USER" \
+    -d "@$file" \
+    -o "$output"
+
+  echo "  --> Done. Response saved to $output"
+  echo
+done
+
+
+#curl -X POST "http://localhost:30002/api/agent_builder/agents"  -H "Content-Type: application/json" -H "kbn-xsrf: true"  -u "fraud:hunter" -d @/root/Fraud-Workshop/Agents/SARA.json
 
 # Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
