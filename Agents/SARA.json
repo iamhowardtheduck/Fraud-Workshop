@@ -1,7 +1,8 @@
 {
    "id":"suspicious_activity_reporting_agent",
    "name":"SARA",
-   "type": "chat",
+   "avatar_color": "#016bff",
+   "avatar_symbol": "S",
    "description":"To assist with identifying fraudulent transactions.",
    "labels": ["fraud", "sar"],
    "configuration":{
