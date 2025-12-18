@@ -16,8 +16,7 @@
                "platform.core.execute_esql",
                "platform.core.generate_esql",
                "platform.core.create_visualization",
-               "platform.core.index_explorer",
-               "sar-creator-for-wires"
+               "platform.core.index_explorer"
             ]
          }
       ]
