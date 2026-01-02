@@ -25,10 +25,10 @@ curl -X POST "http://localhost:30920/_security/user/fraud" -H "Content-Type: app
 }'
 
 # Install LLM Connector
-bash /opt/workshops/elastic-llm.sh -k false -m anthropic -d true
+bash /opt/workshops/elastic-llm.sh -k false -m gpt-4.1 -d true
 
 echo
-echo "AWS Bedrock AI Assistant Connector configured as OpenAI"
+echo "GPT 4.1 AI Assistant Connector configured as OpenAI"
 echo
 
 # Enable workflows
