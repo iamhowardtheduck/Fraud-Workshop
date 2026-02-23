@@ -25,7 +25,7 @@ curl -X POST "http://localhost:30920/_security/user/fraud" -H "Content-Type: app
 }'
 
 # Install LLM Connector
-bash /opt/workshops/elastic-llm.sh -k false -m gpt-4.1 -d true
+bash /opt/workshops/elastic-llm.sh -k false -m claude-sonnet-4 -d true
 
 echo
 echo "GPT 4.1 AI Assistant Connector configured as OpenAI"
