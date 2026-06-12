@@ -25,10 +25,10 @@ curl -X POST "http://localhost:30920/_security/user/fraud" -H "Content-Type: app
 }'
 
 # Update existing elastic-llm.sh
-cp /root/Fraud-Workshop/Scripts/elastic-llm.sh /opt/workshops/elastic-llm.sh
+#cp /root/Fraud-Workshop/Scripts/elastic-llm.sh /opt/workshops/elastic-llm.sh
 
 # Install LLM Connector
-bash /opt/workshops/elastic-llm.sh -m claude-sonnet-4 -k false -d true -n claude-sonnet-4.6
+bash /opt/workshops/elastic-llm.sh -m claude-opus-4-7 -k false -d true 
 #bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true
 #bash /opt/workshops/elastic-llm.sh -m gpt-5.2 -k false -d true -n gpt5-connector -P curriculum-development
 
