@@ -32,10 +32,6 @@ bash /opt/workshops/elastic-llm.sh -m claude-sonnet-4 -k false -d true -n claude
 #bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true
 #bash /opt/workshops/elastic-llm.sh -m gpt-5.2 -k false -d true -n gpt5-connector -P curriculum-development
 
-echo
-echo "GPT-5.2 AI Connector configured as gpt5-connector"
-echo
-
 # Enable workflows
 curl -X POST "http://localhost:30002/api/kibana/settings" -H "Content-Type: application/json" -H "kbn-xsrf: true" -H "x-elastic-internal-origin: featureflag" -u "fraud:hunter"  -d '{
     "changes": {
