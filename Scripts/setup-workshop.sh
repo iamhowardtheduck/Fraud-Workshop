@@ -28,7 +28,7 @@ curl -X POST "http://localhost:30920/_security/user/fraud" -H "Content-Type: app
 #cp /root/Fraud-Workshop/Scripts/elastic-llm.sh /opt/workshops/elastic-llm.sh
 
 # Install LLM Connector
-bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true 
+#bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true 
 #bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true
 #bash /opt/workshops/elastic-llm.sh -m gpt-5.2 -k false -d true -n gpt5-connector -P curriculum-development
 
@@ -194,6 +194,272 @@ for index in "${!SOURCES[@]}"; do
   echo
 done
 
+# Tool creation
+
+# Smurfing Detection
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_smurfing_detection",
+  "type": "esql",
+  "description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds. Aggregates transaction counts and total amounts by account within a time window.",
+  "tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount < ?threshold | STATS tx_count=COUNT(*), total_amount=SUM(amount), avg_amount=AVG(amount), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | WHERE tx_count >= ?minTransactions | SORT tx_count DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the analysis window in ISO 8601 format (e.g. 2024-01-01T00:00:00Z)"
+      },
+      "endTime": {
+        "type": "date",
+        "description": "End of the analysis window in ISO 8601 format",
+        "optional": true,
+        "defaultValue": "now"
+      },
+      "threshold": {
+        "type": "number",
+        "description": "Transaction amount threshold below which smurfing is suspected. Defaults to 10000.",
+        "optional": true,
+        "defaultValue": 10000
+      },
+      "minTransactions": {
+        "type": "integer",
+        "description": "Minimum number of sub-threshold transactions to flag an account. Defaults to 3.",
+        "optional": true,
+        "defaultValue": 3
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of results to return. Defaults to 25.",
+        "optional": true,
+        "defaultValue": 25
+      }
+    }
+  }
+}'
+
+# Veolicty Check
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_velocity_check",
+  "type": "esql",
+  "description": "Checks transaction velocity for a given account — counts how many transactions occurred within a rolling time window and flags accounts exceeding a velocity threshold.",
+  "tags": ["fraud", "velocity", "aml", "real-time"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE account_id == ?accountId | STATS tx_count=COUNT(*), total_amount=SUM(amount), first_tx=MIN(@timestamp), last_tx=MAX(@timestamp), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | EVAL velocity_per_hour = tx_count / DATE_DIFF(\"hours\", first_tx, last_tx)",
+    "params": {
+      "accountId": {
+        "type": "string",
+        "description": "The account ID to check velocity for"
+      },
+      "startTime": {
+        "type": "date",
+        "description": "Start of the lookback window. Defaults to last 24 hours.",
+        "optional": true,
+        "defaultValue": "now-24h"
+      }
+    }
+  }
+}'
+
+# High Value Transactions
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_high_value_transactions",
+  "type": "esql",
+  "description": "Retrieves high-value transactions above a specified amount threshold within a time range. Useful for identifying large suspicious transfers, wire fraud, and outlier transactions.",
+  "tags": ["fraud", "high-value", "wire-fraud", "transactions"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount >= ?minAmount | KEEP @timestamp, account_id, recipient_account, amount, transaction_type, merchant_category, country_code, risk_score | SORT amount DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the time range in ISO 8601 format"
+      },
+      "endTime": {
+        "type": "date",
+        "description": "End of the time range in ISO 8601 format",
+        "optional": true,
+        "defaultValue": "now"
+      },
+      "minAmount": {
+        "type": "number",
+        "description": "Minimum transaction amount to include. Defaults to 50000.",
+        "optional": true,
+        "defaultValue": 50000
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of results to return. Defaults to 50.",
+        "optional": true,
+        "defaultValue": 50
+      }
+    }
+  }
+}'
+
+# Account Profile
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_account_profile",
+  "type": "esql",
+  "description": "Builds a behavioral profile for a specific account: total transaction count, total volume, average amount, unique counterparties, and transaction type breakdown over a lookback period.",
+  "tags": ["fraud", "account", "profiling", "behavioral-analysis"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE account_id == ?accountId | STATS tx_count=COUNT(*), total_volume=SUM(amount), avg_amount=AVG(amount), max_amount=MAX(amount), unique_recipients=COUNT_DISTINCT(recipient_account), unique_countries=COUNT_DISTINCT(country_code) BY transaction_type | SORT tx_count DESC",
+    "params": {
+      "accountId": {
+        "type": "string",
+        "description": "The account ID to profile"
+      },
+      "startTime": {
+        "type": "date",
+        "description": "Start of the lookback window. Defaults to last 30 days.",
+        "optional": true,
+        "defaultValue": "now-30d"
+      }
+    }
+  }
+}'
+
+
+# Geo Anomaly
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_geo_anomaly",
+  "type": "esql",
+  "description": "Detects geographic anomalies by identifying accounts transacting from multiple countries within a short time window — a common indicator of account takeover or card fraud.",
+  "tags": ["fraud", "geo-anomaly", "account-takeover", "international"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | STATS country_count=COUNT_DISTINCT(country_code), countries=VALUES(country_code), tx_count=COUNT(*), total_amount=SUM(amount) BY account_id | WHERE country_count >= ?minCountries | SORT country_count DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the time window in ISO 8601 format"
+      },
+      "endTime": {
+        "type": "date",
+        "description": "End of the time window in ISO 8601 format",
+        "optional": true,
+        "defaultValue": "now"
+      },
+      "minCountries": {
+        "type": "integer",
+        "description": "Minimum number of distinct countries to flag an account. Defaults to 2.",
+        "optional": true,
+        "defaultValue": 2
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of results to return. Defaults to 25.",
+        "optional": true,
+        "defaultValue": 25
+      }
+    }
+  }
+}'
+
+# Risk Score
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_risk_score_summary",
+  "type": "esql",
+  "description": "Summarizes accounts by their average and maximum risk scores over a time period. Returns the top highest-risk accounts for triage and investigation prioritization.",
+  "tags": ["fraud", "risk-score", "triage", "prioritization"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE risk_score >= ?minRiskScore | STATS avg_risk=AVG(risk_score), max_risk=MAX(risk_score), tx_count=COUNT(*), total_amount=SUM(amount) BY account_id | SORT max_risk DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the lookback window. Defaults to last 7 days.",
+        "optional": true,
+        "defaultValue": "now-7d"
+      },
+      "minRiskScore": {
+        "type": "number",
+        "description": "Minimum risk score threshold (0-100). Defaults to 70.",
+        "optional": true,
+        "defaultValue": 70
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of accounts to return. Defaults to 20.",
+        "optional": true,
+        "defaultValue": 20
+      }
+    }
+  }
+}'
+
+# Create Financial Fraud Skill
+curl -X POST "http://localhost:30002/api/agent_builder/skills" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "financial-fraud-analyst-skill",
+  "name": "Financial Fraud Analysis",
+  "description": "Core fraud detection and AML investigation skill. Covers smurfing detection, velocity analysis, geographic anomalies, high-value transaction review, account profiling, and risk score triage.",
+  "configuration": {
+    "instructions": "You are an expert financial fraud analyst specializing in Anti-Money Laundering (AML) and transaction fraud detection. Your responsibilities include: (1) Smurfing Detection: identify accounts splitting large transactions into smaller ones to evade reporting thresholds using fraud_smurfing_detection. (2) Velocity Analysis: flag accounts with abnormally high transaction rates in short windows using fraud_velocity_check. (3) High-Value Transaction Review: surface large or unusual transfers for manual review using fraud_high_value_transactions. (4) Account Profiling: build behavioral baselines to identify deviations using fraud_account_profile. (5) Geographic Anomaly Detection: identify accounts transacting from multiple countries in short timeframes using fraud_geo_anomaly. (6) Risk Score Triage: prioritize investigations by risk score using fraud_risk_score_summary. Always provide clear risk assessments with supporting evidence. Cite specific transaction counts, amounts, and timeframes. Recommend escalation paths for high-risk findings."
+  }
+}'
+
+# Create Financial Fraud Agent
+curl -X POST "http://localhost:30002/api/agent_builder/agents" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
+  -u "fraud:hunter" \
+  -d '{
+  "id": "financial-fraud-analyst",
+  "name": "Financial Fraud Analyst",
+  "description": "I can help you detect and investigate financial fraud — including smurfing, velocity abuse, geographic anomalies, high-value wire transfers, and account risk profiling.",
+  "labels": ["fraud", "aml", "financial", "security"],
+  "avatar_color": "#FF4444",
+  "avatar_symbol": "FF",
+  "configuration": {
+    "instructions": "You are an expert financial fraud analyst. Use your available tools to investigate transaction data, identify suspicious patterns, and provide clear risk assessments with supporting evidence. Always cite specific data points such as amounts, counts, timeframes, and account IDs in your findings.",
+    "tools": [
+      {
+        "tool_ids": [
+          "fraud_smurfing_detection",
+          "fraud_velocity_check",
+          "fraud_high_value_transactions",
+          "fraud_account_profile",
+          "fraud_geo_anomaly",
+          "fraud_risk_score_summary",
+          "platform.core.search",
+          "platform.core.list_indices",
+          "platform.core.get_index_mapping",
+          "platform.core.get_document_by_id"
+        ]
+      },
+      {
+        "skill_ids": [
+          "financial-fraud-analyst-skill"
+        ]
+      }
+    ]
+  }
+}'
 
 #curl -X POST "http://localhost:30002/api/agent_builder/agents"  -H "Content-Type: application/json" -H "kbn-xsrf: true"  -u "fraud:hunter" -d @/root/Fraud-Workshop/Agents/SARA.json
 
