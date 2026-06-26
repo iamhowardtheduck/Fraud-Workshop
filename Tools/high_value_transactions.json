@@ -1,0 +1,33 @@
+{
+  "id": "fraud_high_value_transactions",
+  "type": "esql",
+  "description": "Retrieves high-value transactions above a specified amount threshold within a time range. Useful for identifying large suspicious transfers, wire fraud, and outlier transactions.",
+  "tags": ["fraud", "high-value", "wire-fraud", "transactions"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount >= ?minAmount | KEEP @timestamp, account_id, recipient_account, amount, transaction_type, merchant_category, country_code, risk_score | SORT amount DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the time range in ISO 8601 format"
+      },
+      "endTime": {
+        "type": "date",
+        "description": "End of the time range in ISO 8601 format",
+        "optional": true,
+        "defaultValue": "now"
+      },
+      "minAmount": {
+        "type": "float",
+        "description": "Minimum transaction amount to include. Defaults to 50000.",
+        "optional": true,
+        "defaultValue": 50000
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of results to return. Defaults to 50.",
+        "optional": true,
+        "defaultValue": 50
+      }
+    }
+  }
+}
