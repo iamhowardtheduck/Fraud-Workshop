@@ -1,0 +1,33 @@
+{
+  "id": "fraud_geo_anomaly",
+  "type": "esql",
+  "description": "Detects geographic anomalies by identifying accounts transacting from multiple countries within a short time window — a common indicator of account takeover or card fraud.",
+  "tags": ["fraud", "geo-anomaly", "account-takeover", "international"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | STATS country_count=COUNT_DISTINCT(country_code), tx_count=COUNT(*), total_amount=SUM(amount) BY account_id | WHERE country_count >= ?minCountries | SORT country_count DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the time window in ISO 8601 format"
+      },
+      "endTime": {
+        "type": "date",
+        "description": "End of the time window in ISO 8601 format",
+        "optional": true,
+        "defaultValue": "now"
+      },
+      "minCountries": {
+        "type": "integer",
+        "description": "Minimum number of distinct countries to flag an account. Defaults to 2.",
+        "optional": true,
+        "defaultValue": 2
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of results to return. Defaults to 25.",
+        "optional": true,
+        "defaultValue": 25
+      }
+    }
+  }
+}
