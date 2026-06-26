@@ -1,0 +1,61 @@
+{
+  "processors": [
+    {
+      "enrich": {
+        "ignore_failure": true,
+        "policy_name": "enrich-brokers",
+        "ignore_missing": true,
+        "field": "brokerID",
+        "target_field": "6"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.broker.name",
+        "target_field": "broker.name"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.broker.firm",
+        "target_field": "broker.firm"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.broker.crd",
+        "target_field": "broker.crd"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.broker.branch",
+        "target_field": "broker.branch"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.broker.licensed_states",
+        "target_field": "broker.licensed_states"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.broker.flagged",
+        "target_field": "broker.flagged"
+      }
+    }
+  ]
+}
