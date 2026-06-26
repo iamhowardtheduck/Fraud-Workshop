@@ -9,8 +9,8 @@ Elasticsearch.
 Auth: basic auth (username/password) against an ephemeral VM cluster, read from
 environment variables with workshop defaults:
     ELASTICSEARCH_URL       (default http://localhost:30920)
-    ELASTICSEARCH_USERNAME  (default "instruqt")
-    ELASTICSEARCH_PASSWORD  (default "workshops")
+    ELASTICSEARCH_USERNAME  (default "fraud")
+    ELASTICSEARCH_PASSWORD  (default "hunter")
 
 Usage:
     # Backfill: realistic 7-day traffic curve (diurnal + business-hours),
@@ -381,8 +381,8 @@ def connect(announce=True):
     if Elasticsearch is None:
         sys.exit("elasticsearch package not installed. Run: pip install elasticsearch")
     es_url = os.environ.get("ELASTICSEARCH_URL", "http://localhost:30920")
-    username = os.environ.get("ELASTICSEARCH_USERNAME", "instruqt")
-    password = os.environ.get("ELASTICSEARCH_PASSWORD", "workshops")
+    username = os.environ.get("ELASTICSEARCH_USERNAME", "fraud")
+    password = os.environ.get("ELASTICSEARCH_PASSWORD", "hunter")
     es = Elasticsearch(
         es_url,
         basic_auth=(username, password),
