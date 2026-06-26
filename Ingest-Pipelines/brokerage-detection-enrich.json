@@ -1,0 +1,214 @@
+{
+  "processors": [
+    {
+      "set": {
+        "description": "logsdb requires @timestamp on every doc. Set it FIRST from the full-ISO 'timestamp' field, before any processor that could fail.",
+        "field": "@timestamp",
+        "copy_from": "timestamp",
+        "if": "ctx.containsKey('timestamp')"
+      }
+    },
+    {
+      "set": {
+        "description": "Fallback: derive @timestamp from transaction_date if no timestamp.",
+        "field": "@timestamp",
+        "copy_from": "transaction_date",
+        "if": "!ctx.containsKey('timestamp') && ctx.containsKey('transaction_date')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-accounts",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('accountID')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-brokers",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('brokerID')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-intbank",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('intbankID')"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-austinswift",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.containsKey('txbankId')"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "account_event",
+        "target_field": "account.event"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "account_type",
+        "target_field": "account.type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "event_amount",
+        "target_field": "event.amount"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "event_type",
+        "target_field": "event.type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "transaction_date",
+        "target_field": "transaction.date"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "wire_direction",
+        "target_field": "wire.direction"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "security_symbol",
+        "target_field": "security.symbol"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "security_type",
+        "target_field": "security.type"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "quantity",
+        "target_field": "security.quantity"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "price_per_unit",
+        "target_field": "security.price_per_unit"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "settlement_date",
+        "target_field": "trade.settlement_date"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "tradeID",
+        "target_field": "trade.id"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "counterparty_account",
+        "target_field": "trade.counterparty_account"
+      }
+    },
+    {
+      "set": {
+        "ignore_failure": true,
+        "field": "@timestamp",
+        "copy_from": "transaction.date"
+      }
+    },
+    {
+      "script": {
+        "ignore_failure": true,
+        "description": "Notional value = quantity * price_per_unit when present",
+        "source": "if (ctx.security != null && ctx.security.quantity != null && ctx.security.price_per_unit != null) { ctx.trade = ctx.trade != null ? ctx.trade : new HashMap(); ctx.trade.notional = ctx.security.quantity * ctx.security.price_per_unit; }"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-inbound",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.wire?.direction == 'inbound' || ctx.wire?.direction == 'incoming_domestic'"
+      }
+    },
+    {
+      "pipeline": {
+        "name": "enrich-outbound",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true,
+        "if": "ctx.wire?.direction == 'outbound' || ctx.wire?.direction == 'outgoing_domestic' || ctx.wire?.direction == 'outgoing_international'"
+      }
+    },
+    {
+      "remove": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": [
+          "business_hours",
+          "txbankId",
+          "timestamp",
+          "accountID",
+          "brokerID",
+          "intbankID",
+          "addressId",
+          "account_event",
+          "account_type",
+          "event_amount",
+          "event_type",
+          "wire_direction",
+          "transaction_date",
+          "security_symbol",
+          "security_type",
+          "quantity",
+          "price_per_unit",
+          "settlement_date",
+          "tradeID",
+          "counterparty_account"
+        ]
+      }
+    }
+  ]
+}
