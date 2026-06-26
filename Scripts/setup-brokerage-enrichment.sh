@@ -60,32 +60,32 @@ curl -s $AUTH $HDR -XPUT "${ES_HOST}/_index_template/brokerage-workshop-logsdb" 
 
 # 7) Load the financial fraud analyst tools
 say "7/9 Loading Fraud Agentic Tools"
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/tools" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/tools" \
   --data-binary "@${DIR}/Tools/account_profile.json"; echo  
 
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/tools" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/tools" \
   --data-binary "@${DIR}/Tools/fraud_smurfing_detection.json"; echo
 
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/tools" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/tools" \
   --data-binary "@${DIR}/Tools/geo_anomaly.json"; echo  
 
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/tools" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/tools" \
   --data-binary "@${DIR}/Tools/high_value_transactions.json"; echo  
 
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/tools" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/tools" \
   --data-binary "@${DIR}/Tools/risk_score_summary.json"; echo  
 
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/tools" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/tools" \
   --data-binary "@${DIR}/Tools/velocity_check.json"; echo
 
 # 8) Load the finanicial fraud skill
 say "8/9 Loading Financial Fraud Skills"
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/skills" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/skills" \
   --data-binary "@${DIR}/Skills/financial_fraud.json"; echo
 
 # 9) Load the finanicial fraud skill
 say "9/9 Loading Financial Fraud Agent"
-curl -s $AUTH $HDR -XPUT "${KB_HOST}/api/agent_builder/agents" \
+curl -s $AUTH $HDR -XPOST "${KB_HOST}/api/agent_builder/agents" \
   --data-binary "@${DIR}/Skills/financial-fraud-analyst.json"; echo
 
 say "Done. Now run:  python3 brokerage_workshop.py"
