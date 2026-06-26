@@ -60,6 +60,3 @@ curl -s $AUTH $HDR -XPUT "${ES_HOST}/_index_template/brokerage-workshop-logsdb" 
 say "Done. Now run:  python3 brokerage_workshop.py"
 echo "    (template sets default_pipeline, so the script's pipeline= is belt-and-suspenders)"
 
-
-python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py backfill --days 7 --peak-eps 200
-python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py live --eps 4000
