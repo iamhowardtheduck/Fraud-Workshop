@@ -1,0 +1,29 @@
+{
+  "id": "fraud_risk_score_summary",
+  "type": "esql",
+  "description": "Summarizes accounts by their average and maximum risk scores over a time period. Returns the top highest-risk accounts for triage and investigation prioritization.",
+  "tags": ["fraud", "risk-score", "triage", "prioritization"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE risk_score >= ?minRiskScore | STATS avg_risk=AVG(risk_score), max_risk=MAX(risk_score), tx_count=COUNT(*), total_amount=SUM(amount) BY account_id | SORT max_risk DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the lookback window. Defaults to last 7 days.",
+        "optional": true,
+        "defaultValue": "now-7d"
+      },
+      "minRiskScore": {
+        "type": "float",
+        "description": "Minimum risk score threshold (0-100). Defaults to 70.",
+        "optional": true,
+        "defaultValue": 70
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of accounts to return. Defaults to 20.",
+        "optional": true,
+        "defaultValue": 20
+      }
+    }
+  }
+}
