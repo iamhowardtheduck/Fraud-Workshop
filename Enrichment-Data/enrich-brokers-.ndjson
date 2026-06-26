@@ -1,0 +1,80 @@
+{"index": {"_index": "enrich-brokers", "_id": "1"}}
+{"brokerID": 1, "broker": {"name": "James Rodriguez", "firm": "Charles Schwab", "crd": 2872427, "branch": "San Francisco CA", "licensed_states": ["AZ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "2"}}
+{"brokerID": 2, "broker": {"name": "Priya Williams", "firm": "JPMorgan Self-Directed", "crd": 4539336, "branch": "Austin TX", "licensed_states": ["TX"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "3"}}
+{"brokerID": 3, "broker": {"name": "Michael Davis", "firm": "Morgan Stanley", "crd": 6050099, "branch": "Austin TX", "licensed_states": ["WA"], "flagged": true}}
+{"index": {"_index": "enrich-brokers", "_id": "4"}}
+{"brokerID": 4, "broker": {"name": "Priya Liu", "firm": "Charles Schwab", "crd": 4768238, "branch": "Las Vegas NV", "licensed_states": ["IL", "TX"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "5"}}
+{"brokerID": 5, "broker": {"name": "Sofia Zhang", "firm": "TD Ameritrade", "crd": 2304256, "branch": "Miami FL", "licensed_states": ["NJ", "NY"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "6"}}
+{"brokerID": 6, "broker": {"name": "Carlos Brown", "firm": "Robinhood", "crd": 3885309, "branch": "Las Vegas NV", "licensed_states": ["IL"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "7"}}
+{"brokerID": 7, "broker": {"name": "Ahmed Kim", "firm": "E*TRADE", "crd": 4175376, "branch": "New York NY", "licensed_states": ["WA"], "flagged": true}}
+{"index": {"_index": "enrich-brokers", "_id": "8"}}
+{"brokerID": 8, "broker": {"name": "Ling Wang", "firm": "JPMorgan Self-Directed", "crd": 2613033, "branch": "New York NY", "licensed_states": ["TX", "NV", "FL"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "9"}}
+{"brokerID": 9, "broker": {"name": "Robert Davis", "firm": "Tastytrade", "crd": 1847261, "branch": "Boston MA", "licensed_states": ["IL", "MA", "NJ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "10"}}
+{"brokerID": 10, "broker": {"name": "Yan Wang", "firm": "Charles Schwab", "crd": 6621836, "branch": "Chicago IL", "licensed_states": ["AZ", "NV"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "11"}}
+{"brokerID": 11, "broker": {"name": "Ling Garcia", "firm": "Morgan Stanley", "crd": 7116358, "branch": "Miami FL", "licensed_states": ["CA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "12"}}
+{"brokerID": 12, "broker": {"name": "Carlos Rodriguez", "firm": "Public.com", "crd": 6368707, "branch": "Atlanta GA", "licensed_states": ["FL", "NV", "NJ", "TX"], "flagged": true}}
+{"index": {"_index": "enrich-brokers", "_id": "13"}}
+{"brokerID": 13, "broker": {"name": "Mary Zhang", "firm": "Interactive Brokers", "crd": 3245973, "branch": "New York NY", "licensed_states": ["FL", "GA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "14"}}
+{"brokerID": 14, "broker": {"name": "Michael Patel", "firm": "Interactive Brokers", "crd": 6392632, "branch": "Seattle WA", "licensed_states": ["CA", "IL", "AZ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "15"}}
+{"brokerID": 15, "broker": {"name": "Priya Kim", "firm": "TD Ameritrade", "crd": 7266406, "branch": "Las Vegas NV", "licensed_states": ["PA", "GA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "16"}}
+{"brokerID": 16, "broker": {"name": "Yan Davis", "firm": "Fidelity", "crd": 5274216, "branch": "Seattle WA", "licensed_states": ["NY", "TX", "AZ", "CA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "17"}}
+{"brokerID": 17, "broker": {"name": "Sofia Ivanov", "firm": "E*TRADE", "crd": 4227662, "branch": "Boston MA", "licensed_states": ["GA", "MA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "18"}}
+{"brokerID": 18, "broker": {"name": "Priya Smith", "firm": "Webull", "crd": 7045852, "branch": "New York NY", "licensed_states": ["NV", "WA", "IL"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "19"}}
+{"brokerID": 19, "broker": {"name": "Patricia Martinez", "firm": "Interactive Brokers", "crd": 2326723, "branch": "Seattle WA", "licensed_states": ["TX", "IL", "WA"], "flagged": true}}
+{"index": {"_index": "enrich-brokers", "_id": "20"}}
+{"brokerID": 20, "broker": {"name": "Ravi Brown", "firm": "Tastytrade", "crd": 6245398, "branch": "Chicago IL", "licensed_states": ["NV", "WA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "21"}}
+{"brokerID": 21, "broker": {"name": "John Wang", "firm": "Ally Invest", "crd": 2355171, "branch": "Atlanta GA", "licensed_states": ["WA", "TX"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "22"}}
+{"brokerID": 22, "broker": {"name": "Fatima Smith", "firm": "E*TRADE", "crd": 4044903, "branch": "Chicago IL", "licensed_states": ["FL", "TX", "AZ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "23"}}
+{"brokerID": 23, "broker": {"name": "Robert Patel", "firm": "Tastytrade", "crd": 1580596, "branch": "Atlanta GA", "licensed_states": ["CA"], "flagged": true}}
+{"index": {"_index": "enrich-brokers", "_id": "24"}}
+{"brokerID": 24, "broker": {"name": "Fatima Kim", "firm": "Fidelity", "crd": 3223456, "branch": "Atlanta GA", "licensed_states": ["GA", "PA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "25"}}
+{"brokerID": 25, "broker": {"name": "Priya Miller", "firm": "SoFi Invest", "crd": 3614865, "branch": "Boston MA", "licensed_states": ["NV", "AZ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "26"}}
+{"brokerID": 26, "broker": {"name": "Ahmed Nguyen", "firm": "Merrill Lynch", "crd": 2015056, "branch": "Miami FL", "licensed_states": ["FL", "NY", "NJ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "27"}}
+{"brokerID": 27, "broker": {"name": "Chen Kim", "firm": "Charles Schwab", "crd": 5936193, "branch": "Miami FL", "licensed_states": ["TX"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "28"}}
+{"brokerID": 28, "broker": {"name": "Mary Davis", "firm": "E*TRADE", "crd": 1263510, "branch": "Newark NJ", "licensed_states": ["NY"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "29"}}
+{"brokerID": 29, "broker": {"name": "David Patel", "firm": "Charles Schwab", "crd": 5523422, "branch": "San Francisco CA", "licensed_states": ["AZ", "GA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "30"}}
+{"brokerID": 30, "broker": {"name": "Linda Patel", "firm": "Ally Invest", "crd": 4414666, "branch": "Miami FL", "licensed_states": ["NY", "AZ", "PA", "NJ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "31"}}
+{"brokerID": 31, "broker": {"name": "Sofia Khan", "firm": "Tastytrade", "crd": 7115931, "branch": "Austin TX", "licensed_states": ["NV", "AZ", "NY", "TX"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "32"}}
+{"brokerID": 32, "broker": {"name": "Wei Brown", "firm": "Charles Schwab", "crd": 2607174, "branch": "Miami FL", "licensed_states": ["WA", "MA", "CA", "PA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "33"}}
+{"brokerID": 33, "broker": {"name": "David Khan", "firm": "Charles Schwab", "crd": 1632374, "branch": "Seattle WA", "licensed_states": ["WA", "NY"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "34"}}
+{"brokerID": 34, "broker": {"name": "Priya Smith", "firm": "E*TRADE", "crd": 7321365, "branch": "Miami FL", "licensed_states": ["CA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "35"}}
+{"brokerID": 35, "broker": {"name": "Fatima Patel", "firm": "Charles Schwab", "crd": 4364169, "branch": "Austin TX", "licensed_states": ["CA", "PA", "TX", "NV"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "36"}}
+{"brokerID": 36, "broker": {"name": "Ahmed Martinez", "firm": "Interactive Brokers", "crd": 6843433, "branch": "Atlanta GA", "licensed_states": ["NV", "MA", "CA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "37"}}
+{"brokerID": 37, "broker": {"name": "Elizabeth Miller", "firm": "Vanguard", "crd": 5858516, "branch": "Atlanta GA", "licensed_states": ["TX", "NJ"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "38"}}
+{"brokerID": 38, "broker": {"name": "Mary Okafor", "firm": "Merrill Lynch", "crd": 5218214, "branch": "Atlanta GA", "licensed_states": ["CA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "39"}}
+{"brokerID": 39, "broker": {"name": "Ravi Williams", "firm": "Tastytrade", "crd": 2558812, "branch": "New York NY", "licensed_states": ["GA"], "flagged": false}}
+{"index": {"_index": "enrich-brokers", "_id": "40"}}
+{"brokerID": 40, "broker": {"name": "Linda Li", "firm": "E*TRADE", "crd": 5778783, "branch": "Miami FL", "licensed_states": ["GA"], "flagged": false}}
