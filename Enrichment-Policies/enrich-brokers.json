@@ -1,0 +1,7 @@
+{
+  "match": {
+    "indices": "enrich-brokers",
+    "match_field": "brokerID",
+    "enrich_fields": ["broker.name", "broker.firm", "broker.crd", "broker.branch", "broker.licensed_states", "broker.flagged"]
+  }
+}
