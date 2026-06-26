@@ -1,0 +1,21 @@
+{
+  "id": "fraud_velocity_check",
+  "type": "esql",
+  "description": "Checks transaction velocity for a given account — counts how many transactions occurred within a rolling time window and flags accounts exceeding a velocity threshold.",
+  "tags": ["fraud", "velocity", "aml", "real-time"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE account_id == ?accountId | STATS tx_count=COUNT(*), total_amount=SUM(amount), first_tx=MIN(@timestamp), last_tx=MAX(@timestamp), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id",
+    "params": {
+      "accountId": {
+        "type": "string",
+        "description": "The account ID to check velocity for"
+      },
+      "startTime": {
+        "type": "date",
+        "description": "Start of the lookback window. Defaults to last 24 hours.",
+        "optional": true,
+        "defaultValue": "now-24h"
+      }
+    }
+  }
+}
