@@ -368,4 +368,6 @@ curl -X POST "http://localhost:30002/api/agent_builder/agents" \
 
 # Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
+chmod +x /root/Fraud-Workshop/Scripts/setup-brokerage-enrichment.sh
 bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
+bash /root/Fraud-Workshop/Scripts/setup-brokerage-enrichment.sh
