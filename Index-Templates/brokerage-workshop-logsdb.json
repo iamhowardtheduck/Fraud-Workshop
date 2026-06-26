@@ -1,0 +1,236 @@
+{
+  "template": {
+    "mappings": {
+      "_source": {
+        "mode": "synthetic"
+      },
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "accountID": {
+          "type": "keyword"
+        },
+        "brokerID": {
+          "type": "keyword"
+        },
+        "intbankID": {
+          "type": "keyword"
+        },
+        "txbankId": {
+          "type": "keyword"
+        },
+        "event": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "double"
+            },
+            "type": {
+              "type": "keyword"
+            }
+          }
+        },
+        "account": {
+          "type": "object",
+          "properties": {
+            "event": {
+              "type": "keyword"
+            },
+            "type": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "keyword"
+            },
+            "address": {
+              "type": "keyword"
+            },
+            "checking": {
+              "type": "keyword"
+            },
+            "savings": {
+              "type": "keyword"
+            },
+            "moneymarket": {
+              "type": "keyword"
+            },
+            "telephone_number": {
+              "type": "keyword"
+            },
+            "checking_opened": {
+              "type": "date"
+            },
+            "savings_opened": {
+              "type": "date"
+            },
+            "moneymarket_opened": {
+              "type": "date"
+            }
+          }
+        },
+        "security": {
+          "type": "object",
+          "properties": {
+            "symbol": {
+              "type": "keyword"
+            },
+            "type": {
+              "type": "keyword"
+            },
+            "quantity": {
+              "type": "double"
+            },
+            "price_per_unit": {
+              "type": "double"
+            }
+          }
+        },
+        "trade": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "settlement_date": {
+              "type": "date"
+            },
+            "counterparty_account": {
+              "type": "keyword"
+            },
+            "notional": {
+              "type": "double"
+            }
+          }
+        },
+        "broker": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "keyword"
+            },
+            "firm": {
+              "type": "keyword"
+            },
+            "crd": {
+              "type": "keyword"
+            },
+            "branch": {
+              "type": "keyword"
+            },
+            "licensed_states": {
+              "type": "keyword"
+            },
+            "flagged": {
+              "type": "boolean"
+            }
+          }
+        },
+        "wire": {
+          "type": "object",
+          "properties": {
+            "direction": {
+              "type": "keyword"
+            },
+            "inbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "type": "keyword"
+                },
+                "ip": {
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "type": "keyword"
+                }
+              }
+            },
+            "outbound": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "keyword"
+                },
+                "country_code": {
+                  "type": "keyword"
+                },
+                "name_on_account": {
+                  "type": "keyword"
+                },
+                "ip": {
+                  "type": "ip"
+                },
+                "bank_name": {
+                  "type": "keyword"
+                },
+                "swiftID": {
+                  "type": "keyword"
+                },
+                "routing_number": {
+                  "type": "keyword"
+                }
+              }
+            }
+          }
+        },
+        "intbank": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "keyword"
+            },
+            "country": {
+              "type": "keyword"
+            },
+            "country_code": {
+              "type": "keyword"
+            },
+            "ach": {
+              "type": "keyword"
+            },
+            "ip": {
+              "type": "ip"
+            },
+            "swiftID": {
+              "type": "keyword"
+            }
+          }
+        },
+        "risk": {
+          "type": "object",
+          "properties": {
+            "score": {
+              "type": "long"
+            },
+            "override_req": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "index": {
+        "number_of_replicas": "0",
+        "default_pipeline": "brokerage-detection-enrich",
+        "mode": "logsdb"
+      }
+    }
+  },
+  "index_patterns": [
+    "brokerage-workshop*"
+  ],
+  "composed_of": [],
+  "ignore_missing_component_templates": [],
+  "allow_auto_create": true
+}
