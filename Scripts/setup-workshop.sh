@@ -466,40 +466,23 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" \
 }'
 
 # Create Financial Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/agents" \
+curl -X POST "http://localhost:30002/api/agent_builder/skills" \
   -H "Content-Type: application/json" \
   -H "kbn-xsrf: true" \
   -u "fraud:hunter" \
   -d @- <<'JSON'
 {
-  "id": "financial-fraud-analyst",
-  "name": "Financial Fraud Analyst",
-  "description": "I can help you detect and investigate financial fraud — including smurfing, velocity abuse, geographic anomalies, high-value wire transfers, and account risk profiling.",
-  "labels": ["fraud", "aml", "financial", "security"],
-  "avatar_color": "#FF4444",
-  "avatar_symbol": "FF",
-  "configuration": {
-    "instructions": "You are an expert financial fraud analyst. Use your available tools to investigate transaction data, identify suspicious patterns, and provide clear risk assessments with supporting evidence. Always cite specific data points such as amounts, counts, timeframes, and account IDs in your findings. Workflow: profile an account first (fraud_account_profile), then layer detectors (fraud_smurfing_detection, fraud_velocity_check, fraud_high_value_transactions, fraud_geo_anomaly), interpreting each against the baseline. Triage by risk using fraud_risk_score_summary, ranking by max risk and confirming with average risk. For ad-hoc analysis, generate queries with generate_esql and run them with execute_esql — never fabricate ES|QL. Check platform.core.cases for existing investigations before recommending escalation. No single signal is conclusive; strength comes from corroboration. Always set an explicit time window and recommend a clear escalation path for high-risk findings.",
-    "tools": [
-      {
-        "tool_ids": [
-          "fraud_smurfing_detection",
-          "fraud_velocity_check",
-          "fraud_high_value_transactions",
-          "fraud_account_profile",
-          "fraud_geo_anomaly",
-          "fraud_risk_score_summary",
-          "platform.core.generate_esql",
-          "platform.core.execute_esql",
-          "platform.core.search",
-          "platform.core.cases",
-          "platform.core.list_indices",
-          "platform.core.get_index_mapping",
-          "platform.core.get_document_by_id"
-        ]
-      }
-    ]
-  }
+  "id": "financial-fraud-analyst-skill",
+  "name": "Fraud Analyst Skills",
+  "description": "Transaction-level AML and fraud detection: account profiling, structuring/smurfing, velocity, high-value transfers, and geographic anomaly screening with corroboration-based risk assessment.",
+  "tool_ids": [
+    "fraud_account_profile",
+    "fraud_geo_anomaly",
+    "fraud_high_value_transactions",
+    "fraud_smurfing_detection",
+    "fraud_velocity_check"
+  ],
+  "content": "# Financial Fraud Detection Guide\n\n## When to Use This Skill\n\nUse this skill when:\n- Investigating an account or transaction pattern for AML or fraud indicators\n- Screening for structuring/smurfing — large sums split into many sub-threshold transactions\n- Checking whether an account is transacting at an abnormally high velocity\n- Surfacing large or unusual transfers for manual review\n- Building a behavioral baseline for a specific account\n- Detecting geographic anomalies (an account active across multiple countries in a short window)\n\n## Detection Workflow\n\n### 1. Scope the Investigation\n- Establish the time window before running any tool. Most fraud patterns emerge over days to weeks; use 7-30 days for behavioral baselines and shorter windows for active-incident review.\n- If you have a specific account, profile it first. If you are screening broadly, start with population-level detectors (smurfing, geo anomaly).\n\n### 2. Profile the Account (fraud_account_profile)\n- Build the behavioral baseline: transaction count, total volume, average and max amount, unique counterparties, and country spread, broken down by transaction type.\n- Use this to understand what 'normal' looks like for the account before judging any single signal as anomalous.\n- Default lookback is 30 days; widen it for low-activity accounts.\n\n### 3. Screen for Structuring (fraud_smurfing_detection)\n- Identify accounts running many sub-threshold transactions to evade reporting limits.\n- Default threshold is 10000 and the default minimum is 3 sub-threshold transactions — lower minTransactions to widen the net, raise it to reduce noise.\n- Pay attention to unique_recipients: a high recipient count alongside many small debits strengthens the structuring hypothesis.\n\n### 4. Check Transaction Velocity (fraud_velocity_check)\n- For a named account, count transactions inside a rolling window (default last 24h) and compare first/last transaction timestamps.\n- A burst of activity compressed into a short interval, especially to many recipients, is a takeover or mule indicator.\n\n### 5. Surface High-Value Transfers (fraud_high_value_transactions)\n- Retrieve transactions at or above a value threshold (default 50000) within the time range.\n- Review transaction_type, merchant_category, country_code, and risk_score together — a high amount paired with a high risk_score or an unexpected country is a priority signal.\n\n### 6. Detect Geographic Anomalies (fraud_geo_anomaly)\n- Flag accounts transacting from two or more distinct countries inside the window (default minCountries is 2).\n- Multi-country activity over a short interval is a classic account-takeover and card-fraud indicator. Correlate with velocity findings.\n\n## Assessing Findings\n\n- No single signal is conclusive. Strength comes from corroboration: structuring + high velocity + multi-country is far stronger than any one alone.\n- Always quantify. Cite exact transaction counts, amounts, timeframes, recipient counts, and account IDs in every assessment.\n- Compare against the account's own baseline from fraud_account_profile before calling activity anomalous.\n- For accounts that warrant escalation, hand off to the Fraud Risk Triage & Summarization skill to prioritize against the wider population and to check for related cases.\n\n## Best Practices\n\n- Set an explicit time window for every query — never run undirected.\n- Profile first, then layer detectors; interpret each detector against the baseline.\n- Tune thresholds to the investigation: loosen to widen the net during discovery, tighten to reduce noise during triage.\n- Treat unique_recipients and unique_countries as force-multipliers when assessing severity.\n- Recommend a clear escalation path for any high-confidence finding."
 }
 JSON
 
@@ -520,24 +503,19 @@ curl -X POST "http://localhost:30002/api/agent_builder/agents" \
     "tools": [
       {
         "tool_ids": [
-          "fraud_smurfing_detection",
-          "fraud_velocity_check",
-          "fraud_high_value_transactions",
-          "fraud_account_profile",
-          "fraud_geo_anomaly",
-          "fraud_risk_score_summary",
           "platform.core.generate_esql",
           "platform.core.execute_esql",
           "platform.core.search",
           "platform.core.cases",
           "platform.core.list_indices",
           "platform.core.get_index_mapping",
-          "platform.core.get_document_by_id"
+          "platform.core.get_document_by_id",
+          "platform.core.index_explorer"
         ]
       }
-    ]
-  }
-}
+    ],
+   "skill_ids": [ "financial-fraud-analyst-skill", "graph-creation", "visualization-creation", "dashboard-management" ]
+ }}
 JSON
 
 # Start data-gen installation
