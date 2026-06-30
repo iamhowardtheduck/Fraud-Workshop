@@ -17,7 +17,7 @@
         "intbankID": {
           "type": "keyword"
         },
-        "txbankId": {
+        "txbankID": {
           "type": "keyword"
         },
         "event": {
