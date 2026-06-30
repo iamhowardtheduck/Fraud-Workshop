@@ -88,7 +88,7 @@ CONN_ID=$(curl -s "http://localhost:30002/api/actions/connectors" \
   | python3 -c 'import json,sys; print(next(c["id"] for c in json.load(sys.stdin) if c["name"]=="openai-connector"))')
 echo "Resolved openai-connector -> $CONN_ID"
 
-sed "s/CONNECTOR_ID_PLACEHOLDER/$CONN_ID/g" Workflows/highvalue-workflow-body.json \
+sed "s/CONNECTOR_ID_PLACEHOLDER/$CONN_ID/g" /root/Fraud-Workshop/Workflows/highvalue-workflow-body.json \
   | curl -X POST "http://localhost:30002/api/workflows" \
     -H "Content-Type: application/json" \
     -H "kbn-xsrf: true" \
