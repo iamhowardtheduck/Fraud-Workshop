@@ -58,7 +58,7 @@ curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-works
 curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/root/Fraud-Workshop/Saved-Searches/3-StartSavedSearches.ndjson"
 
 # Load DFA Workflow
-curl -X POST "http://localhost:30002/api/saved_objects/_import?overwrite=true" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/root/Fraud-Workshop/Workflows/dfa-classification-auto-setup.ndjson"
+curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/root/Fraud-Workshop/Workflows/dfa-classification-auto-setup.ndjson"
 
 # Load component templates
 curl -X PUT "http://localhost:30920/_component_template/fraud-workshop-logsdb-mappings" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Component-Templates/fraud-workshop-logsdb-mappings.json
