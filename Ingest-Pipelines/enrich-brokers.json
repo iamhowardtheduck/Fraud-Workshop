@@ -56,6 +56,38 @@
         "field": "6.broker.flagged",
         "target_field": "broker.flagged"
       }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "1.accountID",
+        "target_field": "accountID"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "4.txbankId",
+        "target_field": "txbankId"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "5.intbankID",
+        "target_field": "intbankID"
+      }
+    },
+    {
+      "rename": {
+        "ignore_failure": true,
+        "ignore_missing": true,
+        "field": "6.brokerID",
+        "target_field": "brokerID"
+      }
     }
   ]
 }
