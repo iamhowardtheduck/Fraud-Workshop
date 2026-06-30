@@ -42,7 +42,7 @@ curl -X POST "http://localhost:30002/api/kibana/settings" -H "Content-Type: appl
 # Create 'sar-reports' ingest pipeline and index template
 curl -X PUT "http://localhost:30920/_ingest/pipeline/sar-reports" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/sar-reports.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-brokers.json
-curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/brokerage-detection-enrich.json
+curl -X PUT "http://localhost:30920/_ingest/pipeline/brokerage-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/brokerage-detection-enrich.json
 curl -X POST "http://localhost:30920/_index_template/sar-reports" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/sar-reports.json
 
 # Create fraud-workshop data views
@@ -55,8 +55,10 @@ curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/sar-reports
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop-brokerage" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "brokerage-workshops*", "name": "Brokerage Workshop", "timeFieldName": "@timestamp"  }}'
 
 # Load saved-searches for assignment starts
-curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u fraud:hunter -F "file=@/root/Fraud-Workshop/Saved-Searches/3-StartSavedSearches.ndjson"
+curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/root/Fraud-Workshop/Saved-Searches/3-StartSavedSearches.ndjson"
 
+# Load DFA Workflow
+curl -X POST "http://localhost:30002/api/saved_objects/_import?overwrite=true" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/root/Fraud-Workshop/Workflows/dfa-classification-auto-setup.ndjson"
 
 # Load component templates
 curl -X PUT "http://localhost:30920/_component_template/fraud-workshop-logsdb-mappings" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Component-Templates/fraud-workshop-logsdb-mappings.json
