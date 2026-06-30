@@ -1,0 +1,44 @@
+{
+  "template": {
+    "mappings": {
+      "properties": {
+        "broker": {
+          "type": "object",
+          "properties": {
+            "branch": {
+              "type": "keyword"
+            },
+            "crd": {
+              "type": "keyword"
+            },
+            "firm": {
+              "type": "keyword"
+            },
+            "flagged": {
+              "type": "boolean"
+            },
+            "licensed_states": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "keyword"
+            }
+          }
+        },
+        "brokerID": {
+          "type": "keyword"
+        }
+      }
+    },
+    "settings": {
+      "number_of_replicas": 0,
+      "index": {
+        "mode": "lookup"
+      }
+    }
+  },
+  "index_patterns": [
+    "enrich-brokers*"
+  ],
+  "allow_auto_create": true
+}
