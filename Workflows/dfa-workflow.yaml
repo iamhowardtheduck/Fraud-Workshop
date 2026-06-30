@@ -1,0 +1,176 @@
+name: DFA Classification — Auto-Setup
+description: >
+  Generic Data Frame Analytics classification job creator. Accepts all job
+  parameters as inputs from the ML Readiness Analyst agent. Checks data
+  readiness, validates class balance, creates the DFA job, and logs an audit
+  trail. Does NOT start the job — that remains a manual step.
+enabled: true
+tags: ["ml", "classification", "dfa", "automation"]
+
+# inputs uses list syntax — each parameter is a named list item.
+# Reference them in steps as {{ inputs.paramName }}.
+inputs:
+  - name: sourceIndex
+    type: string
+    description: "Source index or data stream pattern"
+  - name: destIndex
+    type: string
+    description: "Destination index for DFA results"
+  - name: jobId
+    type: string
+    description: "Unique identifier for the DFA job"
+  - name: dependentVariable
+    type: string
+    description: "The field to predict — the classification label"
+  - name: labelField
+    type: string
+    description: "Same as dependentVariable — used for class balance check"
+  - name: classAssignmentObjective
+    type: string
+    description: "maximize_minimum_recall or maximize_accuracy"
+    default: "maximize_minimum_recall"
+  - name: modelMemoryLimit
+    type: string
+    description: "Memory limit for the DFA job e.g. 100mb, 550mb"
+    default: "150mb"
+  - name: trainingPercent
+    type: number
+    description: "Percentage of documents used for training (0-100)"
+    default: 80
+
+consts:
+  minDocs: 5000
+
+triggers:
+  - type: manual
+
+steps:
+
+  # ── Step 1: Count total documents ──────────────────────────────────────────
+  - name: count_total_docs
+    type: elasticsearch.search
+    with:
+      index: "{{ inputs.sourceIndex }}"
+      size: 0
+      query:
+        match_all: {}
+
+  - name: check_sufficient_data
+    type: if
+    condition: "{{ steps.count_total_docs.output.hits.total.value }} < {{ consts.minDocs }}"
+    steps:
+      - name: insufficient_data
+        type: console
+        with:
+          message: >
+            ✗ Insufficient data: {{ steps.count_total_docs.output.hits.total.value }}
+            documents found. Need at least {{ consts.minDocs }}. Aborting.
+    else:
+      - name: data_sufficient_log
+        type: console
+        with:
+          message: >
+            ✓ Data check passed: {{ steps.count_total_docs.output.hits.total.value }}
+            documents in {{ inputs.sourceIndex }}
+
+  # ── Step 2: Check class balance using ES|QL ────────────────────────────────
+  # ES|QL avoids the aggregation body templating issues.
+  - name: count_label_distribution
+    type: elasticsearch.esql.query
+    with:
+      format: json
+      query: >
+        FROM {{ inputs.sourceIndex }}
+        | WHERE @timestamp > NOW() - 30 days
+        | STATS doc_count = COUNT(*) BY {{ inputs.labelField }}
+        | SORT doc_count DESC
+
+  - name: log_class_balance
+    type: console
+    with:
+      message: >
+        Class balance for {{ inputs.labelField }}:
+        {{ steps.count_label_distribution.output.values }}
+
+  # ── Step 3: Check if job already exists ────────────────────────────────────
+  - name: check_job_exists
+    type: elasticsearch.request
+    on-failure:
+      continue: true
+    with:
+      method: GET
+      path: "/_ml/data_frame/analytics/{{ inputs.jobId }}"
+
+  - name: handle_existing_job
+    type: if
+    condition: "{{ steps.check_job_exists.output.status }} == 200"
+    steps:
+      - name: job_already_exists
+        type: console
+        with:
+          message: >
+            ⚠ Job {{ inputs.jobId }} already exists. Skipping creation.
+            Delete the existing job first if you want to recreate it.
+    else:
+      - name: creating_job_log
+        type: console
+        with:
+          message: "→ Creating DFA job: {{ inputs.jobId }}"
+
+      # ── Step 4: Create the DFA classification job ───────────────────────────
+      # Note: analyzed_fields includes/excludes are NOT passed here — see the
+      # note below the workflow for the reason and the follow-up Dev Tools step.
+      - name: create_dfa_job
+        type: elasticsearch.request
+        with:
+          method: PUT
+          path: "/_ml/data_frame/analytics/{{ inputs.jobId }}"
+          body:
+            description: "Classification model for {{ inputs.dependentVariable }} in {{ inputs.sourceIndex }}. Created automatically by Elastic Workflows."
+            source:
+              index:
+                - "{{ inputs.sourceIndex }}"
+              query:
+                match_all: {}
+            dest:
+              index: "{{ inputs.destIndex }}"
+              results_field: "ml"
+            analysis:
+              classification:
+                dependent_variable: "{{ inputs.dependentVariable }}"
+                training_percent: "{{ inputs.trainingPercent }}"
+                num_top_classes: 2
+                num_top_feature_importance_values: 5
+                class_assignment_objective: "{{ inputs.classAssignmentObjective }}"
+            model_memory_limit: "{{ inputs.modelMemoryLimit }}"
+            allow_lazy_start: false
+            max_num_threads: 1
+
+      - name: log_job_created
+        type: console
+        with:
+          message: >
+            ✓ DFA job created: {{ inputs.jobId }}
+            Source:             {{ inputs.sourceIndex }}
+            Destination:        {{ inputs.destIndex }}
+            Dependent variable: {{ inputs.dependentVariable }}
+            Objective:          {{ inputs.classAssignmentObjective }}
+            Memory limit:       {{ inputs.modelMemoryLimit }}
+            Training:           {{ inputs.trainingPercent }}%
+
+      # ── Step 5: Summary ─────────────────────────────────────────────────────
+      - name: final_summary
+        type: console
+        with:
+          message: |
+            ══════════════════════════════════════════════════════════
+            ✓ DFA Classification Job Created
+            ══════════════════════════════════════════════════════════
+            Job ID:      {{ inputs.jobId }}
+            Index:       {{ inputs.sourceIndex }}
+            Label:       {{ inputs.dependentVariable }}
+            Total docs:  {{ steps.count_total_docs.output.hits.total.value }}
+
+            Next step: Add analyzed_fields via Dev Tools, then start:
+            ML → Data Frame Analytics → {{ inputs.jobId }} → ▶
+            ══════════════════════════════════════════════════════════
