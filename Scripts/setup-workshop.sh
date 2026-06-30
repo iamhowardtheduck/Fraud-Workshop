@@ -225,9 +225,6 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
 # Create Financial Fraud Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
 
-# Create Financial Fraud Agent
-curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Agents/financial_fraud_analyst.json
- 
 # Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
 bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
