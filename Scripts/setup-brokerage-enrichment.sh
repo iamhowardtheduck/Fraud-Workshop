@@ -25,8 +25,10 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 say() { echo -e "\n>>> $*"; }
 
-# 1) Load enrichment source data (the lookup table the policy reads from)
-say "1/9 Loading enrich-brokers source data"
+# 1) Load enrichment index template & source data (the lookup table the policy reads from)
+say "1/9 Loading enrich-brokers index template & source data"
+curl -s $AUTH $HDR -XPUT "${ES_HOST}/_index_template/enrich-brokers" \
+  --data-binary "@${DIR}/Index-Templates/Enrichment-Index-Templates/enrich-brokers.json"; echo
 curl -s $AUTH $NDHDR -XPOST "${ES_HOST}/_bulk" \
   --data-binary "@${DIR}/Enrichment-Data/enrich-brokers.ndjson" | python3 -c "import sys,json;d=json.load(sys.stdin);print('  errors:',d.get('errors'))"
 
