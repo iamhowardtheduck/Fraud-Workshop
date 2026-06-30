@@ -41,6 +41,8 @@ curl -X POST "http://localhost:30002/api/kibana/settings" -H "Content-Type: appl
 
 # Create 'sar-reports' ingest pipeline and index template
 curl -X PUT "http://localhost:30920/_ingest/pipeline/sar-reports" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/sar-reports.json
+curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-brokers.json
+curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/brokerage-detection-enrich.json
 curl -X POST "http://localhost:30920/_index_template/sar-reports" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/sar-reports.json
 
 # Create fraud-workshop data views
@@ -65,8 +67,10 @@ curl -X POST "http://localhost:30920/_index_template/enrich-accounts" -H "Conten
 curl -X POST "http://localhost:30920/_index_template/enrich-austinbanks" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinbanks.json
 curl -X POST "http://localhost:30920/_index_template/enrich-austinstores" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinstores.json
 curl -X POST "http://localhost:30920/_index_template/enrich-intbank" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-intbank.json
+curl -X POST "http://localhost:30920/_index_template/enrich-brokers" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-brokers.json
 #curl -X POST "http://localhost:30920/_index_template/fraud-workshop-tsds" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/fraud-workshop-tsds.json
 curl -X POST "http://localhost:30920/_index_template/fraud-workshop-logsdb" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/fraud-workshop-logsdb.json
+curl -X POST "http://localhost:30920/_index_template/brokerage-workshop-logsdb" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/brokerage-workshop-logsdb.json
 
 
 echo
@@ -94,6 +98,7 @@ declare -A SOURCES=(
   [enrich-austinstores]="enrich-austinstores.ndjson"
   [enrich-intbank]="enrich-intbank.ndjson"
   [sar-reports]="sar-reports.ndjson"
+  [enrich-brokers]="enrich-brokers.ndjson"
 )
 
 for index in "${!SOURCES[@]}"; do
@@ -126,6 +131,7 @@ curl -X PUT "http://localhost:30920/_enrich/policy/enrich-austinswift" -H "Conte
 curl -X PUT "http://localhost:30920/_enrich/policy/enrich-inbounds" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-inbounds.json
 curl -X PUT "http://localhost:30920/_enrich/policy/enrich-intbank" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-intbank.json
 curl -X PUT "http://localhost:30920/_enrich/policy/enrich-outbounds" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-outbounds.json
+curl -X PUT "http://localhost:30920/_enrich/policy/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-brokers.json
 
 echo
 echo "Enrichment policies loaded"
@@ -139,6 +145,7 @@ curl -X POST "http://localhost:30920/_enrich/policy/enrich-austinswift/_execute"
 curl -X POST "http://localhost:30920/_enrich/policy/enrich-inbounds/_execute" -u "fraud:hunter"
 curl -X POST "http://localhost:30920/_enrich/policy/enrich-intbank/_execute" -u "fraud:hunter"
 curl -X POST "http://localhost:30920/_enrich/policy/enrich-outbounds/_execute" -u "fraud:hunter"
+curl -X POST "http://localhost:30920/_enrich/policy/enrich-brokers/_execute" -u "fraud:hunter"
 
 echo
 echo "Enrichment policies executed"
@@ -154,7 +161,9 @@ curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-inbound" -H "Content
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-intbank" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-intbank.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-outbound" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-outbound.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-outbounds" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-outbounds.json
+curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-brokers.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/fraud-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/fraud-detection-enrich.json
+curl -X PUT "http://localhost:30920/_ingest/pipeline/brokerage-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/brokerage-detection-enrich.json
 
 
 echo
@@ -175,6 +184,7 @@ DATA_DIR="/root/Fraud-Workshop/Agents"
 
 declare -A SOURCES=(
   [SARA]="SARA.json"
+  [Financial Fraud Analyst]="financial-fraud-analyst.json"
 )
 
 for index in "${!SOURCES[@]}"; do
@@ -198,175 +208,24 @@ done
 # Tool creation
 
 # Smurfing Detection
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_smurfing_detection",
-  "type": "esql",
-  "description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds.",
-  "tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
-  "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount < ?threshold | STATS tx_count=COUNT(*), total_amount=SUM(amount), avg_amount=AVG(amount), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | WHERE tx_count >= ?minTransactions | SORT tx_count DESC | LIMIT ?limit",
-    "params": {
-      "startTime": {"type": "date", "description": "Start of the analysis window in ISO 8601 format"},
-      "endTime": {"type": "date", "description": "End of the analysis window", "optional": true, "defaultValue": "now"},
-      "threshold": {"type": "float", "description": "Amount threshold below which smurfing is suspected. Defaults to 10000.", "optional": true, "defaultValue": 10000},
-      "minTransactions": {"type": "integer", "description": "Min sub-threshold transactions to flag. Defaults to 3.", "optional": true, "defaultValue": 3},
-      "limit": {"type": "integer", "description": "Max results. Defaults to 25.", "optional": true, "defaultValue": 25}
-    }
-  }
-}'
-
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Tools/fraud_smurfing_detection.json
 # Veolicty Check
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_velocity_check",
-  "type": "esql",
-  "description": "Checks transaction velocity for a given account within a rolling time window.",
-  "tags": ["fraud", "velocity", "aml", "real-time"],
-  "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE account_id == ?accountId | STATS tx_count=COUNT(*), total_amount=SUM(amount), first_tx=MIN(@timestamp), last_tx=MAX(@timestamp), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | EVAL velocity_per_hour = tx_count / DATE_DIFF(\"hours\", first_tx, last_tx)",
-    "params": {
-      "accountId": {"type": "string", "description": "The account ID to check velocity for"},
-      "startTime": {"type": "date", "description": "Start of the lookback window. Defaults to last 24 hours.", "optional": true, "defaultValue": "now-24h"}
-    }
-  }
-}'
-
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Tools/velocity_check.json
 # High Value Transactions
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_high_value_transactions",
-  "type": "esql",
-  "description": "Retrieves high-value transactions above a specified amount threshold within a time range.",
-  "tags": ["fraud", "high-value", "wire-fraud", "transactions"],
-  "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount >= ?minAmount | KEEP @timestamp, account_id, recipient_account, amount, transaction_type, merchant_category, country_code, risk_score | SORT amount DESC | LIMIT ?limit",
-    "params": {
-      "startTime": {"type": "date", "description": "Start of the time range in ISO 8601 format"},
-      "endTime": {"type": "date", "description": "End of the time range", "optional": true, "defaultValue": "now"},
-      "minAmount": {"type": "float", "description": "Minimum transaction amount. Defaults to 50000.", "optional": true, "defaultValue": 50000},
-      "limit": {"type": "integer", "description": "Max results. Defaults to 50.", "optional": true, "defaultValue": 50}
-    }
-  }
-}'
-
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Tools/high_value_transactions.json
 # Account Profile
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_account_profile",
-  "type": "esql",
-  "description": "Builds a behavioral profile for a specific account over a lookback period.",
-  "tags": ["fraud", "account", "profiling", "behavioral-analysis"],
-  "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE account_id == ?accountId | STATS tx_count=COUNT(*), total_volume=SUM(amount), avg_amount=AVG(amount), max_amount=MAX(amount), unique_recipients=COUNT_DISTINCT(recipient_account), unique_countries=COUNT_DISTINCT(country_code) BY transaction_type | SORT tx_count DESC",
-    "params": {
-      "accountId": {"type": "string", "description": "The account ID to profile"},
-      "startTime": {"type": "date", "description": "Start of the lookback window. Defaults to last 30 days.", "optional": true, "defaultValue": "now-30d"}
-    }
-  }
-}'
-
-
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Tools/account_profile.json
 # Geo Anomaly
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_geo_anomaly",
-  "type": "esql",
-  "description": "Detects accounts transacting from multiple countries within a short time window.",
-  "tags": ["fraud", "geo-anomaly", "account-takeover", "international"],
-  "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | STATS country_count=COUNT_DISTINCT(country_code), countries=VALUES(country_code), tx_count=COUNT(*), total_amount=SUM(amount) BY account_id | WHERE country_count >= ?minCountries | SORT country_count DESC | LIMIT ?limit",
-    "params": {
-      "startTime": {"type": "date", "description": "Start of the time window in ISO 8601 format"},
-      "endTime": {"type": "date", "description": "End of the time window", "optional": true, "defaultValue": "now"},
-      "minCountries": {"type": "integer", "description": "Min distinct countries to flag. Defaults to 2.", "optional": true, "defaultValue": 2},
-      "limit": {"type": "integer", "description": "Max results. Defaults to 25.", "optional": true, "defaultValue": 25}
-    }
-  }
-}'
-
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Tools/geo_anomaly.json
 # Risk Score
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_risk_score_summary",
-  "type": "esql",
-  "description": "Summarizes accounts by average and maximum risk scores over a time period.",
-  "tags": ["fraud", "risk-score", "triage", "prioritization"],
-  "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE risk_score >= ?minRiskScore | STATS avg_risk=AVG(risk_score), max_risk=MAX(risk_score), tx_count=COUNT(*), total_amount=SUM(amount) BY account_id | SORT max_risk DESC | LIMIT ?limit",
-    "params": {
-      "startTime": {"type": "date", "description": "Start of the lookback window. Defaults to last 7 days.", "optional": true, "defaultValue": "now-7d"},
-      "minRiskScore": {"type": "float", "description": "Minimum risk score threshold (0-100). Defaults to 70.", "optional": true, "defaultValue": 70},
-      "limit": {"type": "integer", "description": "Max accounts. Defaults to 20.", "optional": true, "defaultValue": 20}
-    }
-  }
-}'
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Tools/risk_score_summary.json
 
 # Create Financial Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
-  -d '{
-  "id": "financial-fraud-analyst-skill",
-  "name": "Financial Fraud Analysis",
-  "description": "Core fraud detection and AML investigation skill covering smurfing, velocity, geo anomalies, high-value review, account profiling, and risk triage.",
-  "content": "You are an expert financial fraud analyst specializing in Anti-Money Laundering (AML) and transaction fraud detection. Your responsibilities: (1) Smurfing Detection - identify accounts splitting large transactions to evade reporting thresholds using fraud_smurfing_detection. (2) Velocity Analysis - flag accounts with abnormally high transaction rates using fraud_velocity_check. (3) High-Value Transaction Review - surface large or unusual transfers using fraud_high_value_transactions. (4) Account Profiling - build behavioral baselines using fraud_account_profile. (5) Geographic Anomaly Detection - identify multi-country activity in short timeframes using fraud_geo_anomaly. (6) Risk Score Triage - prioritize investigations using fraud_risk_score_summary. Always provide clear risk assessments with supporting evidence. Cite specific transaction counts, amounts, and timeframes. Recommend escalation paths for high-risk findings.",
-  "tool_ids": [
-    "fraud_smurfing_detection",
-    "fraud_velocity_check",
-    "fraud_high_value_transactions",
-    "fraud_account_profile",
-    "fraud_geo_anomaly"
-  ]
-}'
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
 
 # Create Financial Fraud Agent
-curl -X POST "http://localhost:30002/api/agent_builder/agents" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
-  -d '{
-  "id": "financial-fraud-analyst",
-  "name": "Financial Fraud Analyst",
-  "description": "I can help you detect and investigate financial fraud — including smurfing, velocity abuse, geographic anomalies, high-value wire transfers, and account risk profiling.",
-  "labels": ["fraud", "aml", "financial", "security"],
-  "avatar_color": "#FF4444",
-  "avatar_symbol": "FF",
-  "configuration": {
-    "instructions": "You are an expert financial fraud analyst. Use your available tools to investigate transaction data, identify suspicious patterns, and provide clear risk assessments with supporting evidence. Always cite specific data points such as amounts, counts, timeframes, and account IDs in your findings.",
-    "tools": [
-      {
-        "tool_ids": [
-          "fraud_smurfing_detection",
-          "fraud_velocity_check",
-          "fraud_high_value_transactions",
-          "fraud_account_profile",
-          "fraud_geo_anomaly",
-          "fraud_risk_score_summary",
-          "platform.core.search",
-          "platform.core.list_indices",
-          "platform.core.get_index_mapping",
-          "platform.core.get_document_by_id"
-        ]
-      },
-      {
-        "skill_ids": [
-          "financial-fraud-analyst-skill"
-        ]
-      }
-    ]
-  }
-}'
-
-#curl -X POST "http://localhost:30002/api/agent_builder/agents"  -H "Content-Type: application/json" -H "kbn-xsrf: true"  -u "fraud:hunter" -d @/root/Fraud-Workshop/Agents/SARA.json
-
+curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Agents/financial_fraud_analyst.json
+ 
 # Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
 chmod +x /root/Fraud-Workshop/Scripts/setup-brokerage-enrichment.sh
