@@ -259,50 +259,47 @@ done
 
 # Smurfing Detection
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d @/root/Fraud-Workshop/Tools/fraud_smurfing_detection.json#'{
-  #"id": "fraud_smurfing_detection",
-  #"type": "esql",
-  #"description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds.",
-  #"tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
-  #"configuration": {
-  #  "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount < ?threshold | STATS tx_count=COUNT(*), total_amount=SUM(amount), avg_amount=AVG(amount), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | WHERE tx_count >= ?minTransactions | SORT tx_count DESC | LIMIT ?limit",
-  #  "params": {
-  #    "startTime": {
-  #      "type": "date",
-  #      "description": "Start of the analysis window in ISO 8601 format (e.g. 2024-01-01T00:00:00Z)"
-  #    },
-  #    "endTime": {
-  #      "type": "date",
-  #      "description": "End of the analysis window in ISO 8601 format",
-  #      "optional": true,
-  #      "defaultValue": "now"
-  #    },
-  #    "threshold": {
-  #      "type": "float",
-  #      "description": "Transaction amount threshold below which smurfing is suspected. Defaults to 10000.",
-  #      "optional": true,
-  #      "defaultValue": 10000
-  #    },
-  #    "minTransactions": {
-  #      "type": "integer",
-  #      "description": "Minimum number of sub-threshold transactions to flag an account. Defaults to 3.",
-  #      "optional": true,
-  #      "defaultValue": 3
-  #    },
-  #    "limit": {
-  #      "type": "integer",
-  #      "description": "Maximum number of results to return. Defaults to 25.",
-  #      "optional": true,
-  #      "defaultValue": 25
-  #    }
-  #  }
-  #}
-#}'
+  -d '{
+  "id": "fraud_smurfing_detection",
+  "type": "esql",
+  "description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds.",
+  "tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
+  "configuration": {
+    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount < ?threshold | STATS tx_count=COUNT(*), total_amount=SUM(amount), avg_amount=AVG(amount), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | WHERE tx_count >= ?minTransactions | SORT tx_count DESC | LIMIT ?limit",
+    "params": {
+      "startTime": {
+        "type": "date",
+        "description": "Start of the analysis window in ISO 8601 format (e.g. 2024-01-01T00:00:00Z)"
+      },
+      "endTime": {
+        "type": "date",
+        "description": "End of the analysis window in ISO 8601 format",
+        "optional": true,
+        "defaultValue": "now"
+      },
+      "threshold": {
+        "type": "float",
+        "description": "Transaction amount threshold below which smurfing is suspected. Defaults to 10000.",
+        "optional": true,
+        "defaultValue": 10000
+      },
+      "minTransactions": {
+        "type": "integer",
+        "description": "Minimum number of sub-threshold transactions to flag an account. Defaults to 3.",
+        "optional": true,
+        "defaultValue": 3
+      },
+      "limit": {
+        "type": "integer",
+        "description": "Maximum number of results to return. Defaults to 25.",
+        "optional": true,
+        "defaultValue": 25
+      }
+    }
+  }
+}'
 # Veolicty Check
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
   "id": "fraud_velocity_check",
   "type": "esql",
@@ -325,10 +322,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" \
   }
 }'
 # High Value Transactions
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
   "id": "fraud_high_value_transactions",
   "type": "esql",
@@ -363,11 +357,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" \
   }
 }'
 # Account Profile
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
-  -d '{
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{
   "id": "fraud_account_profile",
   "type": "esql",
   "description": "Builds a behavioral profile for a specific account: total transaction count, total volume, average amount, unique counterparties, and transaction type breakdown over a lookback period.",
@@ -390,10 +380,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" \
 }'
 
 # Geo Anomaly
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
   "id": "fraud_geo_anomaly",
   "type": "esql",
@@ -428,10 +415,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" \
   }
 }'
 # Risk Score
-curl -X POST "http://localhost:30002/api/agent_builder/tools" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
   "id": "fraud_risk_score_summary",
   "type": "esql",
@@ -463,10 +447,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" \
 }'
 
 # Create Financial Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d @- <<'JSON'
 {
   "id": "financial-fraud-analyst-skill",
@@ -483,11 +464,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/skills" \
 }
 JSON
 
-curl -X POST "http://localhost:30002/api/agent_builder/agents" \
-  -H "Content-Type: application/json" \
-  -H "kbn-xsrf: true" \
-  -u "fraud:hunter" \
-  -d @- <<'JSON'
+curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
 {
   "id": "financial-fraud-analyst",
   "name": "Financial Fraud Analyst",
