@@ -1,0 +1,36 @@
+{
+  "processors": [
+    {
+      "rename": {
+        "field": "1.accountID",
+        "target_field": "accountID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "4.txbankId",
+        "target_field": "txbankId",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "5.intbankID",
+        "target_field": "intbankID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    },
+    {
+      "rename": {
+        "field": "6.brokerID",
+        "target_field": "brokerID",
+        "ignore_missing": true,
+        "ignore_failure": true
+      }
+    }
+  ]
+}
