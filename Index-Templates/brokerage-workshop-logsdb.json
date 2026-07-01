@@ -79,10 +79,10 @@
               "type": "keyword"
             },
             "quantity": {
-              "type": "double"
+              "type": "long"
             },
             "price_per_unit": {
-              "type": "double"
+              "type": "long"
             }
           }
         },
