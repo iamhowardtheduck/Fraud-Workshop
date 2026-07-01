@@ -209,6 +209,13 @@
           "counterparty_account"
         ]
       }
+    },
+    {
+      "pipeline": {
+        "name": "brokerage-final",
+        "ignore_missing_pipeline": true,
+        "ignore_failure": true
+      }
     }
   ]
 }
