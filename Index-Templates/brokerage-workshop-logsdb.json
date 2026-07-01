@@ -24,7 +24,7 @@
           "type": "object",
           "properties": {
             "amount": {
-              "type": "double"
+              "type": "long"
             },
             "type": {
               "type": "keyword"
