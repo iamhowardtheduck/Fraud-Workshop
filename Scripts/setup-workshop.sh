@@ -266,7 +266,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds.",
   "tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
   "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE event.amount < ?threshold | STATS tx_count=COUNT(*), total_amount=SUM(event.amount), avg_amount=AVG(event.amount), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | WHERE tx_count >= ?minTransactions | SORT tx_count DESC | LIMIT ?limit",
+    "query": "FROM fraud-* | WHERE event.type == "credit" AND event.amount > 0 AND event.amount < 3000 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days | STATS small_deposits = COUNT(*), total_aggregated = SUM(event.amount), avg_deposit = AVG(event.amount) BY account.name | WHERE small_deposits >= 5 | SORT small_deposits DESC | LIMIT 50",
     "params": {
       "startTime": {
         "type": "date",
@@ -307,7 +307,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "description": "Checks transaction velocity for a given account — counts how many transactions occurred within a rolling time window and flags accounts exceeding a velocity threshold.",
   "tags": ["fraud", "velocity", "aml", "real-time"],
   "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime | WHERE account_id == ?accountId | STATS tx_count=COUNT(*), total_amount=SUM(event.amount), first_tx=MIN(@timestamp), last_tx=MAX(@timestamp), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id",
+    "query": "FROM fraud-* | WHERE event.amount > 0 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days | STATS txn_count = COUNT(*), total_volume = SUM(event.amount), avg_txn = AVG(event.amount), max_txn = MAX(event.amount) BY account.name | WHERE txn_count >= 10 | SORT total_volume DESC | LIMIT 50",
     "params": {
       "accountId": {
         "type": "string",
