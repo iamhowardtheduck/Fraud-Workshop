@@ -435,7 +435,6 @@ DATA_DIR="/root/Fraud-Workshop/Agents"
 
 declare -A SOURCES=(
   [SARA]="SARA.json"
-  [Financial Fraud Analyst]="financial-fraud-analyst.json"
 )
 
 for index in "${!SOURCES[@]}"; do
