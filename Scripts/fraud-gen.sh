@@ -2,5 +2,4 @@ pip install pandas numpy elasticsearch faker
 python3 /root/Fraud-Workshop/Scripts/wire-fraud.py
 python3 /root/Fraud-Workshop/Scripts/money-laundering.py
 python3 /root/Fraud-Workshop/Scripts/smurfing.py
-python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py
 
