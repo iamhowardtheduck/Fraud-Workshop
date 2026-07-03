@@ -482,9 +482,11 @@ step_create_sar_agent() {
 }
 
 step_data_generator() {
-  begin_step "## Start data-gen installation" 2
-  run chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
-  run bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
+  begin_step "## Start data-gen installation" 4
+  run python3 /root/Fraud-Workshop/Scripts/wire-fraud.py
+  run python3 /root/Fraud-Workshop/Scripts/money-laundering.py
+  run python3 /root/Fraud-Workshop/Scripts/smurfing.py
+  run python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py
   end_step
 }
 
@@ -505,10 +507,10 @@ STEPS=(
   step_enrichment_policies
   step_execute_enrichment_policies
   step_create_ingest_pipelines
+  step_data_generator
   step_deploy_agent_tools
   step_create_fraud_skill_and_agent
   step_create_sar_agent
-  step_data_generator
 )
 STEP_TOTAL=${#STEPS[@]}
 
