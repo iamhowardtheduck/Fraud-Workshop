@@ -99,12 +99,27 @@ run() {
   return 0   # never abort the whole run on a single command failure
 }
 
-# run_sh: like run() but for a shell snippet needing pipes/redirection/heredocs.
+# run_sh: like run() but for a shell snippet needing pipes/redirection.
 run_sh() {
   echo "+ (shell) $1" >> "$LOG_FILE"
   bash -c "$1" >> "$LOG_FILE" 2>&1
   local rc=$?
   echo "  [exit $rc]" >> "$LOG_FILE"
+  (( STEP_CUR_DONE++ ))
+  refresh
+  return 0
+}
+
+# run_file: execute a heredoc-authored snippet from a temp file. This avoids the
+# quote-escaping hell of embedding heredocs inside bash -c '...'. Callers write
+# the snippet to $SNIPPET (a temp file) and then call run_file.
+run_file() {
+  local snippet="$1"
+  echo "+ (file) $snippet" >> "$LOG_FILE"
+  bash "$snippet" >> "$LOG_FILE" 2>&1
+  local rc=$?
+  echo "  [exit $rc]" >> "$LOG_FILE"
+  rm -f "$snippet"
   (( STEP_CUR_DONE++ ))
   refresh
   return 0
@@ -409,13 +424,20 @@ step_deploy_agent_tools() {
 
 step_create_fraud_skill_and_agent() {
   begin_step "## Create Financial Fraud skill and agent" 2
+
+  # 1) Skill
   run curl -s -X POST "${KBN_URL}/api/agent_builder/skills" \
     -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "$USER" \
     --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
 
-  run_sh '
-    curl -s -X POST "http://localhost:30002/api/agent_builder/agents" \
-      -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'"'"'JSON'"'"'
+  # 2) Agent — authored to a temp file with a real heredoc, then executed.
+  #    (Wrapping a heredoc inside bash -c mangles the quoting and silently fails,
+  #    which is why the agent didn't get created before.)
+  local snippet
+  snippet="$(mktemp /tmp/ffa-agent.XXXXXX.sh)"
+  cat > "$snippet" <<'SNIPPET'
+curl -s -X POST "http://localhost:30002/api/agent_builder/agents" \
+  -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
 {
   "id": "financial-fraud-analyst",
   "name": "Financial Fraud Analyst",
@@ -426,24 +448,28 @@ step_create_fraud_skill_and_agent() {
   "configuration": {
     "instructions": "You are an expert financial fraud analyst. Use your available tools to investigate transaction data, identify suspicious patterns, and provide clear risk assessments with supporting evidence. Always cite specific data points such as amounts, counts, timeframes, and account IDs in your findings. Workflow: profile an account first (fraud_account_profile), then layer detectors (fraud_smurfing_detection, fraud_velocity_check, fraud_high_value_transactions, fraud_geo_anomaly), interpreting each against the baseline. Triage by risk using fraud_risk_score_summary, ranking by max risk and confirming with average risk. For ad-hoc analysis, generate queries with generate_esql and run them with execute_esql — never fabricate ES|QL. Check platform.core.cases for existing investigations before recommending escalation. No single signal is conclusive; strength comes from corroboration. Always set an explicit time window and recommend a clear escalation path for high-risk findings.",
     "tools": [
-      { "tool_ids": [
-        "platform.core.generate_esql",
-        "platform.core.execute_esql",
-        "platform.core.search",
-        "platform.core.cases",
-        "platform.core.list_indices",
-        "platform.core.get_index_mapping",
-        "platform.core.get_document_by_id",
-        "platform.core.index_explorer",
-        "fraud_geo_anomaly",
-        "fraud_transaction_search"
-      ] }
+      {
+        "tool_ids": [
+          "platform.core.generate_esql",
+          "platform.core.execute_esql",
+          "platform.core.search",
+          "platform.core.cases",
+          "platform.core.list_indices",
+          "platform.core.get_index_mapping",
+          "platform.core.get_document_by_id",
+          "platform.core.index_explorer",
+          "fraud_geo_anomaly",
+          "fraud_transaction_search"
+        ]
+      }
     ],
     "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management" ]
   }
 }
 JSON
-  '
+SNIPPET
+  run_file "$snippet"
+
   end_step
 }
 
