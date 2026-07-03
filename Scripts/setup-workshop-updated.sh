@@ -330,8 +330,24 @@ step_create_ingest_pipelines() {
 }
 
 step_deploy_agent_tools() {
-  begin_step "## Deploy agent tools" 8
+  begin_step "## Deploy agent tools" 9
   local T="${KBN_URL}/api/agent_builder/tools"
+
+  # The index_search tool 'fraud_transaction_search' validates that 'fraud-*'
+  # resolves to real sources AT CREATION TIME. If the data generators haven't
+  # produced/refreshed any fraud-* docs yet, creation 400s with "No sources
+  # found", which then cascades into the agent's tool_ids validation failing.
+  # Wait (up to ~60s) for fraud-* to exist and hold at least one document.
+  run_sh '
+    for i in $(seq 1 30); do
+      curl -s -X POST "http://localhost:30920/fraud-*/_refresh" -u "fraud:hunter" >/dev/null 2>&1
+      CNT=$(curl -s "http://localhost:30920/fraud-*/_count" -u "fraud:hunter" \
+              | python3 -c "import json,sys; print(json.load(sys.stdin).get(\"count\",0))" 2>/dev/null || echo 0)
+      echo "fraud-* doc count: ${CNT} (attempt ${i})"
+      if [ "${CNT:-0}" -gt 0 ]; then echo "fraud-* is ready"; break; fi
+      sleep 2
+    done
+  '
 
   run curl -s -X POST "$T" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "$USER" -d '{
     "id": "fraud_smurfing_detection",
