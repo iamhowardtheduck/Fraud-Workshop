@@ -342,6 +342,8 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
+clear
+
 # Free-form fraud search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
