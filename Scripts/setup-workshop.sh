@@ -465,7 +465,8 @@ curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type:
         ]
       }
     ],
-   "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management" ]
+   "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management" ],
+   "enable_elastic_capabilities": true
  }}
 JSON
 
