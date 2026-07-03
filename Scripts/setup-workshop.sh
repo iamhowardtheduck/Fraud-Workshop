@@ -266,98 +266,66 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds.",
   "tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
   "configuration": {
-    "query": """FROM fraud-* | WHERE event.type == "credit" AND event.amount > 0 AND event.amount < 3000 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days | STATS small_deposits = COUNT(*), total_aggregated = SUM(event.amount), avg_deposit = AVG(event.amount) BY account.name | WHERE small_deposits >= 5 | SORT small_deposits DESC | LIMIT 50""",
+    "query": "FROM fraud-* | WHERE event.type == \"credit\" AND event.amount > 0 AND event.amount < 3000 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS small_deposits = COUNT(*), total_aggregated = SUM(event.amount), avg_deposit = AVG(event.amount) BY account.name | WHERE small_deposits >= 5 | SORT small_deposits DESC | LIMIT 50",
     "params": {
       "days": {
         "type": "integer",
         "description": "Lookback window in days"
       }
     }
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "days": {
-        "type": "integer",
-        "minimum": -9007199254740991,
-        "maximum": 9007199254740991,
-        "description": "Lookback window in days"
-      }
-    },
-    "required": [
-      "days"
-    ],
-    "description": "Parameters needed to execute the query"
   }
 }'
 # Veolicty Check
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -u "fraud:hunter" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
   -d '{
-  "id": "fraud_velocity_check",
-  "type": "esql",
-  "description": "Checks transaction velocity for a given account — counts how many transactions occurred within a rolling time window and flags accounts exceeding a velocity threshold.",
-  "tags": ["fraud", "velocity", "aml", "real-time"],
-  "configuration": {
-    "query": """FROM fraud-* | WHERE event.amount > 0 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days | STATS txn_count = COUNT(*), total_volume = SUM(event.amount), avg_txn = AVG(event.amount), max_txn = MAX(event.amount) BY account.name | WHERE txn_count >= 10 | SORT total_volume DESC | LIMIT 50""",
-    "params": {
-      "days": {
-        "type": "integer",
-        "description": "Lookback window in days"
+    "id": "fraud_velocity_check",
+    "type": "esql",
+    "description": "Checks transaction velocity for a given account — counts how many transactions occurred within a rolling time window and flags accounts exceeding a velocity threshold.",
+    "tags": [
+      "fraud",
+      "velocity",
+      "aml",
+      "real-time"
+    ],
+    "configuration": {
+      "query": "FROM fraud-* | WHERE event.amount > 0 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS txn_count = COUNT(*), total_volume = SUM(event.amount), avg_txn = AVG(event.amount), max_txn = MAX(event.amount) BY account.name | WHERE txn_count >= 10 | SORT total_volume DESC | LIMIT 50",
+      "params": {
+        "days": {
+          "type": "integer",
+          "description": "Lookback window in days"
+        }
       }
     }
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "days": {
-        "type": "integer",
-        "minimum": -9007199254740991,
-        "maximum": 9007199254740991,
-        "description": "Lookback window in days"
-      }
-    },
-    "required": [
-      "days"
-    ],
-    "description": "Parameters needed to execute the query"
-  }
-}'
+  }'
 
 # Round Amount Transactions
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
+curl -X POST "http://localhost:30002/api/agent_builder/tools" \
+  -u "fraud:hunter" \
+  -H "Content-Type: application/json" \
+  -H "kbn-xsrf: true" \
   -d '{
-  "id": "fraud_round_amount_detection",
-  "type": "esql",
-  "description": "Detects suspicious ROUND-NUMBER transactions: transactions whose amount is an exact multiple of $1,000, a common indicator of artificial/laundering activity rather than organic spending. Returns account, count of round transactions and total. Use alongside other signals to corroborate laundering.",
-  "tags": ["fraud", "high-value", "wire-fraud", "transactions"],
-  "configuration": {
-    "query": """FROM fraud-* | WHERE event.amount > 0 AND (event.amount % 1000) == 0 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days | STATS round_txns = COUNT(*), total_round = SUM(event.amount) BY account.name | WHERE round_txns >= 3 | SORT round_txns DESC | LIMIT 50""",
-    "params": {
-      "days": {
-        "type": "integer",
-        "description": "Lookback window in days"
+    "id": "fraud_round_amount_detection",
+    "type": "esql",
+    "description": "Detects suspicious ROUND-NUMBER transactions: transactions whose amount is an exact multiple of $1,000, a common indicator of artificial/laundering activity rather than organic spending. Returns account, count of round transactions and total. Use alongside other signals to corroborate laundering.",
+    "tags": [
+      "fraud",
+      "high-value",
+      "wire-fraud",
+      "transactions"
+    ],
+    "configuration": {
+      "query": "FROM fraud-* | WHERE event.amount > 0 AND (event.amount % 1000) == 0 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS round_txns = COUNT(*), total_round = SUM(event.amount) BY account.name | WHERE round_txns >= 3 | SORT round_txns DESC | LIMIT 50",
+      "params": {
+        "days": {
+          "type": "integer",
+          "description": "Lookback window in days"
+        }
       }
     }
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "days": {
-        "type": "integer",
-        "minimum": -9007199254740991,
-        "maximum": 9007199254740991,
-        "description": "Lookback window in days"
-      }
-    },
-    "required": [
-      "days"
-    ],
-    "description": "Parameters needed to execute the query"
-  }
-}'
+  }'
 
 # Layering Detection
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{
@@ -366,14 +334,8 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "description": "Builds a behavioral profile for a specific account: total transaction count, total volume, average amount, unique counterparties, and transaction type breakdown over a lookback period.",
   "tags": ["fraud", "account", "profiling", "behavioral-analysis"],
   "configuration": {
-    "query": """FROM fraud-* | WHERE wire.direction == "outbound" | STATS wire_count = COUNT(*), total_wired = SUM(event.amount) BY account.name, wire.outbound.bank_name, wire.outbound.country | SORT total_wired DESC | LIMIT 50""",
+    "query": "FROM fraud-* | WHERE wire.direction == \"outbound\" | STATS wire_count = COUNT(*), total_wired = SUM(event.amount) BY account.name, wire.outbound.bank_name, wire.outbound.country | SORT total_wired DESC | LIMIT 50",
     "params": {}
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {},
-    "description": "Parameters needed to execute the query"
   }
 }'
 
@@ -385,29 +347,13 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "description": "Detects STRUCTURING / CTR-evasion: accounts with multiple transactions just below the $10,000 reporting threshold ($8,000-$9,999) over the last N days. Returns the account, count of near-threshold transactions, and total moved. High counts indicate deliberate structuring to avoid Currency Transaction Reports.",
   "tags": ["fraud", "geo-anomaly", "account-takeover", "international"],
   "configuration": {
-    "query": """FROM fraud-* | WHERE event.type == "credit" AND event.amount >= 8000 AND event.amount < 10000 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days | STATS near_threshold_txns = COUNT(*), total_amount = SUM(event.amount), min_amt = MIN(event.amount), max_amt = MAX(event.amount) BY account.name | WHERE near_threshold_txns >= 2 | SORT near_threshold_txns DESC | LIMIT 50""",
+    "query": "FROM fraud-* | WHERE event.type == \"credit\" AND event.amount >= 8000 AND event.amount < 10000 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS near_threshold_txns = COUNT(*), total_amount = SUM(event.amount), min_amt = MIN(event.amount), max_amt = MAX(event.amount) BY account.name | WHERE near_threshold_txns >= 2 | SORT near_threshold_txns DESC | LIMIT 50",
     "params": {
       "days": {
         "type": "integer",
         "description": "Lookback window in days (e.g. 7, 30, 90)"
       }
     }
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "days": {
-        "type": "integer",
-        "minimum": -9007199254740991,
-        "maximum": 9007199254740991,
-        "description": "Lookback window in days (e.g. 7, 30, 90)"
-      }
-    },
-    "required": [
-      "days"
-    ],
-    "description": "Parameters needed to execute the query"
   }
 }'
 # High Value Daily Triage
@@ -424,11 +370,6 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "configuration": {
     "workflow_id": "high-value-daily-aggregate-triage",
     "wait_for_completion": true
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {}
   }
 }'
 
@@ -441,19 +382,6 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   "tags": [],
   "configuration": {
     "pattern": "fraud-*"
-  },
-  "readonly": false,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "nlQuery": {
-        "type": "string",
-        "description": "A natural language query expressing the search request"
-      }
-    },
-    "required": [
-      "nlQuery"
-    ]
   }
 }'
 
@@ -494,257 +422,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
 
 
 # Create Financial Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d @- <<'JSON'
-{
-  "id": "financial-fraud-analysis",
-  "name": "Financial Fraud Analysis",
-  "description": "Analyze fraud-* transaction data for AML red flags: structuring/CTR evasion, smurfing, layering, money laundering, mule-account funneling, and abnormal transaction velocity. Use when asked to hunt for suspicious transactions, score accounts for AML risk, investigate a specific account or counterparty, or explain which money-laundering typology a transaction pattern matches. Produces ranked investigative leads for human SAR review, not accusations.",
-  "content": """# Financial Fraud Analysis
-
-Analyze transaction data in the `fraud-*` indices for suspicious financial activity and turn statistical signals into ranked, human-reviewable investigative leads. Use this skill when asked to hunt for suspicious transactions, score accounts for AML risk, investigate a specific account or counterparty, or explain which AML typology a pattern matches.
-
-## Scope and intent
-
-Outputs are investigative LEADS, not accusations. Every flag is a statistical indicator requiring human review (e.g. a SAR/STR analyst decision), never proof of a crime. Do not present a flagged account as confirmed fraud, and always state the metrics and thresholds behind a finding so a human can judge it. Default the lookback window to 90 days when the user does not specify one.
-
-## Data model
-
-`fraud-*` documents are individual financial events. Banking and healthcare-provider (NPI) fields share the pattern; provider fields are null on banking events and should be ignored for AML work. Key fields:
-
-- `event.amount` — transaction value (numeric)
-- `event.type` — "credit" (money in) or "debit" (money out)
-- `account.name` — account holder; the primary grouping key
-- `account.type` — checking, savings, money market
-- `account.checking` / `account.savings` / `account.moneymarket` — account numbers
-- `transaction.date` — event timestamp used for lookback math
-- `wire.direction` — inbound / outbound
-- `wire.outbound.bank_name` / `wire.outbound.country` — wire destination
-- `wire.inbound.bank_name` / `wire.inbound.swiftID` — wire origin
-- `atm.deposit_amount` / `atm.withdrawal_amount` — ATM cash movement
-- `pos.merchant_name` / `pos.geo_point` — point-of-sale context
-- `risk.score` — pre-computed risk score, if populated
-
-## Detection tools
-
-- `fraud_structuring_detection(days)` — accounts with repeated credits in the $8,000-$9,999 band (just below the $10,000 CTR threshold).
-- `fraud_smurfing_detection(days)` — accounts with many small deposits (under $3,000) aggregating to large sums.
-- `fraud_layering_detection()` — outbound wires grouped by destination bank and country.
-- `fraud_velocity_anomaly(days)` — accounts with abnormally high transaction count and total volume (mule/funnel signature).
-- `fraud_round_amount_detection(days)` — high frequency of exact $1,000-multiple amounts.
-- `platform.core.list_indices` / `platform.core.get_index_mapping` — confirm available fields when needed.
-
-## Method
-
-1. Map the question to a typology. "Breaking up cash" -> smurfing; "just under $10k" -> structuring; "money moving overseas" -> layering; "funnel/mule account" -> velocity. If the request is open-ended ("find anything suspicious"), run several detections and correlate.
-2. Run the matching detection tool(s).
-3. Correlate across typologies. Accounts that flag on more than one detection are the highest priority — a name appearing in both structuring and layering is a far stronger lead than either alone. Collect account.name from each detection and rank by how many distinct typologies each account appears in.
-4. Pull supporting raw records before concluding, so the finding is evidence-backed, not just an aggregate count.
-5. Report as a ranked lead list. For each suspect account give: name, typology(ies) matched, key metrics (counts, totals, min/max), a one-line rationale, and a qualitative risk level (High/Medium/Low). Close with the explicit caveat that these are leads for human investigation and SAR/STR review.
-
-Threshold defaults (≥2 near-threshold txns for structuring, ≥5 small deposits for smurfing, ≥10 txns for velocity, ≥3 round txns) are tunable. State any threshold you change. The full typology playbook with the ES|QL behind each detection, false-positive notes, and tuning guidance is in the referenced AML Typology Playbook content.
-""",
-  "referenced_content": [
-    {
-      "name": "AML Typology Playbook",
-      "relativePath": "./typologies.md",
-      "content": """# AML Typology Playbook
-
-The detection thresholds below are sensible defaults for synthetic workshop data. Tune them
-to your data's magnitudes and your jurisdiction's reporting thresholds. Each detection
-produces statistical leads for human review, not proof of wrongdoing.
-
-All queries run against the `fraud-*` index pattern. Lookback is expressed with
-`DATE_DIFF("days", transaction.date, NOW()) <= ?days` because ES|QL rejects parameterized
-interval literals (`?days * 1 day` fails verification) — use `DATE_DIFF` instead.
-
----
-
-## 1. Structuring (CTR evasion)
-
-**Definition.** Deliberately keeping transactions just below the $10,000 Currency Transaction
-Report threshold so each event escapes mandatory reporting. Also called "smurfing the
-threshold," though it is distinct from smurfing proper (below).
-
-**Indicators.** Multiple credits landing in the $8,000–$9,999 band, often within a short
-window, frequently round-ish numbers a few hundred dollars under $10k.
-
-**ES|QL.**
-
-```esql
-FROM fraud-*
-| WHERE event.type == "credit" AND event.amount >= 8000 AND event.amount < 10000
-    AND DATE_DIFF("days", transaction.date, NOW()) <= ?days
-| STATS near_threshold_txns = COUNT(*), total_amount = SUM(event.amount),
-        min_amt = MIN(event.amount), max_amt = MAX(event.amount) BY account.name
-| WHERE near_threshold_txns >= 2
-| SORT near_threshold_txns DESC
-| LIMIT 50
-```
-
-**False positives.** A business with genuine large-but-sub-$10k recurring receipts (payroll
-runs, rent rolls). Corroborate with regularity of timing and whether amounts cluster
-suspiciously tight to $9,999.
-
-**Tuning.** Raise the floor (e.g. $9,000) to reduce noise, or raise the minimum count to 3+
-for higher-confidence-only output.
-
----
-
-## 2. Smurfing
-
-**Definition.** Breaking one large sum into many small deposits — often across multiple people
-("smurfs"), accounts, or ATMs — to avoid attention. Distinct from structuring: structuring
-hugs the reporting threshold, smurfing uses many *small* amounts that aggregate.
-
-**Indicators.** A high count of small credits (each well under the threshold) that sum to a
-large figure; deposits clustered in time or across many ATM locations.
-
-**ES|QL.**
-
-```esql
-FROM fraud-*
-| WHERE event.type == "credit" AND event.amount > 0 AND event.amount < 3000
-    AND DATE_DIFF("days", transaction.date, NOW()) <= ?days
-| STATS small_deposits = COUNT(*), total_aggregated = SUM(event.amount),
-        avg_deposit = AVG(event.amount) BY account.name
-| WHERE small_deposits >= 5
-| SORT small_deposits DESC
-| LIMIT 50
-```
-
-**False positives.** High-frequency small-ticket merchants (coffee shops, tips). Weight by
-whether deposits are cash/ATM vs card settlement, and by how large the aggregate is.
-
-**Tuning.** Lower the per-deposit ceiling for tighter focus on cash-like amounts; raise the
-minimum deposit count to require a stronger pattern.
-
----
-
-## 3. Layering
-
-**Definition.** Moving illicit funds through a series of transfers — frequently cross-border
-wires to intermediary banks — to distance the money from its source and obscure the audit
-trail. The middle stage of the classic placement → layering → integration model.
-
-**Indicators.** Outbound wires, especially to foreign banks, in volumes inconsistent with the
-account's profile; funds arriving then leaving quickly; multiple destination institutions.
-
-**ES|QL.**
-
-```esql
-FROM fraud-*
-| WHERE wire.direction == "outbound"
-| STATS wire_count = COUNT(*), total_wired = SUM(event.amount)
-        BY account.name, wire.outbound.bank_name, wire.outbound.country
-| SORT total_wired DESC
-| LIMIT 50
-```
-
-**False positives.** Importers, treasury operations, expats with legitimate overseas
-obligations. Corroborate with whether inbound credits shortly precede the outbound wires
-(rapid pass-through is the stronger signal).
-
-**Tuning.** Add a lookback `WHERE DATE_DIFF(...) <= ?days`, or filter to specific high-risk
-destination countries.
-
----
-
-## 4. Velocity anomaly (mule / funnel detection)
-
-**Definition.** An account being used as a conduit shows transaction count and dollar volume
-far above its peers — characteristic of money-mule and funnel accounts that receive and
-immediately redistribute funds.
-
-**Indicators.** High transaction count combined with high total volume in a short window; a
-mix of many inbound credits and rapid outbound debits.
-
-**ES|QL.**
-
-```esql
-FROM fraud-*
-| WHERE event.amount > 0 AND DATE_DIFF("days", transaction.date, NOW()) <= ?days
-| STATS txn_count = COUNT(*), total_volume = SUM(event.amount),
-        avg_txn = AVG(event.amount), max_txn = MAX(event.amount) BY account.name
-| WHERE txn_count >= 10
-| SORT total_volume DESC
-| LIMIT 50
-```
-
-**False positives.** Genuinely active accounts (small businesses, frequent traders). Compare
-against the population median; an account 5–10x the median is more interesting than one merely
-above the floor.
-
-**Tuning.** Replace the fixed `>= 10` floor with a percentile-based cutoff once you know the
-population distribution.
-
----
-
-## 5. Round-amount transactions
-
-**Definition.** Artificial money movement tends toward clean round figures (exact thousands)
-because it is fabricated rather than organic spending. A supporting signal, rarely conclusive
-on its own.
-
-**Indicators.** A high frequency of transactions that are exact multiples of $1,000.
-
-**ES|QL.**
-
-```esql
-FROM fraud-*
-| WHERE event.amount > 0 AND (event.amount % 1000) == 0
-    AND DATE_DIFF("days", transaction.date, NOW()) <= ?days
-| STATS round_txns = COUNT(*), total_round = SUM(event.amount) BY account.name
-| WHERE round_txns >= 3
-| SORT round_txns DESC
-| LIMIT 50
-```
-
-**False positives.** Round-number behavior is common in legitimate transfers, rent, and
-savings. Use only to corroborate — never flag on round amounts alone.
-
-**Tuning.** Tighten to $5,000 or $10,000 multiples for higher specificity.
-
----
-
-## 6. Cross-typology correlation
-
-The single most valuable step is not any one detection but the **overlap**. Run multiple
-detections, collect the `account.name` from each, and rank accounts by how many distinct
-typologies they appear in. An account that surfaces in structuring *and* layering *and*
-velocity is a high-priority lead even if no single metric is extreme.
-
-`scripts/fraud-detect.js scan` automates this: it runs every typology and prints a summary of
-accounts that flag more than once, sorted by overlap count.
-
----
-
-## Reporting template
-
-For each suspect account, report:
-
-- **Account:** holder name
-- **Typologies matched:** e.g. structuring + velocity
-- **Evidence:** the concrete metrics (counts, totals, min/max) from the detections
-- **Rationale:** one line on why the pattern is suspicious
-- **Risk:** High / Medium / Low (qualitative)
-
-Always close with: these are statistical indicators requiring human investigation and
-SAR/STR review, not determinations of criminal conduct.
-"""
-    }
-  ],
-  "tool_ids": [
-    "fraud_structuring_detection",
-    "fraud_smurfing_detection",
-    "fraud_layering_detection",
-    "fraud_velocity_anomaly",
-    "fraud_round_amount_detection"
-  ],
-  "readonly": false,
-  "experimental": false
-}
-JSON
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
 
 curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
 {
