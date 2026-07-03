@@ -342,8 +342,6 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
-clear
-
 # Free-form fraud search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
@@ -391,40 +389,6 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
-
-# Create Financial Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
-
-curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
-{
-  "id": "financial-fraud-analyst",
-  "name": "Financial Fraud Analyst",
-  "description": "I can help you detect and investigate financial fraud — including smurfing, velocity abuse, geographic anomalies, high-value wire transfers, and account risk profiling.",
-  "labels": ["fraud", "aml", "financial", "security"],
-  "avatar_color": "#FF4444",
-  "avatar_symbol": "FF",
-  "configuration": {
-    "instructions": "You are an expert financial fraud analyst. Use your available tools to investigate transaction data, identify suspicious patterns, and provide clear risk assessments with supporting evidence. Always cite specific data points such as amounts, counts, timeframes, and account IDs in your findings. Workflow: profile an account first (fraud_account_profile), then layer detectors (fraud_smurfing_detection, fraud_velocity_check, fraud_high_value_transactions, fraud_geo_anomaly), interpreting each against the baseline. Triage by risk using fraud_risk_score_summary, ranking by max risk and confirming with average risk. For ad-hoc analysis, generate queries with generate_esql and run them with execute_esql — never fabricate ES|QL. Check platform.core.cases for existing investigations before recommending escalation. No single signal is conclusive; strength comes from corroboration. Always set an explicit time window and recommend a clear escalation path for high-risk findings.",
-    "tools": [
-      {
-        "tool_ids": [
-          "platform.core.generate_esql",
-          "platform.core.execute_esql",
-          "platform.core.search",
-          "platform.core.cases",
-          "platform.core.list_indices",
-          "platform.core.get_index_mapping",
-          "platform.core.get_document_by_id",
-          "platform.core.index_explorer",
-          "fraud_geo_anomaly",
-          "fraud_transaction_search"
-        ]
-      }
-    ],
-   "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management" ]
- }}
-JSON
-
 # Create Suspicious Activity Reporting Agent 
 #!/usr/bin/env bash
 set -euo pipefail
@@ -459,3 +423,53 @@ done
 # Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
 bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
+
+# Free-form fraud search
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_transaction_search",
+  "type": "index_search",
+  "description": "Free-form search over the fraud-* transaction indices. Use to investigate a specific account, name, merchant, wire counterparty, SWIFT/routing number, or time range once a suspicious pattern is identified by the detection tools, or to pull supporting raw transaction records.",
+  "tags": [],
+  "configuration": {
+    "pattern": "fraud-*"
+  }
+}'
+
+# Create Financial Fraud Skill
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
+
+curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
+{
+  "id": "financial-fraud-analyst",
+  "name": "Financial Fraud Analyst",
+  "description": "I can help you detect and investigate financial fraud — including smurfing, velocity abuse, geographic anomalies, high-value wire transfers, and account risk profiling.",
+  "labels": ["fraud", "aml", "financial", "security"],
+  "avatar_color": "#FF4444",
+  "avatar_symbol": "FF",
+  "configuration": {
+    "instructions": "You are an expert financial fraud analyst. Use your available tools to investigate transaction data, identify suspicious patterns, and provide clear risk assessments with supporting evidence. Always cite specific data points such as amounts, counts, timeframes, and account IDs in your findings. Workflow: profile an account first (fraud_account_profile), then layer detectors (fraud_smurfing_detection, fraud_velocity_check, fraud_high_value_transactions, fraud_geo_anomaly), interpreting each against the baseline. Triage by risk using fraud_risk_score_summary, ranking by max risk and confirming with average risk. For ad-hoc analysis, generate queries with generate_esql and run them with execute_esql — never fabricate ES|QL. Check platform.core.cases for existing investigations before recommending escalation. No single signal is conclusive; strength comes from corroboration. Always set an explicit time window and recommend a clear escalation path for high-risk findings.",
+    "tools": [
+      {
+        "tool_ids": [
+          "platform.core.generate_esql",
+          "platform.core.execute_esql",
+          "platform.core.search",
+          "platform.core.cases",
+          "platform.core.list_indices",
+          "platform.core.get_index_mapping",
+          "platform.core.get_document_by_id",
+          "platform.core.index_explorer",
+          "fraud_geo_anomaly",
+          "fraud_transaction_search"
+        ]
+      }
+    ],
+   "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management" ]
+ }}
+JSON
+
+clear
+
+python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py
+
