@@ -1,6 +1,5 @@
-# Set up environment variables
+## Set up environment variables
 echo 'ELASTICSEARCH_USERNAME=elastic' >> /root/.env
-#echo -n 'ELASTICSEARCH_PASSWORD=' >> /root/.env
 kubectl get secret elasticsearch-es-elastic-user -n default -o go-template='ELASTICSEARCH_PASSWORD={{.data.elastic | base64decode}}' >> /root/.env
 echo '' >> /root/.env
 echo 'ELASTICSEARCH_URL="http://localhost:30920"' >> /root/.env
@@ -10,13 +9,13 @@ echo 'ELASTIC_VERSION="9.1.0"' >> /root/.env
 echo 'ELASTIC_APM_SERVER_URL=http://apm.default.svc:8200' >> /root/.env
 echo 'ELASTIC_APM_SECRET_TOKEN=pkcQROVMCzYypqXs0b' >> /root/.env
 
-# Set up environment
+## Set up environment
 export $(cat /root/.env | xargs)
 
 BASE64=$(echo -n "elastic:${ELASTICSEARCH_PASSWORD}" | base64)
 KIBANA_URL_WITHOUT_PROTOCOL=$(echo $KIBANA_URL | sed -e 's#http[s]\?://##g')
 
-# Add sdg user with superuser role
+## Add sdg user with superuser role
 curl -X POST "http://localhost:30920/_security/user/fraud" -H "Content-Type: application/json" -u "elastic:${ELASTICSEARCH_PASSWORD}" -d '{
   "password" : "hunter",
   "roles" : [ "superuser" ],
@@ -24,22 +23,14 @@ curl -X POST "http://localhost:30920/_security/user/fraud" -H "Content-Type: app
   "email" : "fraud-hunter@omnicorp.co"
 }'
 
-# Update existing elastic-llm.sh
-#cp /root/Fraud-Workshop/Scripts/elastic-llm.sh /opt/workshops/elastic-llm.sh
-
-# Install LLM Connector
-#bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true 
-#bash /opt/workshops/elastic-llm.sh -m gpt-4.1 -k false -d true
-#bash /opt/workshops/elastic-llm.sh -m gpt-5.2 -k false -d true -n gpt5-connector -P curriculum-development
-
-# Enable workflows
+## Enable workflows
 curl -X POST "http://localhost:30002/api/kibana/settings" -H "Content-Type: application/json" -H "kbn-xsrf: true" -H "x-elastic-internal-origin: featureflag" -u "fraud:hunter"  -d '{
     "changes": {
       "workflows:ui:enabled": true
     }
   }'
 
-# Create 'sar-reports' ingest pipeline and index template
+## Create 'sar-reports' ingest pipeline and index template
 curl -X PUT "http://localhost:30920/_ingest/pipeline/sar-reports" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/sar-reports.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/brokerage-final" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/brokerage-final.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-brokers.json
@@ -51,9 +42,8 @@ echo "Ingest pipelines loaded"
 echo
 clear
 
-# Create fraud-workshop data views
+## Create fraud-workshop data views
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop*", "name": "Fraud Workshop", "timeFieldName": "@timestamp"  }}'  
-#curl -X POST "http://localhost:30002/api/saved_objects/index-pattern" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-tsds*", "name": "Fraud-Workshop-TSDS", "timeFieldName": "@timestamp"  }}'  
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop-money-laundering" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-money-laundering*", "name": "Money-Laundering", "timeFieldName": "@timestamp"  }}'  
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop-wire-fraud" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-wire-fraud*", "name": "Wire-Fraud", "timeFieldName": "@timestamp"  }}' 
 curl -X POST "http://localhost:30002/api/saved_objects/index-pattern/fraud-workshop-smurfing" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-smurfing*", "name": "Smurfing", "timeFieldName": "@timestamp"  }}'
@@ -66,7 +56,7 @@ echo
 clear
 
 
-# Load saved-searches for assignment starts
+## Load saved-searches for assignment starts
 curl -X POST "http://localhost:30002/api/saved_objects/_import" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/root/Fraud-Workshop/Saved-Searches/3-StartSavedSearches.ndjson"
 clear
 echo
@@ -74,7 +64,7 @@ echo "Saved searches loaded"
 echo
 clear
 
-# Load DFA Workflow
+## Load DFA Workflow
 curl -X POST "http://localhost:30002/api/workflows" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/root/Fraud-Workshop/Workflows/dfa-workflow.json
 
 clear
@@ -83,7 +73,7 @@ echo "Data Frame Analytics workflow loaded"
 echo
 clear
 
-# Load High-Value Daily Aggregate Workflow
+## Load High-Value Daily Aggregate Workflow
 CONN_ID=$(curl -s "http://localhost:30002/api/actions/connectors" \
   -H "kbn-xsrf: true" -u "fraud:hunter" \
   | python3 -c 'import json,sys; print(next(c["id"] for c in json.load(sys.stdin) if c["name"]=="openai-connector"))')
@@ -101,7 +91,7 @@ echo "High-Value Daily Aggregate workflow loaded"
 echo
 clear
 
-# Load component templates
+## Load component templates
 curl -X PUT "http://localhost:30920/_component_template/fraud-workshop-logsdb-mappings" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Component-Templates/fraud-workshop-logsdb-mappings.json
 
 clear
@@ -110,7 +100,7 @@ echo "Component Template loaded"
 echo
 clear
 
-# Load index templates
+## Load index templates
 curl -X POST "http://localhost:30920/_index_template/enrich-accounts" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-accounts.json
 curl -X POST "http://localhost:30920/_index_template/enrich-austinbanks" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinbanks.json
 curl -X POST "http://localhost:30920/_index_template/enrich-austinstores" -H "Content-Type: application/json" -u "fraud:hunter" -d @/root/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinstores.json
@@ -124,12 +114,6 @@ echo
 echo "Index templates loaded"
 echo
 clear
-# Load enrichment data sources
-# Legacy direct approach:
-#curl -X POST "http://localhost:30920/enrich-accounts/_bulk" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Data/enrich-accounts.ndjson
-#curl -X POST "http://localhost:30920/enrich-austinbanks/_bulk" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Data/enrich-austinbanks.ndjson
-#curl -X POST "http://localhost:30920/enrich-austinstores/_bulk" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Data/enrich-austinstores.ndjson
-#curl -X POST "http://localhost:30920/enrich-intbank/_bulk" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Data/enrich-intbank.ndjson
 
 # New cleaner progress bar approach:
 #!/usr/bin/env bash
@@ -171,7 +155,7 @@ echo "Enrichment data loaded"
 echo
 clear
 
-# Create enrichment policies
+## Create enrichment policies
 curl -X PUT "http://localhost:30920/_enrich/policy/enrich-accounts" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-accounts.json
 curl -X PUT "http://localhost:30920/_enrich/policy/enrich-austinbanks" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-austinbanks.json
 curl -X PUT "http://localhost:30920/_enrich/policy/enrich-austinstores" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Enrichment-Policies/enrich-austinstores.json
@@ -185,7 +169,7 @@ echo
 echo "Enrichment policies loaded"
 echo
 clear
-# Execute enrichment policies
+## Execute enrichment policies
 curl -X POST "http://localhost:30920/_enrich/policy/enrich-accounts/_execute" -u "fraud:hunter"
 curl -X POST "http://localhost:30920/_enrich/policy/enrich-austinbanks/_execute" -u "fraud:hunter"
 curl -X POST "http://localhost:30920/_enrich/policy/enrich-austinstores/_execute" -u "fraud:hunter"
@@ -201,7 +185,7 @@ echo "Enrichment policies executed"
 echo
 clear
 
-# Create ingest pipelines
+## Create ingest pipelines
 curl -X PUT "http://localhost:30920/_ingest/pipeline/atm-cleanup" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/atm-cleanup.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-accounts" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-accounts.json
 curl -X PUT "http://localhost:30920/_ingest/pipeline/enrich-austinbanks" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/root/Fraud-Workshop/Ingest-Pipelines/enrich-austinbanks.json
@@ -221,12 +205,7 @@ echo "Ingest pipelines loaded"
 echo
 clear
 
-echo
-echo "Deploying Agents"
-echo
-
-# Tool creation
-
+## Tool creation
 # Smurfing Detection
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
@@ -389,7 +368,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
-# Create Suspicious Activity Reporting Agent 
+## Create Suspicious Activity Reporting Agent 
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -420,11 +399,11 @@ for index in "${!SOURCES[@]}"; do
 done
 
 
-# Start data-gen installation
+## Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
 bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
 
-# Free-form fraud search
+## Free-form fraud search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
   "id": "fraud_transaction_search",
@@ -436,9 +415,11 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
-# Create Financial Fraud Skill
+## Create Financial Fraud Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
 
+
+## Create Financial Fraud Analyst Agent
 curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
 {
   "id": "financial-fraud-analyst",
