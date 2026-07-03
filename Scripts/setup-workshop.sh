@@ -225,37 +225,6 @@ echo
 echo "Deploying Agents"
 echo
 
-# Create Suspicious Activity Reporting Agent 
-#!/usr/bin/env bash
-set -euo pipefail
-
-BASE_URL="http://localhost:30002/api/agent_builder/agents"
-USER="fraud:hunter"
-DATA_DIR="/root/Fraud-Workshop/Agents"
-
-declare -A SOURCES=(
-  [SARA]="SARA.json"
-  [Financial Fraud Analyst]="financial-fraud-analyst.json"
-)
-
-for index in "${!SOURCES[@]}"; do
-  file="${DATA_DIR}/${SOURCES[$index]}"
-  output="bulk_${index}_response.json"
-
-  echo "Uploading $file to index [$index]..."
-
-  curl --progress-bar \
-    -X POST "$BASE_URL" \
-    -H "Content-Type: application/json" \
-    -H "kbn-xsrf: true" \
-    -u "$USER" \
-    -d "@$file" \
-    -o "$output"
-
-  echo "  --> Done. Response saved to $output"
-  echo
-done
-
 # Tool creation
 
 # Smurfing Detection
@@ -453,6 +422,38 @@ curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type:
    "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management" ]
  }}
 JSON
+
+# Create Suspicious Activity Reporting Agent 
+#!/usr/bin/env bash
+set -euo pipefail
+
+BASE_URL="http://localhost:30002/api/agent_builder/agents"
+USER="fraud:hunter"
+DATA_DIR="/root/Fraud-Workshop/Agents"
+
+declare -A SOURCES=(
+  [SARA]="SARA.json"
+  [Financial Fraud Analyst]="financial-fraud-analyst.json"
+)
+
+for index in "${!SOURCES[@]}"; do
+  file="${DATA_DIR}/${SOURCES[$index]}"
+  output="bulk_${index}_response.json"
+
+  echo "Uploading $file to index [$index]..."
+
+  curl --progress-bar \
+    -X POST "$BASE_URL" \
+    -H "Content-Type: application/json" \
+    -H "kbn-xsrf: true" \
+    -u "$USER" \
+    -d "@$file" \
+    -o "$output"
+
+  echo "  --> Done. Response saved to $output"
+  echo
+done
+
 
 # Start data-gen installation
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
