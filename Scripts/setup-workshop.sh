@@ -415,8 +415,170 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
+## Consistent amounts under SAR threshold search
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_consistent_amounts_under_sar_threshold",
+  "type": "esql",
+  "description": "Artificially consistent amounts just under our SAR threshold and assign scores with a case statement.",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-wire-fraud
+| WHERE account.event == \"deposit\" AND deposit.type == \"cash\"
+  AND event.amount > 8000 AND event.amount < 10000
+| STATS
+    deposit_count = COUNT(),
+    avg_amount = AVG(event.amount),
+    variance_amount = VARIANCE(event.amount),
+    std_dev_amount = STD_DEV(event.amount),
+    min_amount = MIN(event.amount),
+    max_amount = MAX(event.amount),
+    total_deposited = SUM(event.amount)
+  BY account.name
+| WHERE deposit_count >= 5 // ACCOUNTS WITH MULTIPLE LARGE DEPOSITS
+| EVAL
+    coefficient_of_variation = std_dev_amount / avg_amount,
+    amount_range = max_amount - min_amount,
+    variance_threshold = CASE(variance_amount < 10000, \"SUSPICIOUS\", \"NORMAL\"),
+    avg_deviation_from_threshold = ABS(avg_amount - 9500) / 9500
+| INLINE STATS
+    overall_avg_variance = AVG(variance_amount),
+    overall_std_variance = STD_DEV(variance_amount),
+    median_deposit_count = PERCENTILE(deposit_count, 50)
+| EVAL
+    variance_z_score = (variance_amount - overall_avg_variance) / overall_std_variance,
+    suspicion_score = CASE(
+        variance_amount < 1000 AND avg_amount > 9000, 100, // HIGHLY SUSPICIOUS
+        variance_amount < 5000 AND avg_amount > 8500, 75, // VERY SUSPICIOUS
+        variance_amount < 10000 AND avg_amount > 8000, 50, // MODERATELY SUSPICIOUS
+        25 // NORMAL ACTIVITY
+    )
+| WHERE suspicion_score >= 50
+| SORT variance_amount ASC, coefficient_of_variation ASC",
+    "params": {}
+  }
+}'
+
+## Anomalous deposits as the bank is closing
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_deposit_timing_patterns",
+  "type": "esql",
+  "description": "Anomalous deposits occurring just as the bank would be closing",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-wire-fraud
+| WHERE account.event == \"deposit\" AND event.amount > 8000
+| EVAL
+    hour_of_day = DATE_EXTRACT(\"HOUR_OF_DAY\", transaction.date),
+    day_of_week = DATE_EXTRACT(\"DAY_OF_WEEK\", transaction.date),
+    amount_bucket = ROUND(event.amount / 500) * 500
+| STATS
+    deposit_count = COUNT(),
+    unique_hours = COUNT_DISTINCT(hour_of_day),
+    avg_amount = AVG(event.amount),
+    hour_variance = VARIANCE(hour_of_day),
+    std_dev_hour = STD_DEV(hour_of_day),
+    most_common_hour = MEDIAN(hour_of_day),
+    peak_hour_deposits = SUM(CASE(hour_of_day == 16, 1, 0)),  // 4 PM deposits
+    total_amount = SUM(event.amount)
+  BY account.name
+| WHERE deposit_count >= 5
+| INLINE STATS
+    avg_hour_variance = AVG(hour_variance),
+    std_hour_variance = STD_DEV(hour_variance),
+    avg_unique_hours = AVG(unique_hours),
+    peak_hour_threshold = PERCENTILE(peak_hour_deposits, 90)
+| EVAL
+    hour_consistency_score = CASE(
+        hour_variance < 1.0, 4,  // Very consistent timing
+        hour_variance < 4.0, 3,  // Moderately consistent
+        hour_variance < 9.0, 2,  // Somewhat consistent
+        1  // Random timing
+    ),
+    peak_hour_ratio = peak_hour_deposits / deposit_count,
+    timing_suspicion = CASE(
+        peak_hour_ratio > 0.7 AND hour_variance < 2.0, \"CRITICAL\",
+        peak_hour_ratio > 0.5 AND hour_variance < 4.0, \"HIGH\",
+        peak_hour_ratio > 0.3, \"MODERATE\",
+        \"LOW\"
+    )
+| SORT hour_variance ASC, peak_hour_ratio DESC",
+    "params": {}
+  }
+}'
+
+## Outbound wires occurring at the same time
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
+  -d '{
+  "id": "fraud_coordinated_wire_transfers",
+  "type": "esql",
+  "description": "Outbound wires being coordinated at around the same time",
+  "tags": [
+    "fraud",
+    "wire-fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-wire-fraud
+| WHERE account.event == \"wire\" AND wire.direction == \"outbound\"
+  AND event.amount > 7000 AND event.amount < 10000
+| EVAL
+    wire_hour = DATE_EXTRACT(\"HOUR_OF_DAY\", transaction.date),
+    wire_minute = DATE_EXTRACT(\"minute_of_hour\", transaction.date),
+    wire_second = DATE_EXTRACT(\"second_of_minute\", transaction.date),
+    precise_time = wire_hour * 3600 + wire_minute * 60 + wire_second
+| STATS
+    wire_count = COUNT(),
+    avg_amount = AVG(event.amount),
+    amount_variance = VARIANCE(event.amount),
+    amount_std_dev = STD_DEV(event.amount),
+    time_variance = VARIANCE(precise_time),
+    time_std_dev = STD_DEV(precise_time),
+    unique_banks = COUNT_DISTINCT(wire.outbound.bank_name),
+    total_wired = SUM(event.amount),
+    earliest_wire = MIN(transaction.date),
+    latest_wire = MAX(transaction.date)
+  BY account.name, wire.outbound.bank_name
+| WHERE wire_count >= 3  // Multiple wires to same bank
+| INLINE STATS
+    avg_amount_variance = AVG(amount_variance),
+    avg_time_variance = AVG(time_variance),
+    suspicious_bank_threshold = PERCENTILE(wire_count, 95)
+| EVAL
+    amount_consistency = CASE(
+        amount_variance < avg_amount_variance * 0.1, \"HIGHLY_CONSISTENT\",
+        amount_variance < avg_amount_variance * 0.5, \"CONSISTENT\",
+        \"VARIABLE\"
+    ),
+    timing_consistency = CASE(
+        time_variance < 3600, \"SAME_HOUR\",  // Within same hour
+        time_variance < 86400, \"SAME_DAY\",  // Within same day
+        \"SPREAD_OUT\"
+    ),
+    coordination_score = wire_count * 10 +
+                        CASE(amount_consistency == \"HIGHLY_CONSISTENT\", 50,
+                             amount_consistency == \"CONSISTENT\", 25, 0) +
+                        CASE(timing_consistency == \"SAME_HOUR\", 40,
+                             timing_consistency == \"SAME_DAY\", 20, 0)
+| WHERE coordination_score >= 80  // High coordination threshold
+| SORT coordination_score DESC, amount_variance ASC",
+    "params": {}
+  }
+}'
+
+
 ## Create Financial Fraud Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
+
+## Create International Wire Fraud Skill
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/international_wire_fraud.json
 
 
 ## Create Financial Fraud Analyst Agent
