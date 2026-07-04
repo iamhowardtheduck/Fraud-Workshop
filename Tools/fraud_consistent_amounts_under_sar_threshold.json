@@ -1,0 +1,43 @@
+{
+  "id": "fraud_consistent_amounts_under_sar_threshold",
+  "type": "esql",
+  "description": "Artificially consistent amounts just under our SAR threshold and assign scores with a case statement.",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-wire-fraud
+| WHERE account.event == \"deposit\" AND deposit.type == \"cash\"
+  AND event.amount > 8000 AND event.amount < 10000
+| STATS
+    deposit_count = COUNT(),
+    avg_amount = AVG(event.amount),
+    variance_amount = VARIANCE(event.amount),
+    std_dev_amount = STD_DEV(event.amount),
+    min_amount = MIN(event.amount),
+    max_amount = MAX(event.amount),
+    total_deposited = SUM(event.amount)
+  BY account.name
+| WHERE deposit_count >= 5 // ACCOUNTS WITH MULTIPLE LARGE DEPOSITS
+| EVAL
+    coefficient_of_variation = std_dev_amount / avg_amount,
+    amount_range = max_amount - min_amount,
+    variance_threshold = CASE(variance_amount < 10000, \"SUSPICIOUS\", \"NORMAL\"),
+    avg_deviation_from_threshold = ABS(avg_amount - 9500) / 9500
+| INLINE STATS
+    overall_avg_variance = AVG(variance_amount),
+    overall_std_variance = STD_DEV(variance_amount),
+    median_deposit_count = PERCENTILE(deposit_count, 50)
+| EVAL
+    variance_z_score = (variance_amount - overall_avg_variance) / overall_std_variance,
+    suspicion_score = CASE(
+        variance_amount < 1000 AND avg_amount > 9000, 100, // HIGHLY SUSPICIOUS
+        variance_amount < 5000 AND avg_amount > 8500, 75, // VERY SUSPICIOUS
+        variance_amount < 10000 AND avg_amount > 8000, 50, // MODERATELY SUSPICIOUS
+        25 // NORMAL ACTIVITY
+    )
+| WHERE suspicion_score >= 50
+| SORT variance_amount ASC, coefficient_of_variation ASC"
+  }
+}
