@@ -1,0 +1,15 @@
+{
+  "id": "fraud_structuring_detection",
+  "type": "esql",
+  "description": "Detects STRUCTURING / CTR-evasion: accounts with multiple transactions just below the $10,000 reporting threshold ($8,000-$9,999) over the last N days. Returns the account, count of near-threshold transactions, and total moved. High counts indicate deliberate structuring to avoid Currency Transaction Reports.",
+  "tags": ["fraud", "geo-anomaly", "account-takeover", "international"],
+  "configuration": {
+    "query": "FROM fraud-* | WHERE event.type == \"credit\" AND event.amount >= 8000 AND event.amount < 10000 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS near_threshold_txns = COUNT(*), total_amount = SUM(event.amount), min_amt = MIN(event.amount), max_amt = MAX(event.amount) BY account.name | WHERE near_threshold_txns >= 2 | SORT near_threshold_txns DESC | LIMIT 50",
+    "params": {
+      "days": {
+        "type": "integer",
+        "description": "Lookback window in days (e.g. 7, 30, 90)"
+      }
+    }
+  }
+}
