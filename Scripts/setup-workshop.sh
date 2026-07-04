@@ -321,18 +321,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   }
 }'
 
-# Free-form fraud search
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
-  -d '{
-  "id": "fraud_transaction_search",
-  "type": "index_search",
-  "description": "Free-form search over the fraud-* transaction indices. Use to investigate a specific account, name, merchant, wire counterparty, SWIFT/routing number, or time range once a suspicious pattern is identified by the detection tools, or to pull supporting raw transaction records.",
-  "tags": [],
-  "configuration": {
-    "pattern": "fraud-*"
-  }
-}'
-
+# Geo anomaly search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" \
   -d '{
   "id": "fraud_geo_anomaly",
