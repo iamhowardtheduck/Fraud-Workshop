@@ -7,7 +7,7 @@
     "transactions"
   ],
   "configuration": {
-    "query": "FROM fraud-workshop-wire-fraud
+    "query": """FROM fraud-workshop-wire-fraud
 | WHERE account.event == \"deposit\" AND deposit.type == \"cash\"
   AND event.amount > 8000 AND event.amount < 10000
 | STATS
@@ -38,6 +38,6 @@
         25 // NORMAL ACTIVITY
     )
 | WHERE suspicion_score >= 50
-| SORT variance_amount ASC, coefficient_of_variation ASC"
+| SORT variance_amount ASC, coefficient_of_variation ASC"""
   }
 }
