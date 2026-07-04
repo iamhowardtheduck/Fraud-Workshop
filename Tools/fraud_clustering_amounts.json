@@ -1,0 +1,13 @@
+{
+  "id": "fraud_clustering_amounts",
+  "type": "esql",
+  "description": "Identify accounts depositing at or near the same amount.",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-smurfing | WHERE account.event == \"deposit\" AND event.amount > 0 AND atm.deposit_type == \"cash\" | EVAL amount_bucket = ROUND(event.amount / 50) * 50 | STATS account_count = COUNT_DISTINCT(account.name), total_deposits = COUNT(), avg_amount = AVG(event.amount), std_dev = STD_DEV(event.amount), min_account = MIN(account.name), max_account = MAX(account.name) BY amount_bucket | WHERE account_count >= 3 AND std_dev < 25 | EVAL deposits_per_account = total_deposits / account_count, suspicion_score = account_count * deposits_per_account / (std_dev + 1) | SORT suspicion_score DESC | LIMIT 10",
+    "params": {}
+  }
+}
