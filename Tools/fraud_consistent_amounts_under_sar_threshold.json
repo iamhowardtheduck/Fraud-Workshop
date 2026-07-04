@@ -7,7 +7,7 @@
     "transactions"
   ],
   "configuration": {
-    "query": """FROM fraud-workshop-wire-fraud
+    "query": "FROM fraud-workshop-wire-fraud
 | WHERE account.event == \"deposit\" AND deposit.type == \"cash\"
   AND event.amount > 8000 AND event.amount < 10000
 | STATS
@@ -19,7 +19,7 @@
     max_amount = MAX(event.amount),
     total_deposited = SUM(event.amount)
   BY account.name
-| WHERE deposit_count >= 5 // ACCOUNTS WITH MULTIPLE LARGE DEPOSITS
+| WHERE deposit_count >= 5 
 | EVAL
     coefficient_of_variation = std_dev_amount / avg_amount,
     amount_range = max_amount - min_amount,
@@ -32,12 +32,12 @@
 | EVAL
     variance_z_score = (variance_amount - overall_avg_variance) / overall_std_variance,
     suspicion_score = CASE(
-        variance_amount < 1000 AND avg_amount > 9000, 100, // HIGHLY SUSPICIOUS
-        variance_amount < 5000 AND avg_amount > 8500, 75, // VERY SUSPICIOUS
-        variance_amount < 10000 AND avg_amount > 8000, 50, // MODERATELY SUSPICIOUS
-        25 // NORMAL ACTIVITY
+        variance_amount < 1000 AND avg_amount > 9000, 100, 
+        variance_amount < 5000 AND avg_amount > 8500, 75, 
+        variance_amount < 10000 AND avg_amount > 8000, 50, 
+        25 
     )
 | WHERE suspicion_score >= 50
-| SORT variance_amount ASC, coefficient_of_variation ASC"""
+| SORT variance_amount ASC, coefficient_of_variation ASC"
   }
 }
