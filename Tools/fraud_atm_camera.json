@@ -1,0 +1,13 @@
+{
+  "id": "fraud_atm_camera",
+  "type": "esql",
+  "description": "Identifying ATMs which camera is inoperable with consistent deposits.",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-smurfing | WHERE account.event == \"deposit\" AND event.amount > 0 AND atm.camera_enabled IS NOT NULL AND atm.deposit_type == \"cash\" | STATS deposit_count = COUNT(), avg_amount = AVG(event.amount), std_dev_amount = STD_DEV(event.amount), unique_accounts = COUNT_DISTINCT(account.name), total_amount = SUM(event.amount) BY pos.merchant_name, pos.merchant_address, atm.camera_enabled | EVAL amount_consistency = CASE( std_dev_amount < 50, \"highly_consistent\", std_dev_amount < 150, \"moderately_consistent\", \"variable\") | WHERE deposit_count >= 10 | SORT atm.camera_enabled ASC, std_dev_amount ASC, unique_accounts DESC", 
+    "params": {}
+  }
+}
