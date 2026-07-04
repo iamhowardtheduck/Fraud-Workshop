@@ -1,0 +1,13 @@
+{
+  "id": "fraud_deposit_intervals",
+  "type": "esql",
+  "description": "Identifying deposit timing and intervals.",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-smurfing | WHERE account.event == \"deposit\" AND event.amount > 0 AND atm.deposit_type == \"cash\" | EVAL hour_minute = DATE_FORMAT(\"HH:mm\", transaction.date) | STATS deposit_count = COUNT(), unique_times = COUNT_DISTINCT(hour_minute), avg_amount = AVG(event.amount), std_dev_amount = STD_DEV(event.amount) BY account.name, hour_minute | WHERE deposit_count > 1 | STATS regular_times = COUNT(), total_regular_deposits = SUM(deposit_count), avg_deposits_per_time = AVG(deposit_count), std_dev_timing = STD_DEV(deposit_count) BY account.name | WHERE regular_times >= 3 AND avg_deposits_per_time >= 2 | SORT regular_times DESC, total_regular_deposits DESC",
+    "params": {}
+  }
+}
