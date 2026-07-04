@@ -1,0 +1,20 @@
+{
+    "id": "fraud_velocity_check",
+    "type": "esql",
+    "description": "Checks transaction velocity for a given account — counts how many transactions occurred within a rolling time window and flags accounts exceeding a velocity threshold.",
+    "tags": [
+      "fraud",
+      "velocity",
+      "aml",
+      "real-time"
+    ],
+    "configuration": {
+      "query": "FROM fraud-* | WHERE event.amount > 0 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS txn_count = COUNT(*), total_volume = SUM(event.amount), avg_txn = AVG(event.amount), max_txn = MAX(event.amount) BY account.name | WHERE txn_count >= 10 | SORT total_volume DESC | LIMIT 50",
+      "params": {
+        "days": {
+          "type": "integer",
+          "description": "Lookback window in days"
+        }
+      }
+    }
+  }
