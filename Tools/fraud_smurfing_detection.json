@@ -4,35 +4,11 @@
   "description": "Detects smurfing patterns by identifying accounts that split large transactions into multiple smaller ones to evade detection thresholds.",
   "tags": ["fraud", "smurfing", "aml", "transaction-splitting"],
   "configuration": {
-    "query": "FROM fraud-workshop* | WHERE @timestamp >= ?startTime AND @timestamp <= ?endTime | WHERE amount < ?threshold | STATS tx_count=COUNT(*), total_amount=SUM(amount), avg_amount=AVG(amount), unique_recipients=COUNT_DISTINCT(recipient_account) BY account_id | WHERE tx_count >= ?minTransactions | SORT tx_count DESC | LIMIT ?limit",
+    "query": "FROM fraud-* | WHERE event.type == \"credit\" AND event.amount > 0 AND event.amount < 3000 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS small_deposits = COUNT(*), total_aggregated = SUM(event.amount), avg_deposit = AVG(event.amount) BY account.name | WHERE small_deposits >= 5 | SORT small_deposits DESC | LIMIT 50",
     "params": {
-      "startTime": {
-        "type": "date",
-        "description": "Start of the analysis window in ISO 8601 format (e.g. 2024-01-01T00:00:00Z)"
-      },
-      "endTime": {
-        "type": "date",
-        "description": "End of the analysis window in ISO 8601 format",
-        "optional": true,
-        "defaultValue": "now"
-      },
-      "threshold": {
-        "type": "float",
-        "description": "Transaction amount threshold below which smurfing is suspected. Defaults to 10000.",
-        "optional": true,
-        "defaultValue": 10000
-      },
-      "minTransactions": {
+      "days": {
         "type": "integer",
-        "description": "Minimum number of sub-threshold transactions to flag an account. Defaults to 3.",
-        "optional": true,
-        "defaultValue": 3
-      },
-      "limit": {
-        "type": "integer",
-        "description": "Maximum number of results to return. Defaults to 25.",
-        "optional": true,
-        "defaultValue": 25
+        "description": "Lookback window in days"
       }
     }
   }
