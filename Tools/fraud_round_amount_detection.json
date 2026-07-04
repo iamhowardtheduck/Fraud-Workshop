@@ -1,0 +1,20 @@
+{
+    "id": "fraud_round_amount_detection",
+    "type": "esql",
+    "description": "Detects suspicious ROUND-NUMBER transactions: transactions whose amount is an exact multiple of $1,000, a common indicator of artificial/laundering activity rather than organic spending. Returns account, count of round transactions and total. Use alongside other signals to corroborate laundering.",
+    "tags": [
+      "fraud",
+      "high-value",
+      "wire-fraud",
+      "transactions"
+    ],
+    "configuration": {
+      "query": "FROM fraud-* | WHERE event.amount > 0 AND (event.amount % 1000) == 0 AND DATE_DIFF(\"days\", transaction.date, NOW()) <= ?days | STATS round_txns = COUNT(*), total_round = SUM(event.amount) BY account.name | WHERE round_txns >= 3 | SORT round_txns DESC | LIMIT 50",
+      "params": {
+        "days": {
+          "type": "integer",
+          "description": "Lookback window in days"
+        }
+      }
+    }
+  }
