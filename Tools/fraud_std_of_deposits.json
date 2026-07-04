@@ -1,0 +1,13 @@
+{
+  "id": "fraud_std_of_deposits",
+  "type": "esql",
+  "description": "Standard deviation of deposits for identifying outliers.",
+  "tags": [
+    "fraud",
+    "transactions"
+  ],
+  "configuration": {
+    "query": "FROM fraud-workshop-smurfing | WHERE account.event == \"deposit\" AND event.amount > 0 AND atm.deposit_type == \"cash\" | STATS deposit_count = COUNT(), avg_amount = AVG(event.amount), std_dev = STD_DEV(event.amount), min_amount = MIN(event.amount), max_amount = MAX(event.amount), total_deposits = SUM(event.amount) BY account.name | WHERE deposit_count >= 5 | EVAL coefficient_of_variation = std_dev / avg_amount, amount_range = max_amount - min_amount | WHERE coefficient_of_variation < 0.5 OR amount_range < 50 | SORT std_dev ASC, deposit_count DESC",
+    "params": {}
+  }
+}
