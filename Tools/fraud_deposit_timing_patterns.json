@@ -7,43 +7,7 @@
     "transactions"
   ],
   "configuration": {
-    "query": "FROM fraud-workshop-wire-fraud
-| WHERE account.event == \"deposit\" AND event.amount > 8000
-| EVAL
-    hour_of_day = DATE_EXTRACT(\"HOUR_OF_DAY\", transaction.date),
-    day_of_week = DATE_EXTRACT(\"DAY_OF_WEEK\", transaction.date),
-    amount_bucket = ROUND(event.amount / 500) * 500
-| STATS
-    deposit_count = COUNT(),
-    unique_hours = COUNT_DISTINCT(hour_of_day),
-    avg_amount = AVG(event.amount),
-    hour_variance = VARIANCE(hour_of_day),
-    std_dev_hour = STD_DEV(hour_of_day),
-    most_common_hour = MEDIAN(hour_of_day),
-    peak_hour_deposits = SUM(CASE(hour_of_day == 16, 1, 0)),  // 4 PM deposits
-    total_amount = SUM(event.amount)
-  BY account.name
-| WHERE deposit_count >= 5
-| INLINE STATS
-    avg_hour_variance = AVG(hour_variance),
-    std_hour_variance = STD_DEV(hour_variance),
-    avg_unique_hours = AVG(unique_hours),
-    peak_hour_threshold = PERCENTILE(peak_hour_deposits, 90)
-| EVAL
-    hour_consistency_score = CASE(
-        hour_variance < 1.0, 4,  // Very consistent timing
-        hour_variance < 4.0, 3,  // Moderately consistent
-        hour_variance < 9.0, 2,  // Somewhat consistent
-        1  // Random timing
-    ),
-    peak_hour_ratio = peak_hour_deposits / deposit_count,
-    timing_suspicion = CASE(
-        peak_hour_ratio > 0.7 AND hour_variance < 2.0, \"CRITICAL\",
-        peak_hour_ratio > 0.5 AND hour_variance < 4.0, \"HIGH\",
-        peak_hour_ratio > 0.3, \"MODERATE\",
-        \"LOW\"
-    )
-| SORT hour_variance ASC, peak_hour_ratio DESC",
+    "query": "FROM fraud-workshop-wire-fraud | WHERE account.event == \"deposit\" AND event.amount > 8000 | EVAL hour_of_day = DATE_EXTRACT(\"HOUR_OF_DAY\", transaction.date), day_of_week = DATE_EXTRACT(\"DAY_OF_WEEK\", transaction.date), amount_bucket = ROUND(event.amount / 500) * 500 | STATS deposit_count = COUNT(), unique_hours = COUNT_DISTINCT(hour_of_day), avg_amount = AVG(event.amount), hour_variance = VARIANCE(hour_of_day), std_dev_hour = STD_DEV(hour_of_day), most_common_hour = MEDIAN(hour_of_day), peak_hour_deposits = SUM(CASE(hour_of_day == 16, 1, 0)), total_amount = SUM(event.amount) BY account.name | WHERE deposit_count >= 5 | INLINE STATS avg_hour_variance = AVG(hour_variance), std_hour_variance = STD_DEV(hour_variance), avg_unique_hours = AVG(unique_hours), peak_hour_threshold = PERCENTILE(peak_hour_deposits, 90) | EVAL hour_consistency_score = CASE(hour_variance < 1.0, 4, hour_variance < 4.0, 3, hour_variance < 9.0, 2, 1), peak_hour_ratio = peak_hour_deposits / deposit_count, timing_suspicion = CASE(peak_hour_ratio > 0.7 AND hour_variance < 2.0, \"CRITICAL\", peak_hour_ratio > 0.5 AND hour_variance < 4.0, \"HIGH\", peak_hour_ratio > 0.3, \"MODERATE\", \"LOW\") | SORT hour_variance ASC, peak_hour_ratio DESC",
     "params": {}
   }
 }
