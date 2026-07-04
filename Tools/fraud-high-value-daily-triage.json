@@ -1,0 +1,14 @@
+{
+  "id": "fraud-high-value-daily-triage",
+  "type": "workflow",
+  "description": "Welcome Fraud analysis to focus investigations",
+  "tags": [
+    "security",
+    "investigation",
+    "workflows"
+  ],
+  "configuration": {
+    "workflow_id": "high-value-daily-aggregate-triage",
+    "wait_for_completion": true
+  }
+}
