@@ -204,7 +204,7 @@ echo
 echo "Ingest pipelines loaded"
 echo
 clear
-
+##### TOOLS #####
 ## Tool creation
 # Smurfing Detection
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_smurfing_detection.json
@@ -227,6 +227,7 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
 # Free-form fraud search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_transaction_search.json
 
+# Fraud geo anomaly search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_geo_anomaly.json
  
 ## Create Suspicious Activity Reporting Agent 
@@ -264,6 +265,8 @@ done
 chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
 bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
 
+##### TOOLS #####
+
 ## Free-form fraud search
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_transaction_search.json
 
@@ -273,15 +276,26 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
 ## Anomalous deposits as the bank is closing
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_deposit_timing_patterns.json
 
-# Fraud deposit interval analysis
+# Fraud deposit interval analysis - SMURFING SKILL
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_deposit_intervals.json
-  
+
+# Fraud clustering amounts & accounts - SMURFING SKILL
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_clustering_amounts.json  
+
+# Fraud ATM camera disabled with numerous deposits - SMURFING SKILL
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_atm_camera.json
+
+# Fraud Risk Scoring Deposits - SMURFING SKILL
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_risk_scoring_deposits.json
 
 ## Outbound wires occurring at the same time
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_coordinated_wire_transfers.json
 
 ## Standard deviation of deposits
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_std_of_deposits.json
+
+
+##### SKILLS #####
   
 ## Create Financial Fraud Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
@@ -289,6 +303,10 @@ curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type:
 ## Create International Wire Fraud Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/international_wire_fraud.json
 
+## Create Smurfing & Structuring Fraud Skill
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/smurfing_fraud_activity.json
+
+##### AGENTS #####
 
 ## Create Financial Fraud Analyst Agent
 curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Agents/financial-fraud-analyst.json
