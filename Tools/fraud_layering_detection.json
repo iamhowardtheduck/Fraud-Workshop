@@ -1,0 +1,10 @@
+{
+  "id": "fraud_layering_detection",
+  "type": "esql",
+  "description": "Builds a behavioral profile for a specific account: total transaction count, total volume, average amount, unique counterparties, and transaction type breakdown over a lookback period.",
+  "tags": ["fraud", "account", "profiling", "behavioral-analysis"],
+  "configuration": {
+    "query": "FROM fraud-* | WHERE wire.direction == \"outbound\" | STATS wire_count = COUNT(*), total_wired = SUM(event.amount) BY account.name, wire.outbound.bank_name, wire.outbound.country | SORT total_wired DESC | LIMIT 50",
+    "params": {}
+  }
+}
