@@ -207,27 +207,27 @@ clear
 
 ## Tool creation
 # Smurfing Detection
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_smurfing_detection.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_smurfing_detection.json
 
 # Veolicty Check
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -u "fraud:hunter" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" --data-binary @/root/Fraud-Workshop/Tools/fraud_velocity_check.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -u "fraud:hunter" -H "Content-Type: application/json" -H "kbn-xsrf: true" --data-binary @/root/Fraud-Workshop/Tools/fraud_velocity_check.json
 
 # Round Amount Transactions
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -u "fraud:hunter" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" --data-binary @/root/Fraud-Workshop/Tools/fraud_round_amount_detection.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -u "fraud:hunter" -H "Content-Type: application/json" -H "kbn-xsrf: true" --data-binary @/root/Fraud-Workshop/Tools/fraud_round_amount_detection.json
 
 # Layering Detection
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_layering_detection.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_layering_detection.json
 
 # Structuring Detection
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_structuring_detection.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_structuring_detection.json
 
 # High Value Daily Triage
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud-high-value-daily-triage.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud-high-value-daily-triage.json
 
 # Free-form fraud search
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_transaction_search.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_transaction_search.json
 
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_geo_anomaly.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_geo_anomaly.json
  
 ## Create Suspicious Activity Reporting Agent 
 #!/usr/bin/env bash
@@ -265,27 +265,27 @@ chmod +x /root/Fraud-Workshop/Scripts/fraud-gen.sh
 bash /root/Fraud-Workshop/Scripts/fraud-gen.sh
 
 ## Free-form fraud search
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_transaction_search.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_transaction_search.json
 
 ## Consistent amounts under SAR threshold search
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_consistent_amounts_under_sar_threshold.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_consistent_amounts_under_sar_threshold.json
   
 ## Anomalous deposits as the bank is closing
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_deposit_timing_patterns.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_deposit_timing_patterns.json
   
 
 ## Outbound wires occurring at the same time
-curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_coordinated_wire_transfers.json
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_coordinated_wire_transfers.json
   
 ## Create Financial Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
 
 ## Create International Wire Fraud Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/international_wire_fraud.json
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/international_wire_fraud.json
 
 
 ## Create Financial Fraud Analyst Agent
-curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/x-ndjson" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Agents/financial-fraud-analyst.json
+curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Agents/financial-fraud-analyst.json
 
 clear
 
