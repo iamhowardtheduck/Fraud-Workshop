@@ -329,6 +329,16 @@ step_create_ingest_pipelines() {
   end_step
 }
 
+
+step_data_generator() {
+  begin_step "## Start data-gen installation" 4
+  run python3 /root/Fraud-Workshop/Scripts/wire-fraud.py
+  run python3 /root/Fraud-Workshop/Scripts/money-laundering.py
+  run python3 /root/Fraud-Workshop/Scripts/smurfing.py
+  run python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py
+  end_step
+}
+
 step_deploy_agent_tools() {
   begin_step "## Deploy agent tools" 9
   local T="${KBN_URL}/api/agent_builder/tools"
@@ -494,15 +504,6 @@ step_create_sar_agent() {
   run curl -s -X POST "${KBN_URL}/api/agent_builder/agents" \
     -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "$USER" \
     -d "@/root/Fraud-Workshop/Agents/SARA.json"
-  end_step
-}
-
-step_data_generator() {
-  begin_step "## Start data-gen installation" 4
-  run python3 /root/Fraud-Workshop/Scripts/wire-fraud.py
-  run python3 /root/Fraud-Workshop/Scripts/money-laundering.py
-  run python3 /root/Fraud-Workshop/Scripts/smurfing.py
-  run python3 /root/Fraud-Workshop/Scripts/brokerage_workshop.py
   end_step
 }
 
