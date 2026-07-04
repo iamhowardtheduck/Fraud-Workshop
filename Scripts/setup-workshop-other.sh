@@ -272,10 +272,16 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
   
 ## Anomalous deposits as the bank is closing
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_deposit_timing_patterns.json
+
+# Fraud deposit interval analysis
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_deposit_intervals.json
   
 
 ## Outbound wires occurring at the same time
 curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_coordinated_wire_transfers.json
+
+## Standard deviation of deposits
+curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Tools/fraud_std_of_deposits.json
   
 ## Create Financial Fraud Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/financial_fraud_analyst.json
