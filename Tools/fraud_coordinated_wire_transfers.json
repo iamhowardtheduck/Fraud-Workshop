@@ -8,48 +8,7 @@
     "transactions"
   ],
   "configuration": {
-    "query": "FROM fraud-workshop-wire-fraud
-| WHERE account.event == \"wire\" AND wire.direction == \"outbound\"
-  AND event.amount > 7000 AND event.amount < 10000
-| EVAL
-    wire_hour = DATE_EXTRACT(\"HOUR_OF_DAY\", transaction.date),
-    wire_minute = DATE_EXTRACT(\"minute_of_hour\", transaction.date),
-    wire_second = DATE_EXTRACT(\"second_of_minute\", transaction.date),
-    precise_time = wire_hour * 3600 + wire_minute * 60 + wire_second
-| STATS
-    wire_count = COUNT(),
-    avg_amount = AVG(event.amount),
-    amount_variance = VARIANCE(event.amount),
-    amount_std_dev = STD_DEV(event.amount),
-    time_variance = VARIANCE(precise_time),
-    time_std_dev = STD_DEV(precise_time),
-    unique_banks = COUNT_DISTINCT(wire.outbound.bank_name),
-    total_wired = SUM(event.amount),
-    earliest_wire = MIN(transaction.date),
-    latest_wire = MAX(transaction.date)
-  BY account.name, wire.outbound.bank_name
-| WHERE wire_count >= 3  
-| INLINE STATS
-    avg_amount_variance = AVG(amount_variance),
-    avg_time_variance = AVG(time_variance),
-    suspicious_bank_threshold = PERCENTILE(wire_count, 95)
-| EVAL
-    amount_consistency = CASE(
-        amount_variance < avg_amount_variance * 0.1, \"HIGHLY_CONSISTENT\",
-        amount_variance < avg_amount_variance * 0.5, \"CONSISTENT\",
-        \"VARIABLE\"
-    ),
-    timing_consistency = CASE(
-        time_variance < 3600, \"SAME_HOUR\",  
-        time_variance < 86400, \"SAME_DAY\",  
-        \"SPREAD_OUT\"
-    ),
-    coordination_score = wire_count * 10 +
-                        CASE(amount_consistency == \"HIGHLY_CONSISTENT\", 50,
-                             amount_consistency == \"CONSISTENT\", 25, 0) +
-                        CASE(timing_consistency == \"SAME_HOUR\", 40,
-                             timing_consistency == \"SAME_DAY\", 20, 0)
-| WHERE coordination_score >= 80  
-| SORT coordination_score DESC, amount_variance ASC"
+    "query": "FROM fraud-workshop-wire-fraud | WHERE account.event == \"wire\" AND wire.direction == \"outbound\" AND event.amount > 7000 AND event.amount < 10000 | EVAL wire_hour = DATE_EXTRACT(\"HOUR_OF_DAY\", transaction.date), wire_minute = DATE_EXTRACT(\"minute_of_hour\", transaction.date), wire_second = DATE_EXTRACT(\"second_of_minute\", transaction.date), precise_time = wire_hour * 3600 + wire_minute * 60 + wire_second | STATS wire_count = COUNT(), avg_amount = AVG(event.amount), amount_variance = VARIANCE(event.amount), amount_std_dev = STD_DEV(event.amount), time_variance = VARIANCE(precise_time), time_std_dev = STD_DEV(precise_time), unique_banks = COUNT_DISTINCT(wire.outbound.bank_name), total_wired = SUM(event.amount), earliest_wire = MIN(transaction.date), latest_wire = MAX(transaction.date) BY account.name, wire.outbound.bank_name | WHERE wire_count >= 3 | INLINE STATS avg_amount_variance = AVG(amount_variance), avg_time_variance = AVG(time_variance), suspicious_bank_threshold = PERCENTILE(wire_count, 95) | EVAL amount_consistency = CASE(amount_variance < avg_amount_variance * 0.1, \"HIGHLY_CONSISTENT\", amount_variance < avg_amount_variance * 0.5, \"CONSISTENT\", \"VARIABLE\"), timing_consistency = CASE(time_variance < 3600, \"SAME_HOUR\", time_variance < 86400, \"SAME_DAY\", \"SPREAD_OUT\"), coordination_score = wire_count * 10 + CASE(amount_consistency == \"HIGHLY_CONSISTENT\", 50, amount_consistency == \"CONSISTENT\", 25, 0) + CASE(timing_consistency == \"SAME_HOUR\", 40, timing_consistency == \"SAME_DAY\", 20, 0) | WHERE coordination_score >= 80 | SORT coordination_score DESC, amount_variance ASC",
+    "params": {}
   }
 }
