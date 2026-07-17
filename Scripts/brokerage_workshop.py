@@ -83,6 +83,12 @@ class BrokerageFraudConfig:
     layering_accounts: int = 3
     layering_days_span: int = 7
     layering_payout_ratio: float = 0.93   # fraction wired out after fees/slippage
+    # Pinned offenders (deterministic across runs). Account IDs resolve via
+    # enrich-accounts; broker IDs 3/7/19 are flagged brokers in the
+    # regenerated enrich-brokers.ndjson (Christine Lefevre / Wei Zeng /
+    # Lin Cao), guaranteeing the same names surface every workshop run.
+    layering_account_ids: tuple = (1594, 21162, 1874)   # C. Martinez, B. Kozlov, H. Sidorov
+    layering_broker_id: int = 3                          # Christine Lefevre (flagged)
 
     # ---- Scenario 2: Wash trading ------------------------------------------
     # coordinated buy/sell among linked accounts -> volume w/o net position
@@ -91,12 +97,16 @@ class BrokerageFraudConfig:
     wash_trade_max: float = 400_000.0
     wash_rounds: int = 12                 # buy/sell pairs across the window
     wash_days_span: int = 7
+    wash_account_ids: tuple = (2718, 3141, 1618, 1414)  # Cheng Ma, V. Moeller, Dong Lu, Deng Tian
+    wash_broker_id: int = 19                             # Lin Cao (flagged)
 
     # ---- Scenario 3: Unexplained wealth / rapid in-out ---------------------
     uw_inbound_min: float = 250_000.0
     uw_inbound_max: float = 1_500_000.0
     uw_hold_hours_max: int = 36           # liquidated fast
     uw_payout_ratio: float = 0.97
+    uw_account_id: int = 4096                            # Young Cho
+    uw_broker_id: int = 7                                # Wei Zeng (flagged)
 
     # ---- noise event distribution (must sum to <= 1.0; purchase = remainder)
     buy_percentage: float = 0.34
@@ -357,9 +367,9 @@ class BrokerageDataGenerator:
     def generate_layering_scenario(self) -> List[TransactionEvent]:
         evts = []
         base = datetime.now()
-        accounts = [random.randint(1, 35000) for _ in range(self.fraud_config.layering_accounts)]
-        broker = random.randint(1, 40)
-        logger.info("Layering scenario:")
+        accounts = list(self.fraud_config.layering_account_ids)
+        broker = self.fraud_config.layering_broker_id
+        logger.info("Layering scenario (pinned offenders):")
         logger.info(f"   Accounts: {accounts}  Broker: {broker}")
 
         for acct in accounts:
@@ -424,8 +434,8 @@ class BrokerageDataGenerator:
     def generate_wash_trading_scenario(self) -> List[TransactionEvent]:
         evts = []
         base = datetime.now()
-        accounts = [random.randint(1, 35000) for _ in range(self.fraud_config.wash_accounts)]
-        broker = random.randint(1, 40)
+        accounts = list(self.fraud_config.wash_account_ids)
+        broker = self.fraud_config.wash_broker_id
         sym, stype, px = pick_security(THIN)  # thin name = easier to move
         logger.info("Wash trading scenario:")
         logger.info(f"   Accounts: {accounts}  Symbol: {sym}  Broker: {broker}")
@@ -467,8 +477,8 @@ class BrokerageDataGenerator:
     def generate_unexplained_wealth_scenario(self) -> List[TransactionEvent]:
         evts = []
         base = datetime.now()
-        acct = random.randint(1, 35000)
-        broker = random.randint(1, 40)
+        acct = self.fraud_config.uw_account_id
+        broker = self.fraud_config.uw_broker_id
         inbound = round(random.uniform(self.fraud_config.uw_inbound_min,
                                        self.fraud_config.uw_inbound_max), 2)
         logger.info("Unexplained wealth scenario:")
