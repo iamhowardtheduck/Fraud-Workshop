@@ -24,5 +24,5 @@
       }
     ],
    "skill_ids": [ "financial-fraud-analysis", "graph-creation", "visualization-creation", "dashboard-management", "international_wire_fraud", "smurfing_fraud_activity" ],
-   "enable_elastic_capabilities": true
+   "enable_elastic_capabilities": false
  }}
