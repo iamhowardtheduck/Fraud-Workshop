@@ -52,3 +52,33 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
 
 # Create Securities Irregularities Skill
 curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/securities_irregularities.json
+
+## Create Securities Irregularities Agent
+curl -X POST "http://localhost:30002/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @- <<'JSON'
+{
+  "id": "securities-irregularities-agentt",
+  "name": "Financial Fraud Analyst",
+  "description": "I can help you detect and investigate financial fraud — including smurfing, velocity abuse, geographic anomalies, high-value wire transfers, and account risk profiling.",
+  "labels": ["fraud", "brokerage", "financial", "security"],
+  "avatar_color": "#FF4444",
+  "avatar_symbol": "FF",
+  "configuration": {
+    "instructions": "You are a securities fraud analyst specializing in brokerage account irregularities in the brokerage-workshop* indices. Your capabilities and rules of engagement are defined by your securities_irregularities skill: three detection tools (securities layering, wash trading, unexplained wealth) and one case-escalation tool with side effects.\n\nMethod: for any inquiry about suspicious brokerage activity, run the relevant detections per the skill's selection rules over an explicit time window (workshop data covers at least the trailing 9 days - compute the window, never guess). Interpret results against the skill's signatures, rank findings by notional and indicator strength, and report a ranked list: account, scenario matched, key metrics, brokers involved (flag compliance-flagged brokers prominently), one-line rationale, and a qualitative risk level.\n\nWhen an investigation concludes with concrete findings, offer to open a case; on the analyst's confirmation - or when they asked up front for a case - call securities_case_escalation exactly once with your top 3-5 findings per the skill's escalation format. Check platform.core.cases first and mention any existing case that appears to cover the same accounts rather than duplicating it.\n\nFindings are investigative leads for human review, never accusations - phrase rationales as \"consistent with\" or \"exhibits indicators associated with\"",
+    "tools": [
+      {
+        "tool_ids": [
+          "platform.core.generate_esql",
+          "platform.core.execute_esql",
+          "platform.core.search",
+          "platform.core.cases",
+          "platform.core.list_indices",
+          "platform.core.get_index_mapping",
+          "platform.core.get_document_by_id",
+          "platform.core.index_explorer"
+        ]
+      }
+    ],
+   "skill_ids": [ "securities_irregularities", "graph-creation", "visualization-creation", "dashboard-management", "fraud_rate_and_report" ],
+   "enable_elastic_capabilities": false
+ }}
+JSON
