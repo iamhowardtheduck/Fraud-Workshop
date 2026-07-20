@@ -51,4 +51,4 @@ curl -X POST "http://localhost:30002/api/agent_builder/tools" -H "Content-Type: 
 }'
 
 # Create Brokerage Fraud Deep-Dive Skill
-curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/brokerage_fraud_deep_dive.json
+curl -X POST "http://localhost:30002/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/root/Fraud-Workshop/Skills/securities_irregularities.json
