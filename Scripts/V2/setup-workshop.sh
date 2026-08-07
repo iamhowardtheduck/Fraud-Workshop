@@ -232,8 +232,8 @@ done
 
 
 ## Start data-gen installation
-chmod +x /home/elastic/Fraud-Workshop/Scripts/fraud-gen.sh
-bash /home/elastic/Fraud-Workshop/Scripts/fraud-gen.sh
+chmod +x /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
+bash /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
 
 ##### TOOLS #####
 
