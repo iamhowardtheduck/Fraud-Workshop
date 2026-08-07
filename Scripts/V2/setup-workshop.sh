@@ -174,6 +174,13 @@ echo
 echo "Ingest pipelines loaded"
 echo
 clear
+
+## Start data-gen installation
+chmod +x /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
+bash /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
+
+clear
+
 ##### TOOLS #####
 ## Tool creation
 # Smurfing Detection
@@ -279,6 +286,8 @@ curl -X POST "https://kb.elastic.lab:443/api/agent_builder/agents" -H "Content-T
 
 clear
 
-## Start data-gen installation
-chmod +x /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
-bash /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
+## Start message 
+echo ""
+echo "You are now ready to begin the assignment!"
+echo ""
+
