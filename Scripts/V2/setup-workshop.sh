@@ -231,10 +231,6 @@ for index in "${!SOURCES[@]}"; do
 done
 
 
-## Start data-gen installation
-chmod +x /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
-bash /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
-
 ##### TOOLS #####
 
 ## Free-form fraud search
@@ -283,4 +279,6 @@ curl -X POST "https://kb.elastic.lab:443/api/agent_builder/agents" -H "Content-T
 
 clear
 
-python3 /home/elastic/Fraud-Workshop/Scripts/V2/brokerage_workshop.py
+## Start data-gen installation
+chmod +x /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
+bash /home/elastic/Fraud-Workshop/Scripts/V2/fraud-gen.sh
