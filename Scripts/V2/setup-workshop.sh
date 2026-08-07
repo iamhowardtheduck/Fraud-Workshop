@@ -1,0 +1,286 @@
+
+
+## Create 'sar-reports' ingest pipeline and index template
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/sar-reports" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/sar-reports.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/brokerage-final" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/brokerage-final.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-brokers.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/brokerage-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/brokerage-detection-enrich.json
+curl -X POST "https://es.elastic.lab:443/_index_template/sar-reports" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/sar-reports.json
+clear
+echo
+echo "Ingest pipelines loaded"
+echo
+clear
+
+## Create fraud-workshop data views
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/index-pattern/fraud-workshop" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop*", "name": "Fraud Workshop", "timeFieldName": "@timestamp"  }}'  
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/index-pattern/fraud-workshop-money-laundering" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-money-laundering*", "name": "Money-Laundering", "timeFieldName": "@timestamp"  }}'  
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/index-pattern/fraud-workshop-wire-fraud" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-wire-fraud*", "name": "Wire-Fraud", "timeFieldName": "@timestamp"  }}' 
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/index-pattern/fraud-workshop-smurfing" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "fraud-workshop-smurfing*", "name": "Smurfing", "timeFieldName": "@timestamp"  }}'
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/index-pattern/sar-reports" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "sar-reports*", "name": "SAR Reports", "timeFieldName": "@timestamp"  }}'
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/index-pattern/fraud-workshop-brokerage" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d '{ "attributes": { "title": "brokerage-workshop*", "name": "Brokerage Workshop", "timeFieldName": "@timestamp"  }}'
+clear
+echo
+echo "Data Views loaded"
+echo
+clear
+
+
+## Load saved-searches for assignment starts
+curl -X POST "https://kb.elastic.lab:443/api/saved_objects/_import" -H "kbn-xsrf: true" -u "fraud:hunter" -F "file=@/home/elastic/Fraud-Workshop/Saved-Searches/3-StartSavedSearches.ndjson"
+clear
+echo
+echo "Saved searches loaded"
+echo
+clear
+
+## Load DFA Workflow
+curl -X POST "https://kb.elastic.lab:443/api/workflows" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Workflows/dfa-workflow.json
+
+clear
+echo
+echo "Data Frame Analytics workflow loaded"
+echo
+clear
+
+## Load High-Value Daily Aggregate Workflow
+CONN_ID=$(curl -s "https://kb.elastic.lab:443/api/actions/connectors" \
+  -H "kbn-xsrf: true" -u "fraud:hunter" \
+  | python3 -c 'import json,sys; print(next(c["id"] for c in json.load(sys.stdin) if c["name"]=="openai-connector"))')
+echo "Resolved openai-connector -> $CONN_ID"
+
+sed "s/CONNECTOR_ID_PLACEHOLDER/$CONN_ID/g" /home/elastic/Fraud-Workshop/Workflows/highvalue-workflow-body.json \
+  | curl -X POST "https://kb.elastic.lab:443/api/workflows" \
+    -H "Content-Type: application/json" \
+    -H "kbn-xsrf: true" \
+    -u "fraud:hunter" \
+    --data-binary @-
+clear
+echo
+echo "High-Value Daily Aggregate workflow loaded"
+echo
+clear
+
+## Load component templates
+curl -X PUT "https://es.elastic.lab:443/_component_template/fraud-workshop-logsdb-mappings" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/Component-Templates/fraud-workshop-logsdb-mappings.json
+
+clear
+echo
+echo "Component Template loaded"
+echo
+clear
+
+## Load index templates
+curl -X POST "https://es.elastic.lab:443/_index_template/enrich-accounts" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-accounts.json
+curl -X POST "https://es.elastic.lab:443/_index_template/enrich-austinbanks" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinbanks.json
+curl -X POST "https://es.elastic.lab:443/_index_template/enrich-austinstores" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-austinstores.json
+curl -X POST "https://es.elastic.lab:443/_index_template/enrich-intbank" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-intbank.json
+curl -X POST "https://es.elastic.lab:443/_index_template/enrich-brokers" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/Enrichment-Index-Templates/enrich-brokers.json
+curl -X POST "https://es.elastic.lab:443/_index_template/fraud-workshop-logsdb" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/fraud-workshop-logsdb.json
+curl -X POST "https://es.elastic.lab:443/_index_template/brokerage-workshop-logsdb" -H "Content-Type: application/json" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Index-Templates/brokerage-workshop-logsdb.json
+
+clear
+echo
+echo "Index templates loaded"
+echo
+clear
+
+# New cleaner progress bar approach:
+#!/usr/bin/env bash
+set -euo pipefail
+
+BASE_URL="https://es.elastic.lab:443"
+USER="fraud:hunter"
+DATA_DIR="/home/elastic/Fraud-Workshop/Enrichment-Data"
+
+declare -A SOURCES=(
+  [enrich-accounts]="enrich-accounts.ndjson"
+  [enrich-austinbanks]="enrich-austinbanks.ndjson"
+  [enrich-austinstores]="enrich-austinstores.ndjson"
+  [enrich-intbank]="enrich-intbank.ndjson"
+  [sar-reports]="sar-reports.ndjson"
+  [enrich-brokers]="enrich-brokers.ndjson"
+)
+
+for index in "${!SOURCES[@]}"; do
+  file="${DATA_DIR}/${SOURCES[$index]}"
+  output="bulk_${index}_response.json"
+
+  echo "Uploading $file to index [$index]..."
+
+  curl --progress-bar \
+    -X POST "$BASE_URL/$index/_bulk" \
+    -H "Content-Type: application/x-ndjson" \
+    -u "$USER" \
+    --data-binary "@$file" \
+    -o "$output"
+
+  echo "  --> Done. Response saved to $output"
+  echo
+done
+
+clear
+echo
+echo "Enrichment data loaded"
+echo
+clear
+
+## Create enrichment policies
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-accounts" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-accounts.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-austinbanks" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-austinbanks.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-austinstores" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-austinstores.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-austinswift" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-austinswift.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-inbounds" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-inbounds.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-intbank" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-intbank.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-outbounds" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-outbounds.json
+curl -X PUT "https://es.elastic.lab:443/_enrich/policy/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Enrichment-Policies/enrich-brokers.json
+clear
+echo
+echo "Enrichment policies loaded"
+echo
+clear
+## Execute enrichment policies
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-accounts/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-austinbanks/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-austinstores/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-austinswift/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-inbounds/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-intbank/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-outbounds/_execute" -u "fraud:hunter"
+curl -X POST "https://es.elastic.lab:443/_enrich/policy/enrich-brokers/_execute" -u "fraud:hunter"
+
+clear
+echo
+echo "Enrichment policies executed"
+echo
+clear
+
+## Create ingest pipelines
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/atm-cleanup" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/atm-cleanup.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-accounts" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-accounts.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-austinbanks" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-austinbanks.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-austinstores" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-austinstores.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-austinswift" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-austinswift.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-inbound" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-inbound.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-intbank" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-intbank.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-outbound" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-outbound.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-outbounds" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-outbounds.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/enrich-brokers" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/enrich-brokers.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/fraud-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/fraud-detection-enrich.json
+curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/brokerage-detection-enrich" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/brokerage-detection-enrich.json
+
+clear
+echo
+echo "Ingest pipelines loaded"
+echo
+clear
+##### TOOLS #####
+## Tool creation
+# Smurfing Detection
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_smurfing_detection.json
+
+# Veolicty Check
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -u "fraud:hunter" -H "Content-Type: application/json" -H "kbn-xsrf: true" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_velocity_check.json
+
+# Round Amount Transactions
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -u "fraud:hunter" -H "Content-Type: application/json" -H "kbn-xsrf: true" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_round_amount_detection.json
+
+# Layering Detection
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_layering_detection.json
+
+# Structuring Detection
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_structuring_detection.json
+
+# High Value Daily Triage
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud-high-value-daily-triage.json
+
+# Free-form fraud search
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_transaction_search.json
+
+# Fraud geo anomaly search
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_geo_anomaly.json
+ 
+## Create Suspicious Activity Reporting Agent 
+#!/usr/bin/env bash
+set -euo pipefail
+
+BASE_URL="https://kb.elastic.lab:443/api/agent_builder/agents"
+USER="fraud:hunter"
+DATA_DIR="/home/elastic/Fraud-Workshop/Agents"
+
+declare -A SOURCES=(
+  [SARA]="SARA.json"
+)
+
+for index in "${!SOURCES[@]}"; do
+  file="${DATA_DIR}/${SOURCES[$index]}"
+  output="bulk_${index}_response.json"
+
+  echo "Uploading $file to index [$index]..."
+
+  curl --progress-bar \
+    -X POST "$BASE_URL" \
+    -H "Content-Type: application/json" \
+    -H "kbn-xsrf: true" \
+    -u "$USER" \
+    -d "@$file" \
+    -o "$output"
+
+  echo "  --> Done. Response saved to $output"
+  echo
+done
+
+
+## Start data-gen installation
+chmod +x /home/elastic/Fraud-Workshop/Scripts/fraud-gen.sh
+bash /home/elastic/Fraud-Workshop/Scripts/fraud-gen.sh
+
+##### TOOLS #####
+
+## Free-form fraud search
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_transaction_search.json
+
+## Consistent amounts under SAR threshold search
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_consistent_amounts_under_sar_threshold.json
+  
+## Anomalous deposits as the bank is closing
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_deposit_timing_patterns.json
+
+# Fraud deposit interval analysis - SMURFING SKILL
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_deposit_intervals.json
+
+# Fraud clustering amounts & accounts - SMURFING SKILL
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_clustering_amounts.json  
+
+# Fraud ATM camera disabled with numerous deposits - SMURFING SKILL
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_atm_camera.json
+
+# Fraud Risk Scoring Deposits - SMURFING SKILL
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_risk_scoring_deposits.json
+
+## Outbound wires occurring at the same time
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_coordinated_wire_transfers.json
+
+## Standard deviation of deposits
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/tools" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Tools/fraud_std_of_deposits.json
+
+
+##### SKILLS #####
+  
+## Create Financial Fraud Skill
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Skills/financial_fraud_analyst.json
+
+## Create International Wire Fraud Skill
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Skills/international_wire_fraud.json
+
+## Create Smurfing & Structuring Fraud Skill
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/skills" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Skills/smurfing_fraud_activity.json
+
+##### AGENTS #####
+
+## Create Financial Fraud Analyst Agent
+curl -X POST "https://kb.elastic.lab:443/api/agent_builder/agents" -H "Content-Type: application/json" -H "kbn-xsrf: true" -u "fraud:hunter" --data-binary @/home/elastic/Fraud-Workshop/Agents/financial-fraud-analyst.json
+
+clear
+
+python3 /home/elastic/Fraud-Workshop/Scripts/V2/brokerage_workshop.py
