@@ -1,4 +1,6 @@
-
+# Enable experimental Agent Builder features
+curl -u fraud:hunter -X POST "https://kb.elastic.lab:443/api/kibana/settings/agentBuilder:experimentalFeatures" -H "kbn-xsrf: true" -H "Content-Type: application/json" -d '{"value": true}'
+curl -u fraud:hunter -X POST "https://kb.elastic.lab:443/api/kibana/settings/agentBuilder:bashSupport" -H "kbn-xsrf: true" -H "Content-Type: application/json" -d '{"value": true}'
 
 ## Create 'sar-reports' ingest pipeline and index template
 curl -X PUT "https://es.elastic.lab:443/_ingest/pipeline/sar-reports" -H "Content-Type: application/x-ndjson" -u "fraud:hunter" -d @/home/elastic/Fraud-Workshop/Ingest-Pipelines/sar-reports.json
