@@ -1,0 +1,9 @@
+PUT /_query/data_source/s3bucket
+{
+  "type": "s3",
+  "settings": {
+    "region": "us-east-1",
+    "auth": "anonymous",
+    "endpoint": "http://host-1:9000"
+  }
+}
